@@ -1,13 +1,13 @@
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { probeProvider } from "@/lib/ai/probe";
 import { apiRoot } from "@/lib/ai/presets";
-import { getAiCredentialPublic, marcarActiva } from "@/server/ai/credentials";
+import { getAiCredentialPublic, marcarActiva } from "@/server/agents/ai/credentials";
 import {
   aiProbeSchema,
   baseUrlEfectiva,
   llaveParaProbar,
   vistaAjustesIa,
-} from "@/server/ai/settings";
+} from "@/server/agents/ai/settings";
 
 export const dynamic = "force-dynamic";
 

@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { apiV1Enabled } from "@/server/api-v1/flag";
-import { resolveInstanceOrg } from "@/server/bot/auth";
+import { resolveInstanceOrg } from "@/server/agents/bot/auth";
 
 /**
  * 069 — Dónde existe el OAuth: en la instancia con la API encendida

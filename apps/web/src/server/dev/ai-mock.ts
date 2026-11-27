@@ -1,4 +1,4 @@
-import { JUDGE_MARKER } from "@/server/ai/prompts";
+import { JUDGE_MARKER } from "@/server/agents/ai/prompts";
 
 /**
  * Proveedor LLM determinista para el self-test (contrato mocks.md).

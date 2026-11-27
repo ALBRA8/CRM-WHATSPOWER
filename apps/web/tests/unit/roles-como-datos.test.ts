@@ -6,8 +6,8 @@ import {
   herramientasEfectivas,
   rolDe,
 } from "@/lib/agent-roles";
-import { PERSONAS } from "@/server/lab/personas";
-import { personasDelRol } from "@/server/lab/runner";
+import { PERSONAS } from "@/server/agents/lab/personas";
+import { personasDelRol } from "@/server/agents/lab/runner";
 
 /** 034 — Roles como datos: el catálogo, el Calificador y sus personas. */
 describe("el catálogo de herramientas", () => {

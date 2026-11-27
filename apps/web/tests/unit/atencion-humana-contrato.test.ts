@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { CAPACIDAD_ATENCION_HUMANA, capacidadesDelCrm } from "@/server/brains/contract";
-import { armarAtencion, MAX_TEXTO_ATENCION, recortarParaNota } from "@/server/brains/atencion-humana";
+import { CAPACIDAD_ATENCION_HUMANA, capacidadesDelCrm } from "@/server/agents/brains/contract";
+import { armarAtencion, MAX_TEXTO_ATENCION, recortarParaNota } from "@/server/agents/brains/atencion-humana";
 
 /**
  * 076 — «Hubo una persona», tal como lo ve un cerebro.

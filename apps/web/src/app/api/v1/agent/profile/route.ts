@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/agent-profile";
+import * as h from "@/server/agents/http/agent-profile";
 
 export const dynamic = "force-dynamic";
 

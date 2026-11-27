@@ -3,14 +3,14 @@ import {
   armarEvento,
   CAPACIDAD_SUPERADO,
   capacidadesDelCrm,
-} from "@/server/brains/contract";
+} from "@/server/agents/brains/contract";
 import {
   cuerpoRespuesta,
   DISPATCH_SUPERADO,
   MENSAJE_SUPERADO,
   pideCallarSiSuperado,
-} from "@/server/bot/respuesta";
-import { toHandoffReason } from "@/server/bot/handoff";
+} from "@/server/agents/bot/respuesta";
+import { toHandoffReason } from "@/server/agents/bot/handoff";
 import { textoTraspaso } from "@/lib/eventos-hilo";
 import { HANDOFF_LABEL } from "@/lib/analytics";
 

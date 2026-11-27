@@ -5,7 +5,7 @@ import {
   type AiProvider,
   type EstadoIa,
 } from "@/lib/ai/provider";
-import { marcarEstadoPorRespuesta } from "@/server/ai/credentials";
+import { marcarEstadoPorRespuesta } from "@/server/agents/ai/credentials";
 
 /**
  * Adaptador LLM OpenRouter-compatible — ÚNICA frontera con el proveedor de IA

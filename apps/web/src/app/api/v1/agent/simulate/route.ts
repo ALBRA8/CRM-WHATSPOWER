@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/agent-simulate";
+import * as h from "@/server/agents/http/agent-simulate";
 
 export const dynamic = "force-dynamic";
 // Cada turno espera al cerebro real (hasta ~90 s por línea).

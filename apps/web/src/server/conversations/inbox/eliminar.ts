@@ -1,8 +1,8 @@
 import { and, eq, gt, inArray, isNotNull, notExists, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { vaciarFicha } from "@/server/bot/ficha";
-import type { CanalDelEvento } from "@/server/brains/contract";
+import { vaciarFicha } from "@/server/agents/bot/ficha";
+import type { CanalDelEvento } from "@/server/agents/brains/contract";
 import { deleteMediaFile } from "@/server/channels/whatsapp/media";
 
 /**

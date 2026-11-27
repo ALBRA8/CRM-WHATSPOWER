@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { apiError } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
 import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 import {
   downloadGraphMedia,

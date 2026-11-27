@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { apiError } from "@/lib/api";
 import { scoped } from "@/lib/db/tenant";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
 import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
 import { addDaysISO, todayInTz } from "@/lib/time/slots";
 import {

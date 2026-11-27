@@ -24,8 +24,8 @@ import {
 } from "@/server/attribution/referral";
 import { registrarAnuncioDeOrigen } from "@/server/attribution/store";
 import { onLeadActivity } from "@/server/conversations/inbox/lead-activity";
-import { despachoActivo } from "@/server/brains/config";
-import { despacharAlCerebro } from "@/server/dispatch/encolar";
+import { despachoActivo } from "@/server/agents/brains/config";
+import { despacharAlCerebro } from "@/server/agents/dispatch/encolar";
 import { pausarIaPorRespuestaManual } from "@/server/conversations/inbox/pausa-manual";
 import { devolverALaIaSiToca } from "@/server/conversations/inbox/reactivacion";
 import { registrarReaccionWhatsApp } from "@/server/conversations/inbox/reacciones";

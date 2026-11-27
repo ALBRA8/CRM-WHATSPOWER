@@ -11,8 +11,8 @@ import {
   type ClaveHerramienta,
 } from "@/lib/agent-roles";
 import { agendaEnabled } from "@/server/agenda/flag";
-import { leerConfigDespacho, urlSaludCerebro } from "@/server/brains/config";
-import { getBrainHealth } from "@/server/bot/status";
+import { leerConfigDespacho, urlSaludCerebro } from "@/server/agents/brains/config";
+import { getBrainHealth } from "@/server/agents/bot/status";
 import { HORAS_REACTIVACION_MAX } from "@/server/conversations/inbox/reactivacion";
 
 

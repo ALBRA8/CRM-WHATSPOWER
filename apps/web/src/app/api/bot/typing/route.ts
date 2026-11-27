@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { getDb, schema } from "@/lib/db";
 import { apiError, parseBody } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
 import { mostrarEscribiendo } from "@/server/channels/whatsapp/escribiendo";
 
 export const dynamic = "force-dynamic";

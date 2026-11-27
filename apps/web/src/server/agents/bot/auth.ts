@@ -2,7 +2,7 @@ import { timingSafeEqual } from "node:crypto";
 import { getDb, schema } from "@/lib/db";
 import { apiError } from "@/lib/api";
 import { checkRateLimit, clientIp } from "@/lib/rate-limit";
-import { markBotSeen } from "@/server/bot/status";
+import { markBotSeen } from "@/server/agents/bot/status";
 
 /**
  * Autenticación de la API de servicio `/api/bot/*`.

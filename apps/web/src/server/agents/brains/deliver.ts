@@ -14,12 +14,12 @@ import {
   type EventoDespacho,
   type MensajeParaEvento,
   type ResultadoEntrega,
-} from "@/server/brains/contract";
-import { leerConfigDespacho } from "@/server/brains/config";
-import type { FilaDespacho } from "@/server/dispatch/outbox";
+} from "@/server/agents/brains/contract";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
+import type { FilaDespacho } from "@/server/agents/dispatch/outbox";
 import { isWindowOpen, windowExpiresAt } from "@/server/conversations/inbox/window";
 import { windowMsFor } from "@/server/channels/capabilities";
-import { atencionHumanaPara } from "@/server/brains/atencion-humana";
+import { atencionHumanaPara } from "@/server/agents/brains/atencion-humana";
 
 /**
  * 021 — Entrega de un despacho al cerebro: leer la ráfaga, armar el evento y

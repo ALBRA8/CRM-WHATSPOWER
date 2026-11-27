@@ -1,5 +1,5 @@
 import { mockGuard } from "@/lib/dev-guard";
-import { barrido } from "@/server/dispatch/red-de-seguridad";
+import { barrido } from "@/server/agents/dispatch/red-de-seguridad";
 
 export const dynamic = "force-dynamic";
 

@@ -43,7 +43,7 @@ vi.mock("@/server/agenda/flag", () => ({
   agendaDisabledResponse: () => new Response(null, { status: 404 }),
 }));
 
-vi.mock("@/server/bot/auth", () => ({
+vi.mock("@/server/agents/bot/auth", () => ({
   requireBotKey: () => null,
   resolveInstanceOrg: async () => "org_1",
 }));

@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/agent-brain-status";
+import * as http from "@/server/agents/http/agent-brain-status";
 
 export const dynamic = "force-dynamic";
 

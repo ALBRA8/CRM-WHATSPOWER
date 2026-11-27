@@ -19,7 +19,7 @@ const st = vi.hoisted(() => ({
   usos: 0,
 }));
 
-vi.mock("@/server/bot/auth", () => ({ resolveInstanceOrg: async () => st.instancia }));
+vi.mock("@/server/agents/bot/auth", () => ({ resolveInstanceOrg: async () => st.instancia }));
 vi.mock("@/server/api-v1/acceso", async (orig) => {
   const real = await orig<typeof import("@/server/api-v1/acceso")>();
   return { ...real, rolVigente: async () => st.role };

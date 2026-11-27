@@ -10,7 +10,7 @@ import { resolveCommit } from "@/lib/version";
 import { agendaEnabled } from "@/server/agenda/flag";
 import { enabledChannels } from "@/server/channels/enabled";
 import { navKicker } from "@/lib/channels";
-import { avisoIaDe } from "@/server/ai/aviso";
+import { avisoIaDe } from "@/server/agents/ai/aviso";
 import { AvisoIaBanner } from "@/components/avisos/aviso-ia";
 import { avisoEsperandoDeCookie, ESPERANDO_COOKIE } from "@/lib/esperando";
 

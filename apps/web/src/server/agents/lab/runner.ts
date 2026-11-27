@@ -3,15 +3,15 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { publish } from "@/server/conversations/events/bus";
-import { renderKb } from "@/server/ai/prompts";
-import { construirEventoOlvido } from "@/server/brains/contract";
-import { avisarOlvido } from "@/server/brains/deliver";
-import { encolarDespacho } from "@/server/dispatch/outbox";
-import { iniciarWorker, programarTanda } from "@/server/dispatch/worker";
-import { computeScore, judgeCase } from "@/server/lab/judge";
-import { PERSONAS, type Persona } from "@/server/lab/personas";
+import { renderKb } from "@/server/agents/ai/prompts";
+import { construirEventoOlvido } from "@/server/agents/brains/contract";
+import { avisarOlvido } from "@/server/agents/brains/deliver";
+import { encolarDespacho } from "@/server/agents/dispatch/outbox";
+import { iniciarWorker, programarTanda } from "@/server/agents/dispatch/worker";
+import { computeScore, judgeCase } from "@/server/agents/lab/judge";
+import { PERSONAS, type Persona } from "@/server/agents/lab/personas";
 import { rolDe } from "@/lib/agent-roles";
-import { esperarCalma } from "@/server/lab/cierre-de-turno";
+import { esperarCalma } from "@/server/agents/lab/cierre-de-turno";
 
 /**
  * Runner del Laboratorio (FR-030/FR-034): corrida en segundo plano DENTRO del

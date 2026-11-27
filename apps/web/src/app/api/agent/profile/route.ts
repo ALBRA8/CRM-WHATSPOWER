@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/agent-profile";
+import * as http from "@/server/agents/http/agent-profile";
 
 export const dynamic = "force-dynamic";
 

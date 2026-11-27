@@ -2,8 +2,8 @@ import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { getDb, schema } from "@/lib/db";
 import { apiError, parseBody } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { upsertFicha } from "@/server/bot/ficha";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
+import { upsertFicha } from "@/server/agents/bot/ficha";
 
 export const dynamic = "force-dynamic";
 

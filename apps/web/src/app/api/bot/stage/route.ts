@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { moverEtapaPorElCerebro } from "@/server/bot/stage";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
+import { moverEtapaPorElCerebro } from "@/server/agents/bot/stage";
 import { publish } from "@/server/conversations/events/bus";
 
 export const dynamic = "force-dynamic";

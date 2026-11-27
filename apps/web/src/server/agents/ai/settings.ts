@@ -15,7 +15,7 @@ import {
   getAiCredentialPublic,
   getAiCredentialSecret,
   type AiCredentialPublic,
-} from "@/server/ai/credentials";
+} from "@/server/agents/ai/credentials";
 
 /**
  * Ajustes → IA: lo que valida y lo que devuelve `/api/settings/ai`. Fuera del

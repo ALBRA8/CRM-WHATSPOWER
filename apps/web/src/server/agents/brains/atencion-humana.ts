@@ -1,7 +1,7 @@
 import { and, asc, desc, eq, gt, ne, notInArray, sql, type SQL } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import type { AtencionHumana } from "@/server/brains/contract";
+import type { AtencionHumana } from "@/server/agents/brains/contract";
 
 /**
  * 076 — «Hubo una persona»: lo que el cerebro necesita saber cuando vuelve.

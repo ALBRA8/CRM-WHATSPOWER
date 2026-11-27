@@ -2,7 +2,7 @@ import { conSesion } from "@/server/http/compartido";
 import { asc } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { renderKb } from "@/server/ai/prompts";
+import { renderKb } from "@/server/agents/ai/prompts";
 
 
 /**

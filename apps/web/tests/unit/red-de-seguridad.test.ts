@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { esCierre, todoEsCierre } from "@/server/dispatch/cierres";
+import { esCierre, todoEsCierre } from "@/server/agents/dispatch/cierres";
 import {
   decidir,
   MARGEN_DE_VENTANA_MS,
   MAX_RELANZAMIENTOS,
   type EntradaDecision,
-} from "@/server/dispatch/red-de-seguridad";
+} from "@/server/agents/dispatch/red-de-seguridad";
 
 /**
  * 075 — Qué hace la red de seguridad con un turno que el cerebro recibió y

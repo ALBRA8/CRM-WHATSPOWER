@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CIERRE_MAX_MS, QUIETUD_MS, esperarCalma } from "@/server/lab/cierre-de-turno";
+import { CIERRE_MAX_MS, QUIETUD_MS, esperarCalma } from "@/server/agents/lab/cierre-de-turno";
 
 /**
  * 071 — El turno del cerebro se cierra cuando deja de pasar algo, no tras un

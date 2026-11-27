@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { SIN_DESPACHO, despachoFallando } from "@/lib/brain-status";
-import { leerConfigDespacho } from "@/server/brains/config";
-import { hayMensajesSinDespachar, sinDespachar } from "@/server/brains/deliver";
-import { dispatchDto } from "@/server/dispatch/estado";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
+import { hayMensajesSinDespachar, sinDespachar } from "@/server/agents/brains/deliver";
+import { dispatchDto } from "@/server/agents/dispatch/estado";
 import { checkDispatch } from "@/server/doctor/checks";
-import { BACKOFF_MS, MAX_INTENTOS, esperaDeReintento } from "@/server/dispatch/outbox";
+import { BACKOFF_MS, MAX_INTENTOS, esperaDeReintento } from "@/server/agents/dispatch/outbox";
 
 /**
  * 021 — Cuándo hay despacho, y qué se dice cuando no.

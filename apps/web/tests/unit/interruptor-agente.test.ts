@@ -44,7 +44,7 @@ vi.mock("@/lib/db", async (importOriginal) => {
 });
 
 const encolarDespacho = vi.hoisted(() => vi.fn(async () => ({ notBefore: new Date() })));
-vi.mock("@/server/dispatch/outbox", () => ({
+vi.mock("@/server/agents/dispatch/outbox", () => ({
   encolarDespacho,
   ventanaCoalesceMs: () => 3000,
   ventanaLargaMs: () => 8000,
@@ -52,10 +52,10 @@ vi.mock("@/server/dispatch/outbox", () => ({
 // 078 — El «escribiendo…» al encolar no toca Meta en las unitarias.
 const mostrarEscribiendo = vi.hoisted(() => vi.fn(async () => ({ ok: true })));
 vi.mock("@/server/channels/whatsapp/escribiendo", () => ({ mostrarEscribiendo }));
-vi.mock("@/server/dispatch/worker", () => ({ iniciarWorker: () => {}, programarTanda: () => {} }));
+vi.mock("@/server/agents/dispatch/worker", () => ({ iniciarWorker: () => {}, programarTanda: () => {} }));
 
 const getBrainHealth = vi.hoisted(() => vi.fn());
-vi.mock("@/server/bot/status", () => ({ getBrainHealth }));
+vi.mock("@/server/agents/bot/status", () => ({ getBrainHealth }));
 
 vi.mock("@/lib/auth/session", () => ({
   UnauthorizedError: class UnauthorizedError extends Error {},
@@ -63,7 +63,7 @@ vi.mock("@/lib/auth/session", () => ({
   getSessionOrNull: async () => ({ userId: "usr_1", organizationId: "org_1", role: "owner" }),
 }));
 
-import { despacharAlCerebro } from "@/server/dispatch/encolar";
+import { despacharAlCerebro } from "@/server/agents/dispatch/encolar";
 import { PUT } from "@/app/api/agent/profile/route";
 
 const CONV_ABIERTA = { aiEnabled: true, handoffAt: null, isTest: false, channel: "whatsapp" };

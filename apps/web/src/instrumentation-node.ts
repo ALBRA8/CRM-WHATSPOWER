@@ -1,9 +1,9 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { mediaDirStatus } from "@/server/media-dir";
-import { leerConfigDespacho } from "@/server/brains/config";
-import { iniciarWorker, tanda } from "@/server/dispatch/worker";
-import { iniciarRedDeSeguridad } from "@/server/dispatch/red-de-seguridad";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
+import { iniciarWorker, tanda } from "@/server/agents/dispatch/worker";
+import { iniciarRedDeSeguridad } from "@/server/agents/dispatch/red-de-seguridad";
 import { cifrarSecretosEnClaro } from "@/server/channels/zernio/secreto-guardado";
 import { barrido, iniciarBarrido } from "@/server/channels/webhooks/worker";
 

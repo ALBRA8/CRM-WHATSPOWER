@@ -4,12 +4,12 @@ import {
   AiCredentialError,
   deleteAiCredential,
   saveAiCredential,
-} from "@/server/ai/credentials";
+} from "@/server/agents/ai/credentials";
 import {
   aiSettingsPutSchema,
   baseUrlEfectiva,
   vistaAjustesIa,
-} from "@/server/ai/settings";
+} from "@/server/agents/ai/settings";
 
 
 /**

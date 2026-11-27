@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildJudgePrompt } from "@/server/ai/prompts";
+import { buildJudgePrompt } from "@/server/agents/ai/prompts";
 
 /**
  * 033 — El traspaso a una persona no es un mensaje: el runner lo anota como

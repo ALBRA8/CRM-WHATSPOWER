@@ -4,7 +4,7 @@ import {
   aiModelsSchema,
   baseUrlEfectiva,
   llaveParaProbar,
-} from "@/server/ai/settings";
+} from "@/server/agents/ai/settings";
 
 export const dynamic = "force-dynamic";
 

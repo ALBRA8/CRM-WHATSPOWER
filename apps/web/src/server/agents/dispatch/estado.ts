@@ -2,7 +2,7 @@ import { and, count, desc, eq, inArray, isNotNull, type SQL } from "drizzle-orm"
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import type { BrainDispatchDto } from "@/lib/brain-status";
-import { leerConfigDespacho, type ConfigDespacho } from "@/server/brains/config";
+import { leerConfigDespacho, type ConfigDespacho } from "@/server/agents/brains/config";
 
 /**
  * 021 — Lo que «Quién responde» enseña del despacho: a quién se le empuja,

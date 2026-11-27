@@ -4,7 +4,7 @@ import {
   moverEtapaPorElCerebro,
   resolverEtapa,
   type EtapaDelPipeline,
-} from "@/server/bot/stage";
+} from "@/server/agents/bot/stage";
 
 /** 038 — El cerebro mueve la etapa: reglas puras y decisión contra la BD. */
 

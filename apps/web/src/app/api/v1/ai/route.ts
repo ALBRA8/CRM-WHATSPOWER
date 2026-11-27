@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/settings-ai";
+import * as h from "@/server/agents/http/settings-ai";
 
 export const dynamic = "force-dynamic";
 // La llave se guarda pero nunca se lee: la respuesta trae el estado y los últimos 4. Sin DELETE por la API.

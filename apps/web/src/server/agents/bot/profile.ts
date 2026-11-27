@@ -1,5 +1,5 @@
 import type { schema } from "@/lib/db";
-import { renderKb } from "@/server/ai/prompts";
+import { renderKb } from "@/server/agents/ai/prompts";
 import { herramientasEfectivas, rolDe } from "@/lib/agent-roles";
 
 type AgentProfile = typeof schema.agentProfile.$inferSelect;

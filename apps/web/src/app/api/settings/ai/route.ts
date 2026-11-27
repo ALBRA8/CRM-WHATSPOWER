@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/settings-ai";
+import * as http from "@/server/agents/http/settings-ai";
 
 export const dynamic = "force-dynamic";
 

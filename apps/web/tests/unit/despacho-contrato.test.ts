@@ -10,8 +10,8 @@ import {
   CABECERA_EVENTO,
   CABECERA_FIRMA,
   CABECERA_ORG,
-} from "@/server/brains/contract";
-import { entregar } from "@/server/brains/deliver";
+} from "@/server/agents/brains/contract";
+import { entregar } from "@/server/agents/brains/deliver";
 
 /**
  * 021 — El contrato del despacho, fijado byte a byte.

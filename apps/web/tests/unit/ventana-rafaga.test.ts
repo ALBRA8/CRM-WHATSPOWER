@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { dejaLaRafagaAbierta, ventanaParaMensaje } from "@/server/dispatch/ventana";
+import { dejaLaRafagaAbierta, ventanaParaMensaje } from "@/server/agents/dispatch/ventana";
 
 const t = (text: string) => ({ type: "text", text });
 

@@ -2,7 +2,7 @@ import { asc, eq } from "drizzle-orm";
 import { apiError, withAuth } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { PERSONA_LABELS } from "@/server/lab/personas";
+import { PERSONA_LABELS } from "@/server/agents/lab/personas";
 
 export const dynamic = "force-dynamic";
 

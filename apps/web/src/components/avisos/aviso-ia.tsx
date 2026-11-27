@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
-import type { AvisoIa } from "@/server/ai/aviso";
+import type { AvisoIa } from "@/server/agents/ai/aviso";
 
 /**
  * La franja que dice que el agente no puede contestar (issue #85).

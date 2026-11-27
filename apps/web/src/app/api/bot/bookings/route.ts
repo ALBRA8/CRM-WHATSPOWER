@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
 import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
 import {
   createSessionBooking,

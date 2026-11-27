@@ -15,9 +15,9 @@ const LLAVE_IA = "sk-or-secreta-9f3a";
 const resolveAiProvider = vi.hoisted(() => vi.fn<() => Promise<AiResolution>>());
 vi.mock("@/lib/ai/provider", () => ({ resolveAiProvider }));
 const marcarEstadoPorRespuesta = vi.hoisted(() => vi.fn(async () => true));
-vi.mock("@/server/ai/credentials", () => ({ marcarEstadoPorRespuesta }));
-vi.mock("@/server/bot/auth", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@/server/bot/auth")>()),
+vi.mock("@/server/agents/ai/credentials", () => ({ marcarEstadoPorRespuesta }));
+vi.mock("@/server/agents/bot/auth", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/server/agents/bot/auth")>()),
   resolveInstanceOrg: async () => "org_1",
 }));
 

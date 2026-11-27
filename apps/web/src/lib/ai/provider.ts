@@ -5,7 +5,7 @@ import {
   getAiCredentialSecret,
   type AiCredentialPublic,
   type AiCredentialSecret,
-} from "@/server/ai/credentials";
+} from "@/server/agents/ai/credentials";
 
 /**
  * Con qué proveedor de IA habla esta organización (issue #85).

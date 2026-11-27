@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { BOT_API_BUDGET, BOT_AUTH_FAILURES, requireBotKey } from "@/server/bot/auth";
-import { mergeFicha, normalizeFicha } from "@/server/bot/ficha";
-import { toHandoffReason } from "@/server/bot/handoff";
+import { BOT_API_BUDGET, BOT_AUTH_FAILURES, requireBotKey } from "@/server/agents/bot/auth";
+import { mergeFicha, normalizeFicha } from "@/server/agents/bot/ficha";
+import { toHandoffReason } from "@/server/agents/bot/handoff";
 import { resetRateLimit } from "@/lib/rate-limit";
 
 /** La puerta de toda la superficie `/api/bot/*`. */

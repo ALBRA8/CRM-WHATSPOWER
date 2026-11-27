@@ -3,8 +3,8 @@ import { apiError, withAuth } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { isAiConfiguredFor } from "@/lib/ai/provider";
-import { leerConfigDespacho } from "@/server/brains/config";
-import { RunConflictError, startRun } from "@/server/lab/runner";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
+import { RunConflictError, startRun } from "@/server/agents/lab/runner";
 
 export const dynamic = "force-dynamic";
 

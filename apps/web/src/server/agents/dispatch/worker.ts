@@ -1,12 +1,12 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { leerConfigDespacho } from "@/server/brains/config";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
 import {
   construirEvento,
   entregar,
   rafagaDe,
   sinDespachar,
-} from "@/server/brains/deliver";
+} from "@/server/agents/brains/deliver";
 import {
   caducarAHumano,
   descartarDespacho,
@@ -18,7 +18,7 @@ import {
   renovarLease,
   tomarPendientes,
   type FilaDespacho,
-} from "@/server/dispatch/outbox";
+} from "@/server/agents/dispatch/outbox";
 
 /**
  * 021 — El worker del despachador.

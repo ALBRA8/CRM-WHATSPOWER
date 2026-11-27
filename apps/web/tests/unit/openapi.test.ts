@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { armarEvento, construirEventoOlvido } from "@/server/brains/contract";
+import { armarEvento, construirEventoOlvido } from "@/server/agents/brains/contract";
 import { CLAVES_HERRAMIENTA } from "@/lib/agent-roles";
 import openapi from "../../docs/openapi.json";
 

@@ -6,7 +6,7 @@ vi.mock("@/lib/ai", () => ({
   chatJson: (...args: unknown[]) => chatJson(...args),
 }));
 
-import { computeScore, judgeCase } from "@/server/lab/judge";
+import { computeScore, judgeCase } from "@/server/agents/lab/judge";
 
 describe("judgeCase (FR-032)", () => {
   beforeEach(() => chatJson.mockReset());

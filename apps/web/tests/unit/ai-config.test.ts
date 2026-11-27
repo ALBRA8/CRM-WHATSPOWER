@@ -14,14 +14,14 @@ import {
   resolver,
   type AiProvider,
 } from "@/lib/ai/provider";
-import { estadoSegunRespuesta } from "@/server/ai/credentials";
+import { estadoSegunRespuesta } from "@/server/agents/ai/credentials";
 import {
   aiModelsSchema,
   aiProbeSchema,
   aiSettingsPutSchema,
   baseUrlEfectiva,
-} from "@/server/ai/settings";
-import type { AiCredentialSecret } from "@/server/ai/credentials";
+} from "@/server/agents/ai/settings";
+import type { AiCredentialSecret } from "@/server/agents/ai/credentials";
 
 /**
  * #85 — Ajustes → IA. Las reglas puras: con quién habla el adaptador (la fila

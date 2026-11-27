@@ -17,7 +17,7 @@ vi.mock("@/lib/ai/provider", async (importOriginal) => ({
 }));
 
 const getBrainHealth = vi.hoisted(() => vi.fn());
-vi.mock("@/server/bot/status", () => ({ getBrainHealth }));
+vi.mock("@/server/agents/bot/status", () => ({ getBrainHealth }));
 
 import { onboardingStatus } from "@/server/organizations/onboarding/status";
 import { verifyCalendar, hasWeeklyHours } from "@/server/organizations/onboarding/calendar-verifiers";

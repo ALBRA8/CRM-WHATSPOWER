@@ -1,8 +1,8 @@
 import { asc, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { apiError } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { serializeBotProfile, type BotLlm } from "@/server/bot/profile";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
+import { serializeBotProfile, type BotLlm } from "@/server/agents/bot/profile";
 import { resolveAiProvider } from "@/lib/ai/provider";
 
 export const dynamic = "force-dynamic";

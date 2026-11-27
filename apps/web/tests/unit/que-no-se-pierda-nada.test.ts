@@ -12,7 +12,7 @@ import {
 import { lookupPublico } from "@/server/conversations/inbox/descarga-remota";
 import { mediaRemota, serializeMessage, tipoDeEntrante } from "@/server/conversations/inbox/ingest";
 import { debeAplicarse, extraerEdicion } from "@/server/conversations/inbox/ediciones";
-import { armarEvento, mediaIdDelEvento } from "@/server/brains/contract";
+import { armarEvento, mediaIdDelEvento } from "@/server/agents/brains/contract";
 import { normalizeMetaPagePayload, normalizeZernioEvent } from "@/server/channels/messenger/ingest";
 import { normalizeZernioTiktokEvent } from "@/server/channels/tiktok/ingest";
 import { esNoSoportado, previewText } from "@/components/inbox/helpers";

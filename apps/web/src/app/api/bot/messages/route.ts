@@ -1,15 +1,15 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { apiError, parseBody } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
 import {
   cuerpoRespuesta,
   MENSAJE_SUPERADO,
   pideCallarSiSuperado,
-} from "@/server/bot/respuesta";
-import { despachoDe, despachoSuperado } from "@/server/dispatch/outbox";
+} from "@/server/agents/bot/respuesta";
+import { despachoDe, despachoSuperado } from "@/server/agents/dispatch/outbox";
 import { SendError, sendText } from "@/server/conversations/inbox/send";
-import { guardarRespuestaDePrueba } from "@/server/lab/sandbox";
+import { guardarRespuestaDePrueba } from "@/server/agents/lab/sandbox";
 
 export const dynamic = "force-dynamic";
 

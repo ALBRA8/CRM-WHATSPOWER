@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { chatJson, extractJson } from "@/lib/ai";
-import type { AiCredentialSecret } from "@/server/ai/credentials";
+import type { AiCredentialSecret } from "@/server/agents/ai/credentials";
 
 /**
  * #85 — La fila de Ajustes → IA de la organización, simulada. Sin fila
@@ -11,8 +11,8 @@ import type { AiCredentialSecret } from "@/server/ai/credentials";
 const fila: { current: AiCredentialSecret | null } = { current: null };
 const marcas: { status: number; nuevo: string }[] = [];
 
-vi.mock("@/server/ai/credentials", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/ai/credentials")>();
+vi.mock("@/server/agents/ai/credentials", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/agents/ai/credentials")>();
   return {
     ...original,
     getAiCredentialSecret: async () => fila.current,

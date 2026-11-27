@@ -11,7 +11,7 @@ import {
   haceCuanto,
 } from "@/lib/brain-status";
 import { resetRateLimit } from "@/lib/rate-limit";
-import { isBotKeyConfigured, requireBotKey } from "@/server/bot/auth";
+import { isBotKeyConfigured, requireBotKey } from "@/server/agents/bot/auth";
 import {
   BRAIN_HEALTH_TTL_MS,
   EXTERNAL_SEEN_WINDOW_MS,
@@ -22,7 +22,7 @@ import {
   markBotSeen,
   resetBrainStatusState,
   type BrainStatusInput,
-} from "@/server/bot/status";
+} from "@/server/agents/bot/status";
 
 /**
  * «Quién responde a tus clientes». Lo que se protege: que el dueño sepa si

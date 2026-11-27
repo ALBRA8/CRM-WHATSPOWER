@@ -1,6 +1,6 @@
 import { apiError } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { pensarPorElCerebro } from "@/server/bot/llm-proxy";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
+import { pensarPorElCerebro } from "@/server/agents/bot/llm-proxy";
 
 export const dynamic = "force-dynamic";
 // Un modelo puede tardar en contestar: el default cortaría un turno sano.

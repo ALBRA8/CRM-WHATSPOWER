@@ -9,7 +9,7 @@ import {
   getContactStage,
   serializeContact,
 } from "@/server/crm/contacts";
-import { upsertFicha } from "@/server/bot/ficha";
+import { upsertFicha } from "@/server/agents/bot/ficha";
 import { pauseConversations } from "@/server/crm/contacts-import";
 import { cuentaComoAnuncio } from "@/lib/anuncios";
 import {

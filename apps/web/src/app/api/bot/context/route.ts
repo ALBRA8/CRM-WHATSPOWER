@@ -1,14 +1,14 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { apiError } from "@/lib/api";
-import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { serializeFicha } from "@/server/bot/ficha";
+import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
+import { serializeFicha } from "@/server/agents/bot/ficha";
 import { findContactByIdentity } from "@/server/conversations/inbox/identity";
 import { isWindowOpen, windowRemainingMs } from "@/server/conversations/inbox/window";
 import { windowMsFor } from "@/server/channels/capabilities";
 import { citasParaContexto } from "@/server/agenda/context";
 import { anuncioDelContacto } from "@/server/attribution/store";
-import { siguientesDelLead } from "@/server/bot/stage";
+import { siguientesDelLead } from "@/server/agents/bot/stage";
 
 export const dynamic = "force-dynamic";
 

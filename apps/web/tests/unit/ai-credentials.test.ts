@@ -63,7 +63,7 @@ beforeEach(() => {
 
 describe("saveAiCredential", () => {
   it("cifra la llave: la fila no contiene el texto plano y queda activa", async () => {
-    const { saveAiCredential } = await import("@/server/ai/credentials");
+    const { saveAiCredential } = await import("@/server/agents/ai/credentials");
     const token = "sk-or-llave-super-secreta-abcd";
     const guardada = await saveAiCredential({
       organizationId: "org_1",
@@ -100,7 +100,7 @@ describe("saveAiCredential", () => {
 
   it("sin llave y sin fila → error tipado sin_token (no inserta nada)", async () => {
     const { saveAiCredential, AiCredentialError } = await import(
-      "@/server/ai/credentials"
+      "@/server/agents/ai/credentials"
     );
     await expect(
       saveAiCredential({
@@ -132,7 +132,7 @@ describe("saveAiCredential", () => {
         updatedAt: new Date(),
       },
     ];
-    const { saveAiCredential } = await import("@/server/ai/credentials");
+    const { saveAiCredential } = await import("@/server/agents/ai/credentials");
     const guardada = await saveAiCredential({
       organizationId: "org_1",
       provider: "openrouter",
@@ -148,7 +148,7 @@ describe("saveAiCredential", () => {
 
 describe("el estado según el proveedor", () => {
   it("401 → paused_invalid_token con el detalle; 402 → paused_no_credit", async () => {
-    const { marcarEstadoPorRespuesta } = await import("@/server/ai/credentials");
+    const { marcarEstadoPorRespuesta } = await import("@/server/agents/ai/credentials");
     expect(await marcarEstadoPorRespuesta("org_1", 401, "proveedor respondió 401")).toBe(true);
     expect(updated[0]).toMatchObject({
       status: "paused_invalid_token",
@@ -159,14 +159,14 @@ describe("el estado según el proveedor", () => {
   });
 
   it("429 y 500 no tocan la fila", async () => {
-    const { marcarEstadoPorRespuesta } = await import("@/server/ai/credentials");
+    const { marcarEstadoPorRespuesta } = await import("@/server/agents/ai/credentials");
     expect(await marcarEstadoPorRespuesta("org_1", 429)).toBe(false);
     expect(await marcarEstadoPorRespuesta("org_1", 500)).toBe(false);
     expect(updated).toHaveLength(0);
   });
 
   it("marcarActiva vuelve a active y limpia el motivo", async () => {
-    const { marcarActiva } = await import("@/server/ai/credentials");
+    const { marcarActiva } = await import("@/server/agents/ai/credentials");
     await marcarActiva("org_1");
     expect(updated[0]).toMatchObject({ status: "active", statusReason: null });
   });

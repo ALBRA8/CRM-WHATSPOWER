@@ -2,12 +2,12 @@ import { and, desc, eq, gt, isNull, lte, ne, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { getEnv } from "@/lib/env";
-import { leerConfigDespacho } from "@/server/brains/config";
-import { rafagaDe } from "@/server/brains/deliver";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
+import { rafagaDe } from "@/server/agents/brains/deliver";
 import { windowMsFor } from "@/server/channels/capabilities";
-import { todoEsCierre } from "@/server/dispatch/cierres";
-import { encolarDespacho, type FilaDespacho } from "@/server/dispatch/outbox";
-import { programarTanda } from "@/server/dispatch/worker";
+import { todoEsCierre } from "@/server/agents/dispatch/cierres";
+import { encolarDespacho, type FilaDespacho } from "@/server/agents/dispatch/outbox";
+import { programarTanda } from "@/server/agents/dispatch/worker";
 import { publish } from "@/server/conversations/events/bus";
 
 /**

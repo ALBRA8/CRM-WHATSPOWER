@@ -1,6 +1,6 @@
 import { apiRoot } from "@/lib/ai/presets";
 import { resolveAiProvider } from "@/lib/ai/provider";
-import { marcarEstadoPorRespuesta } from "@/server/ai/credentials";
+import { marcarEstadoPorRespuesta } from "@/server/agents/ai/credentials";
 
 /**
  * 036 — El CRM piensa por el cerebro (`POST /api/bot/llm/{ruta}`).

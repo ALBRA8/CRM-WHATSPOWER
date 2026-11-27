@@ -1,15 +1,15 @@
 import { conSesion } from "@/server/http/compartido";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { urlSaludCerebro } from "@/server/brains/config";
+import { urlSaludCerebro } from "@/server/agents/brains/config";
 import { isAiConfiguredFor } from "@/lib/ai/provider";
-import { isBotKeyConfigured } from "@/server/bot/auth";
+import { isBotKeyConfigured } from "@/server/agents/bot/auth";
 import {
   botLastSeenAt,
   computeBrainStatus,
   getBrainHealth,
-} from "@/server/bot/status";
-import { estadoDelDespacho } from "@/server/dispatch/estado";
+} from "@/server/agents/bot/status";
+import { estadoDelDespacho } from "@/server/agents/dispatch/estado";
 
 
 /**

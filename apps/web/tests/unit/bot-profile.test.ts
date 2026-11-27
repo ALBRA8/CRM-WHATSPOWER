@@ -1,5 +1,5 @@
 ﻿import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { serializeBotProfile } from "@/server/bot/profile";
+import { serializeBotProfile } from "@/server/agents/bot/profile";
 import type { schema } from "@/lib/db";
 import { resetRateLimit } from "@/lib/rate-limit";
 // Estático a propósito: `vi.mock` se hoistea por encima de los imports, así que
@@ -21,8 +21,8 @@ vi.mock("@/lib/db", async (importOriginal) => {
   return { ...actual, getDb: () => builder };
 });
 
-vi.mock("@/server/bot/auth", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@/server/bot/auth")>();
+vi.mock("@/server/agents/bot/auth", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/server/agents/bot/auth")>();
   return { ...actual, resolveInstanceOrg: async () => "org_1" };
 });
 

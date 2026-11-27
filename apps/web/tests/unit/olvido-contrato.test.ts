@@ -6,8 +6,8 @@ import {
   CABECERA_ORG,
   construirEventoOlvido,
   firmarCuerpo,
-} from "@/server/brains/contract";
-import { avisarOlvido } from "@/server/brains/deliver";
+} from "@/server/agents/brains/contract";
+import { avisarOlvido } from "@/server/agents/brains/deliver";
 
 /**
  * 026 — El contrato del olvido, fijado byte a byte.

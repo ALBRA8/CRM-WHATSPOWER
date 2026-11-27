@@ -3,8 +3,8 @@ import { scoped } from "@/lib/db/tenant";
 import { estadoIaDe, mensajeDeEstado } from "@/lib/ai/provider";
 import { agendaEnabled } from "@/server/agenda/flag";
 import { verifyCalendar } from "./calendar-verifiers";
-import { leerConfigDespacho, urlSaludCerebro } from "@/server/brains/config";
-import { getBrainHealth } from "@/server/bot/status";
+import { leerConfigDespacho, urlSaludCerebro } from "@/server/agents/brains/config";
+import { getBrainHealth } from "@/server/agents/bot/status";
 
 /**
  * Qué le falta a esta instancia para que el agente conteste (issue #86).

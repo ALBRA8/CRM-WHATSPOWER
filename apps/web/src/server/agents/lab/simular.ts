@@ -2,7 +2,7 @@ import { and, asc, eq, gt } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
-import { leerConfigDespacho } from "@/server/brains/config";
+import { leerConfigDespacho } from "@/server/agents/brains/config";
 import { olvidar, turnoPorDespacho } from "./runner";
 
 /**
