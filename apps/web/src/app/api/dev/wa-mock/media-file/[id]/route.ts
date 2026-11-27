@@ -1,6 +1,6 @@
 import { mockGuard } from "@/lib/dev-guard";
 import { empaquetarOgg } from "@/lib/audio/webm-ogg";
-import { pngDePrueba } from "@/server/dev/png-de-prueba";
+import { pngDePrueba } from "@/server/platform/dev/png-de-prueba";
 
 /**
  * Binario de prueba del wa-mock (media proxy del bot). La metadata del mock de

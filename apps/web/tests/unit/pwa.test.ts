@@ -9,7 +9,7 @@ import { describe, expect, it, vi } from "vitest";
  */
 
 const { getBrandingContext } = vi.hoisted(() => ({ getBrandingContext: vi.fn() }));
-vi.mock("@/server/branding", () => ({
+vi.mock("@/server/platform/branding", () => ({
   getBrandingContext,
   getBranding: async () => (await getBrandingContext()).branding,
 }));

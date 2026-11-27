@@ -3,7 +3,7 @@ import { SIN_DESPACHO, despachoFallando } from "@/lib/brain-status";
 import { leerConfigDespacho } from "@/server/agents/brains/config";
 import { hayMensajesSinDespachar, sinDespachar } from "@/server/agents/brains/deliver";
 import { dispatchDto } from "@/server/agents/dispatch/estado";
-import { checkDispatch } from "@/server/doctor/checks";
+import { checkDispatch } from "@/server/platform/doctor/checks";
 import { BACKOFF_MS, MAX_INTENTOS, esperaDeReintento } from "@/server/agents/dispatch/outbox";
 
 /**

@@ -25,7 +25,7 @@ import {
   formatResult,
   summarize,
   type CheckResult,
-} from "@/server/doctor/checks";
+} from "@/server/platform/doctor/checks";
 
 const cwd = process.cwd();
 const envPath = path.join(cwd, ".env");

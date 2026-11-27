@@ -1,6 +1,6 @@
 import { isVestroName } from "@/lib/brand";
 import { DEFAULT_BRANDING } from "@/lib/branding";
-import { getBranding } from "@/server/branding";
+import { getBranding } from "@/server/platform/branding";
 import { enabledChannels } from "@/server/channels/enabled";
 import { productName } from "@/lib/channels";
 import { BrandLogo } from "@/components/brand-mark";

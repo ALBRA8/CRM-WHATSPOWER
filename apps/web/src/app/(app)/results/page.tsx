@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { todayInTz } from "@/lib/time/slots";
-import { getBranding } from "@/server/branding";
+import { getBranding } from "@/server/platform/branding";
 import { agendaEnabled } from "@/server/scheduling/agenda/flag";
-import { businessTimezone } from "@/server/analytics/period";
+import { businessTimezone } from "@/server/platform/analytics/period";
 import { ResultsClient } from "@/components/results/results-client";
 
 export const dynamic = "force-dynamic";

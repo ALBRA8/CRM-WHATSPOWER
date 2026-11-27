@@ -1,5 +1,5 @@
 import { mockGuard } from "@/lib/dev-guard";
-import { getWaMockState } from "@/server/dev/wa-mock-state";
+import { getWaMockState } from "@/server/platform/dev/wa-mock-state";
 
 export const dynamic = "force-dynamic";
 

@@ -14,7 +14,7 @@ vi.mock("@/lib/env", () => ({ getEnv }));
 vi.mock("@/lib/db", () => ({ getDb: vi.fn(), schema: {} }));
 
 import { checkMediaDir } from "@/instrumentation-node";
-import { resetMediaDirCache } from "@/server/media-dir";
+import { resetMediaDirCache } from "@/server/platform/media-dir";
 
 let tmp: string;
 let error: MockInstance<typeof console.error>;

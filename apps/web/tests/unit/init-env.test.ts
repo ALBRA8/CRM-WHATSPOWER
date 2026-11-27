@@ -10,7 +10,7 @@ import {
   GENERATED_SECRETS,
   renderInitEnv,
   runInitEnv,
-} from "@/server/doctor/init-env";
+} from "@/server/platform/doctor/init-env";
 
 /**
  * `pnpm init-env` existe para que `docker compose up -d` arranque sin editar

@@ -5,8 +5,8 @@ import { getDb, PG_CONNECTION_OPTIONS, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { envSchema, safeParseEnv, type Env } from "@/lib/env";
 import { leerConfigDespacho } from "@/server/agents/brains/config";
-import { GENERATED_SECRETS, PLACEHOLDER_PREFIX } from "@/server/doctor/init-env";
-import { probeBucket, probeMediaDir } from "@/server/media-dir";
+import { GENERATED_SECRETS, PLACEHOLDER_PREFIX } from "@/server/platform/doctor/init-env";
+import { probeBucket, probeMediaDir } from "@/server/platform/media-dir";
 import { testConnection, type ConnectionCheck } from "@/server/channels/whatsapp/connect";
 import {
   getCredentialsByOrg,

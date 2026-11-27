@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { sumable } from "@/lib/money";
 import type { HygieneBlockDto } from "@/lib/analytics";
-import { notLabContact } from "@/server/analytics/shared";
+import { notLabContact } from "@/server/platform/analytics/shared";
 
 /**
  * 019 — Bloque de higiene.

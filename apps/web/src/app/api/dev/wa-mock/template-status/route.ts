@@ -1,11 +1,11 @@
 import { z } from "zod";
 import { mockGuard } from "@/lib/dev-guard";
 import { apiError, parseBody } from "@/lib/api";
-import { getWaMockState } from "@/server/dev/wa-mock-state";
+import { getWaMockState } from "@/server/platform/dev/wa-mock-state";
 import {
   buildTemplateStatusPayload,
   deliverToWebhook,
-} from "@/server/dev/wa-mock-inbound";
+} from "@/server/platform/dev/wa-mock-inbound";
 
 export const dynamic = "force-dynamic";
 

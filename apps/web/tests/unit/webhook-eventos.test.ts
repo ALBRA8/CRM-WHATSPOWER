@@ -37,7 +37,7 @@ import {
   resumenDeError,
 } from "@/server/channels/webhooks/eventos";
 import { recibirEvento } from "@/server/channels/webhooks/recibir";
-import { lanzarFalloDePrueba, programarFallosDePrueba } from "@/server/dev/webhook-fallo";
+import { lanzarFalloDePrueba, programarFallosDePrueba } from "@/server/platform/dev/webhook-fallo";
 
 const ENV = { ...process.env };
 afterEach(() => {

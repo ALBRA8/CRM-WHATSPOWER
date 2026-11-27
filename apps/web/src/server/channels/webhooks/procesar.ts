@@ -4,7 +4,7 @@ import { processTemplateStatusValue } from "@/server/channels/whatsapp/template-
 import { processMetaInstagramPayload } from "@/server/channels/instagram/ingest";
 import { processMetaPagePayload } from "@/server/channels/messenger/ingest";
 import { processZernioPayload } from "@/server/channels/zernio/dispatch";
-import { lanzarFalloDePrueba } from "@/server/dev/webhook-fallo";
+import { lanzarFalloDePrueba } from "@/server/platform/dev/webhook-fallo";
 import type { FuenteWebhook } from "./eventos";
 
 /**

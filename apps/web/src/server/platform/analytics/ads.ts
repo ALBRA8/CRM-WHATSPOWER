@@ -10,12 +10,12 @@ import {
   type SourceRowDto,
 } from "@/lib/analytics";
 import { SOURCE_LABELS, SOURCE_VALUES } from "@/server/crm/contact-source";
-import type { ResolvedPeriod } from "@/server/analytics/period";
+import type { ResolvedPeriod } from "@/server/platform/analytics/period";
 import {
   effectiveSourceExpr,
   firstAttributionIdExpr,
   notLabContact,
-} from "@/server/analytics/shared";
+} from "@/server/platform/analytics/shared";
 
 /**
  * 019 — De dónde llegan: por origen y por anuncio, SOLO en conteos.

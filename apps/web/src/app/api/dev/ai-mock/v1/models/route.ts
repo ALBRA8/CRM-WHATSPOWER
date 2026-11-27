@@ -1,5 +1,5 @@
 import { mockGuard } from "@/lib/dev-guard";
-import { aiMockAuthFailure, aiMockModels } from "@/server/dev/ai-mock";
+import { aiMockAuthFailure, aiMockModels } from "@/server/platform/dev/ai-mock";
 
 export const dynamic = "force-dynamic";
 

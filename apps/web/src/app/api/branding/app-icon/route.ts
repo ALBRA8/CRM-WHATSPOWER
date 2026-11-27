@@ -1,5 +1,5 @@
 import { parseAppIconParams } from "@/lib/pwa";
-import { appIconResponse } from "@/server/app-icon";
+import { appIconResponse } from "@/server/platform/app-icon";
 
 export const dynamic = "force-dynamic";
 

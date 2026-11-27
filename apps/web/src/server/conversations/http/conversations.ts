@@ -1,6 +1,6 @@
 import { apiError } from "@/lib/api";
 import { estaEsperando, minutosDeEspera } from "@/lib/esperando";
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { listConversations } from "@/server/conversations/inbox/queries";
 import { withPins } from "@/server/conversations/inbox/pins";
 

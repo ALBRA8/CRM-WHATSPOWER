@@ -6,7 +6,7 @@ import {
   zernioTokenIsBad,
   type ZernioMockAccount,
   type ZernioMockWebhook,
-} from "@/server/dev/zernio-mock-state";
+} from "@/server/platform/dev/zernio-mock-state";
 
 export const dynamic = "force-dynamic";
 

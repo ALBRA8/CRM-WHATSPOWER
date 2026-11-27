@@ -8,7 +8,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { PG_CONNECTION_OPTIONS } from "@/lib/db";
 import * as schema from "@/lib/db/schema";
-import { seedDemo, isDomainEmpty } from "@/server/seed/demo";
+import { seedDemo, isDomainEmpty } from "@/server/platform/seed/demo";
 
 function loadEnvVar(name: string): string | undefined {
   if (process.env[name]) return process.env[name];

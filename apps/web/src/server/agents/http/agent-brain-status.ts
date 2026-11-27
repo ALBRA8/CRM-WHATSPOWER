@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { urlSaludCerebro } from "@/server/agents/brains/config";

@@ -4,7 +4,7 @@ import {
   googleMockState,
   mockRefreshTokenIsBad,
   resetGoogleMock,
-} from "@/server/dev/google-mock-state";
+} from "@/server/platform/dev/google-mock-state";
 
 export const dynamic = "force-dynamic";
 

@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { DEFAULT_BRANDING } from "@/lib/branding";
 import { productName } from "@/lib/channels";
 import { buildManifest } from "@/lib/pwa";
-import { getBranding } from "@/server/branding";
+import { getBranding } from "@/server/platform/branding";
 import { enabledChannels } from "@/server/channels/enabled";
 
 export const dynamic = "force-dynamic";

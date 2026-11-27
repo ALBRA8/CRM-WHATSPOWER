@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
@@ -6,7 +6,7 @@ import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { publish } from "@/server/conversations/events/bus";
 import { moveLeadToStage } from "@/server/crm/leads/stage-history";
-import { getBranding } from "@/server/branding";
+import { getBranding } from "@/server/platform/branding";
 
 
 type Params = { params: Promise<{ id: string }> };

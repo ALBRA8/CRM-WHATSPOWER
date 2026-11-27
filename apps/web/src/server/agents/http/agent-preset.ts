@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";

@@ -1,6 +1,6 @@
 import { apiError, withAuth } from "@/lib/api";
 import { getDb } from "@/lib/db";
-import { isDomainEmpty, seedDemo } from "@/server/seed/demo";
+import { isDomainEmpty, seedDemo } from "@/server/platform/seed/demo";
 
 export const dynamic = "force-dynamic";
 

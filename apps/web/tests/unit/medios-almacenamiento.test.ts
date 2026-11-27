@@ -280,7 +280,7 @@ describe("037 — el sondeo prueba donde se escribe", () => {
       })
     );
     await montar({ MEDIA_STORE: "bucket", ...CREDS });
-    const { probeAlmacen } = await import("@/server/media-dir");
+    const { probeAlmacen } = await import("@/server/platform/media-dir");
     expect(await probeAlmacen(dirTemporal)).toEqual({
       store: "bucket",
       dir: "cuenta123.r2.cloudflarestorage.com",
@@ -292,13 +292,13 @@ describe("037 — el sondeo prueba donde se escribe", () => {
   it("con el bucket rechazando: no escribible, con el código", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => new Response("", { status: 403 })));
     await montar({ MEDIA_STORE: "bucket", ...CREDS });
-    const { probeAlmacen } = await import("@/server/media-dir");
+    const { probeAlmacen } = await import("@/server/platform/media-dir");
     expect(await probeAlmacen(dirTemporal)).toMatchObject({ store: "bucket", writable: false, code: "bucket_403" });
   });
 
   it("con la bandera y sin credenciales: no escribible (quien instala pidió el bucket)", async () => {
     await montar({ MEDIA_STORE: "bucket" });
-    const { probeAlmacen } = await import("@/server/media-dir");
+    const { probeAlmacen } = await import("@/server/platform/media-dir");
     expect(await probeAlmacen(dirTemporal)).toMatchObject({
       store: "bucket",
       writable: false,
@@ -310,7 +310,7 @@ describe("037 — el sondeo prueba donde se escribe", () => {
     const f = vi.fn();
     vi.stubGlobal("fetch", f);
     await montar({ ...CREDS });
-    const { probeAlmacen } = await import("@/server/media-dir");
+    const { probeAlmacen } = await import("@/server/platform/media-dir");
     expect(await probeAlmacen(dirTemporal)).toMatchObject({ store: "disco", writable: true });
     expect(f).not.toHaveBeenCalled();
   });
@@ -318,12 +318,12 @@ describe("037 — el sondeo prueba donde se escribe", () => {
 
 describe("037 — doctor y salud", () => {
   it("sin la bandera, el doctor no menciona el bucket", async () => {
-    const { checkMediaBucket } = await import("@/server/doctor/checks");
+    const { checkMediaBucket } = await import("@/server/platform/doctor/checks");
     expect(await checkMediaBucket({ ...CREDS })).toBeNull();
   });
 
   it("con la bandera y variables faltantes, falla y dice cuáles", async () => {
-    const { checkMediaBucket } = await import("@/server/doctor/checks");
+    const { checkMediaBucket } = await import("@/server/platform/doctor/checks");
     const r = await checkMediaBucket({ MEDIA_STORE: "bucket", MEDIA_BUCKET_ENDPOINT: CREDS.MEDIA_BUCKET_ENDPOINT });
     expect(r).toMatchObject({ status: "fail" });
     expect(r?.fix).toMatch(/MEDIA_BUCKET_SECRET/);
@@ -331,7 +331,7 @@ describe("037 — doctor y salud", () => {
 
   it("con el bucket sano, ok sin enseñar llaves", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => new Response("", { status: 200 })));
-    const { checkMediaBucket } = await import("@/server/doctor/checks");
+    const { checkMediaBucket } = await import("@/server/platform/doctor/checks");
     const r = await checkMediaBucket({ MEDIA_STORE: "bucket", ...CREDS });
     expect(r).toMatchObject({ status: "ok" });
     expect(JSON.stringify(r)).not.toContain(CREDS.MEDIA_BUCKET_SECRET);
@@ -339,7 +339,7 @@ describe("037 — doctor y salud", () => {
   });
 
   it("/api/health dice el almacén pedido en features.media", async () => {
-    const { healthFeatures } = await import("@/server/health");
+    const { healthFeatures } = await import("@/server/platform/health");
     expect(healthFeatures({}).media).toBe("disco");
     expect(healthFeatures({ MEDIA_STORE: "bucket" }).media).toBe("bucket");
     expect(healthFeatures({ MEDIA_STORE: "s3" }).media).toBe("disco");

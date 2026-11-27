@@ -1,7 +1,7 @@
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
 import { aparienciaSchema, temaPropio } from "@/lib/temas";
-import { aparienciaDelNegocio, guardarAparienciaDelNegocio } from "@/server/apariencia";
+import { aparienciaDelNegocio, guardarAparienciaDelNegocio } from "@/server/platform/apariencia";
 
 export const dynamic = "force-dynamic";
 

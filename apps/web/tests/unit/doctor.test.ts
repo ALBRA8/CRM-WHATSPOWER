@@ -22,8 +22,8 @@ import {
   requiredEnvKeys,
   summarize,
   type CheckResult,
-} from "@/server/doctor/checks";
-import { renderInitEnv } from "@/server/doctor/init-env";
+} from "@/server/platform/doctor/checks";
+import { renderInitEnv } from "@/server/platform/doctor/init-env";
 import type { Credentials } from "@/server/channels/whatsapp/credentials";
 
 /**

@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import {
   MAX_TEXT_CHARS_ANY_CHANNEL,
   TEXT_TOO_LONG_ANY_CHANNEL,

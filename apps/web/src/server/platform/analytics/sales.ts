@@ -13,8 +13,8 @@ import {
   type StageTimingDto,
 } from "@/lib/analytics";
 import { LOSS_REASON_LABEL, type LossReason } from "@/lib/types";
-import type { ResolvedPeriod } from "@/server/analytics/period";
-import { localDateExpr, notLabContact } from "@/server/analytics/shared";
+import type { ResolvedPeriod } from "@/server/platform/analytics/period";
+import { localDateExpr, notLabContact } from "@/server/platform/analytics/shared";
 
 /**
  * 019 — Bloque de ventas y embudo.

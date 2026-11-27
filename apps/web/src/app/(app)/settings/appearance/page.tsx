@@ -4,7 +4,7 @@ import { EsperandoCard } from "@/components/settings/esperando-card";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { canConfigure } from "@/lib/auth/roles";
 import { avisoEsperandoDeCookie, ESPERANDO_COOKIE } from "@/lib/esperando";
-import { aparienciaActual } from "@/server/apariencia";
+import { aparienciaActual } from "@/server/platform/apariencia";
 
 export const dynamic = "force-dynamic";
 

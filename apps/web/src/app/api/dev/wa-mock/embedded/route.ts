@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { mockGuard } from "@/lib/dev-guard";
 import { parseBody } from "@/lib/api";
-import { getWaMockState } from "@/server/dev/wa-mock-state";
+import { getWaMockState } from "@/server/platform/dev/wa-mock-state";
 
 export const dynamic = "force-dynamic";
 

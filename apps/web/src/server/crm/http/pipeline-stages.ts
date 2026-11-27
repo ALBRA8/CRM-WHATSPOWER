@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { asc, sql } from "drizzle-orm";
 import { z } from "zod";
 import { parseBody } from "@/lib/api";

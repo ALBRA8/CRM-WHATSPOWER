@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { comparable, delta, MIN_SAMPLE, rate } from "@/lib/analytics";
-import { armarEmbudo, clasificarCierres, motivosDePerdida, type Desenlace } from "@/server/analytics/sales";
-import { MAX_ANUNCIOS, unirAnuncios, unirFuentes } from "@/server/analytics/ads";
+import { armarEmbudo, clasificarCierres, motivosDePerdida, type Desenlace } from "@/server/platform/analytics/sales";
+import { MAX_ANUNCIOS, unirAnuncios, unirFuentes } from "@/server/platform/analytics/ads";
 import { escalaLimpia, etiqueta } from "@/components/results/time-bars";
 
 /**

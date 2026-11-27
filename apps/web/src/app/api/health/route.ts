@@ -1,4 +1,4 @@
-import { checkHealth } from "@/server/health";
+import { checkHealth } from "@/server/platform/health";
 
 export const dynamic = "force-dynamic";
 

@@ -1,6 +1,6 @@
 import { withAuth } from "@/lib/api";
-import { getBranding } from "@/server/branding";
-import { hygieneBlock } from "@/server/analytics/hygiene";
+import { getBranding } from "@/server/platform/branding";
+import { hygieneBlock } from "@/server/platform/analytics/hygiene";
 
 export const dynamic = "force-dynamic";
 

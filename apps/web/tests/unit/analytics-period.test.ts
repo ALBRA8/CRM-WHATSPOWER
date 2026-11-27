@@ -9,7 +9,7 @@ beforeAll(() => {
 });
 
 const { daysApart, median, PeriodError, resolvePeriod } = await import(
-  "@/server/analytics/period"
+  "@/server/platform/analytics/period"
 );
 const { bucketsDelPeriodo } = await import("@/lib/analytics");
 const { shortcuts } = await import("@/components/results/range-picker");

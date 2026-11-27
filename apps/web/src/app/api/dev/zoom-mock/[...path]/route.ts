@@ -4,7 +4,7 @@ import {
   resetZoomMock,
   zoomMockSnapshot,
   zoomMockState,
-} from "@/server/dev/zoom-mock-state";
+} from "@/server/platform/dev/zoom-mock-state";
 
 export const dynamic = "force-dynamic";
 

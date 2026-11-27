@@ -1,6 +1,6 @@
 import { createHmac } from "node:crypto";
 import { getEnv } from "@/lib/env";
-import { nextN } from "@/server/dev/wa-mock-state";
+import { nextN } from "@/server/platform/dev/wa-mock-state";
 
 /**
  * Construye un payload real de Meta y lo entrega al webhook público por

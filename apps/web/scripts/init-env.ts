@@ -11,7 +11,7 @@
  * vive en src/server/doctor/init-env.ts.
  */
 import path from "node:path";
-import { DEFAULT_DOMAIN, runInitEnv } from "@/server/doctor/init-env";
+import { DEFAULT_DOMAIN, runInitEnv } from "@/server/platform/doctor/init-env";
 
 function usage(): void {
   console.error(

@@ -1,7 +1,7 @@
 import { apiError, withAuth } from "@/lib/api";
-import { getBranding } from "@/server/branding";
-import { PeriodError, periodFromRequest } from "@/server/analytics/period";
-import { salesBlock } from "@/server/analytics/sales";
+import { getBranding } from "@/server/platform/branding";
+import { PeriodError, periodFromRequest } from "@/server/platform/analytics/period";
+import { salesBlock } from "@/server/platform/analytics/sales";
 
 export const dynamic = "force-dynamic";
 

@@ -3,8 +3,8 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { schema } from "@/lib/db";
 import { rate, type BotBlockDto } from "@/lib/analytics";
-import { resolvePeriod } from "@/server/analytics/period";
-import { botBlock } from "@/server/analytics/bot";
+import { resolvePeriod } from "@/server/platform/analytics/period";
+import { botBlock } from "@/server/platform/analytics/bot";
 import { BotSection } from "@/components/results/bot-section";
 
 /**

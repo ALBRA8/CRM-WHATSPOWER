@@ -7,7 +7,7 @@ vi.mock("@/lib/auth/session", async (original) => ({
   ...(await original<typeof import("@/lib/auth/session")>()),
   requireSession: mocks.session,
 }));
-vi.mock("@/server/apariencia", () => ({
+vi.mock("@/server/platform/apariencia", () => ({
   aparienciaDelNegocio: mocks.leer,
   guardarAparienciaDelNegocio: mocks.guardar,
 }));

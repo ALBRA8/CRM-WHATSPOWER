@@ -1,6 +1,6 @@
 import { apiError, withAuth } from "@/lib/api";
-import { PeriodError, periodFromRequest } from "@/server/analytics/period";
-import { botBlock } from "@/server/analytics/bot";
+import { PeriodError, periodFromRequest } from "@/server/platform/analytics/period";
+import { botBlock } from "@/server/platform/analytics/bot";
 
 export const dynamic = "force-dynamic";
 

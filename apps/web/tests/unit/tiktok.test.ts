@@ -19,7 +19,7 @@ import {
   windowMsFor,
 } from "@/server/channels/capabilities";
 import { parseChannels } from "@/server/channels/enabled";
-import { healthFeatures } from "@/server/health";
+import { healthFeatures } from "@/server/platform/health";
 import { cabeOtroMensaje } from "@/server/conversations/inbox/outbound-cap";
 import {
   isWindowOpen,

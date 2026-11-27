@@ -5,7 +5,7 @@ import { getCredentialsByPhoneNumberId } from "@/server/channels/whatsapp/creden
 import {
   buildEchoPayload,
   deliverToWebhook,
-} from "@/server/dev/wa-mock-inbound";
+} from "@/server/platform/dev/wa-mock-inbound";
 
 export const dynamic = "force-dynamic";
 

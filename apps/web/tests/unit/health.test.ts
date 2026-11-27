@@ -21,12 +21,12 @@ const { getEnv, getDb } = vi.hoisted(() => ({
 vi.mock("@/lib/env", () => ({ getEnv }));
 vi.mock("@/lib/db", () => ({ getDb, schema: {} }));
 
-import { checkHealth, healthFeatures } from "@/server/health";
+import { checkHealth, healthFeatures } from "@/server/platform/health";
 import {
   MEDIA_DIR_PROBE_TTL_MS,
   mediaDirStatus,
   resetMediaDirCache,
-} from "@/server/media-dir";
+} from "@/server/platform/media-dir";
 import { GET } from "@/app/api/health/route";
 
 const ENV_ORIGINAL = { ...process.env };

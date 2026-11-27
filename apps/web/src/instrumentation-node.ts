@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { mediaDirStatus } from "@/server/media-dir";
+import { mediaDirStatus } from "@/server/platform/media-dir";
 import { leerConfigDespacho } from "@/server/agents/brains/config";
 import { iniciarWorker, tanda } from "@/server/agents/dispatch/worker";
 import { iniciarRedDeSeguridad } from "@/server/agents/dispatch/red-de-seguridad";

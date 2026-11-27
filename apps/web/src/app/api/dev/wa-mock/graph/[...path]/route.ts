@@ -5,7 +5,7 @@ import {
   nextN,
   nextOutboundWamid,
   type MockTemplate,
-} from "@/server/dev/wa-mock-state";
+} from "@/server/platform/dev/wa-mock-state";
 
 /**
  * Imitación de la Graph API (contrato mocks.md). El cliente real apunta aquí

@@ -1,6 +1,6 @@
 import { BrandingClient } from "@/components/settings/branding-client";
 import { FaviconCard } from "@/components/settings/favicon-card";
-import { getBranding } from "@/server/branding";
+import { getBranding } from "@/server/platform/branding";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { enabledChannels } from "@/server/channels/enabled";
 import { navKicker } from "@/lib/channels";

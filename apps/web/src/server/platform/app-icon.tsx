@@ -9,7 +9,7 @@ import {
 } from "@/lib/brand";
 import { FAVICON_ASSET, faviconInitial } from "@/lib/favicon";
 import type { AppIconPurpose, AppIconSize } from "@/lib/pwa";
-import { getBrandingContext } from "@/server/branding";
+import { getBrandingContext } from "@/server/platform/branding";
 import { readMediaFile } from "@/server/channels/whatsapp/media";
 
 /**

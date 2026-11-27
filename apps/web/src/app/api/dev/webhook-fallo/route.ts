@@ -4,7 +4,7 @@ import { mockGuard } from "@/lib/dev-guard";
 import {
   fallosDePruebaPendientes,
   programarFallosDePrueba,
-} from "@/server/dev/webhook-fallo";
+} from "@/server/platform/dev/webhook-fallo";
 
 export const dynamic = "force-dynamic";
 

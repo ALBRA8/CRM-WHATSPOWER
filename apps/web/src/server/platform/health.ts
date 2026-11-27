@@ -5,7 +5,7 @@ import { APP_VERSION, resolveCommit } from "@/lib/version";
 import { parseAgendaFlag } from "@/server/scheduling/agenda/flag";
 import { parseAtribucionFlag } from "@/server/attribution/flag";
 import { parseChannels } from "@/server/channels/enabled";
-import { mediaDirStatus } from "@/server/media-dir";
+import { mediaDirStatus } from "@/server/platform/media-dir";
 import { conteoGlobal } from "@/server/channels/webhooks/eventos";
 
 /**

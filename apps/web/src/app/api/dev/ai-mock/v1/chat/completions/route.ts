@@ -4,7 +4,7 @@ import {
   aiMockCompletion,
   aiMockEstado,
   aiMockRegistrar,
-} from "@/server/dev/ai-mock";
+} from "@/server/platform/dev/ai-mock";
 
 export const dynamic = "force-dynamic";
 

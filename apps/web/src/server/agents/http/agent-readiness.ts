@@ -1,6 +1,6 @@
 import { onboardingStatus } from "@/server/organizations/onboarding/status";
-import { conSesion } from "@/server/http/compartido";
-import { origenPublico, pendientesConEnlaces } from "@/server/http/enlaces";
+import { conSesion } from "@/server/platform/http/compartido";
+import { origenPublico, pendientesConEnlaces } from "@/server/platform/http/enlaces";
 
 /**
  * 069 — `GET /api/v1/agent/readiness`: el estado de la guía de inicio y, por

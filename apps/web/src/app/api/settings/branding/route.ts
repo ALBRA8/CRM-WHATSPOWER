@@ -3,7 +3,7 @@ import { apiError, parseBody, withAuth } from "@/lib/api";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { isValidHex, resolveAccentSet } from "@/lib/branding";
 import { CURRENCIES } from "@/lib/money";
-import { getBranding, saveBranding } from "@/server/branding";
+import { getBranding, saveBranding } from "@/server/platform/branding";
 
 export const dynamic = "force-dynamic";
 

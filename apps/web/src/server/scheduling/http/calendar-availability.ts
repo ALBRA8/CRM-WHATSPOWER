@@ -1,4 +1,4 @@
-import { conSesion } from "@/server/http/compartido";
+import { conSesion } from "@/server/platform/http/compartido";
 import { dayIsoInTz, timeInTz, dayLabelInTz } from "@/lib/time/slots";
 import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { computeAvailability } from "@/server/scheduling/agenda/availability";
