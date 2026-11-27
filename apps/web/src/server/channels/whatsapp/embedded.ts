@@ -3,13 +3,13 @@ import { request as httpRequest } from "node:http";
 import { request as httpsRequest } from "node:https";
 import { getEnv } from "@/lib/env";
 import { graphRequest, MetaApiError } from "@/lib/meta/client";
-import { saveCredentials } from "@/server/whatsapp/credentials";
+import { saveCredentials } from "@/server/channels/whatsapp/credentials";
 import {
   descubrirCuentaDeMensajes,
   registerWebhookForNumber,
   type WebhookRegistration,
-} from "@/server/whatsapp/connect";
-import { webhookUrl, webhookVerifyToken } from "@/server/whatsapp/webhook-url";
+} from "@/server/channels/whatsapp/connect";
+import { webhookUrl, webhookVerifyToken } from "@/server/channels/whatsapp/webhook-url";
 
 /**
  * 066 — «Conectar con Meta» (Embedded Signup v4), del lado del servidor.

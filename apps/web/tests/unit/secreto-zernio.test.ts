@@ -85,7 +85,7 @@ function sinNadaEnClaro(fila: Fila) {
 
 describe("guardar una conexión por Zernio", () => {
   it("Instagram: la fila no contiene el secreto en claro y se descifra igual", async () => {
-    const { saveInstagramCredentials } = await import("@/server/instagram/credentials");
+    const { saveInstagramCredentials } = await import("@/server/channels/instagram/credentials");
     await saveInstagramCredentials({
       organizationId: "org_1",
       source: "zernio",
@@ -101,7 +101,7 @@ describe("guardar una conexión por Zernio", () => {
   });
 
   it("Messenger: igual", async () => {
-    const { saveMessengerCredentials } = await import("@/server/messenger/credentials");
+    const { saveMessengerCredentials } = await import("@/server/channels/messenger/credentials");
     await saveMessengerCredentials({
       organizationId: "org_1",
       source: "zernio",
@@ -117,7 +117,7 @@ describe("guardar una conexión por Zernio", () => {
   });
 
   it("TikTok: igual", async () => {
-    const { saveTiktokCredentials } = await import("@/server/tiktok/credentials");
+    const { saveTiktokCredentials } = await import("@/server/channels/tiktok/credentials");
     await saveTiktokCredentials({
       organizationId: "org_1",
       accountRef: "acc_tt",
@@ -131,7 +131,7 @@ describe("guardar una conexión por Zernio", () => {
   });
 
   it("sin secreto (modo Meta) las cuatro columnas quedan nulas", async () => {
-    const { columnasDelSecreto } = await import("@/server/zernio/secreto-guardado");
+    const { columnasDelSecreto } = await import("@/server/channels/zernio/secreto-guardado");
     expect(columnasDelSecreto(null)).toEqual({
       webhookSecret: null,
       webhookSecretCipher: null,
@@ -142,7 +142,7 @@ describe("guardar una conexión por Zernio", () => {
   });
 
   it("dos guardados del mismo secreto no producen el mismo cifrado (iv nuevo)", async () => {
-    const { columnasDelSecreto } = await import("@/server/zernio/secreto-guardado");
+    const { columnasDelSecreto } = await import("@/server/channels/zernio/secreto-guardado");
     const a = columnasDelSecreto(SECRETO);
     const b = columnasDelSecreto(SECRETO);
     expect(a.webhookSecretIv).not.toBe(b.webhookSecretIv);
@@ -152,13 +152,13 @@ describe("guardar una conexión por Zernio", () => {
 
 describe("leer el secreto de una fila", () => {
   it("prefiere el cifrado", async () => {
-    const { columnasDelSecreto, secretoDeLaFila } = await import("@/server/zernio/secreto-guardado");
+    const { columnasDelSecreto, secretoDeLaFila } = await import("@/server/channels/zernio/secreto-guardado");
     const cols = columnasDelSecreto(SECRETO);
     expect(secretoDeLaFila({ ...cols, webhookSecret: "otro-en-claro" })).toBe(SECRETO);
   });
 
   it("una fila que el arranque aún no cifró sigue verificando con el de claro", async () => {
-    const { secretoDeLaFila } = await import("@/server/zernio/secreto-guardado");
+    const { secretoDeLaFila } = await import("@/server/channels/zernio/secreto-guardado");
     expect(
       secretoDeLaFila({
         webhookSecret: SECRETO,
@@ -170,7 +170,7 @@ describe("leer el secreto de una fila", () => {
   });
 
   it("sin nada guardado es null", async () => {
-    const { secretoDeLaFila } = await import("@/server/zernio/secreto-guardado");
+    const { secretoDeLaFila } = await import("@/server/channels/zernio/secreto-guardado");
     expect(
       secretoDeLaFila({
         webhookSecret: null,
@@ -182,7 +182,7 @@ describe("leer el secreto de una fila", () => {
   });
 
   it("un cifrado manipulado no se lee como bueno: lanza", async () => {
-    const { columnasDelSecreto, secretoDeLaFila } = await import("@/server/zernio/secreto-guardado");
+    const { columnasDelSecreto, secretoDeLaFila } = await import("@/server/channels/zernio/secreto-guardado");
     const cols = columnasDelSecreto(SECRETO);
     const otro = columnasDelSecreto("otro-secreto-cualquiera-de-zernio");
     expect(() => secretoDeLaFila({ ...cols, webhookSecretTag: otro.webhookSecretTag })).toThrow();
@@ -192,7 +192,7 @@ describe("leer el secreto de una fila", () => {
 describe("el arranque cifra lo que quedó en claro", () => {
   it("cifra las filas de las tres tablas y deja la columna vieja en nulo", async () => {
     const { schema } = await import("@/lib/db");
-    const { cifrarSecretosEnClaro } = await import("@/server/zernio/secreto-guardado");
+    const { cifrarSecretosEnClaro } = await import("@/server/channels/zernio/secreto-guardado");
     enClaro = new Map<unknown, Fila[]>([
       [schema.instagramCredentials, [{ id: "c_ig", secreto: SECRETO }]],
       [schema.messengerCredentials, [{ id: "c_fb", secreto: SECRETO }]],
@@ -212,14 +212,14 @@ describe("el arranque cifra lo que quedó en claro", () => {
   });
 
   it("sin filas en claro no escribe nada", async () => {
-    const { cifrarSecretosEnClaro } = await import("@/server/zernio/secreto-guardado");
+    const { cifrarSecretosEnClaro } = await import("@/server/channels/zernio/secreto-guardado");
     expect(await cifrarSecretosEnClaro()).toBe(0);
     expect(actualizaciones).toHaveLength(0);
   });
 
   it("si la fila cambió entre la lectura y la escritura, no cuenta (no la pisó)", async () => {
     const { schema } = await import("@/lib/db");
-    const { cifrarSecretosEnClaro } = await import("@/server/zernio/secreto-guardado");
+    const { cifrarSecretosEnClaro } = await import("@/server/channels/zernio/secreto-guardado");
     enClaro = new Map<unknown, Fila[]>([[schema.tiktokCredentials, [{ id: "c_tt", secreto: SECRETO }]]]);
     encuentraLaFila = false;
     expect(await cifrarSecretosEnClaro()).toBe(0);
@@ -227,7 +227,7 @@ describe("el arranque cifra lo que quedó en claro", () => {
 
   it("un secreto vacío se limpia, pero no cuenta como cifrado", async () => {
     const { schema } = await import("@/lib/db");
-    const { cifrarSecretosEnClaro } = await import("@/server/zernio/secreto-guardado");
+    const { cifrarSecretosEnClaro } = await import("@/server/channels/zernio/secreto-guardado");
     enClaro = new Map<unknown, Fila[]>([[schema.instagramCredentials, [{ id: "c_ig", secreto: "" }]]]);
     expect(await cifrarSecretosEnClaro()).toBe(0);
     expect(actualizaciones[0]?.set.webhookSecret).toBeNull();

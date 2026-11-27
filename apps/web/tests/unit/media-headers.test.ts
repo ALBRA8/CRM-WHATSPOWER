@@ -6,7 +6,7 @@ import {
   isForbiddenUploadMime,
   isPreviewable,
   mediaResponseHeaders,
-} from "@/server/whatsapp/media-headers";
+} from "@/server/channels/whatsapp/media-headers";
 
 /**
  * #78 — Un adjunto es contenido ajeno servido desde el origen del CRM. Estas

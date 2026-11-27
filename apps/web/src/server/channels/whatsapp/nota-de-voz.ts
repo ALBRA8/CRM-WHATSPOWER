@@ -1,5 +1,5 @@
 import { esWebm, webmAOgg, WebmOggError } from "@/lib/audio/webm-ogg";
-import { MediaValidationError } from "@/server/whatsapp/media";
+import { MediaValidationError } from "@/server/channels/whatsapp/media";
 
 /** El único formato de nota de voz que acepta WhatsApp (Ogg con Opus, mono). */
 export const MIME_NOTA_DE_VOZ = "audio/ogg; codecs=opus";

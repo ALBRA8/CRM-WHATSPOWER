@@ -6,7 +6,7 @@ import {
   WEBHOOKS_FAIL_MS,
   WEBHOOKS_OK_MS,
   WEBHOOKS_RECHECK_MS,
-} from "@/server/zernio/webhooks";
+} from "@/server/channels/zernio/webhooks";
 
 /**
  * 023 — La lectura de los webhooks de Zernio corre en la verificación de firma

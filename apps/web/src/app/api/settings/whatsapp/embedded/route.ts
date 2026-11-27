@@ -7,7 +7,7 @@ import {
   completarAltaEmbebida,
   EmbeddedSignupError,
   embeddedConfig,
-} from "@/server/whatsapp/embedded";
+} from "@/server/channels/whatsapp/embedded";
 
 /**
  * 066 — «Conectar con Meta» (Embedded Signup v4) en Ajustes → WhatsApp.

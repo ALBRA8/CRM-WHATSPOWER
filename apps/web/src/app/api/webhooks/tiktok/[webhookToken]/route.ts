@@ -4,9 +4,9 @@ import {
   channelDisabledResponse,
   isChannelEnabled,
 } from "@/server/channels/enabled";
-import { zernioSignatureFrom } from "@/server/zernio";
-import { isAuthenticZernioDelivery } from "@/server/zernio/dispatch";
-import { recibirEvento } from "@/server/webhooks/recibir";
+import { zernioSignatureFrom } from "@/server/channels/zernio";
+import { isAuthenticZernioDelivery } from "@/server/channels/zernio/dispatch";
+import { recibirEvento } from "@/server/channels/webhooks/recibir";
 
 /**
  * 022 — Webhook público del canal de TikTok.

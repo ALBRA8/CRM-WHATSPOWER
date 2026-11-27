@@ -4,7 +4,7 @@ import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { isMockEnabled } from "@/lib/env";
 import { publish } from "@/server/events/bus";
-import { deleteMediaFile, saveMediaFile } from "@/server/whatsapp/media";
+import { deleteMediaFile, saveMediaFile } from "@/server/channels/whatsapp/media";
 
 /**
  * 018 — La imagen del creativo, copiada al llegar.

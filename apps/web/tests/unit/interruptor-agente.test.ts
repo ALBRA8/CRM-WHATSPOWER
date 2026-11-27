@@ -51,7 +51,7 @@ vi.mock("@/server/dispatch/outbox", () => ({
 }));
 // 078 — El «escribiendo…» al encolar no toca Meta en las unitarias.
 const mostrarEscribiendo = vi.hoisted(() => vi.fn(async () => ({ ok: true })));
-vi.mock("@/server/whatsapp/escribiendo", () => ({ mostrarEscribiendo }));
+vi.mock("@/server/channels/whatsapp/escribiendo", () => ({ mostrarEscribiendo }));
 vi.mock("@/server/dispatch/worker", () => ({ iniciarWorker: () => {}, programarTanda: () => {} }));
 
 const getBrainHealth = vi.hoisted(() => vi.fn());

@@ -4,9 +4,9 @@ import {
   channelDisabledResponse,
   isChannelEnabled,
 } from "@/server/channels/enabled";
-import { looksLikeMetaPayload, zernioSignatureFrom } from "@/server/zernio";
-import { isAuthenticZernioDelivery } from "@/server/zernio/dispatch";
-import { recibirEvento } from "@/server/webhooks/recibir";
+import { looksLikeMetaPayload, zernioSignatureFrom } from "@/server/channels/zernio";
+import { isAuthenticZernioDelivery } from "@/server/channels/zernio/dispatch";
+import { recibirEvento } from "@/server/channels/webhooks/recibir";
 
 /**
  * 017 — Webhook público del canal de Messenger.

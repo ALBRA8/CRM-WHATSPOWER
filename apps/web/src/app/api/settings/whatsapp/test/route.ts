@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
-import { testConnection } from "@/server/whatsapp/connect";
+import { testConnection } from "@/server/channels/whatsapp/connect";
 
 export const dynamic = "force-dynamic";
 

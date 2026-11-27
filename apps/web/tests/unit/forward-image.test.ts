@@ -23,8 +23,8 @@ vi.mock("@/lib/db", async () => {
   };
   return { schema, getDb: () => ({ select: () => chain }) };
 });
-vi.mock("@/server/whatsapp/media", async (original) => ({
-  ...(await original<typeof import("@/server/whatsapp/media")>()),
+vi.mock("@/server/channels/whatsapp/media", async (original) => ({
+  ...(await original<typeof import("@/server/channels/whatsapp/media")>()),
   readMediaFile: mocks.read,
   ensureAssetAvailable: mocks.ensure,
   // `leerAdjunto` (recupera de Meta un archivo perdido) se prueba aparte, en
@@ -52,7 +52,7 @@ import { POST } from "@/app/api/conversations/[id]/messages/forward-image/route"
 import { UnauthorizedError } from "@/lib/auth/session";
 import { SendError } from "@/server/inbox/send";
 import { IMAGEN_ADJUNTA, validarImagenAdjunta } from "@/lib/imagen-adjunta";
-import { MEDIA_LIMITS } from "@/server/whatsapp/media";
+import { MEDIA_LIMITS } from "@/server/channels/whatsapp/media";
 
 const input = {
   organizationId: "org_a",

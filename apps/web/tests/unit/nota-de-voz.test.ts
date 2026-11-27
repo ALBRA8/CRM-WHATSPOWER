@@ -1,8 +1,8 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { MediaValidationError, validateOutgoing } from "@/server/whatsapp/media";
-import { MIME_NOTA_DE_VOZ, prepararAudioSaliente } from "@/server/whatsapp/nota-de-voz";
+import { MediaValidationError, validateOutgoing } from "@/server/channels/whatsapp/media";
+import { MIME_NOTA_DE_VOZ, prepararAudioSaliente } from "@/server/channels/whatsapp/nota-de-voz";
 
 /** 044 — Lo que graba el compositor sale como lo acepta WhatsApp. */
 const webm = readFileSync(path.join(import.meta.dirname, "../fixtures/nota-chrome.webm"));

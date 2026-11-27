@@ -15,7 +15,7 @@ import {
   getCredentialsByOrg,
   getCredentialsByWabaId,
   markReconnectRequired,
-} from "@/server/whatsapp/credentials";
+} from "@/server/channels/whatsapp/credentials";
 import { callGraphSend, SendError } from "@/server/inbox/send";
 import { serializeMessage } from "@/server/inbox/ingest";
 import type { WebhookValue } from "@/server/inbox/webhook";

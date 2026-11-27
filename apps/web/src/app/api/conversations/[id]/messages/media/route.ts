@@ -2,7 +2,7 @@ import { apiError, withAuth } from "@/lib/api";
 import { getConversation } from "@/server/inbox/queries";
 import { SendError, sendMediaMessage } from "@/server/inbox/send";
 import { pausarIaTrasEnvioDeLaBandeja } from "@/server/inbox/pausa-manual";
-import { MediaValidationError } from "@/server/whatsapp/media";
+import { MediaValidationError } from "@/server/channels/whatsapp/media";
 
 export const dynamic = "force-dynamic";
 

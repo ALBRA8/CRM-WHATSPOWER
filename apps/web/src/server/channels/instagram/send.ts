@@ -1,5 +1,5 @@
 import { MetaApiError } from "@/lib/meta/client";
-import type { InstagramCredentials } from "@/server/instagram/credentials";
+import type { InstagramCredentials } from "@/server/channels/instagram/credentials";
 
 /**
  * 014 — Frontera de salida del canal de Instagram (Constitución II: todo

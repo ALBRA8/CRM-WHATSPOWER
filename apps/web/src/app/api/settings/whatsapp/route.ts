@@ -5,19 +5,19 @@ import {
   getCredentialsByOrg,
   saveCredentials,
   tokenLast4,
-} from "@/server/whatsapp/credentials";
+} from "@/server/channels/whatsapp/credentials";
 import {
   descubrirCuentaDeMensajes,
   registerWebhookForNumber,
   testConnection,
   unregisterWebhookForMessagingAccount,
   unregisterWebhookForNumber,
-} from "@/server/whatsapp/connect";
+} from "@/server/channels/whatsapp/connect";
 import {
   webhookPath,
   webhookUrl,
   webhookVerifyToken,
-} from "@/server/whatsapp/webhook-url";
+} from "@/server/channels/whatsapp/webhook-url";
 
 export const dynamic = "force-dynamic";
 

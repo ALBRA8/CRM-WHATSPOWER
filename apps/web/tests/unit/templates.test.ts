@@ -4,7 +4,7 @@ import {
   importableTemplate,
   renderBody,
   validateBodyVariables,
-} from "@/server/whatsapp/templates";
+} from "@/server/channels/whatsapp/templates";
 
 describe("countVariables / validateBodyVariables (FR-050)", () => {
   it("sin variables → 0, válido", () => {

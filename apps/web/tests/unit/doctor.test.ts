@@ -24,7 +24,7 @@ import {
   type CheckResult,
 } from "@/server/doctor/checks";
 import { renderInitEnv } from "@/server/doctor/init-env";
-import type { Credentials } from "@/server/whatsapp/credentials";
+import type { Credentials } from "@/server/channels/whatsapp/credentials";
 
 /**
  * `pnpm doctor` usa el MISMO esquema que el arranque (safeParseEnv) y, para

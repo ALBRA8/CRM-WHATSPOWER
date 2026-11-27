@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { vaciarFicha } from "@/server/bot/ficha";
 import type { CanalDelEvento } from "@/server/brains/contract";
-import { deleteMediaFile } from "@/server/whatsapp/media";
+import { deleteMediaFile } from "@/server/channels/whatsapp/media";
 
 /**
  * 026 — Eliminar una conversación, por petición explícita de quien administra

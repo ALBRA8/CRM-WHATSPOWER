@@ -18,16 +18,16 @@ const { after, guardarEvento, resolverOrganizacion, procesarFuente, procesarEven
   }));
 
 vi.mock("next/server", () => ({ after }));
-vi.mock("@/server/webhooks/eventos", async (orig) => ({
-  ...(await orig<typeof import("@/server/webhooks/eventos")>()),
+vi.mock("@/server/channels/webhooks/eventos", async (orig) => ({
+  ...(await orig<typeof import("@/server/channels/webhooks/eventos")>()),
   guardarEvento,
 }));
-vi.mock("@/server/webhooks/organizacion", async (orig) => ({
-  ...(await orig<typeof import("@/server/webhooks/organizacion")>()),
+vi.mock("@/server/channels/webhooks/organizacion", async (orig) => ({
+  ...(await orig<typeof import("@/server/channels/webhooks/organizacion")>()),
   resolverOrganizacion,
 }));
-vi.mock("@/server/webhooks/procesar", () => ({ procesarFuente }));
-vi.mock("@/server/webhooks/worker", () => ({ procesarEvento }));
+vi.mock("@/server/channels/webhooks/procesar", () => ({ procesarFuente }));
+vi.mock("@/server/channels/webhooks/worker", () => ({ procesarEvento }));
 
 import {
   ESPERAS_MS,
@@ -35,8 +35,8 @@ import {
   esperaDeReintento,
   huellaDe,
   resumenDeError,
-} from "@/server/webhooks/eventos";
-import { recibirEvento } from "@/server/webhooks/recibir";
+} from "@/server/channels/webhooks/eventos";
+import { recibirEvento } from "@/server/channels/webhooks/recibir";
 import { lanzarFalloDePrueba, programarFallosDePrueba } from "@/server/dev/webhook-fallo";
 
 const ENV = { ...process.env };
@@ -89,8 +89,8 @@ describe("a qué organización va cada evento", () => {
 
   it("WhatsApp por phone_number_id, y por WABA para los estados de plantillas", async () => {
     const { resolverOrganizacion: real } = await vi.importActual<
-      typeof import("@/server/webhooks/organizacion")
-    >("@/server/webhooks/organizacion");
+      typeof import("@/server/channels/webhooks/organizacion")
+    >("@/server/channels/webhooks/organizacion");
     const mensajes = { entry: [{ id: "WABA", changes: [{ field: "messages", value: { metadata: { phone_number_id: "PNID" } } }] }] };
     expect(await real("whatsapp", mensajes, b)).toBe("org_a");
     const plantillas = { entry: [{ id: "WABA", changes: [{ field: "message_template_status_update", value: {} }] }] };
@@ -100,8 +100,8 @@ describe("a qué organización va cada evento", () => {
 
   it("Instagram y Messenger de Meta, y Zernio por su cuenta", async () => {
     const { resolverOrganizacion: real } = await vi.importActual<
-      typeof import("@/server/webhooks/organizacion")
-    >("@/server/webhooks/organizacion");
+      typeof import("@/server/channels/webhooks/organizacion")
+    >("@/server/channels/webhooks/organizacion");
     expect(await real("meta_instagram", { object: "instagram", entry: [{ id: "IG1" }] }, b)).toBe("org_a");
     const pagina = {
       object: "page",

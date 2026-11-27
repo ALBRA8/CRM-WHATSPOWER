@@ -21,8 +21,8 @@ vi.mock("@/lib/env", () => ({ getEnv: () => env }));
 import {
   registerWebhookForNumber,
   unregisterWebhookForNumber,
-} from "@/server/whatsapp/connect";
-import { webhookPath, webhookUrl, webhookVerifyToken } from "@/server/whatsapp/webhook-url";
+} from "@/server/channels/whatsapp/connect";
+import { webhookPath, webhookUrl, webhookVerifyToken } from "@/server/channels/whatsapp/webhook-url";
 
 const URL_PROPIA = "https://crm.ejemplo.test/api/webhooks/wa/verify-token-xyz";
 const opts = {

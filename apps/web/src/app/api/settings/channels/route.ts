@@ -3,7 +3,7 @@ import { channelsStatus } from "@/server/channels/status";
 import {
   ZERNIO_CHANNELS,
   ensureWebhookForOrg,
-} from "@/server/zernio/conexiones";
+} from "@/server/channels/zernio/conexiones";
 import {
   channelDisabledResponse,
   isChannelEnabled,

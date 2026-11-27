@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { IMAGEN_ADJUNTA } from "@/lib/imagen-adjunta";
-import { ensureAssetAvailable, leerAdjunto } from "@/server/whatsapp/media";
+import { ensureAssetAvailable, leerAdjunto } from "@/server/channels/whatsapp/media";
 import { SendError, sendMediaMessage } from "./send";
 
 /** 042 — Un reenvío que no puede salir; el código va tal cual a la API. */

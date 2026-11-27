@@ -2,7 +2,7 @@ import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { encolarDespacho, ventanaCoalesceMs, ventanaLargaMs } from "@/server/dispatch/outbox";
 import { ventanaParaMensaje } from "@/server/dispatch/ventana";
-import { mostrarEscribiendo } from "@/server/whatsapp/escribiendo";
+import { mostrarEscribiendo } from "@/server/channels/whatsapp/escribiendo";
 import { iniciarWorker, programarTanda } from "@/server/dispatch/worker";
 
 /**

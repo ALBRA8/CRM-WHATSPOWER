@@ -18,17 +18,17 @@ import { FB_PREFIX, IG_PREFIX, resolveIdentity } from "@/server/inbox/identity";
 import type { WebhookMessage, WebhookValue } from "@/server/inbox/webhook";
 import { replyWindow } from "@/server/inbox/window";
 import { callGraphSend, SendError } from "@/server/inbox/send";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 import {
   getInstagramCredentialsByOrg,
   markInstagramReconnectRequired,
-} from "@/server/instagram/credentials";
+} from "@/server/channels/instagram/credentials";
 import {
   getMessengerCredentialsByOrg,
   markMessengerReconnectRequired,
-} from "@/server/messenger/credentials";
-import { reactZernioMessage, type ZernioEvent } from "@/server/zernio";
-import { findZernioConnection } from "@/server/zernio/conexiones";
+} from "@/server/channels/messenger/credentials";
+import { reactZernioMessage, type ZernioEvent } from "@/server/channels/zernio";
+import { findZernioConnection } from "@/server/channels/zernio/conexiones";
 
 /**
  * 072 — Reacciones a mensajes: las del cliente que llegan por webhook y las

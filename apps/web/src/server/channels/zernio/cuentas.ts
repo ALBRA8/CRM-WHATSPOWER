@@ -1,5 +1,5 @@
 import type { Channel } from "@/lib/channels";
-import { zernioFetch } from "@/server/zernio";
+import { zernioFetch } from "@/server/channels/zernio";
 
 /**
  * 023 — Qué cuenta de Zernio es la que se está conectando, y cómo está.

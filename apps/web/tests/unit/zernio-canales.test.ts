@@ -1,19 +1,19 @@
 import { createHmac } from "node:crypto";
 import { describe, expect, it } from "vitest";
-import { isValidZernioSignatureAny } from "@/server/zernio";
+import { isValidZernioSignatureAny } from "@/server/channels/zernio";
 import {
   accountHealth,
   pickZernioAccount,
   zernioAccountName,
   type ZernioAccount,
-} from "@/server/zernio/cuentas";
+} from "@/server/channels/zernio/cuentas";
 import {
   coversAccount,
   pointsHere,
   webhookHealth,
   type ZernioWebhook,
-} from "@/server/zernio/webhooks";
-import { webhookAccountIds } from "@/server/zernio/conexiones";
+} from "@/server/channels/zernio/webhooks";
+import { webhookAccountIds } from "@/server/channels/zernio/conexiones";
 
 // Forma real de GET /accounts (2026-10-13): un perfil con sus tres redes.
 const PERFIL = "68d2d7be1ca85e7dbf120b4e";

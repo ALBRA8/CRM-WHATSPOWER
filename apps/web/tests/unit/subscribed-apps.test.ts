@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi, type MockInstance } from "vitest";
 import { MetaApiError } from "@/lib/meta/client";
-import { registerWebhookForNumber } from "@/server/whatsapp/connect";
+import { registerWebhookForNumber } from "@/server/channels/whatsapp/connect";
 
 /**
  * Guardar la conexión de WhatsApp registra el webhook en el número, pero SIN

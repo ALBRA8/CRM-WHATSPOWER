@@ -3,13 +3,13 @@ import { apiError } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 import {
   downloadGraphMedia,
   ensureAssetAvailable,
   leerAdjunto,
   MediaFetchError,
-} from "@/server/whatsapp/media";
+} from "@/server/channels/whatsapp/media";
 
 export const dynamic = "force-dynamic";
 

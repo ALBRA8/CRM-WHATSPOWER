@@ -8,10 +8,10 @@ import {
   getTiktokCredentialsByOrg,
   saveTiktokCredentials,
   tokenLast4,
-} from "@/server/tiktok/credentials";
-import { ensureWebhookForOrg } from "@/server/zernio/conexiones";
-import { accountHealth, zernioAccountName } from "@/server/zernio/cuentas";
-import { resolveZernioAccount } from "@/server/zernio/guardar";
+} from "@/server/channels/tiktok/credentials";
+import { ensureWebhookForOrg } from "@/server/channels/zernio/conexiones";
+import { accountHealth, zernioAccountName } from "@/server/channels/zernio/cuentas";
+import { resolveZernioAccount } from "@/server/channels/zernio/guardar";
 
 export const dynamic = "force-dynamic";
 

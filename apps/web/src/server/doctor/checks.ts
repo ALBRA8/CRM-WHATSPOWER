@@ -7,12 +7,12 @@ import { envSchema, safeParseEnv, type Env } from "@/lib/env";
 import { leerConfigDespacho } from "@/server/brains/config";
 import { GENERATED_SECRETS, PLACEHOLDER_PREFIX } from "@/server/doctor/init-env";
 import { probeBucket, probeMediaDir } from "@/server/media-dir";
-import { testConnection, type ConnectionCheck } from "@/server/whatsapp/connect";
+import { testConnection, type ConnectionCheck } from "@/server/channels/whatsapp/connect";
 import {
   getCredentialsByOrg,
   tokenLast4,
   type Credentials,
-} from "@/server/whatsapp/credentials";
+} from "@/server/channels/whatsapp/credentials";
 
 /**
  * `pnpm doctor` — las comprobaciones, una por línea, con el arreglo exacto de

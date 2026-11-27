@@ -10,7 +10,7 @@ import {
   type ReaccionDto,
 } from "@/lib/reacciones";
 import { REACCION_ERROR_STATUS } from "@/server/inbox/reacciones";
-import { ZERNIO_MESSAGE_EVENT, ZERNIO_REACTION_EVENT, coversAccount } from "@/server/zernio/webhooks";
+import { ZERNIO_MESSAGE_EVENT, ZERNIO_REACTION_EVENT, coversAccount } from "@/server/channels/zernio/webhooks";
 
 /** 072 — Reacciones a mensajes: lo puro. El flujo vivo lo cubre el E2E. */
 

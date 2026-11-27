@@ -5,7 +5,7 @@ import {
   sniffFaviconMime,
 } from "@/lib/favicon";
 import { getBranding, saveBranding } from "@/server/branding";
-import { deleteMediaFile, saveMediaFile } from "@/server/whatsapp/media";
+import { deleteMediaFile, saveMediaFile } from "@/server/channels/whatsapp/media";
 
 export const dynamic = "force-dynamic";
 

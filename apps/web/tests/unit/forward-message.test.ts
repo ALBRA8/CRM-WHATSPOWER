@@ -25,8 +25,8 @@ vi.mock("@/lib/db", async () => {
   };
   return { schema, getDb: () => ({ select: () => chain }) };
 });
-vi.mock("@/server/whatsapp/media", async (original) => ({
-  ...(await original<typeof import("@/server/whatsapp/media")>()),
+vi.mock("@/server/channels/whatsapp/media", async (original) => ({
+  ...(await original<typeof import("@/server/channels/whatsapp/media")>()),
   ensureAssetAvailable: mocks.ensure,
   leerAdjunto: async (organizationId: string, asset: { id: string }) => {
     try {

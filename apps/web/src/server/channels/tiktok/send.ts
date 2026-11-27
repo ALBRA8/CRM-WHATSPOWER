@@ -1,5 +1,5 @@
-import type { TiktokCredentials } from "@/server/tiktok/credentials";
-import { sendZernioMessage } from "@/server/zernio";
+import type { TiktokCredentials } from "@/server/channels/tiktok/credentials";
+import { sendZernioMessage } from "@/server/channels/zernio";
 
 /**
  * 022 — Frontera de salida del canal de TikTok (Constitución II: todo request

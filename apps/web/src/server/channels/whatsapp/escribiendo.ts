@@ -1,7 +1,7 @@
 import { and, desc, eq, isNotNull } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { graphRequest } from "@/lib/meta/client";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 
 export type ResultadoEscribiendo =
   | { ok: true }

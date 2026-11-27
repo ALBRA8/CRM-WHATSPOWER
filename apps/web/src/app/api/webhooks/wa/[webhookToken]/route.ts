@@ -1,6 +1,6 @@
 import { getEnv } from "@/lib/env";
 import { isValidSignature, isValidWebhookToken } from "@/server/inbox/webhook";
-import { recibirEvento } from "@/server/webhooks/recibir";
+import { recibirEvento } from "@/server/channels/webhooks/recibir";
 
 /**
  * Webhook público de WhatsApp (contrato webhook.md).

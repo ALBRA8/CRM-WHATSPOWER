@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { mockGuard } from "@/lib/dev-guard";
 import { apiError, parseBody } from "@/lib/api";
-import { getCredentialsByPhoneNumberId } from "@/server/whatsapp/credentials";
+import { getCredentialsByPhoneNumberId } from "@/server/channels/whatsapp/credentials";
 import {
   buildEchoPayload,
   deliverToWebhook,

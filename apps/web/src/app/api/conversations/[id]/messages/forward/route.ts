@@ -5,7 +5,7 @@ import { ForwardImageError } from "@/server/inbox/forward-image";
 import { forwardMessage } from "@/server/inbox/forward-message";
 import { pausarIaTrasEnvioDeLaBandeja } from "@/server/inbox/pausa-manual";
 import { SendError } from "@/server/inbox/send";
-import { MediaValidationError } from "@/server/whatsapp/media";
+import { MediaValidationError } from "@/server/channels/whatsapp/media";
 
 export const dynamic = "force-dynamic";
 

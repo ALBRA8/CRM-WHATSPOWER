@@ -1,25 +1,25 @@
 import { isChannelEnabled } from "@/server/channels/enabled";
-import { processZernioEvent } from "@/server/instagram/ingest";
-import { processZernioMessengerEvent } from "@/server/messenger/ingest";
-import { processZernioTiktokEvent, zernioPlatform } from "@/server/tiktok/ingest";
-import { webhookVerifyToken } from "@/server/whatsapp/webhook-url";
+import { processZernioEvent } from "@/server/channels/instagram/ingest";
+import { processZernioMessengerEvent } from "@/server/channels/messenger/ingest";
+import { processZernioTiktokEvent, zernioPlatform } from "@/server/channels/tiktok/ingest";
+import { webhookVerifyToken } from "@/server/channels/whatsapp/webhook-url";
 import {
   isValidZernioSignatureAny,
   parseZernioEvent,
   type ZernioEvent,
-} from "@/server/zernio";
+} from "@/server/channels/zernio";
 import {
   findZernioConnection,
   healZernioAccountRef,
   storedZernioSecrets,
-} from "@/server/zernio/conexiones";
-import type { ZernioChannel } from "@/server/zernio/cuentas";
+} from "@/server/channels/zernio/conexiones";
+import type { ZernioChannel } from "@/server/channels/zernio/cuentas";
 import { registrarReaccionZernio } from "@/server/inbox/reacciones";
 import {
   ZERNIO_REACTION_EVENT,
   WEBHOOKS_RECHECK_MS,
   webhookSecretsFromZernio,
-} from "@/server/zernio/webhooks";
+} from "@/server/channels/zernio/webhooks";
 
 /**
  * 017 — Reparto de un evento de Zernio al canal que le toca.

@@ -10,7 +10,7 @@ import {
   saveCapiSettings,
   stageBelongsToOrg,
 } from "@/server/attribution/settings";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 
 export const dynamic = "force-dynamic";
 

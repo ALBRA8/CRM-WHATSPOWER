@@ -1,9 +1,9 @@
 import type { WebhookPayload } from "@/server/inbox/webhook";
 import { processEchoesValue, processMessagesValue } from "@/server/inbox/ingest";
-import { processTemplateStatusValue } from "@/server/whatsapp/template-events";
-import { processMetaInstagramPayload } from "@/server/instagram/ingest";
-import { processMetaPagePayload } from "@/server/messenger/ingest";
-import { processZernioPayload } from "@/server/zernio/dispatch";
+import { processTemplateStatusValue } from "@/server/channels/whatsapp/template-events";
+import { processMetaInstagramPayload } from "@/server/channels/instagram/ingest";
+import { processMetaPagePayload } from "@/server/channels/messenger/ingest";
+import { processZernioPayload } from "@/server/channels/zernio/dispatch";
 import { lanzarFalloDePrueba } from "@/server/dev/webhook-fallo";
 import type { FuenteWebhook } from "./eventos";
 

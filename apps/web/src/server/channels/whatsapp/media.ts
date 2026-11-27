@@ -6,8 +6,8 @@ import { graphRequest, MetaApiError } from "@/lib/meta/client";
 import {
   getCredentialsByOrg,
   type Credentials,
-} from "@/server/whatsapp/credentials";
-import { isForbiddenUploadMime } from "@/server/whatsapp/media-headers";
+} from "@/server/channels/whatsapp/credentials";
+import { isForbiddenUploadMime } from "@/server/channels/whatsapp/media-headers";
 import { descargarAdjuntoRemoto } from "@/server/inbox/descarga-remota";
 import {
   origenOf,

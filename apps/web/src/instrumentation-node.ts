@@ -4,8 +4,8 @@ import { mediaDirStatus } from "@/server/media-dir";
 import { leerConfigDespacho } from "@/server/brains/config";
 import { iniciarWorker, tanda } from "@/server/dispatch/worker";
 import { iniciarRedDeSeguridad } from "@/server/dispatch/red-de-seguridad";
-import { cifrarSecretosEnClaro } from "@/server/zernio/secreto-guardado";
-import { barrido, iniciarBarrido } from "@/server/webhooks/worker";
+import { cifrarSecretosEnClaro } from "@/server/channels/zernio/secreto-guardado";
+import { barrido, iniciarBarrido } from "@/server/channels/webhooks/worker";
 
 /**
  * 008 — Aviso al arranque si MEDIA_DIR no es escribible. Sin esto, el primer

@@ -6,7 +6,7 @@ import { parseAgendaFlag } from "@/server/agenda/flag";
 import { parseAtribucionFlag } from "@/server/attribution/flag";
 import { parseChannels } from "@/server/channels/enabled";
 import { mediaDirStatus } from "@/server/media-dir";
-import { conteoGlobal } from "@/server/webhooks/eventos";
+import { conteoGlobal } from "@/server/channels/webhooks/eventos";
 
 /**
  * `GET /api/health` — lo que una plataforma, un script o un `curl` pueden

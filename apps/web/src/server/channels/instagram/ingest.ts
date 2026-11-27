@@ -4,8 +4,8 @@ import { splitInbound, type RemoteAttachment } from "@/server/inbox/remote-media
 import {
   getInstagramCredentialsByAccountRef,
   getInstagramCredentialsByIgUserId,
-} from "@/server/instagram/credentials";
-import { zernioSentAtSeconds, type ZernioEvent } from "@/server/zernio";
+} from "@/server/channels/instagram/credentials";
+import { zernioSentAtSeconds, type ZernioEvent } from "@/server/channels/zernio";
 
 /**
  * 014 — Adaptadores de entrada del canal de Instagram.
@@ -21,7 +21,7 @@ import { zernioSentAtSeconds, type ZernioEvent } from "@/server/zernio";
  * todos los canales que entran por esa API. Se re-exporta para no tocar a
  * quien ya la importaba de aquí.
  */
-export { isValidZernioSignature } from "@/server/zernio";
+export { isValidZernioSignature } from "@/server/channels/zernio";
 
 export async function processZernioEvent(payload: unknown): Promise<void> {
   const evt = payload as ZernioEvent;

@@ -2,13 +2,13 @@ import type { WebhookPayload } from "@/server/inbox/webhook";
 import {
   getCredentialsByPhoneNumberId,
   getCredentialsByWabaId,
-} from "@/server/whatsapp/credentials";
-import { getInstagramCredentialsByIgUserId } from "@/server/instagram/credentials";
-import { getMessengerCredentialsByPageId } from "@/server/messenger/credentials";
-import { normalizeMetaPagePayload } from "@/server/messenger/ingest";
-import { zernioTargetChannel } from "@/server/zernio/dispatch";
-import { findZernioConnection } from "@/server/zernio/conexiones";
-import type { ZernioEvent } from "@/server/zernio";
+} from "@/server/channels/whatsapp/credentials";
+import { getInstagramCredentialsByIgUserId } from "@/server/channels/instagram/credentials";
+import { getMessengerCredentialsByPageId } from "@/server/channels/messenger/credentials";
+import { normalizeMetaPagePayload } from "@/server/channels/messenger/ingest";
+import { zernioTargetChannel } from "@/server/channels/zernio/dispatch";
+import { findZernioConnection } from "@/server/channels/zernio/conexiones";
+import type { ZernioEvent } from "@/server/channels/zernio";
 import type { FuenteWebhook } from "./eventos";
 
 /**

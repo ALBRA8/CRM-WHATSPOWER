@@ -10,7 +10,7 @@ import {
 import { FAVICON_ASSET, faviconInitial } from "@/lib/favicon";
 import type { AppIconPurpose, AppIconSize } from "@/lib/pwa";
 import { getBrandingContext } from "@/server/branding";
-import { readMediaFile } from "@/server/whatsapp/media";
+import { readMediaFile } from "@/server/channels/whatsapp/media";
 
 /**
  * 048 — El icono PNG de la app instalada.

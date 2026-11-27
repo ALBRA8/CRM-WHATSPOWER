@@ -10,9 +10,9 @@ import {
 import {
   getMessengerCredentialsByAccountRef,
   getMessengerCredentialsByPageId,
-} from "@/server/messenger/credentials";
-import { fetchMessengerProfileName } from "@/server/messenger/send";
-import { zernioSentAtSeconds, type ZernioEvent } from "@/server/zernio";
+} from "@/server/channels/messenger/credentials";
+import { fetchMessengerProfileName } from "@/server/channels/messenger/send";
+import { zernioSentAtSeconds, type ZernioEvent } from "@/server/channels/zernio";
 
 /**
  * 017 — Adaptadores de entrada del canal de Messenger.

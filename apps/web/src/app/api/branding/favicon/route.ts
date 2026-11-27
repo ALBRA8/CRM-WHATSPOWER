@@ -1,4 +1,4 @@
-import { readMediaFile } from "@/server/whatsapp/media";
+import { readMediaFile } from "@/server/channels/whatsapp/media";
 import { getBrandingContext } from "@/server/branding";
 import { DEFAULT_BRANDING } from "@/lib/branding";
 import { FAVICON_ASSET, generatedFaviconSvg } from "@/lib/favicon";

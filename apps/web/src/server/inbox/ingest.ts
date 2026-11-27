@@ -4,8 +4,8 @@ import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { normalizeMx } from "@/lib/meta/client";
 import { publish } from "@/server/events/bus";
-import { getCredentialsByPhoneNumberId } from "@/server/whatsapp/credentials";
-import { ensureAssetAvailable } from "@/server/whatsapp/media";
+import { getCredentialsByPhoneNumberId } from "@/server/channels/whatsapp/credentials";
+import { ensureAssetAvailable } from "@/server/channels/whatsapp/media";
 import type { Channel } from "@/lib/channels";
 import type {
   WebhookMediaPayload,

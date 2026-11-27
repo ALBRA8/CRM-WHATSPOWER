@@ -5,7 +5,7 @@ import {
   pickZernioAccount,
   type ZernioAccount,
   type ZernioChannel,
-} from "@/server/zernio/cuentas";
+} from "@/server/channels/zernio/cuentas";
 
 /**
  * 023 — El paso que comparten las tres pantallas al guardar una conexión por

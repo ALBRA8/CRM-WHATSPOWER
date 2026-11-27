@@ -13,8 +13,8 @@ import { lookupPublico } from "@/server/inbox/descarga-remota";
 import { mediaRemota, serializeMessage, tipoDeEntrante } from "@/server/inbox/ingest";
 import { debeAplicarse, extraerEdicion } from "@/server/inbox/ediciones";
 import { armarEvento, mediaIdDelEvento } from "@/server/brains/contract";
-import { normalizeMetaPagePayload, normalizeZernioEvent } from "@/server/messenger/ingest";
-import { normalizeZernioTiktokEvent } from "@/server/tiktok/ingest";
+import { normalizeMetaPagePayload, normalizeZernioEvent } from "@/server/channels/messenger/ingest";
+import { normalizeZernioTiktokEvent } from "@/server/channels/tiktok/ingest";
 import { esNoSoportado, previewText } from "@/components/inbox/helpers";
 import type { WebhookMessage } from "@/server/inbox/webhook";
 

@@ -3,7 +3,7 @@ import {
   kindFromMime,
   MediaValidationError,
   validateOutgoing,
-} from "@/server/whatsapp/media";
+} from "@/server/channels/whatsapp/media";
 
 /**
  * 008 — Validación previa de adjuntos salientes (FR-007): tipo y tamaño se
@@ -78,9 +78,9 @@ vi.mock("@/lib/meta/client", async (importOriginal) => {
   return { ...original, graphRequest };
 });
 
-vi.mock("@/server/whatsapp/media", async (importOriginal) => {
+vi.mock("@/server/channels/whatsapp/media", async (importOriginal) => {
   const original =
-    await importOriginal<typeof import("@/server/whatsapp/media")>();
+    await importOriginal<typeof import("@/server/channels/whatsapp/media")>();
   return { ...original, uploadGraphMedia, saveMediaFile };
 });
 

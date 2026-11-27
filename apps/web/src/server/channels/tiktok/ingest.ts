@@ -1,8 +1,8 @@
 import { TT_PREFIX } from "@/server/inbox/identity";
 import { ingerirPartes } from "@/server/inbox/partes";
 import { splitInbound, type RemoteAttachment } from "@/server/inbox/remote-media";
-import { getTiktokCredentialsByAccountRef } from "@/server/tiktok/credentials";
-import { zernioSentAtSeconds, type ZernioEvent } from "@/server/zernio";
+import { getTiktokCredentialsByAccountRef } from "@/server/channels/tiktok/credentials";
+import { zernioSentAtSeconds, type ZernioEvent } from "@/server/channels/zernio";
 
 /**
  * 022 — Entrada del canal de TikTok.

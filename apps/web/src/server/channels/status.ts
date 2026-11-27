@@ -3,27 +3,27 @@ import { CHANNEL_ORDER, type Channel } from "@/lib/channels";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { enabledChannels } from "@/server/channels/enabled";
-import { getInstagramCredentialsByOrg } from "@/server/instagram/credentials";
-import { getMessengerCredentialsByOrg } from "@/server/messenger/credentials";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
-import { webhookVerifyToken } from "@/server/whatsapp/webhook-url";
+import { getInstagramCredentialsByOrg } from "@/server/channels/instagram/credentials";
+import { getMessengerCredentialsByOrg } from "@/server/channels/messenger/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
+import { webhookVerifyToken } from "@/server/channels/whatsapp/webhook-url";
 import {
   zernioConnectionsOfOrg,
   type ZernioConnection,
-} from "@/server/zernio/conexiones";
+} from "@/server/channels/zernio/conexiones";
 import {
   accountHealth,
   fetchZernioAccounts,
   zernioAccountName,
   type Health,
   type ZernioAccount,
-} from "@/server/zernio/cuentas";
+} from "@/server/channels/zernio/cuentas";
 import {
   fetchZernioWebhooks,
   webhookHealth,
   type WebhookHealth,
   type ZernioWebhook,
-} from "@/server/zernio/webhooks";
+} from "@/server/channels/zernio/webhooks";
 
 /**
  * 023 — El estado de los canales de una organización, para Ajustes → Canales.

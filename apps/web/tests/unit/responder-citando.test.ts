@@ -22,8 +22,8 @@ vi.mock("@/lib/meta/client", async (importOriginal) => {
   return { ...original, graphRequest: h.graphRequest };
 });
 
-vi.mock("@/server/whatsapp/media", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/whatsapp/media")>();
+vi.mock("@/server/channels/whatsapp/media", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/channels/whatsapp/media")>();
   return {
     ...original,
     uploadGraphMedia: h.uploadGraphMedia,
@@ -34,9 +34,9 @@ vi.mock("@/server/whatsapp/media", async (importOriginal) => {
 
 vi.mock("@/server/events/bus", () => ({ publish: h.publish }));
 
-vi.mock("@/server/whatsapp/credentials", async (importOriginal) => {
+vi.mock("@/server/channels/whatsapp/credentials", async (importOriginal) => {
   const original =
-    await importOriginal<typeof import("@/server/whatsapp/credentials")>();
+    await importOriginal<typeof import("@/server/channels/whatsapp/credentials")>();
   return {
     ...original,
     getCredentialsByOrg: h.getCredentialsByOrg,
@@ -539,11 +539,11 @@ describe("envío con context", () => {
 /* ---------------- Instagram: no cita (spec 039 · D5) ---------------- */
 
 const ig = vi.hoisted(() => ({ sendInstagramText: vi.fn() }));
-vi.mock("@/server/instagram/send", () => ({
+vi.mock("@/server/channels/instagram/send", () => ({
   sendInstagramText: ig.sendInstagramText,
 }));
 vi.mock("@/server/channels/enabled", () => ({ isChannelEnabled: () => true }));
-vi.mock("@/server/instagram/credentials", () => ({
+vi.mock("@/server/channels/instagram/credentials", () => ({
   getInstagramCredentialsByOrg: vi.fn(async () => ({
     organizationId: "org_1",
     status: "connected",

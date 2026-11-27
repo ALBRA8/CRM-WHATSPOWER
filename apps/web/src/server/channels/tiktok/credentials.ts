@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { decryptSecret, encryptSecret } from "@/lib/crypto";
-import { columnasDelSecreto, secretoDeLaFila } from "@/server/zernio/secreto-guardado";
+import { columnasDelSecreto, secretoDeLaFila } from "@/server/channels/zernio/secreto-guardado";
 
 /**
  * 022 — Credenciales del canal de TikTok.

@@ -2,9 +2,9 @@ import { apiError, withAuth } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
 import { getEnv } from "@/lib/env";
 import { isChannelEnabled } from "@/server/channels/enabled";
-import { registerWebhookForNumber } from "@/server/whatsapp/connect";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
-import { webhookUrl, webhookVerifyToken } from "@/server/whatsapp/webhook-url";
+import { registerWebhookForNumber } from "@/server/channels/whatsapp/connect";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
+import { webhookUrl, webhookVerifyToken } from "@/server/channels/whatsapp/webhook-url";
 
 export const dynamic = "force-dynamic";
 

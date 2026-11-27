@@ -43,13 +43,13 @@ vi.mock("@/lib/auth/session", () => ({
   getSessionOrNull: async () => ({ userId: "usr_1", organizationId: "org_a", role: sesion.role }),
 }));
 vi.mock("@/server/channels/enabled", () => ({ isChannelEnabled: () => false }));
-vi.mock("@/server/whatsapp/credentials", () => ({
+vi.mock("@/server/channels/whatsapp/credentials", () => ({
   desconectarCanal: disconnect,
   getCredentialsByOrg: async () => creds.current,
   saveCredentials: save,
   tokenLast4: (t: string) => t.slice(-4),
 }));
-vi.mock("@/server/whatsapp/connect", () => ({
+vi.mock("@/server/channels/whatsapp/connect", () => ({
   testConnection: async () => ({
     ok: true,
     displayPhoneNumber: "+52 55 0000 0000",

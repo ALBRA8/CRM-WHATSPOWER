@@ -3,7 +3,7 @@ import { z } from "zod";
 import { mockGuard } from "@/lib/dev-guard";
 import { apiError, parseBody } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
-import { getCredentialsByOrg } from "@/server/whatsapp/credentials";
+import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 import {
   buildStatusPayload,
   deliverToWebhook,

@@ -34,8 +34,8 @@ const creds = vi.hoisted(() => ({
     token: string;
   },
 }));
-vi.mock("@/server/whatsapp/credentials", async (importOriginal) => {
-  const real = await importOriginal<typeof import("@/server/whatsapp/credentials")>();
+vi.mock("@/server/channels/whatsapp/credentials", async (importOriginal) => {
+  const real = await importOriginal<typeof import("@/server/channels/whatsapp/credentials")>();
   return {
     cuentaDePlantillas: real.cuentaDePlantillas,
     getCredentialsByOrg: async () => creds.current,
@@ -86,9 +86,9 @@ import {
   descubrirCuentaDeMensajes,
   registerWebhookForNumber,
   unregisterWebhookForMessagingAccount,
-} from "@/server/whatsapp/connect";
-import { cuentaDePlantillas } from "@/server/whatsapp/credentials";
-import { createTemplate, syncTemplates, TemplateError } from "@/server/whatsapp/templates";
+} from "@/server/channels/whatsapp/connect";
+import { cuentaDePlantillas } from "@/server/channels/whatsapp/credentials";
+import { createTemplate, syncTemplates, TemplateError } from "@/server/channels/whatsapp/templates";
 
 const URL_PROPIA = "https://crm.ejemplo.test/api/webhooks/wa/verify-token-xyz";
 const RUTA_PROPIA = "/api/webhooks/wa/verify-token-xyz";

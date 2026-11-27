@@ -6,7 +6,7 @@ import {
   sendTemplate,
   TemplateError,
   templateErrorStatus,
-} from "@/server/whatsapp/templates";
+} from "@/server/channels/whatsapp/templates";
 
 export const dynamic = "force-dynamic";
 

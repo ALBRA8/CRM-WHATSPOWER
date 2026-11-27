@@ -8,27 +8,27 @@ import { isChannelEnabled } from "@/server/channels/enabled";
 import {
   getInstagramCredentialsByAccountRef,
   getInstagramCredentialsByOrg,
-} from "@/server/instagram/credentials";
+} from "@/server/channels/instagram/credentials";
 import {
   getMessengerCredentialsByAccountRef,
   getMessengerCredentialsByOrg,
-} from "@/server/messenger/credentials";
+} from "@/server/channels/messenger/credentials";
 import {
   getTiktokCredentialsByAccountRef,
   getTiktokCredentialsByOrg,
-} from "@/server/tiktok/credentials";
+} from "@/server/channels/tiktok/credentials";
 import {
   webhookUrl,
   webhookVerifyToken,
   type WebhookChannel,
-} from "@/server/whatsapp/webhook-url";
-import { fetchZernioAccounts, type ZernioChannel } from "@/server/zernio/cuentas";
-import { columnasDelSecreto } from "@/server/zernio/secreto-guardado";
+} from "@/server/channels/whatsapp/webhook-url";
+import { fetchZernioAccounts, type ZernioChannel } from "@/server/channels/zernio/cuentas";
+import { columnasDelSecreto } from "@/server/channels/zernio/secreto-guardado";
 import {
   cachedZernioWebhooks,
   ensureZernioWebhook,
   pointsHere,
-} from "@/server/zernio/webhooks";
+} from "@/server/channels/zernio/webhooks";
 
 /**
  * 023 — Las conexiones por Zernio de una organización, en una sola forma.

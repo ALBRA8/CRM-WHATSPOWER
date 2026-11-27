@@ -36,8 +36,8 @@ vi.mock("@/server/inbox/forward-image", async (original) => ({
   ...(await original<typeof import("@/server/inbox/forward-image")>()),
   forwardImage: m.forwardImage,
 }));
-vi.mock("@/server/whatsapp/templates", async (original) => ({
-  ...(await original<typeof import("@/server/whatsapp/templates")>()),
+vi.mock("@/server/channels/whatsapp/templates", async (original) => ({
+  ...(await original<typeof import("@/server/channels/whatsapp/templates")>()),
   sendTemplate: m.sendTemplate,
 }));
 

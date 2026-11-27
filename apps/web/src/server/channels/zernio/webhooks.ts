@@ -1,6 +1,6 @@
 import { createHash } from "node:crypto";
-import { zernioFetch } from "@/server/zernio";
-import type { Health } from "@/server/zernio/cuentas";
+import { zernioFetch } from "@/server/channels/zernio";
+import type { Health } from "@/server/channels/zernio/cuentas";
 
 /**
  * 023 — Los webhooks de Zernio que entregan a esta instancia.

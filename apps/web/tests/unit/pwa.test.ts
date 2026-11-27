@@ -13,7 +13,7 @@ vi.mock("@/server/branding", () => ({
   getBrandingContext,
   getBranding: async () => (await getBrandingContext()).branding,
 }));
-vi.mock("@/server/whatsapp/media", () => ({ readMediaFile: vi.fn() }));
+vi.mock("@/server/channels/whatsapp/media", () => ({ readMediaFile: vi.fn() }));
 
 import { DEFAULT_BRANDING } from "@/lib/branding";
 import {

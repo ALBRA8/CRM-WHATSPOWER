@@ -2,8 +2,8 @@ import { eq } from "drizzle-orm";
 import { apiError, withAuth } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { ensureAssetAvailable, leerAdjunto } from "@/server/whatsapp/media";
-import { mediaResponseHeaders } from "@/server/whatsapp/media-headers";
+import { ensureAssetAvailable, leerAdjunto } from "@/server/channels/whatsapp/media";
+import { mediaResponseHeaders } from "@/server/channels/whatsapp/media-headers";
 
 export const dynamic = "force-dynamic";
 

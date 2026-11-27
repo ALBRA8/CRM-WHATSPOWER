@@ -4,14 +4,14 @@ import {
   getInstagramCredentialsByOrg,
   saveInstagramCredentials,
   tokenLast4,
-} from "@/server/instagram/credentials";
+} from "@/server/channels/instagram/credentials";
 import {
   channelDisabledResponse,
   isChannelEnabled,
 } from "@/server/channels/enabled";
-import { ensureWebhookForOrg } from "@/server/zernio/conexiones";
-import { accountHealth, zernioAccountName } from "@/server/zernio/cuentas";
-import { resolveZernioAccount } from "@/server/zernio/guardar";
+import { ensureWebhookForOrg } from "@/server/channels/zernio/conexiones";
+import { accountHealth, zernioAccountName } from "@/server/channels/zernio/cuentas";
+import { resolveZernioAccount } from "@/server/channels/zernio/guardar";
 
 export const dynamic = "force-dynamic";
 

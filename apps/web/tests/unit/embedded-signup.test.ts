@@ -33,8 +33,8 @@ vi.mock("@/lib/auth/session", async (original) => ({
   ...(await original<typeof import("@/lib/auth/session")>()),
   requireSession: mocks.session,
 }));
-vi.mock("@/server/whatsapp/credentials", () => ({ saveCredentials: mocks.save }));
-vi.mock("@/server/whatsapp/connect", () => ({
+vi.mock("@/server/channels/whatsapp/credentials", () => ({ saveCredentials: mocks.save }));
+vi.mock("@/server/channels/whatsapp/connect", () => ({
   registerWebhookForNumber: mocks.webhook,
   descubrirCuentaDeMensajes: mocks.descubrir,
 }));
@@ -44,7 +44,7 @@ import {
   EmbeddedSignupError,
   embeddedConfig,
   generarPin,
-} from "@/server/whatsapp/embedded";
+} from "@/server/channels/whatsapp/embedded";
 import { leerEventoDeAlta, opcionesDeInit, opcionesDeLogin } from "@/lib/meta/signup-event";
 import { GET, POST } from "@/app/api/settings/whatsapp/embedded/route";
 import { resetRateLimit } from "@/lib/rate-limit";

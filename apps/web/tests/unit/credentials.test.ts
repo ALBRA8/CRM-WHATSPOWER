@@ -33,7 +33,7 @@ beforeAll(() => {
 
 describe("credenciales de WhatsApp", () => {
   it("saveCredentials cifra el token: la fila no contiene el texto plano", async () => {
-    const { saveCredentials } = await import("@/server/whatsapp/credentials");
+    const { saveCredentials } = await import("@/server/channels/whatsapp/credentials");
     const token = "EAAG-token-super-secreto-abcd";
     await saveCredentials({
       organizationId: "org_1",
@@ -60,7 +60,7 @@ describe("credenciales de WhatsApp", () => {
   });
 
   it("tokenLast4 expone solo los últimos 4 caracteres", async () => {
-    const { tokenLast4 } = await import("@/server/whatsapp/credentials");
+    const { tokenLast4 } = await import("@/server/channels/whatsapp/credentials");
     expect(tokenLast4("EAAG-token-super-secreto-abcd")).toBe("abcd");
   });
 });

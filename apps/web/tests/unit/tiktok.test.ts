@@ -27,10 +27,10 @@ import {
   windowRemainingMs,
 } from "@/server/inbox/window";
 import { channelMark } from "@/components/channel-badge";
-import { normalizeZernioTiktokEvent } from "@/server/tiktok/ingest";
-import { normalizeZernioEvent as normalizeMessenger } from "@/server/messenger/ingest";
-import { isValidZernioSignature } from "@/server/zernio";
-import { zernioTargetChannel } from "@/server/zernio/dispatch";
+import { normalizeZernioTiktokEvent } from "@/server/channels/tiktok/ingest";
+import { normalizeZernioEvent as normalizeMessenger } from "@/server/channels/messenger/ingest";
+import { isValidZernioSignature } from "@/server/channels/zernio";
+import { zernioTargetChannel } from "@/server/channels/zernio/dispatch";
 
 const HORA = 60 * 60 * 1000;
 const ACCOUNT = "6ace6bfe5d6259b1df1e1bf2";

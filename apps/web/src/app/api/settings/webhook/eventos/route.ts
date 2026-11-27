@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
-import { estadoDeEntregas, reintentarAgotados } from "@/server/webhooks/eventos";
-import { barrido } from "@/server/webhooks/worker";
+import { estadoDeEntregas, reintentarAgotados } from "@/server/channels/webhooks/eventos";
+import { barrido } from "@/server/channels/webhooks/worker";
 
 export const dynamic = "force-dynamic";
 

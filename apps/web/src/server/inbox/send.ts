@@ -8,7 +8,7 @@ import {
   getCredentialsByOrg,
   markReconnectRequired,
   type Credentials,
-} from "@/server/whatsapp/credentials";
+} from "@/server/channels/whatsapp/credentials";
 import { isWindowOpen, replyWindow } from "@/server/inbox/window";
 import { plainSocialText } from "@/lib/social-text";
 import { IG_PREFIX } from "@/server/inbox/identity";
@@ -16,23 +16,23 @@ import {
   getInstagramCredentialsByOrg,
   markInstagramReconnectRequired,
   type InstagramCredentials,
-} from "@/server/instagram/credentials";
-import { sendInstagramText } from "@/server/instagram/send";
+} from "@/server/channels/instagram/credentials";
+import { sendInstagramText } from "@/server/channels/instagram/send";
 import { FB_PREFIX } from "@/server/inbox/identity";
 import {
   getMessengerCredentialsByOrg,
   markMessengerReconnectRequired,
   type MessengerCredentials,
-} from "@/server/messenger/credentials";
-import { sendMessengerText } from "@/server/messenger/send";
+} from "@/server/channels/messenger/credentials";
+import { sendMessengerText } from "@/server/channels/messenger/send";
 import { TT_PREFIX } from "@/server/inbox/identity";
 import {
   getTiktokCredentialsByOrg,
   markTiktokReconnectRequired,
   type TiktokCredentials,
-} from "@/server/tiktok/credentials";
-import { sendTiktokText } from "@/server/tiktok/send";
-import { prepararAudioSaliente } from "@/server/whatsapp/nota-de-voz";
+} from "@/server/channels/tiktok/credentials";
+import { sendTiktokText } from "@/server/channels/tiktok/send";
+import { prepararAudioSaliente } from "@/server/channels/whatsapp/nota-de-voz";
 import {
   cabeOtroMensaje,
   salientesDesdeElUltimoEntrante,
@@ -53,7 +53,7 @@ import {
   saveMediaFile,
   uploadGraphMedia,
   validateOutgoing,
-} from "@/server/whatsapp/media";
+} from "@/server/channels/whatsapp/media";
 
 /** Error tipado del envío; `code` mapea a HTTP en la capa de API. */
 export class SendError extends Error {

@@ -1,6 +1,6 @@
 import { graphRequest, MetaApiError } from "@/lib/meta/client";
-import type { MessengerCredentials } from "@/server/messenger/credentials";
-import { sendZernioMessage } from "@/server/zernio";
+import type { MessengerCredentials } from "@/server/channels/messenger/credentials";
+import { sendZernioMessage } from "@/server/channels/zernio";
 
 /**
  * 017 — Frontera de salida del canal de Messenger (Constitución II: todo

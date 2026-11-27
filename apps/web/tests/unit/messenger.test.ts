@@ -7,14 +7,14 @@ import { channelMark } from "@/components/channel-badge";
 import {
   normalizeMetaPagePayload,
   normalizeZernioEvent,
-} from "@/server/messenger/ingest";
-import { buildMessengerSendBody } from "@/server/messenger/send";
+} from "@/server/channels/messenger/ingest";
+import { buildMessengerSendBody } from "@/server/channels/messenger/send";
 import {
   isValidZernioSignature,
   looksLikeMetaPayload,
   zernioSentAtSeconds,
-} from "@/server/zernio";
-import { zernioTargetChannel } from "@/server/zernio/dispatch";
+} from "@/server/channels/zernio";
+import { zernioTargetChannel } from "@/server/channels/zernio/dispatch";
 import { createHmac } from "node:crypto";
 
 const PAGE = "1092837465";
