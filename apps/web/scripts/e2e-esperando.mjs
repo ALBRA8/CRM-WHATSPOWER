@@ -3,7 +3,7 @@
  *
  * Conduce la app real con el wa-mock y hace de CEREBRO con el cerebro falso
  * compartido (`scripts/lib/cerebro-falso.mjs`): contesta cada despacho y,
- * cuando el cliente pide un asesor, se despide y traspasa como lo haría Nea.
+ * cuando el cliente pide un asesor, se despide y traspasa como lo haría AGENTE-GENERAL.
  * El paso del tiempo se simula moviendo minutos en la base (`DATABASE_URL`):
  * nadie espera 15 minutos ni 24 horas.
  *
@@ -226,7 +226,7 @@ async function main() {
 
 async function preparar() {
   console.log("== Setup ==");
-  const email = "e2e@vocero.test";
+  const email = "e2e@vestro.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",
@@ -466,7 +466,7 @@ async function navegador() {
 
     // El sonido es de cada persona: el botón del cintillo lo apaga y queda en su cookie.
     await page.locator("[data-esperando-cintillo] [data-esperando-sonido]").click();
-    const galleta = async () => (await ctx.cookies()).find((c) => c.name === "vocero-esperando")?.value ?? null;
+    const galleta = async () => (await ctx.cookies()).find((c) => c.name === "vestro-esperando")?.value ?? null;
     ok("apagar el sonido desde el cintillo lo guarda para esta persona", (await hasta(async () => (await galleta()) === "todo.0", 3000)) !== null, String(await galleta()));
     await page.locator("[data-esperando-cintillo] [data-esperando-sonido]").click();
 

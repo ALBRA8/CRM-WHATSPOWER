@@ -2,11 +2,9 @@ MIT License
 
 Copyright (c) 2026 ALBRA — Proyecto Vestro (monorepo CRM WHATSPOWER)
 
-Válido para todo el código nuevo de este repositorio (packages/, services/, infra/,
-CONTEXTO CRM/ y archivos raíz). El código heredado conserva su licencia original:
-
-- apps/web: VOCERO CRM v2.12.0 (MIT, Copyright Kevin Belier) — ver apps/web/LICENSE
-- packages/presets: perfiles sectoriales de CRM-WHATSAPP (MIT, AILINK) — ver NOTICE.md
+Válido para todo el código nuevo de este repositorio (packages/, services/,
+infra/ y archivos raíz). El código heredado conserva su licencia original y su
+atribución está consolidada en un único archivo: THIRD_PARTY_NOTICES.md.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

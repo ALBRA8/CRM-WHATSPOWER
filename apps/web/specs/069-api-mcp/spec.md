@@ -1,4 +1,4 @@
-# 069 — API pública v1, MCP y su OAuth (puerto de Vocero Cloud)
+# 069 — API pública v1, MCP y su OAuth (puerto de Vestro Cloud)
 
 **Feature Branch**: `feat/069-api-mcp`
 
@@ -6,13 +6,13 @@
 
 **Status**: Spec escrito durante la implementación (es documentación del
 puerto, no diseño previo: el diseño viene de Cloud, `docs/plan-api-mcp.md` de
-`vocerocrm-cloud`). Implementada; typecheck, lint, 1 520 pruebas unitarias,
+`vestrocrm-cloud`). Implementada; typecheck, lint, 1 520 pruebas unitarias,
 build y el arnés `scripts/e2e-api-mcp.mjs` (81/81) contra la app viva con el
 wa-mock y el cerebro falso en verde. Regresión del refactor de rutas:
 `e2e-etapa` 31/31, `e2e-notas-internas` 28/28, `e2e-respuestas-rapidas` 35/35.
 Sin probar todavía desde claude.ai con un conector real (ver «Pendiente»).
 
-**Input**: Kevin, 2026-11-23: «Portea la funcionalidad de api / mcp de vocero
+**Input**: el propietario del producto, 2026-11-23: «Portea la funcionalidad de api / mcp de vestro
 cloud a este proyecto, considerando sus diferencias».
 
 **Carril**: ciclo completo (Principio VI): migración nueva (`0027_api_v1_mcp`),
@@ -20,7 +20,7 @@ bandera de despliegue nueva (`API_V1`), rutas públicas nuevas.
 
 ## Qué es
 
-«Vocero agent first»: el dueño le pide a Claude «quiero que mi agente agende
+«Vestro agent first»: el dueño le pide a Claude «quiero que mi agente agende
 así» y Claude configura el agente por el MCP, lo prueba sin WhatsApp y le dice
 qué falta con los enlaces exactos. Encima, una API v1 con llaves para n8n y
 scripts. Detalle de uso en [docs/api-v1.md](../../docs/api-v1.md).
@@ -40,7 +40,7 @@ scripts. Detalle de uso en [docs/api-v1.md](../../docs/api-v1.md).
 | Recordatorios de citas | No existen en la raíz: fuera |
 | `/brain` GET/PUT + `connect_nea` | Solo `GET /brain` + `get_brain`: el cerebro se conecta en el despliegue (`BRAIN_DISPATCH_URL` + `BOT_API_KEY`) |
 | `/openrouter` + `save_openrouter_key` | `/ai` (Ajustes → IA: proveedor, modelo, llave) + `get_ai_status` / `save_ai_key` |
-| Simulación = «ensayo» de Nea (`/vocero/ensayo`) con ficha HMAC | Simulación por el camino del Laboratorio (`src/server/lab/simular.ts`): conversación `is_test`, despacho al cerebro real (Nea u otro), respuesta guardada sin enviar, contacto sintético borrado al terminar |
+| Simulación = «ensayo» de AGENTE-GENERAL (`/vestro/ensayo`) con ficha HMAC | Simulación por el camino del Laboratorio (`src/server/lab/simular.ts`): conversación `is_test`, despacho al cerebro real (AGENTE-GENERAL u otro), respuesta guardada sin enviar, contacto sintético borrado al terminar |
 | `/templates/send` y `/templates/record` (`API_PLANTILLAS_ORGS`) | Pendiente (no entra en este puerto) |
 | Agendas por profesional (`list_agendas`…) | No existen en la raíz: fuera |
 
@@ -68,8 +68,8 @@ scripts. Detalle de uso en [docs/api-v1.md](../../docs/api-v1.md).
 - **FR-7** MCP (`POST /api/v1/mcp`): Streamable HTTP sin estado; cada
   herramienta es una llamada a la v1 con la misma credencial; `tools/list`
   filtra por permiso y pone las de configurar primero; el MCP nunca le escribe
-  al cliente; prompts `configurar_vocero` y `probar_agente` iguales a las
-  skills del plugin `plugin/vocero/`.
+  al cliente; prompts `configurar_vestro` y `probar_agente` iguales a las
+  skills del plugin `plugin/vestro/`.
 - **FR-8** OAuth 2.1 mínimo: RFC 9728 y 8414, registro dinámico (clientes
   públicos), consentimiento en el CRM con mismo origen, PKCE S256, refresco que
   rota, reuso detectado, revocación; `configure` solo lo concede quien
@@ -83,6 +83,6 @@ scripts. Detalle de uso en [docs/api-v1.md](../../docs/api-v1.md).
 ## Pendiente
 
 - Probar desde claude.ai con un conector de verdad contra una instancia con
-  https (p. ej. un rc expuesto con un túnel) y Nea real.
+  https (p. ej. un rc expuesto con un túnel) y AGENTE-GENERAL real.
 - `/templates/send` y `/templates/record` para n8n.
 - Exportar el respaldo del negocio (fase 1d de Cloud) cuando exista allá.

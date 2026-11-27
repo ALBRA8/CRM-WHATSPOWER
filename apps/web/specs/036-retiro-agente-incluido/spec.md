@@ -6,9 +6,9 @@
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: quinta pieza de la 2.0.0 (`PLAN-2.0.md`): kevinrivm/vocero-crm#106.
-Kevin autorizó en el chat del 2026-10-20 mergear la 035 y seguir con la #106.
-Decisiones de producto ya tomadas por Kevin para la 2.0: el cerebro piensa
+**Input**: quinta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#106.
+el propietario del producto autorizó en el chat del 2026-10-20 mergear la 035 y seguir con la #106.
+Decisiones de producto ya tomadas por el propietario del producto para la 2.0: el cerebro piensa
 por el CRM (`/api/bot/llm`, opción recomendada del issue) y el par usa una
 sola base.
 
@@ -22,18 +22,18 @@ significado del interruptor del agente. Plan en [plan.md](plan.md), tareas en
 Mantener dos agentes es la duplicación que la 2.0 viene a quitar. El incluido
 es el incompleto: una llamada por turno y solo texto. Lo que le falta (audio,
 imagen y PDF, el candado «sin rumbo», seguimiento, hostilidad, formato de
-WhatsApp, reprogramar) ya está en Nea, y probado. Y desde la 021, con el
+WhatsApp, reprogramar) ya está en AGENTE-GENERAL, y probado. Y desde la 021, con el
 despacho activo, el incluido ya ni contesta: es código muerto que confunde
 («Quién responde», `doble_respuesta`, un interruptor que no decide nada).
 
 ## Historias
 
-**H1 — El CRM no trae agente.** Sin cerebro conectado, Vocero es un CRM de
+**H1 — El CRM no trae agente.** Sin cerebro conectado, Vestro es un CRM de
 bandeja manual: recibe, envía a mano, pipeline, agenda. La interfaz lo dice
 sin tratarlo como error.
 
-**H2 — La llave de IA se pone una vez, en el CRM.** Nea piensa por
-`/api/bot/llm`; quien instala no copia la llave a Nea. Un 401 o 402 del
+**H2 — La llave de IA se pone una vez, en el CRM.** AGENTE-GENERAL piensa por
+`/api/bot/llm`; quien instala no copia la llave a AGENTE-GENERAL. Un 401 o 402 del
 proveedor pausa la credencial en Ajustes → IA, como antes.
 
 **H3 — El interruptor del agente decide.** Encendido = el CRM le despacha al
@@ -90,16 +90,16 @@ a `{baseUrl}/v1/{ruta}` con la llave de Ajustes → IA (o, de respaldo,
 **D5 — El perfil gana `llm`** (aditivo): `{ "path": "/api/bot/llm", "model":
 "<el de Ajustes → IA>" }`, o `null` sin IA configurada. Va al OpenAPI.
 
-**D6 — Nea piensa por el CRM** cuando `LLM_API_KEY` está vacía: su cliente del
+**D6 — AGENTE-GENERAL piensa por el CRM** cuando `LLM_API_KEY` está vacía: su cliente del
 modelo apunta a `{CRM_BASE_URL}/api/bot/llm` con `CRM_BOT_API_KEY`, y usa el
 modelo que dice el perfil (`LLM_MODEL` si el perfil no trae). Con
-`LLM_API_KEY`, Nea sigue con su llave (cerebro propio con su proveedor). El
-`/health` dice `llm: "crm" | "propia"`. Va en nea 2.0.0 (sin publicar).
+`LLM_API_KEY`, AGENTE-GENERAL sigue con su llave (cerebro propio con su proveedor). El
+`/health` dice `llm: "crm" | "propia"`. Va en agente 2.0.0 (sin publicar).
 
 **D7 — Guía de inicio.** El paso «IA» se queda (es con lo que piensa el
 agente); se suma **«Conecta tu agente»**: listo cuando el despacho está
 configurado y el `/health` contesta. La tarjeta final: «enciende tu agente»
-solo cuando hay cerebro; sin él, «Vocero funciona como bandeja manual; para
+solo cuando hay cerebro; sin él, «Vestro funciona como bandeja manual; para
 que un agente conteste, conéctalo» con enlace a la guía.
 
 **D8 — «Quién responde»** pierde el agente incluido: el DTO deja `embedded`,
@@ -111,9 +111,9 @@ se queda el cerebro externo y el despacho, y gana `enabled`. Avisos:
 `sin_cerebro`** y la pantalla lo explica. El juez sigue usando la llave de
 Ajustes → IA. El sandbox de `/api/bot/*` (033) no cambia.
 
-**D10 — Compose.** El servicio `nea` deja de llevar `LLM_API_KEY` (piensa por
-el CRM); `.env.example` pierde `NEA_LLM_API_KEY`. El perfil `nea` se queda
-hasta publicar nea 2.0.0 (035 D6).
+**D10 — Compose.** El servicio `agente` deja de llevar `LLM_API_KEY` (piensa por
+el CRM); `.env.example` pierde `NEA_LLM_API_KEY`. El perfil `agente` se queda
+hasta publicar agente 2.0.0 (035 D6).
 
 **D11 — Ajustes → IA** dice para qué es la llave: «con esta llave piensa tu
 agente (a través del CRM) y el juez del Laboratorio».
@@ -134,10 +134,10 @@ cerebro en la interfaz (D3).
   `sin_credencial`; el token no aparece en la respuesta ni en logs.
 - **AC4** — Con cerebro y el interruptor apagado no se despacha; encendido,
   sí.
-- **AC5** — Nea con `LLM_API_KEY` vacía piensa por el CRM (pytest con respx y
+- **AC5** — AGENTE-GENERAL con `LLM_API_KEY` vacía piensa por el CRM (pytest con respx y
   e2e contra el CRM local).
 - **AC6** — Gates verdes; OpenAPI al día (`openapi.test.ts`).
-- **AC7** — En vivo: `vocero20` con Nea **sin** `LLM_API_KEY` contesta un
+- **AC7** — En vivo: `vestro20` con AGENTE-GENERAL **sin** `LLM_API_KEY` contesta un
   WhatsApp real por el relevo, y una corrida corta del Laboratorio pasa.
 
 ## Constitution Check

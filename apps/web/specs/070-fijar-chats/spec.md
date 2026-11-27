@@ -7,8 +7,8 @@
 **Status**: Implementada; unitarias y arnés E2E (`scripts/e2e-fijar-chats.mjs`)
 en verde.
 
-**Input**: Kevin, el 2026-11-23. Fijar chats ya corre en una instancia
-derivada de Vocero, donde lo pidió el equipo que atiende la Bandeja desde el
+**Input**: el propietario del producto, el 2026-11-23. Fijar chats ya corre en una instancia
+derivada de Vestro, donde lo pidió el equipo que atiende la Bandeja desde el
 celular: sus clientes recurrentes se les perdían entre los chats nuevos. Aquí
 se porta al raíz, adaptado a una instalación de un solo negocio. Se reescribe;
 no se copia código ni texto de esa instancia.

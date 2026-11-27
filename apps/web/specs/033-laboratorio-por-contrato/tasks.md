@@ -13,12 +13,12 @@
 - [ ] T9 Contrato 021 enmendado
 - [ ] T10 Gates; `e2e-despacho` y `e2e-selftest` sin regresión
 
-## Nea
+## AGENTE-GENERAL
 
 - [ ] T11 `conversation.test` → sin lista de permitidos ni seguimiento
 - [ ] T12 Pruebas y `pytest`
 
 ## Juntos
 
-- [ ] T13 En vivo: corrida en `vocero20` contra Nea
+- [ ] T13 En vivo: corrida en `vestro20` contra AGENTE-GENERAL
 - [ ] T14 Bitácora, PRs

@@ -163,7 +163,7 @@ export async function registerWebhookForNumber(opts: {
   verifyToken: string;
   /**
    * 035 — «Recuperar el webhook»: quien administra decidió que los mensajes
-   * vuelvan al CRM aunque la WABA enrute a un override ajeno (el de Nea 1.x,
+   * vuelvan al CRM aunque la WABA enrute a un override ajeno (el de AGENTE-GENERAL 1.x,
    * o el backend de una agencia). Se re-suscribe la app SIN cuerpo —así borra
    * Meta el override de la WABA— y se registra el del número. Quitar también
    * el de la WABA es lo que hace que dure: si se quedara, el siguiente

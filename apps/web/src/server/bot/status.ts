@@ -15,7 +15,7 @@ import {
  *
  * 036 — El CRM ya no trae agente: quien contesta es el cerebro al que se le
  * despacha (`BRAIN_DISPATCH_URL`), y solo con el interruptor encendido. Sin
- * cerebro, Vocero es una bandeja manual, que es un producto válido: el aviso
+ * cerebro, Vestro es una bandeja manual, que es un producto válido: el aviso
  * `sin_cerebro` informa, no alarma. Ya no hay dos que puedan contestar a la
  * vez desde el CRM, así que `doble_respuesta` se fue.
  */
@@ -39,25 +39,25 @@ type HealthCacheEntry = {
 // En globalThis: los módulos pueden evaluarse más de una vez (una por ruta en
 // dev) y la última llamada la anota `requireBotKey`, en otra ruta.
 const globalForBrain = globalThis as unknown as {
-  __voceroBotLastSeen?: number;
-  __voceroBrainHealth?: HealthCacheEntry;
+  __vestroBotLastSeen?: number;
+  __vestroBrainHealth?: HealthCacheEntry;
 };
 
 /** La anota `requireBotKey` en cada llamada autenticada. Solo memoria: se
  *  pierde al reiniciar, y la UI lo dice («desde el último arranque»). */
 export function markBotSeen(now: number = Date.now()): void {
-  globalForBrain.__voceroBotLastSeen = now;
+  globalForBrain.__vestroBotLastSeen = now;
 }
 
 export function botLastSeenAt(): Date | null {
-  const t = globalForBrain.__voceroBotLastSeen;
+  const t = globalForBrain.__vestroBotLastSeen;
   return typeof t === "number" ? new Date(t) : null;
 }
 
 /** Solo para tests. */
 export function resetBrainStatusState(): void {
-  delete globalForBrain.__voceroBotLastSeen;
-  delete globalForBrain.__voceroBrainHealth;
+  delete globalForBrain.__vestroBotLastSeen;
+  delete globalForBrain.__vestroBrainHealth;
 }
 
 // ---------------------------------------------------------------------------
@@ -122,10 +122,10 @@ export type FetchBrainHealthOptions = {
  *
  * - No sigue redirecciones: el `/health` de un servicio interno no redirige,
  *   y seguirla sería pedirle al servidor que llame a donde diga otro.
- * - Las credenciales de la URL (`http://user:pass@nea:8000/health`) viajan
+ * - Las credenciales de la URL (`http://user:pass@agente:8000/health`) viajan
  *   como `Authorization: Basic` —fetch rechaza una URL que las trae— y, como
  *   la ruta y la query, jamás salen en la respuesta: solo el host.
- * - Tolera cualquier subconjunto de campos (una Nea vieja solo manda
+ * - Tolera cualquier subconjunto de campos (una AGENTE-GENERAL vieja solo manda
  *   `status`): el mínimo es 200 con `ok: true` o `status: "ok"`.
  */
 export async function fetchBrainHealth(
@@ -177,7 +177,7 @@ export async function fetchBrainHealth(
       };
     }
     const body = parseJsonObject(await readCapped(res, MAX_HEALTH_BYTES));
-    // La identidad sale aunque no esté sana: Nea la manda también en su 503.
+    // La identidad sale aunque no esté sana: AGENTE-GENERAL la manda también en su 503.
     const identity = body ? parseIdentity(body) : {};
     if (res.status !== 200) {
       return { ...base, ...identity, reachable: false, problem: "status", httpStatus: res.status };
@@ -199,7 +199,7 @@ export async function fetchBrainHealth(
 
 /**
  * `fetchBrainHealth` con caché de 15 s por URL, compartida entre llamadas
- * simultáneas: la tarjeta y el panel de contacto no martillan a Nea.
+ * simultáneas: la tarjeta y el panel de contacto no martillan a AGENTE-GENERAL.
  * `null` si no hay URL configurada.
  */
 export async function getBrainHealth(
@@ -208,7 +208,7 @@ export async function getBrainHealth(
 ): Promise<BrainHealthDto | null> {
   if (!rawUrl) return null;
   const clock = opts.clock ?? Date.now;
-  const cached = globalForBrain.__voceroBrainHealth;
+  const cached = globalForBrain.__vestroBrainHealth;
   if (cached && cached.url === rawUrl && clock() < cached.expiresAt) {
     return cached.pending;
   }
@@ -218,7 +218,7 @@ export async function getBrainHealth(
     expiresAt: Number.POSITIVE_INFINITY,
     pending: fetchBrainHealth(rawUrl, opts),
   };
-  globalForBrain.__voceroBrainHealth = entry;
+  globalForBrain.__vestroBrainHealth = entry;
   const result = await entry.pending;
   entry.expiresAt = clock() + (opts.ttlMs ?? BRAIN_HEALTH_TTL_MS);
   return result;

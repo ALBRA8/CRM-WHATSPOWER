@@ -4,7 +4,7 @@
 **Nombre de trabajo del producto:** Vestro (ver `CONTEXTO CRM/00_MASTER/PROJECT_STATE.md`)
 
 Vestro es una plataforma CRM SaaS modular, multi-tenant y comercializable cuyo
-núcleo funcional es **VOCERO CRM** (conservado al 100 %) y cuyo **único cerebro
+núcleo funcional es **VESTRO CRM** (conservado al 100 %) y cuyo **único cerebro
 de inteligencia y ejecución es AGENTE-GENERAL**, conectado por contratos
 versionados e independiente del núcleo.
 
@@ -13,7 +13,7 @@ versionados e independiente del núcleo.
 ```
 ├── CONTEXTO CRM/          Memoria documental de continuidad + documentos rectores
 ├── apps/
-│   └── web/               Núcleo VOCERO 2.12.0 (Next.js 15 + React 19 + Drizzle + PG16)
+│   └── web/               Núcleo VESTRO 2.12.0 (Next.js 15 + React 19 + Drizzle + PG16)
 ├── services/
 │   ├── agent-gateway/     Adaptador hacia AGENTE-GENERAL (despacho, firma HMAC, HITL)
 │   ├── flows/             Motor de flujos (herencia WHATSPOWER, contrato versionado)
@@ -29,9 +29,9 @@ versionados e independiente del núcleo.
 
 ## Reglas de oro (no negociables)
 
-1. **VOCERO se conserva completo.** Ninguna capacidad se elimina ni se marca
+1. **VESTRO se conserva completo.** Ninguna capacidad se elimina ni se marca
    como implementada sin correspondencia verificable en código y pruebas.
-   Matriz viva: `CONTEXTO CRM/00_MASTER/MATRIZ_PARIDAD_VOCERO.md`.
+   Matriz viva: `CONTEXTO CRM/00_MASTER/MATRIZ_PARIDAD_VESTRO.md`.
 2. **AGENTE-GENERAL es el único cerebro.** Nada de razonamiento, memoria,
    herramientas, firewall ni aprobaciones se duplica en Vestro.
 3. **Aislamiento multi-tenant en la base de datos** (RLS) y doble valla en la

@@ -85,8 +85,8 @@ la edición cloud para que un cerebro sirva a las dos.
   texto recortado a 500 caracteres, sin los de la ráfaga). Sin persona del
   equipo no hay campo y el despacho es idéntico al de antes.
 - **CA-3.2** El CRM anuncia la capacidad `atencion_humana` en cada despacho.
-- **CA-3.3** Un cerebro que no conoce el campo lo ignora. Nea lo usa para no
-  contradecir al equipo; ese lado vive en el repositorio de Nea.
+- **CA-3.3** Un cerebro que no conoce el campo lo ignora. AGENTE-GENERAL lo usa para no
+  contradecir al equipo; ese lado vive en el repositorio de AGENTE-GENERAL.
 
 ## Decisiones
 

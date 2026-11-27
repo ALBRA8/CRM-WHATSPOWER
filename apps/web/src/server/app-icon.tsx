@@ -5,7 +5,7 @@ import {
   BRAND_MARK_BODY,
   BRAND_MARK_STROKE,
   BRAND_MARK_TAIL,
-  isVoceroName,
+  isVestroName,
 } from "@/lib/brand";
 import { FAVICON_ASSET, faviconInitial } from "@/lib/favicon";
 import type { AppIconPurpose, AppIconSize } from "@/lib/pwa";
@@ -22,7 +22,7 @@ import { readMediaFile } from "@/server/whatsapp/media";
  *
  * Con logo subido (PNG, JPEG o SVG) va el logo sobre el color de marca. Un ICO
  * o un WEBP no los sabe dibujar `ImageResponse`: con esos, como sin logo, va
- * lo mismo que la pestaña (la V de Vocero o la inicial sobre el acento).
+ * lo mismo que la pestaña (la V de Vestro o la inicial sobre el acento).
  */
 
 /** Los formatos que `ImageResponse` dibuja dentro de un `<img>`. */
@@ -69,8 +69,8 @@ function dibujo(
   const aSangre = purpose === "maskable" || size === 180;
   // Zona segura del maskable: lo importante dentro del 60 % central.
   const contenido = Math.round(size * (purpose === "maskable" ? 0.6 : 0.72));
-  const vocero = !logo && isVoceroName(branding.name);
-  const fondo = vocero
+  const vestro = !logo && isVestroName(branding.name);
+  const fondo = vestro
     ? `linear-gradient(135deg, ${accent}, ${hover})`
     : logo
       ? "#ffffff"
@@ -92,9 +92,9 @@ function dibujo(
       {logo ? (
         // eslint-disable-next-line @next/next/no-img-element -- ImageResponse dibuja <img>, no next/image
         <img src={logo} width={contenido} height={contenido} style={{ objectFit: "contain" }} alt="" />
-      ) : vocero ? (
+      ) : vestro ? (
         // eslint-disable-next-line @next/next/no-img-element -- ImageResponse dibuja <img>, no next/image
-        <img src={marcaVocero()} width={contenido} height={contenido} alt="" />
+        <img src={marcaVestro()} width={contenido} height={contenido} alt="" />
       ) : (
         <span
           style={{
@@ -122,8 +122,8 @@ function grosor(color: string, size: number): string {
   return pasos.map(([x, y]) => `${x}px ${y}px 0 ${color}`).join(", ");
 }
 
-/** La V de Vocero sola, sin mosaico: el mosaico lo pone el contenedor. */
-function marcaVocero(): string {
+/** La V de Vestro sola, sin mosaico: el mosaico lo pone el contenedor. */
+function marcaVestro(): string {
   const svg = [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="240" height="240">`,
     `<g fill="none" stroke-linecap="round">`,

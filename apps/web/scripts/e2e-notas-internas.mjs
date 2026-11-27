@@ -16,7 +16,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-notas@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-notas@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-notas";
 const S = Date.now().toString(36);
 const PN = `PN-NOTA-${S}`;
@@ -52,7 +52,7 @@ try {
   if (!r.ok()) r = await apiA("/api/auth/sign-in/email", { method: "POST", data: { email: EMAIL, password: PASSWORD } });
   ok("login de la dueña", r.ok());
   await apiA("/api/settings/whatsapp", { method: "PUT", data: { wabaId: "WABA-NOTA", phoneNumberId: PN, token: "tok-nota" } });
-  const mEmail = `miembro-nota-${S}@vocero.test`;
+  const mEmail = `miembro-nota-${S}@vestro.test`;
   r = await apiA("/api/settings/team", { method: "POST", data: { name: "Laura Ventas", email: mEmail, password: "password-miembro-nota" } });
   ok("alta de un miembro (Laura)", r.status() === 201);
   const ctxB = await browser.newContext({ viewport: { width: 1280, height: 860 } });

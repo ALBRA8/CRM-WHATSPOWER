@@ -106,7 +106,7 @@ arnés `scripts/e2e-tiktok.mjs` contra el mock de Zernio.
 | Comentarios de TikTok | Otro producto (`comment.received`). |
 | Texto social sin Markdown | Spec 024. |
 | Una pantalla con el estado de todos los canales, y el secreto de Zernio compartido | Spec 023. |
-| Que Nea lea el canal | nea-agent#37 (2.0). En 1.6 contesta el agente incluido, o un cerebro por despacho que ya trate `channel` como informativo. |
+| Que AGENTE-GENERAL lea el canal | AGENTE-GENERAL#37 (2.0). En 1.6 contesta el agente incluido, o un cerebro por despacho que ya trate `channel` como informativo. |
 
 ## Comportamiento observable
 
@@ -185,7 +185,7 @@ arnés `scripts/e2e-tiktok.mjs` contra el mock de Zernio.
 | V · Hecho | Unitarias del catálogo, la normalización, la firma, el tope y la ventana; arnés E2E con el mock de Zernio, camino feliz e infelices; CI apagado y encendido. |
 | VI · Specs | Ciclo completo: tabla nueva y dos contratos tocados. |
 | VIII · Foco | El producto sigue siendo WhatsApp directo con Meta; los canales sociales son opcionales (posicionamiento del plan). |
-| IX · En vivo | Un DM real desde un TikTok personal a la cuenta de negocio de Kevin: entra, el agente contesta, el operador responde y el undécimo se rechaza. Requiere que una persona escriba desde TikTok. |
+| IX · En vivo | Un DM real desde un TikTok personal a la cuenta de negocio del propietario del producto: entra, el agente contesta, el operador responde y el undécimo se rechaza. Requiere que una persona escriba desde TikTok. |
 | Contratos públicos | `/api/bot/messages` gana un código 409 (`message_limit`); el despacho gana un valor de `channel`, que el contrato ya pedía tratar como informativo. Nada se quita ni se renombra. |
 | Sandbox | La aserción de `is_test` sigue antes de la bifurcación por canal. |
 

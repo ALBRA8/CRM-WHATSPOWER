@@ -7,7 +7,7 @@
 **Status**: Especificada antes de escribir código.
 
 **Input**: issue #89 del hito 2.0.0 y la sección 2.0.0 de
-[`docs/plan-1.5-y-2.0.md`](../../docs/plan-1.5-y-2.0.md). Decisión del dueño el
+Decisión del dueño el
 2026-10-08: el CRM es el producto y el agente es un servicio aparte.
 
 **Carril**: ciclo completo (Principio VI). Añade una tabla (migración `0016`) y
@@ -17,10 +17,10 @@ despacho ([contracts/despacho.md](contracts/despacho.md)).
 ## Contexto
 
 Hoy, para que un cerebro externo conteste, tiene que ponerse **delante** del
-CRM: Nea se queda con el webhook de Meta, guarda una copia del secreto de la
+CRM: AGENTE-GENERAL se queda con el webhook de Meta, guarda una copia del secreto de la
 app y le releva cada mensaje al CRM con una cola. De ahí salen los incidentes
 del par (el relay que se cae en silencio, el override que se pierde), y por eso
-Instagram y Messenger se quedan sin agente: a Nea solo le llega WhatsApp.
+Instagram y Messenger se quedan sin agente: a AGENTE-GENERAL solo le llega WhatsApp.
 
 La edición cloud ya lo hace al revés: el webhook nunca sale del CRM, el mensaje
 entra primero a la bandeja y el CRM le **despacha** la ráfaga al cerebro,
@@ -32,7 +32,7 @@ misma firma y la misma tabla, para que los dos repos lo compartan.
 - **D1 — Bandeja primero, cerebro después.** Cuando existe un despacho, el
   mensaje ya está guardado. Si el cerebro falla, no se pierde nada.
 - **D2 — El mismo evento y la misma firma que cloud.** Un cerebro que ya recibe
-  despachos de Vocero Cloud entiende los de la raíz sin cambios. El secreto es
+  despachos de Vestro Cloud entiende los de la raíz sin cambios. El secreto es
   `BOT_API_KEY`: la misma llave firma el despacho y autentica la vuelta por
   `/api/bot/*`.
 - **D3 — El despacho está activo con dos cosas**: `BRAIN_DISPATCH_URL` con una
@@ -47,13 +47,13 @@ misma firma y la misma tabla, para que los dos repos lo compartan.
   Editarla desde la interfaz llega con #106, junto con la llave y la prueba de
   conexión del paso «conecta tu agente».
 - **D6 — Caer a un humano es el traspaso que ya existe**: IA en pausa en esa
-  conversación con motivo `error`, el mismo que usa Nea cuando no puede
+  conversación con motivo `error`, el mismo que usa AGENTE-GENERAL cuando no puede
   contestar. Sin columnas nuevas en `conversation`.
 - **D7 — Sin cortacircuitos en esta entrega.** Cloud lo lleva por organización
   en una tabla que la raíz no tiene. Con el cerebro caído, cada conversación
   agota sus tres intentos (unos 5 s de esperas, más lo que tarde cada intento
   en fallar) y cae a un humano.
-- **D8 — El cerebro de prueba vive en el arnés**, en otro proceso, como la Nea
+- **D8 — El cerebro de prueba vive en el arnés**, en otro proceso, como la AGENTE-GENERAL
   falsa de «Quién responde». El despacho cruza HTTP de verdad y la firma se
   comprueba desde fuera; el producto no gana rutas `/api/dev` nuevas.
 - **D9 — `mediaId` es el que acepta `/api/bot/media/{mediaId}`** (el de Graph),
@@ -83,7 +83,7 @@ misma firma y la misma tabla, para que los dos repos lo compartan.
 | OpenAPI del contrato | #92. Aquí queda el contrato en Markdown y una prueba que fija la firma byte a byte. |
 | Cortacircuitos | D7. |
 | Avisar si el cerebro recibió el turno y nunca contestó | El 2xx significa «recibido»; vigilar la respuesta es otra feature. |
-| El evento `conversation.deleted` | La raíz no elimina conversaciones. La cabecera `x-vocero-event` queda reservada. |
+| El evento `conversation.deleted` | La raíz no elimina conversaciones. La cabecera `x-vestro-event` queda reservada. |
 
 ## Comportamiento observable
 
@@ -95,7 +95,7 @@ un `POST` firmado al cerebro, y lo que el cerebro conteste por
 
 - **AC1** Un WhatsApp entrante produce un despacho con `dispatchId`,
   `conversation.channel = "whatsapp"`, la identidad del contacto y el mensaje.
-  La firma `x-vocero-signature` valida contra el cuerpo crudo con `BOT_API_KEY`.
+  La firma `x-vestro-signature` valida contra el cuerpo crudo con `BOT_API_KEY`.
 - **AC2** Cinco mensajes dentro de la ventana (`AGENT_COALESCE_MS`) producen
   **un** despacho con los cinco, en orden.
 - **AC3** Un mensaje de Instagram y uno de Messenger se despachan igual, con su

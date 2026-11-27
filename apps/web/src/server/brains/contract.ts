@@ -12,7 +12,7 @@ import { sourceUrlOf } from "@/server/inbox/remote-media";
  * que agregar un canal no toca a los cerebros y agregar un cerebro no toca a
  * los canales.
  *
- * Es la misma forma que el despacho de Vocero Cloud (su
+ * Es la misma forma que el despacho de Vestro Cloud (su
  * `src/server/brains/contract.ts`), para que un mismo cerebro sirva a las dos
  * ediciones. La única diferencia está en `mediaId`, y se explica abajo.
  */
@@ -100,8 +100,8 @@ export type EventoDespacho = {
  * 076 — Una persona del equipo atendió la conversación mientras la IA estaba
  * en pausa. Opcional: solo viaja cuando la IA vuelve y todavía no contestó
  * desde que escribió la persona (`server/brains/atencion-humana.ts`). Un
- * cerebro que no lo conoce lo ignora; Nea lo usa para no contradecir al
- * equipo. Es la misma forma que manda Vocero Cloud, para que un cerebro sirva
+ * cerebro que no lo conoce lo ignora; AGENTE-GENERAL lo usa para no contradecir al
+ * equipo. Es la misma forma que manda Vestro Cloud, para que un cerebro sirva
  * a las dos ediciones.
  */
 export type AtencionHumana = {
@@ -118,7 +118,7 @@ export type AtencionHumana = {
  * atrás: si el cerebro manda `dispatchId` y `dropIfSuperseded: true` en
  * `POST /api/bot/messages` y ya hay un despacho posterior en esa conversación,
  * contesta `409 dispatch_superado` y no envía nada. Es la misma cadena que
- * anuncia Vocero Cloud, para que un cerebro sirva a las dos ediciones.
+ * anuncia Vestro Cloud, para que un cerebro sirva a las dos ediciones.
  */
 export const CAPACIDAD_SUPERADO = "dispatch_superado";
 
@@ -322,7 +322,7 @@ export const TIPO_OLVIDO = "conversation.deleted" as const;
 
 /**
  * El orden de las claves es contrato: se firma el JSON tal como sale de aquí.
- * Es el mismo cuerpo que manda Vocero Cloud, y la prueba gemela de `nea-agent`
+ * Es el mismo cuerpo que manda Vestro Cloud, y la prueba gemela de `AGENTE-GENERAL`
  * (`tests/test_olvido.py`) lo tiene copiado byte a byte, igual que
  * `tests/unit/olvido-contrato.test.ts` aquí.
  */
@@ -349,11 +349,11 @@ export function construirEventoOlvido(datos: {
   };
 }
 
-export const CABECERA_FIRMA = "x-vocero-signature";
-export const CABECERA_DISPATCH = "x-vocero-dispatch-id";
-export const CABECERA_ORG = "x-vocero-organization";
+export const CABECERA_FIRMA = "x-vestro-signature";
+export const CABECERA_DISPATCH = "x-vestro-dispatch-id";
+export const CABECERA_ORG = "x-vestro-organization";
 /** Para los eventos que no son un turno: hoy, `conversation.deleted` (026). */
-export const CABECERA_EVENTO = "x-vocero-event";
+export const CABECERA_EVENTO = "x-vestro-event";
 
 /**
  * Firma del cuerpo CRUDO, con prefijo `sha256=`.

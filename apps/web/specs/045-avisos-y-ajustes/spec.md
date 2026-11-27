@@ -6,7 +6,7 @@
 
 **Status**: Implementada y probada con el arnés E2E (wa-mock).
 
-**Input**: Kevin, sobre el RC con 039–044: quitar del compositor enviar
+**Input**: el propietario del producto, sobre el RC con 039–044: quitar del compositor enviar
 ubicación y contacto; que al llegar un mensaje suene un aviso en el navegador
 y que la pestaña muestre los pendientes, como WhatsApp Web.
 
@@ -27,7 +27,7 @@ aviso corto en cualquier pantalla de la app, salvo que ya estés mirando esa
 conversación con la pestaña al frente. Lo que mandas tú (o el agente) no
 suena. Una ráfaga suena una vez.
 
-**H3 — La pestaña cuenta los pendientes.** «(3) Vocero — CRM…»: cuántos chats
+**H3 — La pestaña cuenta los pendientes.** «(3) Vestro — CRM…»: cuántos chats
 tienen mensajes sin leer, como WhatsApp Web. Se actualiza en vivo y en todas
 las pantallas.
 

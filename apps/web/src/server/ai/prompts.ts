@@ -4,7 +4,7 @@ import type { schema } from "@/lib/db";
  * 036 — Lo que queda de los prompts desde que el CRM no trae agente: el
  * conocimiento en texto (lo sirve `/api/bot/profile` y lo mide la pantalla
  * Agente) y el prompt del juez del Laboratorio. El del agente vive en el
- * cerebro (Nea: `app/prompt.py`).
+ * cerebro (AGENTE-GENERAL: `app/prompt.py`).
  */
 
 type KbEntry = typeof schema.kbEntry.$inferSelect;

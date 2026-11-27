@@ -50,7 +50,7 @@ algo que no pasó.
   siendo una respuesta (`SILENCIO_MS`), un despacho no aceptado sigue siendo
   una falla y el tope del turno sigue en `TURNO_TIMEOUT_MS`.
 - **CT-5 · El costo.** Un turno que contesta tarda hasta 2.5 s más que antes
-  en cerrarse. El turno de Nea con el modelo tarda de 3 a 20 s, así que la
+  en cerrarse. El turno de AGENTE-GENERAL con el modelo tarda de 3 a 20 s, así que la
   diferencia es chica frente a una lectura equivocada.
 
 ## Diseño

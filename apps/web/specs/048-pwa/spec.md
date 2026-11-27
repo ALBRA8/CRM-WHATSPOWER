@@ -1,4 +1,4 @@
-# 048 — Vocero en el celular (PWA)
+# 048 — Vestro en el celular (PWA)
 
 **Feature Branch**: `feat/048-pwa` (sobre `feat/047-webhook-a-prueba-de-fallos`, #147)
 
@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; gates, arnés E2E (36/36), self-test general (280/280), prueba en la imagen Docker y capturas en claro y oscuro en verde. D5 cambió al implementar: «Instalar app» es una fila del menú encima de Ajustes, no un icono en el pie (apretaba el nombre del usuario).
 
-**Input**: segunda spec de la 2.2, elegida por Kevin el 2026-10-23 en
+**Input**: segunda spec de la 2.2, elegida por el propietario del producto el 2026-10-23 en
 [046 research.md](../046-referencias-2.2/research.md), sección «PWA: qué
 entra al núcleo y qué no». Referencias observadas: Chatwoot (MIT), que tiene un
 `manifest.json` y un service worker de 35 líneas solo para push, y
@@ -18,7 +18,7 @@ icono) y un archivo estático.
 
 ## Problema
 
-1. **El dueño atiende desde el celular, pero Vocero vive en una pestaña.**
+1. **El dueño atiende desde el celular, pero Vestro vive en una pestaña.**
    Para contestar tiene que abrir el navegador, buscar la pestaña entre
    otras veinte y volver a entrar. WhatsApp está a un toque en la pantalla de
    inicio; el CRM que lo atiende, no.
@@ -26,17 +26,17 @@ icono) y un archivo estático.
    muestran «Instalar», y en el iPhone «Agregar a inicio» deja un recorte de
    la página como icono.
 3. **Cinco instancias instaladas se verían iguales** si el icono fuera el de
-   Vocero: una agencia instala la de cada cliente en su propio celular.
+   Vestro: una agencia instala la de cada cliente en su propio celular.
 
 ## Decisiones
 
 **D1 — Manifest con la marca de la organización.** `src/app/manifest.ts` lo
 arma en cada petición con la marca guardada (nombre y logo o inicial): nada de
-«Vocero» cableado. Lleva:
+«Vestro» cableado. Lleva:
 
 - `display: "standalone"` y `start_url: "/inbox"`: la app instalada abre en la
   Bandeja. Primero fue `/`, que según el estado manda a la guía de inicio;
-  Kevin lo probó en Android el 2026-10-23 y pidió la Bandeja;
+  el propietario del producto lo probó en Android el 2026-10-23 y pidió la Bandeja;
 - `scope: "/"` e `id: "/"`;
 - `lang: "es"`;
 - color de fondo y de tema: el azul marino de la barra lateral, igual en los
@@ -59,8 +59,8 @@ Lo que se dibuja:
 - **Con logo subido** (PNG, JPEG o SVG), el logo centrado sobre el color de
   marca. Un ICO o un WEBP no se pueden dibujar en `ImageResponse`: con esos
   formatos cae a la inicial.
-- **Sin logo**, el mismo icono generado que la pestaña: la V de Vocero si la
-  instancia se llama Vocero, y la inicial sobre el acento si se llama de otra
+- **Sin logo**, el mismo icono generado que la pestaña: la V de Vestro si la
+  instancia se llama Vestro, y la inicial sobre el acento si se llama de otra
   forma.
 
 Las mismas cabeceras de seguridad que el favicon.
@@ -80,7 +80,7 @@ muestra conversaciones viejas como si fueran actuales es peor que uno que dice
 
 **D4 — Se registra en el layout raíz.** Un componente cliente registra
 `/sw.js` al cargar. Si el navegador no tiene service worker (o falla el
-registro), no pasa nada: Vocero funciona igual en la pestaña.
+registro), no pasa nada: Vestro funciona igual en la pestaña.
 
 **D5 — «Instalar app» en el menú.** Encima de Ajustes aparece una fila
 **Instalar app** (al implementar se descartó el icono junto a la campana: con
@@ -97,7 +97,7 @@ Compartir → «Agregar a inicio» y la guía lo dice (README, «En el celular»
 **D6 — Sin Web Push.** Las notificaciones con la app cerrada pasan por el
 servicio de push del navegador (Google, Apple, Mozilla). Es un tercero en el
 camino, y por el Principio II solo podría entrar como conector opcional tras
-bandera. Queda fuera de la 2.2, como decidió Kevin. Con la app abierta siguen
+bandera. Queda fuera de la 2.2, como decidió el propietario del producto. Con la app abierta siguen
 funcionando el sonido y el contador de la 045.
 
 ## Comportamiento observable y criterios de aceptación

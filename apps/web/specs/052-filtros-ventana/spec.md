@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada y enmendada el 2026-10-23 (un solo botón «Filtrar», ver abajo, también antes del código); gates, arnés E2E (16/16 en base limpia) y self-test general (280/280) en verde.
 
-**Input**: sexta y última spec del recorte de la 2.2, elegida por Kevin el
+**Input**: sexta y última spec del recorte de la 2.2, elegida por el propietario del producto el
 2026-10-23 ([046 research.md](../046-referencias-2.2/research.md)). Viene de
 wacrm (MIT, código leído): su filtro «expiring» (la ventana de 24 h cierra en
 menos de 2 h) y «esperando respuesta» (`src/lib/inbox/inbox-filters.ts`). No
@@ -64,9 +64,9 @@ decenas de temporizadores para ganar minutos.
   los de siempre.
 - **AC6.** A 390 px la fila de filtros envuelve sin desplazamiento horizontal.
 
-## Enmienda del 2026-10-23 — un solo botón «Filtrar» (Kevin, tras probar la rc.3)
+## Enmienda del 2026-10-23 — un solo botón «Filtrar» (el propietario del producto, tras probar la rc.3)
 
-Kevin probó la rc.3 y los óvalos no le convencieron: «Todas · No leídas ·
+el propietario del producto probó la rc.3 y los óvalos no le convencieron: «Todas · No leídas ·
 Sin responder · Por vencer · Anuncios» y luego el selector de etapa
 amontonaban la barra, y «Sin responder» no le parecía bien. Eligió entre
 dos maquetas la de **un solo botón «Filtrar»**:

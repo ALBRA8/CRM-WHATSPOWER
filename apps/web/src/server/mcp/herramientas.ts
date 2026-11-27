@@ -1,5 +1,5 @@
 /**
- * 069 — Herramientas del MCP de Vocero (puerto de Vocero Cloud).
+ * 069 — Herramientas del MCP de Vestro (puerto de Vestro Cloud).
  *
  * Cada herramienta es una LLAMADA a la API v1, no una reimplementación: se
  * arma una petición con la misma llave y se le pasa al mismo handler que

@@ -1,4 +1,4 @@
-# INSTALL-IA.md — Instalación de Vocero CRM guiada por IA
+# INSTALL-IA.md — Instalación de Vestro CRM guiada por IA
 
 > **Para el asistente de IA** (Claude Code u otro agente con acceso a
 > herramientas): este archivo ES tu guion de instalación. Síguelo de arriba a
@@ -10,10 +10,10 @@
 > ningún otro archivo**: Coolify descarga la imagen publicada y los secretos
 > viven como variables de la plataforma.
 
-**Imagen**: `ghcr.io/kevinrivm/vocero-crm:2.12.0` (GitHub Container Registry,
+**Imagen**: `ghcr.io/albra8/crm-whatpower:2.12.0` (GitHub Container Registry,
 una etiqueta por versión, `linux/amd64`, escucha en el puerto `3000`).
 
-**Repositorio**: `https://github.com/kevinrivm/vocero-crm` (público, rama `main`,
+**Repositorio**: `https://github.com/ALBRA8/vestro-crm` (público, rama `main`,
 `Dockerfile` en la raíz). Hace falta para la Ruta B y para construir desde el
 código.
 
@@ -54,7 +54,7 @@ dentro: README → «Instalación» → «Otras plataformas».
 | Variable | Valor |
 |---|---|
 | `APP_BASE_URL` | `https://<dominio>` |
-| `DATABASE_URL` | `postgresql://postgres:<POSTGRES_PASSWORD>@<host-postgres>:5432/vocero` |
+| `DATABASE_URL` | `postgresql://postgres:<POSTGRES_PASSWORD>@<host-postgres>:5432/vestro` |
 | `POSTGRES_PASSWORD` | generado (es la de la base; la app no la lee, solo va dentro de `DATABASE_URL`) |
 | `BETTER_AUTH_SECRET` | generado |
 | `ENCRYPTION_KEY` | generado (base64, 44 caracteres) |
@@ -70,30 +70,30 @@ Opcionales, que NO se preguntan (el usuario los agrega después; la guía de
 cada uno está en `.env.example`): `META_APP_SECRET`, `META_APP_ID` +
 `META_EMBEDDED_CONFIG_ID` (botón «Conectar con Meta»; panel de Meta en
 [`docs/embedded-signup.md`](docs/embedded-signup.md)), `BOT_API_KEY`,
-`BRAIN_DISPATCH_URL` y `BRAIN_HEALTH_URL` (un cerebro externo como Nea),
+`BRAIN_DISPATCH_URL` y `BRAIN_HEALTH_URL` (un cerebro externo como AGENTE-GENERAL),
 `AGENDA=on`, `ATRIBUCION=on` y `CHANNELS`.
 
-Vocero no trae agente: sin uno conectado es un CRM de bandeja manual, y eso
-es una instalación válida. Si el usuario quiere que un agente conteste (Nea),
+Vestro no trae agente: sin uno conectado es un CRM de bandeja manual, y eso
+es una instalación válida. Si el usuario quiere que un agente conteste (AGENTE-GENERAL),
 se instala al lado del CRM y se conecta por el despacho: el webhook de Meta se
-queda en el CRM, **nunca se mueve a Nea**. **No le pongas llave de IA a Nea**
+queda en el CRM, **nunca se mueve a AGENTE-GENERAL**. **No le pongas llave de IA a AGENTE-GENERAL**
 (`LLM_API_KEY` vacía): piensa por el CRM (`/api/bot/llm`) con la llave y el
 modelo de Ajustes → IA, así la llave se pone una sola vez, en la app. Pasos y
 variables en [`docs/migrar-a-2.0.md`](docs/migrar-a-2.0.md) («El par»); el
 contrato, en [`docs/openapi.json`](docs/openapi.json). Después, el usuario
-enciende el agente en la pantalla Agente (solo se deja con Nea en línea).
+enciende el agente en la pantalla Agente (solo se deja con AGENTE-GENERAL en línea).
 
 ## Ruta A — Coolify (con el MCP de Coolify)
 
 1. **Base de datos**: crea un servicio PostgreSQL 16 en el proyecto
-   (`database` tipo `postgresql`), con la contraseña generada y base `vocero`.
+   (`database` tipo `postgresql`), con la contraseña generada y base `vestro`.
    Anota su host interno (algo como `<uuid>:5432`).
 2. **Aplicación**: en el mismo proyecto, crea una app de tipo **Docker Image**
-   con la imagen `ghcr.io/kevinrivm/vocero-crm`, la etiqueta `2.12.0`, puerto
+   con la imagen `ghcr.io/albra8/crm-whatpower`, la etiqueta `2.12.0`, puerto
    expuesto `3000` y el dominio del usuario con HTTPS (MCP: `application`
    con `action: create_dockerimage`, el `project_uuid`, el
    `server_uuid` y el `environment_name` del proyecto,
-   `docker_registry_image_name: ghcr.io/kevinrivm/vocero-crm`,
+   `docker_registry_image_name: ghcr.io/albra8/crm-whatpower`,
    `docker_registry_image_tag: 2.12.0`, `ports_exposes: "3000"`,
    `domains: https://<dominio>` e `instant_deploy: false`). Coolify descarga
    la imagen: no hay repositorio, GitHub App ni deploy keys que configurar, ni
@@ -101,7 +101,7 @@ enciende el agente en la pantalla Agente (solo se deja con Nea en línea).
    variables.
 3. **Almacenamiento persistente**: agrega a la app un volumen montado en
    **`/data`** (MCP: `storages` con `resource: application`, el `uuid` de la
-   app, `action: create`, `type: persistent`, `name: vocero-data`,
+   app, `action: create`, `type: persistent`, `name: vestro-data`,
    `mount_path: /data`). Ahí viven los adjuntos, el logo y el icono; la imagen
    ya trae `MEDIA_DIR=/data/media`, así que **no definas `MEDIA_DIR`**. Que
    Coolify monte el volumen como root no importa: el contenedor arranca como
@@ -126,7 +126,7 @@ enciende el agente en la pantalla Agente (solo se deja con Nea en línea).
 Para un VPS ARM (p. ej. Ampere o Graviton: la imagen es `linux/amd64` y ahí no
 corre) o para un fork con cambios propios. En el paso 2, en vez de la imagen,
 crea una app tipo **repositorio público** apuntando a
-`https://github.com/kevinrivm/vocero-crm` o al fork (rama `main`, build pack
+`https://github.com/ALBRA8/vestro-crm` o al fork (rama `main`, build pack
 `dockerfile`, puerto expuesto `3000`, el dominio del usuario con HTTPS; MCP:
 `application` con `action: create_public`) — no requiere GitHub App ni deploy
 keys. Los pasos 3 a 7 son iguales. El build corre en el VPS y tarda varios
@@ -142,7 +142,7 @@ migraciones corren solas al arrancar.
 ## Ruta B — docker compose (VPS con Docker)
 
 ```bash
-git clone https://github.com/kevinrivm/vocero-crm.git vocero && cd vocero
+git clone https://github.com/ALBRA8/vestro-crm.git vestro && cd vestro
 pnpm install && pnpm init-env --domain <dominio>   # .env con los secretos generados (Node 22 + pnpm)
 pnpm doctor                                         # cada ✗ dice cómo arreglarla; sale con 1 si algo falla
 docker compose up -d
@@ -154,33 +154,33 @@ docker compose up -d
   `docker-compose.yml`. En un VPS ARM o en un fork con cambios propios, usa
   `docker compose up -d --build`: la construye desde el código.
 - Caddy emite el certificado HTTPS automáticamente con `DOMAIN`.
-- El compose ya monta el volumen `vocero_app_data` en `/data` (adjuntos, logo
+- El compose ya monta el volumen `vestro_app_data` en `/data` (adjuntos, logo
   e icono): no hay que definir `MEDIA_DIR`.
-- Con el agente (Nea): `BOT_API_KEY`, `BRAIN_DISPATCH_URL` y
+- Con el agente (AGENTE-GENERAL): `BOT_API_KEY`, `BRAIN_DISPATCH_URL` y
   `BRAIN_HEALTH_URL` en el `.env` (valores en `docs/migrar-a-2.0.md`) y
   `docker compose up -d`.
-- Verifica: `docker compose ps` (tres servicios healthy, cuatro con Nea) y
+- Verifica: `docker compose ps` (tres servicios healthy, cuatro con AGENTE-GENERAL) y
   `https://<dominio>/api/health` → `{"ok":true,"version":"2.12.0",…}` (`"mediaWritable":true` confirma el volumen).
 
 ## Cierre (obligatorio decirlo al usuario)
 
-> ✅ Vocero quedó instalado en `https://<dominio>`.
+> ✅ Vestro quedó instalado en `https://<dominio>`.
 >
 > 1. Entra y **regístrate**: el primer registro crea tu organización (después
 >    el registro público se cierra solo).
 > 2. Pulsa **"Cargar datos de demostración"** si quieres explorar con la
 >    Ferretería El Martillo.
 > 3. Para conectar tu WhatsApp entra a **Configuración → WhatsApp**: ahí está
->    el wizard; al guardar, Vocero registra el webhook en Meta por sí solo (la
+>    el wizard; al guardar, Vestro registra el webhook en Meta por sí solo (la
 >    URL exacta sigue a la vista por si tu agencia enruta desde su backend o
 >    hay que pegarla a mano). La conexión del número NO es parte de esta
 >    instalación.
-> 4. Vocero no trae agente: la **Guía de inicio** te dice si hay uno conectado.
->    Sin él, contestas tú desde la Bandeja. Con Nea en línea, enciéndelo en la
+> 4. Vestro no trae agente: la **Guía de inicio** te dice si hay uno conectado.
+>    Sin él, contestas tú desde la Bandeja. Con AGENTE-GENERAL en línea, enciéndelo en la
 >    pantalla **Agente** cuando el Laboratorio te dé buen puntaje.
 > 5. Si vas a instalarlo para otros negocios: cómo venderlo, adaptarlo y
 >    entregarlo sin que truene se aprende en la
->    [VIBE Community](https://kevinbelier.cloud/comunidad).
+>    la comunidad del proyecto.
 
 ## Diagnóstico rápido
 

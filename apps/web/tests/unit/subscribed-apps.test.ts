@@ -7,7 +7,7 @@ import { registerWebhookForNumber } from "@/server/whatsapp/connect";
  * pisar un override de callback de la WABA: en Meta, `POST
  * {WABA}/subscribed_apps` sin cuerpo es exactamente cómo se elimina el
  * callback alterno, y el override del número tiene prioridad sobre el de la
- * WABA. Con cualquiera de las dos cosas, un cerebro externo (Nea) o el backend
+ * WABA. Con cualquiera de las dos cosas, un cerebro externo (AGENTE-GENERAL) o el backend
  * de una agencia dejaba de recibir mensajes cada vez que alguien pulsaba
  * "Guardar" o rotaba el token.
  */
@@ -25,8 +25,8 @@ const TOKEN = "EAAG-token-secreto-1234";
 const APP = { id: "123", name: "Mi app", link: "https://www.facebook.com/games/?app_id=123" };
 /** El webhook de esta instancia: el verify token es el segmento secreto. */
 const URL_PROPIA = "https://crm.ejemplo.com/api/webhooks/wa/verify-secreto-xyz";
-/** El override de Nea lleva también su propio segmento secreto. */
-const OVERRIDE = "https://nea.ejemplo.com/api/webhooks/wa/segmento-secreto-abc";
+/** El override de AGENTE-GENERAL lleva también su propio segmento secreto. */
+const OVERRIDE = "https://agente.ejemplo.com/api/webhooks/wa/segmento-secreto-abc";
 
 const opts = {
   wabaId: WABA,
@@ -103,7 +103,7 @@ describe("registerWebhookForNumber — la WABA ya enruta a un override ajeno", (
     await expect(registerWebhookForNumber(opts)).resolves.toEqual({
       ok: true,
       skipped: "waba_override",
-      host: "nea.ejemplo.com",
+      host: "agente.ejemplo.com",
     });
 
     const [path, o] = calls()[0]!;
@@ -147,7 +147,7 @@ describe("registerWebhookForNumber — la WABA ya enruta a un override ajeno", (
     const text = consoleText();
     expect(text).toMatch(/override/);
     expect(text).toContain(WABA);
-    expect(text).toContain("nea.ejemplo.com");
+    expect(text).toContain("agente.ejemplo.com");
     expect(text).not.toContain(TOKEN);
     expect(text).not.toContain("segmento-secreto-abc");
     expect(text).not.toContain("verify-secreto-xyz");
@@ -267,14 +267,14 @@ describe("035 — «Recuperar el webhook» (forzar)", () => {
   it("el log dice que se quitó, sin la ruta secreta del override", async () => {
     metaFalsa({ data: [{ whatsapp_business_api_data: APP, override_callback_uri: OVERRIDE }] });
     await registerWebhookForNumber({ ...opts, forzar: true });
-    expect(consoleText()).toContain("nea.ejemplo.com");
+    expect(consoleText()).toContain("agente.ejemplo.com");
     expect(consoleText()).not.toContain("segmento-secreto-abc");
   });
 
-  it("también pisa un override ajeno en el número (el de Nea 1.x)", async () => {
+  it("también pisa un override ajeno en el número (el de AGENTE-GENERAL 1.x)", async () => {
     const meta = metaFalsa(
       { data: [{ whatsapp_business_api_data: APP, override_callback_uri: OVERRIDE }] },
-      "https://nea.ejemplo.com/webhook"
+      "https://agente.ejemplo.com/webhook"
     );
     await registerWebhookForNumber({ ...opts, forzar: true });
     expect(meta.override).toBe(URL_PROPIA);

@@ -6,7 +6,7 @@ import { marcarEstadoPorRespuesta } from "@/server/ai/credentials";
  * 036 — El CRM piensa por el cerebro (`POST /api/bot/llm/{ruta}`).
  *
  * Puerto de `/api/brains/llm` de la edición cloud. La llave de IA se pone una
- * vez, en Ajustes → IA, y no sale del CRM: el cerebro (Nea) apunta el
+ * vez, en Ajustes → IA, y no sale del CRM: el cerebro (AGENTE-GENERAL) apunta el
  * `base_url` de su SDK de OpenAI aquí y el CRM le pone la llave al reenviar.
  * Así quien instala no la copia a dos lugares, una filtrada no viaja, y
  * cuando el proveedor la rechaza (401, o 402 sin saldo) es el CRM quien se

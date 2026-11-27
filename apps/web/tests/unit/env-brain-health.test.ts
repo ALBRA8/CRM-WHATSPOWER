@@ -23,7 +23,7 @@ afterEach(() => {
 });
 
 describe("BRAIN_HEALTH_URL no tumba el arranque", () => {
-  it.each(["nea:8000/health", "ftp://nea/health", "no es una url"])(
+  it.each(["agente:8000/health", "ftp://agente/health", "no es una url"])(
     "%s → getEnv no lanza y la conserva tal cual",
     async (valor) => {
       process.env = { ...original, ...BASE, BRAIN_HEALTH_URL: valor };

@@ -11,7 +11,7 @@ de los mensajes se puedan abrir. Hoy una URL en el texto de un mensaje (la
 liga de un mapa con la dirección, la de un pago, la de un catálogo) se pinta
 como texto plano: el operador tiene que seleccionarla, copiarla y pegarla en
 otra pestaña. La función ya funciona en el CRM de ese negocio; aquí se vuelve
-a montar sobre el `main` de Vocero, sin sus datos.
+a montar sobre el `main` de Vestro, sin sus datos.
 
 **Carril**: ligero (Principio VI). Solo interfaz: no toca el modelo de datos,
 ni `/api/bot/*`, ni el despacho, ni el DTO del mensaje.

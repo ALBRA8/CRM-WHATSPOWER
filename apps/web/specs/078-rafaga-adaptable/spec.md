@@ -61,7 +61,7 @@ cerebro piensa**; no ayuda cuando la primera respuesta ya salió.
   preguntas completas se contestan antes. El valor por defecto no cambia
   (6 s): una instalación que actualiza no cambia de ritmo sin decidirlo.
 - **D4 — «Escribiendo…» marca leído.** Es como funciona la API de WhatsApp: el
-  cliente ve las palomitas azules en cuanto escribe, igual que hoy cuando Nea
+  cliente ve las palomitas azules en cuanto escribe, igual que hoy cuando AGENTE-GENERAL
   empieza a pensar, solo que unos segundos antes.
 - **D5 — Los guiones E2E fijan la larga igual a la normal.** La configuración
   estándar de la 036 lleva `AGENT_COALESCE_LARGO_MS=1500` y el cerebro falso

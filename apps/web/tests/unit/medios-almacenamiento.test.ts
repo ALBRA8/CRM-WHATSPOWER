@@ -24,7 +24,7 @@ const BASE = {
 
 const CREDS = {
   MEDIA_BUCKET_ENDPOINT: "https://cuenta123.r2.cloudflarestorage.com",
-  MEDIA_BUCKET_NAME: "vocero-media",
+  MEDIA_BUCKET_NAME: "vestro-media",
   MEDIA_BUCKET_KEY_ID: "AKIAEJEMPLO",
   MEDIA_BUCKET_SECRET: "secretoDeEjemplo1234567890",
   MEDIA_BUCKET_REGION: "auto",
@@ -44,7 +44,7 @@ async function montar(extra: Record<string, string | undefined>) {
 }
 
 beforeEach(async () => {
-  dirTemporal = await mkdtemp(path.join(tmpdir(), "vocero-medios-"));
+  dirTemporal = await mkdtemp(path.join(tmpdir(), "vestro-medios-"));
 });
 
 afterEach(() => {
@@ -57,7 +57,7 @@ describe("firma SigV4 del bucket", () => {
     const r = firmarSolicitud({
       cfg: {
         endpoint: "https://cuenta123.r2.cloudflarestorage.com",
-        bucket: "vocero-media",
+        bucket: "vestro-media",
         accessKeyId: "AKIAEJEMPLO",
         secretAccessKey: "secretoDeEjemplo1234567890",
         region: "auto",
@@ -72,13 +72,13 @@ describe("firma SigV4 del bucket", () => {
     // Valor de referencia calculado con botocore (AWS oficial) para estas
     // mismas entradas. Si esta firma cambia, la culpa es nuestra.
     expect(r.headers.Authorization).toContain(
-      "Signature=fe58228394eb5897a000e946894026e0bc343e2363eb5aab4d11546437633304"
+      "Signature=bd0b2a26c9fa21c142e6538f2d65c07f70f81742173f227e80cfa458f0b067f8"
     );
     expect(r.headers.Authorization).toContain(
       "SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date"
     );
     expect(r.url).toBe(
-      "https://cuenta123.r2.cloudflarestorage.com/vocero-media/org_abc/asset_def"
+      "https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_abc/asset_def"
     );
   });
 });
@@ -128,7 +128,7 @@ describe("dónde se escribe", () => {
     expect(fetchFalso).toHaveBeenCalledOnce();
     const [url, init] = fetchFalso.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe(
-      "https://cuenta123.r2.cloudflarestorage.com/vocero-media/org_1/asset_1"
+      "https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/asset_1"
     );
     expect(init.method).toBe("PUT");
     await expect(
@@ -161,7 +161,7 @@ describe("una llave fija (el icono) no queda tapada al mover la bandera", () => 
     const m = await montar({ MEDIA_STORE: "disco", ...CREDS });
     await m.guardarMedia("org_1", "favicon", Buffer.from("icono nuevo"));
     expect(await readFile(path.join(dirTemporal, "org_1", "favicon"), "utf8")).toBe("icono nuevo");
-    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vocero-media/org_1/favicon"]);
+    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/favicon"]);
   });
 });
 
@@ -259,7 +259,7 @@ describe("037 — un bucket caído no pierde el archivo (D4)", () => {
     await writeFile(path.join(dirTemporal, "org_1", "asset_4"), "x");
     await m.borrarMedia("org_1", "asset_4");
     await expect(readFile(path.join(dirTemporal, "org_1", "asset_4"))).rejects.toThrow();
-    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vocero-media/org_1/asset_4"]);
+    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/asset_4"]);
   });
 
   it("un endpoint que no es http(s) cuenta como bucket mal configurado", async () => {

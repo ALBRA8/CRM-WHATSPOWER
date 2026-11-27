@@ -10,7 +10,7 @@
 emojis junto al campo de escritura, como el de WhatsApp. Hoy el operador solo
 puede escribirlos con el teclado del sistema (en Windows, `Win + .`), que casi
 nadie conoce. La función ya funciona en el CRM de ese negocio; aquí se vuelve
-a montar sobre el `main` de Vocero.
+a montar sobre el `main` de Vestro.
 
 **Carril**: ligero (Principio VI). Solo interfaz: no toca el modelo de datos,
 ni `/api/bot/*`, ni el despacho, ni ningún DTO. Se interpreta «adjuntar

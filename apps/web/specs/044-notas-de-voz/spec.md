@@ -6,16 +6,16 @@
 
 **Status**: Implementada y probada con el arnés E2E (wa-mock).
 
-**Input**: Kevin, probando el RC con las mejoras del chat (039–043): el
+**Input**: el propietario del producto, probando el RC con las mejoras del chat (039–043): el
 compositor no deja grabar audios; los audios que llegan se ven con el
 reproductor del navegador, sin la velocidad 1.5×/2×, sin la onda y sin poder
-ir a un momento; y Nea no transcribe las notas de voz porque su modelo no oye.
+ir a un momento; y AGENTE-GENERAL no transcribe las notas de voz porque su modelo no oye.
 
 **Carril**: ligero (Principio VI). No toca el modelo de datos, ni el
 despacho, ni ningún DTO. `/api/bot/*` no cambia. El envío es el de siempre
 (`POST …/messages/media`) con un campo opcional más.
 
-**Va con** nea-agent `fix/modelo-que-oye` (la transcripción vive en Nea).
+**Va con** AGENTE-GENERAL `fix/modelo-que-oye` (la transcripción vive en AGENTE-GENERAL).
 
 ## Comportamiento
 
@@ -36,7 +36,7 @@ a un momento (también con flechas, Inicio y Fin), y velocidad 1× → 1.5× →
 La velocidad elegida se recuerda para los siguientes audios. Solo suena uno a
 la vez.
 
-**H4 — Nea transcribe sin configurar nada.** Pensando por el CRM, Nea manda el
+**H4 — AGENTE-GENERAL transcribe sin configurar nada.** Pensando por el CRM, AGENTE-GENERAL manda el
 audio dentro del chat; con el modelo por defecto (`whisper-1`, que solo existe
 en OpenAI) toda nota de voz fallaba. Ahora oye `google/gemini-3.5-flash-lite`.
 
@@ -94,7 +94,7 @@ mensaje. Vale para todo adjunto entrante, no solo audios.
 
 ## Qué NO se hace, y por qué
 
-- **Transcripción visible en la bandeja**: hoy transcribe Nea para contestar;
+- **Transcripción visible en la bandeja**: hoy transcribe AGENTE-GENERAL para contestar;
   enseñarla al operador es otra función (dónde se guarda, quién la paga).
 - **Marcar en el hilo si un audio fue nota de voz o archivo**: haría falta una
   columna nueva; los dos se oyen con el mismo reproductor.
@@ -122,9 +122,9 @@ mensaje. Vale para todo adjunto entrante, no solo audios.
   envío falla, se dice y la nota sigue para reintentar. (E2E.)
 - **AC6** — La velocidad elegida se recuerda al volver. Sin permiso de
   micrófono se dice por qué y la caja sigue usable. (E2E.)
-- **AC7** — Nea: con `whisper-1` por el CRM, la nota de voz va a
+- **AC7** — AGENTE-GENERAL: con `whisper-1` por el CRM, la nota de voz va a
   `google/gemini-3.5-flash-lite` con el audio dentro del chat; un modelo
-  elegido se respeta. (pytest en nea-agent.)
+  elegido se respeta. (pytest en AGENTE-GENERAL.)
 - **AC8** — Gates: `typecheck`, `lint`, `test`, `build` en verde.
 
 ## Constitution Check

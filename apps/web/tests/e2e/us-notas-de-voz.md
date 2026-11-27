@@ -36,4 +36,4 @@ graba de verdad: lo que llega al wa-mock es lo que llegaría a Meta.
   suya (`tests/unit/nota-de-voz.test.ts`).
 - Que la nota llegue al teléfono como nota de voz (con su botón de reproducir
   y la onda de WhatsApp) solo se ve con un número real.
-- La transcripción la hace Nea (nea-agent `fix/modelo-que-oye`).
+- La transcripción la hace AGENTE-GENERAL (AGENTE-GENERAL `fix/modelo-que-oye`).

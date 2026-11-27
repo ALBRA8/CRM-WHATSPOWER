@@ -31,7 +31,7 @@ cloud, para que un cerebro sirva a las dos.
   DESPACHAR al cerebro; nunca escribe al cliente.
 - El reintento como texto simple ante el 131009 al responder citando ya está
   en el raíz (068, `src/server/inbox/send.ts`): no se toca.
-- Renovar «escribiendo…» es trabajo del cerebro (Nea lo hace cada 20 s). El
+- Renovar «escribiendo…» es trabajo del cerebro (AGENTE-GENERAL lo hace cada 20 s). El
   CRM ya acepta llamadas repetidas a `/api/bot/typing`; solo se documenta.
 
 ## Comportamiento
@@ -63,7 +63,7 @@ cloud, para que un cerebro sirva a las dos.
 
 - **RS-1 · Cada 60 s** (`RED_DE_SEGURIDAD_MS`, `0` la apaga), in-process como
   el worker del despacho, busca despachos `entregado` que todavía no revisó,
-  entregados hace más de 10 minutos (Nea descarta un despacho que no empezó
+  entregados hace más de 10 minutos (AGENTE-GENERAL descarta un despacho que no empezó
   en 5 y corta su turno a los 4: pasados 10, nadie sigue con él).
 - **RS-2 · Respondido = salió algo después de la entrega.** Cualquier saliente
   de la conversación (del agente o de una persona) posterior a la hora de
@@ -72,7 +72,7 @@ cloud, para que un cerebro sirva a las dos.
 - **RS-3 · Relanza.** Si nadie contestó, encola un despacho nuevo con los
   mismos mensajes y `relaunch: 1` en el sobre; si ese tampoco se contesta,
   otro con `relaunch: 2`. El cerebro recibe los mismos `messages[].id`: no
-  debe descartarlos por repetidos (Nea los contesta sin volver a guardarlos).
+  debe descartarlos por repetidos (AGENTE-GENERAL los contesta sin volver a guardarlos).
 - **RS-4 · Traspasa.** Si el despacho con `relaunch: 2` tampoco se contesta,
   la conversación pasa a una persona: IA en pausa, `handoff_reason =
   sin_respuesta`, evento en vivo a la Bandeja y en el hilo «La IA se pausó: el
@@ -84,7 +84,7 @@ cloud, para que un cerebro sirva a las dos.
   o ya traspasada, en una conversación `is_test`, ni si lo pendiente son solo
   cierres («gracias», «ok», 👍, un sticker o una reacción), salvo que lo
   último que dijo el agente fuera una pregunta. La lista de cierres es la
-  misma de Nea (`app/cierres.py`).
+  misma de AGENTE-GENERAL (`app/cierres.py`).
 - **RS-6 · Idempotente por despacho.** Cada despacho se revisa una sola vez:
   `safety_net_at` se escribe con un UPDATE condicionado a que siga vacío, así
   que dos barridos o dos procesos nunca relanzan el mismo.
@@ -112,14 +112,14 @@ cloud, para que un cerebro sirva a las dos.
   otra espera y sobre una conversación, para el arnés.
 - Contrato en `docs/openapi.json`.
 
-## Compatibilidad con Nea
+## Compatibilidad con AGENTE-GENERAL
 
-Nea ya lee `capabilities` y `relaunch` del despacho. Lo segundo funciona hoy
+AGENTE-GENERAL ya lee `capabilities` y `relaunch` del despacho. Lo segundo funciona hoy
 contra el raíz: un relanzamiento se contesta aunque los mensajes ya estuvieran
-leídos. Para el turno superado, Nea manda `dispatchId` y `dropIfSuperseded`
+leídos. Para el turno superado, AGENTE-GENERAL manda `dispatchId` y `dropIfSuperseded`
 solo con su cliente de la edición cloud; su cliente del raíz todavía no los
 manda, así que contra el raíz se comporta como un cerebro de terceros (TS-4)
-hasta que lo haga. El CRM ya está listo para ese cambio del lado de Nea.
+hasta que lo haga. El CRM ya está listo para ese cambio del lado de AGENTE-GENERAL.
 
 ## Verificación
 

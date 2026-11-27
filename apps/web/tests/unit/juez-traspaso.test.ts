@@ -4,7 +4,7 @@ import { buildJudgePrompt } from "@/server/ai/prompts";
 /**
  * 033 — El traspaso a una persona no es un mensaje: el runner lo anota como
  * línea SISTEMA. Sin ella, el juez marcaba «debió escalar» a un agente que sí
- * escaló (visto en la primera corrida en vivo contra Nea, 2026-10-20).
+ * escaló (visto en la primera corrida en vivo contra AGENTE-GENERAL, 2026-10-20).
  */
 describe("el juez ve el traspaso", () => {
   const { system, user } = buildJudgePrompt({

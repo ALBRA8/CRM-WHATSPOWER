@@ -11,12 +11,12 @@
 - [ ] T7 Pruebas unitarias y e2e (`e2e-roles.mjs`)
 - [ ] T8 Gates; migración sobre base vacía y sobre `0020`
 
-## Nea
+## AGENTE-GENERAL
 
 - [ ] T9 Perfil con `role` y `tools`; herramientas filtradas; sin `agendar`, sin agenda
 - [ ] T10 Pruebas
 
 ## Juntos
 
-- [ ] T11 En vivo en `vocero20`: apagar «agendar» sin redesplegar
+- [ ] T11 En vivo en `vestro20`: apagar «agendar» sin redesplegar
 - [ ] T12 Bitácora, PRs

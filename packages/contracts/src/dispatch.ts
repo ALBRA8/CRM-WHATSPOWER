@@ -2,7 +2,7 @@
  * Contrato de despacho estándar (evento de conversación, CRM → Agente).
  *
  * Fuente canónica: `CONTEXTO CRM/06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` §4.
- * Conserva el despacho estándar de VOCERO: outbox con coalescing por ráfaga,
+ * Conserva el despacho estándar de VESTRO: outbox con coalescing por ráfaga,
  * firma, 3 reintentos y red de seguridad hacia humanos. Añade el contexto del
  * tenant (organización + agente lógico).
  */

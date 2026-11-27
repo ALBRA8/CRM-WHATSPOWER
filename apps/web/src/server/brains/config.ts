@@ -10,7 +10,7 @@
  *
  * A diferencia de la edición cloud, aquí no se exige una URL pública: la pone
  * quien instala, no un tercero, y lo normal es la dirección interna del
- * contenedor del cerebro (`http://nea:8000/vocero/dispatch`).
+ * contenedor del cerebro (`http://agente:8000/crm/dispatch`).
  */
 
 const MIN_KEY_LENGTH = 16;
@@ -61,7 +61,7 @@ export function despachoActivo(): boolean {
 
 /**
  * 036 — A dónde preguntarle al cerebro si está sano: `BRAIN_HEALTH_URL` o, sin
- * ella, el `/health` del mismo origen del despacho (lo que sirve Nea). `null`
+ * ella, el `/health` del mismo origen del despacho (lo que sirve AGENTE-GENERAL). `null`
  * si no hay ninguna de las dos.
  */
 export function urlSaludCerebro(env: Entorno = process.env): string | null {

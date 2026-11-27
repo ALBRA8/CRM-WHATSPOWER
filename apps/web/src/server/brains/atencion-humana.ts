@@ -86,7 +86,7 @@ export async function atencionHumanaPara(
 
 /**
  * Pura: el campo tal como viaja. El orden de las claves es el de la prueba
- * gemela de nea-agent (`tests/test_atencion_humana.py`).
+ * gemela de AGENTE-GENERAL (`tests/test_atencion_humana.py`).
  */
 export function armarAtencion(
   since: Date,

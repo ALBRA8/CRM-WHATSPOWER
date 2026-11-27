@@ -8,7 +8,6 @@
 guiones E2E en verde. Probada en vivo con la imagen `1.6.0-rc.8` (bitácora).
 
 **Input**: hallazgo de la 023 (2026-10-13), anotado en
-`docs/bitacora-2.0.md`: la columna `webhook_secret` de
 `instagram_credentials`, `messenger_credentials` y `tiktok_credentials` guarda
 en claro el secreto con el que se verifica la firma HMAC de los webhooks de
 Zernio. El token de la misma fila sí va cifrado con AES-256-GCM
@@ -159,7 +158,7 @@ vive en el entorno de la app, nunca en la base ni en el repo.
 | V · Hecho | Unitarias de guardado, lectura y paso de arranque; los cuatro guiones E2E; la actualización probada sobre una base en `0019` con datos escritos por el código de `main`. |
 | VI · Specs | Ciclo completo: migración y datos movidos. Spec, plan y tareas antes del código. |
 | VIII · Foco | Endurece el núcleo de canales; no añade superficie. |
-| IX · En vivo | Ver «Prueba en vivo» en el plan: la parte en Coolify espera autorización de Kevin para tocar `vocero-clase`. |
+| IX · En vivo | Ver «Prueba en vivo» en el plan: la parte en Coolify espera autorización del propietario del producto para tocar `vestro-clase`. |
 | Contratos públicos | Ninguno cambia (D7). |
 | Sandbox | Sin relación: no hay envíos nuevos. |
 

@@ -5,7 +5,7 @@
 
 ## Por qué
 
-Kevin eligió la referencia 6 de la galería: tarjetas blancas separadas sobre
+el propietario del producto eligió la referencia 6 de la galería: tarjetas blancas separadas sobre
 un marco suave, un riel de iconos, el cliente en burbuja oscura y el
 compositor en cápsula.
 

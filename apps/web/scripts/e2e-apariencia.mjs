@@ -13,7 +13,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-apariencia@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-apariencia@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-apariencia";
 const SALIDA = process.env.CAPTURAS_DIR ?? ".tmp";
 
@@ -57,7 +57,7 @@ try {
   ok("login", r.ok());
   const sesion = await base.storageState();
   antes = (await (await base.request.get(`${BASE}/api/settings/appearance`)).json()).apariencia;
-  // Se parte de la de Vocero para que lo de abajo no dependa de corridas anteriores.
+  // Se parte de la de Vestro para que lo de abajo no dependa de corridas anteriores.
   await base.request.put(`${BASE}/api/settings/appearance`, {
     data: { tema: "menta", letra: "urbanist", tamano: "normal", densidad: "normal" },
   });
@@ -109,7 +109,7 @@ try {
   await p.getByLabel("Color de texto").fill("#eeeeee");
   ok("con texto ilegible avisa", Boolean(await hasta(async () => (await p.getByRole("alert").filter({ hasText: /no se lee/ }).count()) === 1)));
   const cookieApariencia = async () =>
-    decodeURIComponent((await ctx.cookies()).find((c) => c.name === "vocero-apariencia")?.value ?? "");
+    decodeURIComponent((await ctx.cookies()).find((c) => c.name === "vestro-apariencia")?.value ?? "");
   ok("y no se guarda", !(await cookieApariencia()).includes("#eeeeee"));
   await p.getByLabel("Color de texto").fill("#1b1430");
   await p.getByLabel("Color de marco").fill("#cdb8ff");

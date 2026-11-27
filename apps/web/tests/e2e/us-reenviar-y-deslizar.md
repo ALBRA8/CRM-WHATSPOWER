@@ -7,7 +7,7 @@
 ## Por qué
 
 Solo se reenviaban imágenes, y en el celular la flecha de responder se leía
-como «reenviar». Kevin pidió reenviar cualquier mensaje y deslizar para
+como «reenviar». el propietario del producto pidió reenviar cualquier mensaje y deslizar para
 responder.
 
 ## Camino verificado

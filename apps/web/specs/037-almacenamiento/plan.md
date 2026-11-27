@@ -15,4 +15,4 @@
 7. Compose: servicio `minio` + creador del bucket, perfil `bucket`.
    `.env.example`, README, AGENTS, INSTALL-IA, CHANGELOG; comentarios de
    Render, Fly y Railway.
-8. En vivo: MinIO dentro de `vocero20-par`, imagen real por WhatsApp.
+8. En vivo: MinIO dentro de `vestro20-par`, imagen real por WhatsApp.

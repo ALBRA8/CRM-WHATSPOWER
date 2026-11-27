@@ -58,8 +58,8 @@ proceso; aun así, haz el cambio con un mensaje de prueba a mano (paso 5 de
 2. `GET /{CUENTA_MENSAJES}/subscribed_apps` con el token: la app aparece con
    `override_callback_uri` = la URL de la instancia.
 3. Plantillas → **Sincronizar**: aparecen `hello_world` y las creadas en el
-   Administrador de WhatsApp (las que Vocero sabe enviar).
-4. Crear una plantilla de prueba desde Vocero → queda «pendiente» (antes:
+   Administrador de WhatsApp (las que Vestro sabe enviar).
+4. Crear una plantilla de prueba desde Vestro → queda «pendiente» (antes:
    «Invalid parameter»). Bórrala después en el Administrador si no se usa.
 5. Un mensaje real al número entra a la Bandeja.
 

@@ -10,7 +10,7 @@ import {
 
 /**
  * PRUEBA DE VIGÍA (D-013): el catálogo de errores está CONGELADO.
- * Los agentes ya conectados al contrato VOCERO dependen de estos códigos:
+ * Los agentes ya conectados al contrato VESTRO dependen de estos códigos:
  * renombrar, retirar o alterar el HTTP de un código debe romper esta prueba.
  */
 describe("catálogo de errores — vigía de compatibilidad", () => {

@@ -130,7 +130,7 @@ async function main() {
   mkdirSync(".tmp", { recursive: true });
 
   console.log("== Preparación ==");
-  const email = "e2e-047@vocero.test";
+  const email = "e2e-047@vestro.test";
   const password = "password-e2e-047";
   let su = await api("/api/auth/sign-up/email", { method: "POST", body: JSON.stringify({ email, password, name: "Dueña 047" }) });
   if (!su.res.ok) su = await api("/api/auth/sign-in/email", { method: "POST", body: JSON.stringify({ email, password }) });
@@ -210,7 +210,7 @@ async function main() {
       })
     );
     // El tema es una preferencia del dispositivo (cookie), no del sistema.
-    await ctx.addCookies([{ name: "vocero-theme", value: tema, url: BASE }]);
+    await ctx.addCookies([{ name: "vestro-theme", value: tema, url: BASE }]);
     const page = await ctx.newPage();
     await page.goto(`${BASE}/settings/whatsapp`, { waitUntil: "domcontentloaded" });
     const tarjeta = page.getByTestId("entregas-webhook");
@@ -299,7 +299,7 @@ async function main() {
   );
 
   console.log("\n== AC10 · un miembro sin permiso de configurar ==");
-  const mEmail = `miembro-047-${RUN}@vocero.test`;
+  const mEmail = `miembro-047-${RUN}@vestro.test`;
   const alta = await api("/api/settings/team", {
     method: "POST",
     body: JSON.stringify({ name: "Vendedor 047", email: mEmail, password: "password-miembro-047" }),

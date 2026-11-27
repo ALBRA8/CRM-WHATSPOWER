@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; gates, arnés E2E (32/32), self-test general (280/280) y capturas en claro y oscuro en verde.
 
-**Input**: primera spec de la 2.2, elegida por Kevin el 2026-10-23 en
+**Input**: primera spec de la 2.2, elegida por el propietario del producto el 2026-10-23 en
 [046 research.md](../046-referencias-2.2/research.md). El estudio confirmó en
 `main` (`9940226`) lo que el análisis del 12-oct había encontrado: el webhook
 responde 200 y procesa en `after()`; si el procesamiento falla, solo queda una
@@ -170,6 +170,6 @@ si hay cerebro, se despacha. Reordenar el hilo por la hora del canal cambia
 | IV · Idempotencia | Huella única del cuerpo; reclamo condicionado; la ingesta ya deduplica por `wa_message_id` |
 | V · Hecho | Unitarias del reintento y de la resolución; arnés E2E con fallo inyectado; los cuatro gates |
 | VI · Specs | Ciclo completo: esta spec, `plan.md` y `tasks.md` antes del código |
-| VII · Trazabilidad | D1 a D8; el cambio al contrato del webhook queda anotado en `specs/001-vocero-core/contracts/webhook.md` |
+| VII · Trazabilidad | D1 a D8; el cambio al contrato del webhook queda anotado en `specs/001-vestro-core/contracts/webhook.md` |
 | VIII · Foco | Atender conversaciones de WhatsApp sin perder ninguna |
 | IX · En vivo | Self-test con mocks: camino feliz, fallo inyectado, agotado y Reintentar en la interfaz |

@@ -4,7 +4,7 @@
 
 ## Summary
 
-Puerto de `2624262` (Vocero Cloud #117) sobre lo que el 021 ya trajo del #111.
+Puerto de `2624262` (Vestro Cloud #117) sobre lo que el 021 ya trajo del #111.
 La ingesta pasa el id del entrante hasta el encolado; el despacho lo anota; la
 ráfaga suma lo anotado que quedó detrás de una respuesta del agente; el worker
 descarta el despacho vacío y, tras entregar, vuelve a despachar lo que el

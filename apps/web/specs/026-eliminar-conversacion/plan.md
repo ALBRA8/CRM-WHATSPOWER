@@ -60,7 +60,7 @@ El id del evento es `olv_<nanoid>` (`newId("olvido")`).
 ## Pruebas
 
 - `tests/unit/olvido-contrato.test.ts`: el cuerpo y la firma gemelos de
-  `nea-agent/tests/test_olvido.py` (`CUERPO_GEMELO`, `FIRMA_GEMELA`,
+  `AGENTE-GENERAL/tests/test_olvido.py` (`CUERPO_GEMELO`, `FIRMA_GEMELA`,
   `SECRETO_GEMELO`), byte a byte; el orden de las claves; `avisarOlvido` con un
   `fetch` de mentira (200 → avisado, 500 o sin respuesta → sin confirmar, sin
   despacho → no aplica, y que manda las cabeceras de D6 y un solo intento).

@@ -129,7 +129,7 @@ describe("despacho firmado (contrato §4)", () => {
     expect(hits.get("/crm/dispatch-5xx")).toBe(3); // 1 inicial + 2 reintentos
   });
 
-  it("preserva el código tipado ai_paused en 409 (compatibilidad VOCERO)", async () => {
+  it("preserva el código tipado ai_paused en 409 (compatibilidad VESTRO)", async () => {
     const gw = makeGateway("/crm/dispatch-paused", 0);
     const res = await gw.dispatch(VALID_EVENT, "req-uuid-3");
     expect(res.ok).toBe(false);

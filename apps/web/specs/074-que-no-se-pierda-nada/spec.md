@@ -153,7 +153,7 @@ dos llaves.
   Instagram.
 - Los hosts reales desde los que Zernio sirve adjuntos de Instagram, Messenger
   y TikTok, y su tiempo de caducidad.
-- Que el cerebro (Nea) lea bien las fotos de los canales sociales con el
+- Que el cerebro (AGENTE-GENERAL) lea bien las fotos de los canales sociales con el
   `mediaId` interno.
 
 ## Fuera de alcance

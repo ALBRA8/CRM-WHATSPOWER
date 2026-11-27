@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 /**
- * MCP de Vocero: el protocolo y la traducción herramienta → API v1.
+ * MCP de Vestro: el protocolo y la traducción herramienta → API v1.
  *
  * Los handlers de la API se sustituyen por espías: aquí importa qué petición
  * reciben (ruta, query, cuerpo, la MISMA llave). Que esas rutas no crucen
@@ -102,7 +102,7 @@ describe("protocolo", () => {
     const body = await res.json();
     expect(body.result.protocolVersion).toBe("2025-06-18");
     expect(body.result.capabilities).toEqual({ tools: { listChanged: false }, prompts: { listChanged: false } });
-    expect(body.result.serverInfo.name).toBe("vocero-crm");
+    expect(body.result.serverInfo.name).toBe("vestro-crm");
 
     const rara = await (await rpc("initialize", { protocolVersion: "1999-01-01" })).json();
     expect(rara.result.protocolVersion).toBe(VERSIONES[0]);
@@ -342,13 +342,13 @@ describe("configurar el agente por el MCP", () => {
 
   it("la guía se ofrece como prompt, y el plugin trae el mismo texto como skill", async () => {
     const lista = await (await rpc("prompts/list")).json();
-    expect(lista.result.prompts.map((p: { name: string }) => p.name)).toEqual(["configurar_vocero", "probar_agente"]);
+    expect(lista.result.prompts.map((p: { name: string }) => p.name)).toEqual(["configurar_vestro", "probar_agente"]);
     expect(JSON.stringify(lista.result.prompts)).not.toContain("Reglas que no se rompen"); // la lista no trae el texto
-    const p = await (await rpc("prompts/get", { name: "configurar_vocero" })).json();
+    const p = await (await rpc("prompts/get", { name: "configurar_vestro" })).json();
     expect(p.result.messages[0].content.text).toBe(GUIA_CONFIGURAR);
     const desconocido = await (await rpc("prompts/get", { name: "otro" })).json();
     expect(desconocido.error.code).toBe(-32602);
-    const skill = readFileSync(join(process.cwd(), "plugin/vocero/skills/configurar-vocero/SKILL.md"), "utf8").replace(/\r\n/g, "\n");
+    const skill = readFileSync(join(process.cwd(), "plugin/vestro/skills/configurar-vestro/SKILL.md"), "utf8").replace(/\r\n/g, "\n");
     expect(skill.replace(/^---\n[\s\S]*?\n---\n\n/, "")).toBe(GUIA_CONFIGURAR);
   });
 
@@ -356,7 +356,7 @@ describe("configurar el agente por el MCP", () => {
     const existentes = new Set(HERRAMIENTAS.map((t) => t.name));
     // Lo que va entre comillas invertidas y no es herramienta: códigos de
     // error, tipos de acción de la simulación y los nombres de los prompts.
-    const noSonHerramientas = new Set(["configurar_vocero", "probar_agente", "sin_cerebro"]);
+    const noSonHerramientas = new Set(["configurar_vestro", "probar_agente", "sin_cerebro"]);
     for (const guia of [GUIA_CONFIGURAR, GUIA_PROBAR]) {
       const nombradas = [...guia.matchAll(/`([a-z]+_[a-z_]+)`/g)].map((m) => m[1]!);
       expect(nombradas.filter((n) => !existentes.has(n) && !noSonHerramientas.has(n))).toEqual([]);
@@ -404,9 +404,9 @@ describe("probar el agente sin WhatsApp", () => {
   it("la guía para probar es un prompt y la misma skill del plugin, con su ventana", async () => {
     const p = await (await rpc("prompts/get", { name: "probar_agente" })).json();
     expect(p.result.messages[0].content.text).toBe(GUIA_PROBAR);
-    const skill = readFileSync(join(process.cwd(), "plugin/vocero/skills/probar-agente/SKILL.md"), "utf8").replace(/\r\n/g, "\n");
+    const skill = readFileSync(join(process.cwd(), "plugin/vestro/skills/probar-agente/SKILL.md"), "utf8").replace(/\r\n/g, "\n");
     expect(skill.replace(/^---\n[\s\S]*?\n---\n\n/, "")).toBe(GUIA_PROBAR);
-    const ventana = readFileSync(join(process.cwd(), "plugin/vocero/skills/probar-agente/ventana-chat.html"), "utf8");
+    const ventana = readFileSync(join(process.cwd(), "plugin/vestro/skills/probar-agente/ventana-chat.html"), "utf8");
     expect(ventana).toContain('"simulate_conversation"');
     expect(ventana).toContain("__CONECTOR__");
     // Los casos difíciles van siempre.

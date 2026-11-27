@@ -5,7 +5,7 @@ import { useEffect } from "react";
 /**
  * 045 — Avisos de mensaje nuevo, como WhatsApp Web: un sonido corto cuando
  * entra un mensaje y, en la pestaña, cuántos chats tienen mensajes sin leer
- * («(3) Vocero»).
+ * («(3) Vestro»).
  *
  * El sonido se sintetiza con Web Audio (dos notas cortas): no hay archivo que
  * servir ni que licenciar. El navegador no deja sonar nada antes de que la
@@ -13,7 +13,7 @@ import { useEffect } from "react";
  * primer clic o tecla.
  */
 
-const CLAVE_SONIDO = "vocero.sonido";
+const CLAVE_SONIDO = "vestro.sonido";
 /** Una ráfaga de mensajes suena una vez, no diez. */
 const PAUSA_ENTRE_SONIDOS_MS = 1500;
 
@@ -132,7 +132,7 @@ export function debeSonar(m: { direction?: string; conversationId: string }): bo
   return !mirando;
 }
 
-/** «(3) Vocero — CRM»; sin pendientes, el título tal cual. */
+/** «(3) Vestro — CRM»; sin pendientes, el título tal cual. */
 export function tituloConNoLeidos(titulo: string, chats: number): string {
   const base = titulo.replace(/^\(\d+\+?\)\s+/, "");
   if (chats <= 0) return base;
@@ -164,7 +164,7 @@ export function useTituloNoLeidos(chats: number): void {
  * Bandeja ya montada: si la URL no cambia (otro aviso del mismo chat), el
  * parámetro solo no bastaría.
  */
-export const EVENTO_ABRIR_CONVERSACION = "vocero:abrir-conversacion";
+export const EVENTO_ABRIR_CONVERSACION = "vestro:abrir-conversacion";
 export function abrirConversacionDeAviso(
   url: string,
   navegar: (url: string) => void

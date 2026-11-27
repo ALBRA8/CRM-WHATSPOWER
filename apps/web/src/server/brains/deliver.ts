@@ -23,7 +23,7 @@ import { atencionHumanaPara } from "@/server/brains/atencion-humana";
 
 /**
  * 021 — Entrega de un despacho al cerebro: leer la ráfaga, armar el evento y
- * hacer el POST firmado. Puerto de `src/server/brains/deliver.ts` de Vocero
+ * hacer el POST firmado. Puerto de `src/server/brains/deliver.ts` de Vestro
  * Cloud sin tipos de cerebro: aquí hay uno, el de `BRAIN_DISPATCH_URL`.
  */
 

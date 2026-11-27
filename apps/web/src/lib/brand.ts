@@ -1,5 +1,5 @@
 /**
- * La marca Vocero — la misma de vocerocrm.com.
+ * La marca Vestro — la misma de vestro.app.
  *
  * Vive aquí, sin React, porque la usan dos mundos: los componentes (el trazo
  * del panel lateral y del login) y el servidor (el favicon generado que se
@@ -28,11 +28,11 @@ export const BRAND_CYAN = "#00c6f5";
 export const BRAND_CYAN_ON_TILE = "#3fdcff";
 
 /**
- * ¿Esta instancia se llama Vocero? Solo entonces se dibuja el logo: una
+ * ¿Esta instancia se llama Vestro? Solo entonces se dibuja el logo: una
  * agencia que rebautizó el CRM para su cliente no debe ver la "v" de otro
  * producto en su barra lateral ni en su pestaña. El nombre por defecto es
- * "Vocero", así que una instancia sin configurar la ve de inmediato.
+ * "Vestro", así que una instancia sin configurar la ve de inmediato.
  */
-export function isVoceroName(name: string): boolean {
-  return name.trim().toLowerCase() === "vocero";
+export function isVestroName(name: string): boolean {
+  return name.trim().toLowerCase() === "vestro";
 }

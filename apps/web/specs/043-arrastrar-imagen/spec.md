@@ -9,7 +9,7 @@
 **Input**: el mismo negocio que pidió la 042 pidió también poder arrastrar una
 imagen desde el escritorio o el explorador de archivos y soltarla en el chat,
 como en WhatsApp Web. La función ya funciona en el CRM de ese negocio; aquí se
-vuelve a montar sobre el `main` de Vocero.
+vuelve a montar sobre el `main` de Vestro.
 
 **Depende de la 042** (pegar y reenviar imágenes): reutiliza su validación
 (`validarImagenAdjunta`) y toca el mismo compositor. La rama sale de

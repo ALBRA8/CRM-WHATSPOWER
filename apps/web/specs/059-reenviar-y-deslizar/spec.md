@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; unitarias, arnés E2E (42/42, en claro y oscuro) y capturas en verde.
 
-**Input**: lo pidió Kevin al probar la 2.2.0-rc.1 en Android (2026-10-23):
+**Input**: lo pidió el propietario del producto al probar la 2.2.0-rc.1 en Android (2026-10-23):
 
 - que se pueda reenviar cualquier mensaje, no solo responderlo;
 - que en el celular «la flechita para responder» se entiende como reenviar, y
@@ -82,7 +82,7 @@ lo demás.** En una pantalla táctil (sin «pasar el ratón») no hay iconos jun
 a las burbujas:
 
 - **Deslizar** la burbuja hacia un lado la cita en el compositor. Sirve hacia
-  la izquierda, como lo pidió Kevin, y hacia la derecha, como en WhatsApp. La
+  la izquierda, como lo pidió el propietario del producto, y hacia la derecha, como en WhatsApp. La
   burbuja sigue al dedo hasta 72 px, se asoma el icono de responder y, a
   partir de 56 px, soltar cita el mensaje (vibra un instante si el teléfono
   lo permite). Un movimiento más vertical que horizontal es desplazar el hilo
@@ -129,7 +129,7 @@ dice «Imagen reenviada a Fulano» o «Mensaje reenviado a Fulano».
 ## Qué NO se hace y por qué
 
 - **Reenviar a varios a la vez**: multiplica los envíos con un clic, con el
-  riesgo de que Meta lo tome como spam. Uno a la vez cubre el caso de Kevin.
+  riesgo de que Meta lo tome como spam. Uno a la vez cubre el caso del propietario del producto.
 - **Marca «Reenviado»**: ver D4.
 - **Reenviar ubicación o contacto**: ver D1.
 - **Gestos con el ratón** (arrastrar en la computadora): ahí hay iconos.
@@ -144,6 +144,6 @@ dice «Imagen reenviada a Fulano» o «Mensaje reenviado a Fulano».
 | IV · Idempotencia | Cada reenvío es un mensaje nuevo; el diálogo no deja mandar dos veces con un doble clic (como en la 042) |
 | V · Hecho | Unitarias (regla de D1, gesto, endpoint) y arnés E2E con Playwright, con toques simulados |
 | VI · Specs | Este documento, antes del código; carril ligero |
-| VIII · Foco | Lo que Kevin pidió al usar la bandeja en su teléfono |
+| VIII · Foco | Lo que el propietario del producto pidió al usar la bandeja en su teléfono |
 | IX · En vivo | El arnés reenvía de verdad contra el wa-mock y desliza con eventos táctiles |
 | Sandbox | El Laboratorio no reenvía ni recibe reenvíos |

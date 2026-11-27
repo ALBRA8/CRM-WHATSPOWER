@@ -6,7 +6,7 @@
 >
 > **036 — el CRM no trae agente.** Lo que antes probaba este guion (respuesta
 > con IA, agrupación, `move_stage`, handoff por frase) era el turno dentro del
-> proceso, que se fue. Ese comportamiento es del cerebro: en Nea, con su
+> proceso, que se fue. Ese comportamiento es del cerebro: en AGENTE-GENERAL, con su
 > propia suite. Aquí queda lo que el CRM sí hace: guardar el perfil y el
 > conocimiento que el cerebro lee, decidir con el interruptor si se le
 > despacha, y la llave de IA con la que piensa.
@@ -23,7 +23,7 @@
 2. **Sin cerebro** (app sin `BRAIN_DISPATCH_URL`): encender el interruptor.
    ✅ `PUT /api/agent/profile {enabled:true}` → **409** `sin_cerebro`; la
    pantalla dice qué falta y el interruptor sigue apagado. La tarjeta «Quién
-   responde» dice que Vocero funciona como bandeja manual, sin rojo.
+   responde» dice que Vestro funciona como bandeja manual, sin rojo.
 3. Un inbound → aparece en la bandeja y nadie contesta solo; el operador
    contesta a mano.
 4. **Con cerebro** (`BRAIN_DISPATCH_URL` + `BRAIN_HEALTH_URL` hacia un cerebro

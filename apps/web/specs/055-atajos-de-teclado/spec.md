@@ -7,7 +7,7 @@
 **Status**: Especificada antes de escribir código. Implementada; unitarias, arnés E2E (25/25, en claro y oscuro) y capturas en verde.
 
 **Input**: candidata 9 del estudio de la 2.2
-([046 research.md](../046-referencias-2.2/research.md)). Kevin la eligió el
+([046 research.md](../046-referencias-2.2/research.md)). el propietario del producto la eligió el
 2026-10-23 junto con la 054, como cierre de la 2.4.0. Referencias:
 
 - **Chatwoot (MIT):** barra Ctrl+K y ayuda de atajos; Alt+J/K para cambiar de

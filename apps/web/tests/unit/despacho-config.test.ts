@@ -28,27 +28,27 @@ describe("leerConfigDespacho", () => {
 
   it("URL interna + llave: activo, y es válida aunque no sea pública", () => {
     const c = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch",
+      BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch",
       BOT_API_KEY: LLAVE,
     });
     expect(c).toEqual({
       active: true,
-      url: "http://nea:8000/vocero/dispatch",
-      host: "nea:8000",
+      url: "http://agente:8000/crm/dispatch",
+      host: "agente:8000",
       secret: LLAVE,
     });
   });
 
   it("https público también", () => {
     const c = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: " https://nea.ejemplo.com/vocero/dispatch ",
+      BRAIN_DISPATCH_URL: " https://agente.ejemplo.com/vestro/dispatch ",
       BOT_API_KEY: LLAVE,
     });
     expect(c.active).toBe(true);
-    expect(c.host).toBe("nea.ejemplo.com");
+    expect(c.host).toBe("agente.ejemplo.com");
   });
 
-  it.each(["nea:8000/vocero/dispatch", "no es una url", "ftp://nea/vocero", "file:///etc/passwd"])(
+  it.each(["agente:8000/vestro/dispatch", "no es una url", "ftp://agente/vestro", "file:///etc/passwd"])(
     "%s → problema de URL, inactivo",
     (url) => {
       const c = leerConfigDespacho({ BRAIN_DISPATCH_URL: url, BOT_API_KEY: LLAVE });
@@ -58,18 +58,18 @@ describe("leerConfigDespacho", () => {
 
   it("usuario y clave en la URL → problema de URL (el despacho ya va firmado)", () => {
     const c = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: "https://user:secreto@nea.ejemplo.com/vocero/dispatch",
+      BRAIN_DISPATCH_URL: "https://user:secreto@agente.ejemplo.com/vestro/dispatch",
       BOT_API_KEY: LLAVE,
     });
-    expect(c).toEqual({ active: false, host: "nea.ejemplo.com", problem: "url" });
+    expect(c).toEqual({ active: false, host: "agente.ejemplo.com", problem: "url" });
     expect(JSON.stringify(c)).not.toContain("secreto");
   });
 
   it("sin BOT_API_KEY, o corta → sin_llave, inactivo, y solo sale el host", () => {
-    const sin = leerConfigDespacho({ BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch?t=abc" });
-    expect(sin).toEqual({ active: false, host: "nea:8000", problem: "sin_llave" });
+    const sin = leerConfigDespacho({ BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch?t=abc" });
+    expect(sin).toEqual({ active: false, host: "agente:8000", problem: "sin_llave" });
     const corta = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch",
+      BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch",
       BOT_API_KEY: "corta",
     });
     expect(corta).toMatchObject({ active: false, problem: "sin_llave" });
@@ -78,7 +78,7 @@ describe("leerConfigDespacho", () => {
 
 describe("dispatchDto — lo que ve la tarjeta", () => {
   const activo = leerConfigDespacho({
-    BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch",
+    BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch",
     BOT_API_KEY: LLAVE,
   });
   const sinHechos = { lastDeliveredAt: null, lastFailure: null, pending: 0 };
@@ -95,24 +95,24 @@ describe("dispatchDto — lo que ve la tarjeta", () => {
     });
     expect(dto).toEqual({
       active: true,
-      host: "nea:8000",
+      host: "agente:8000",
       problem: null,
       lastDeliveredAt: "2026-10-08T10:00:00.000Z",
       lastFailure: { at: "2026-10-08T09:00:00.000Z", detail: "el cerebro respondió 500" },
       pending: 2,
     });
     expect(JSON.stringify(dto)).not.toContain(LLAVE);
-    expect(JSON.stringify(dto)).not.toContain("/vocero/dispatch");
+    expect(JSON.stringify(dto)).not.toContain("/vestro/dispatch");
   });
 
   it("mal configurado: el problema viaja y active es false", () => {
-    const dto = dispatchDto(leerConfigDespacho({ BRAIN_DISPATCH_URL: "http://nea:8000/x" }), sinHechos);
-    expect(dto).toMatchObject({ active: false, host: "nea:8000", problem: "sin_llave" });
+    const dto = dispatchDto(leerConfigDespacho({ BRAIN_DISPATCH_URL: "http://agente:8000/x" }), sinHechos);
+    expect(dto).toMatchObject({ active: false, host: "agente:8000", problem: "sin_llave" });
   });
 });
 
 describe("despachoFallando — cuándo es una alarma", () => {
-  const base = { ...SIN_DESPACHO, active: true, host: "nea:8000" };
+  const base = { ...SIN_DESPACHO, active: true, host: "agente:8000" };
   const fallo = (at: string) => ({ at, detail: "el cerebro respondió 500" });
 
   it("sin fallos, o inactivo → no", () => {
@@ -189,20 +189,20 @@ describe("pnpm doctor — la línea del despacho", () => {
 
   it("activo: ✓ con el host, sin la ruta ni la llave", () => {
     const r = checkDispatch({
-      BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch?t=secreto",
+      BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch?t=secreto",
       BOT_API_KEY: LLAVE,
     });
     expect(r.status).toBe("ok");
-    expect(r.detail).toContain("nea:8000");
+    expect(r.detail).toContain("agente:8000");
     expect(JSON.stringify(r)).not.toContain("secreto");
     expect(JSON.stringify(r)).not.toContain(LLAVE);
   });
 
   it("mal puesta: aviso con el arreglo, nunca una ✗ (el CRM funciona igual)", () => {
-    const url = checkDispatch({ BRAIN_DISPATCH_URL: "nea:8000", BOT_API_KEY: LLAVE });
+    const url = checkDispatch({ BRAIN_DISPATCH_URL: "agente:8000", BOT_API_KEY: LLAVE });
     expect(url.status).toBe("warn");
     expect(url.fix).toContain("BRAIN_DISPATCH_URL=");
-    const llave = checkDispatch({ BRAIN_DISPATCH_URL: "http://nea:8000/vocero/dispatch" });
+    const llave = checkDispatch({ BRAIN_DISPATCH_URL: "http://agente:8000/crm/dispatch" });
     expect(llave.status).toBe("warn");
     expect(llave.fix).toContain("BOT_API_KEY=");
   });

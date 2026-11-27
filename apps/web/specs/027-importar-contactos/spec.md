@@ -8,7 +8,7 @@
 guiones E2E en verde. Probada en vivo con la imagen `1.6.0-rc.4` (bitácora).
 
 **Input**: sexta spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
-2026-10-13). Puerto de Vocero Cloud #108 (`a6d1bdf`): `src/lib/contact-import.ts`,
+2026-10-13). Puerto de Vestro Cloud #108 (`a6d1bdf`): `src/lib/contact-import.ts`,
 `src/server/contacts-import.ts`, `POST /api/contacts/import`, el diálogo y la
 columna `contact.ai_paused`. Sin el aislamiento entre organizaciones de su
 guion: en el raíz una instancia es un negocio.
@@ -21,7 +21,7 @@ agente» es lo que ya veía de una conversación en pausa.
 
 ## Problema
 
-Quien instala Vocero ya tiene a sus clientes en otro lado: una hoja de cálculo,
+Quien instala Vestro ya tiene a sus clientes en otro lado: una hoja de cálculo,
 la lista de una comunidad, el export de otro sistema. Hoy solo puede darlos de
 alta uno por uno. Y cuando alguno de ellos escribe, el agente le contesta como
 a un desconocido, cuando el dueño quería atenderlos él.
@@ -121,7 +121,7 @@ como estaban. Corre sola al arrancar.
 - Los guiones existentes siguen en verde.
 - **Interfaz** en local: el diálogo con la vista previa y los rechazados, la
   etiqueta «Sin agente» y la casilla de «Editar», en claro y oscuro.
-- **En vivo** (Principio IX): en `vocero-clase`, importar un contacto de
+- **En vivo** (Principio IX): en `vestro-clase`, importar un contacto de
   prueba «sin agente» con el teléfono de la línea cliente no aplica (esa línea
   ya tiene conversación y es la que se usa para probar al agente); se importa
   un número de prueba que no existe y se elimina después. Que el agente calle

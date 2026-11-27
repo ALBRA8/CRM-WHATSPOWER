@@ -74,7 +74,7 @@ await ctx.addInitScript(() => {
 });
 
 console.log("== Setup: operador, conexión y dos conversaciones ==");
-const email = process.env.E2E_EMAIL ?? "e2e@vocero.test";
+const email = process.env.E2E_EMAIL ?? "e2e@vestro.test";
 const password = process.env.E2E_PASSWORD ?? "password-e2e-123";
 let su = await req.post(`${BASE}/api/auth/sign-up/email`, {
   data: { email, password, name: "Operador E2E" },

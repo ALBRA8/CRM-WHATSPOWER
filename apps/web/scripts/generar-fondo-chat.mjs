@@ -52,7 +52,7 @@ const DIBUJOS = {
   dona: `<circle cx="20" cy="20" r="13"/><circle cx="20" cy="20" r="4.5"/><path d="M12 14L13.5 15M27 13L25.5 14.5M13 26L14.5 25M26 27L27 25.5M20 9.5V11"/>`,
   candado: `<rect x="9" y="18" width="22" height="16" rx="3"/><path d="M14 18V13A6 6 0 0 1 26 13V18"/><path d="M20 24V28"/>`,
   rayo: `<path d="M22 5L10 22H19L17 35L30 17H21Z"/>`,
-  // Los de la casa (pedido de Kevin): el carnero (Belier), el pulpo, el
+  // Los de la casa (ajuste propio): el carnero, el pulpo, el
   // plato de DJ y la diosa del logo de AISHIA, en el mismo trazo que el resto.
   carnero: `<path d="M15 16C15 14 17 13 20 13C23 13 25 14 25 16L24 27C23.5 30 22 32 20 32C18 32 16.5 30 16 27Z"/><path d="M15.5 15C11 10 4 13 5 19C6 24 12 24 12 20C12 17.5 9 17.5 9 19.5"/><path d="M24.5 15C29 10 36 13 35 19C34 24 28 24 28 20C28 17.5 31 17.5 31 19.5"/><path d="M17 13Q18 10.5 20 12Q22 10.5 23 13"/><circle cx="18" cy="20" r=".8"/><circle cx="22" cy="20" r=".8"/><path d="M18.5 28L19.3 28.8M21.5 28L20.7 28.8"/>`,
   pulpo: `<path d="M11 19C9 10 14 4 20 4C26 4 31 10 29 19"/><path d="M11 19Q12.5 21.5 14 21Q16 22.5 18 22Q20 23 22 22Q24 22.5 26 21Q27.5 21.5 29 19"/><path d="M11 19C8 22 7 26 4 26C2 26 2 23 4 23M14 21C13 26 11 30 8 32C6 33 5 31 7 30M18 22C18 27 16 31 15 34C14 36 16 37 17 35M22 22C22 27 24 31 25 34C26 36 24 37 23 35M26 21C27 26 29 30 32 32C34 33 35 31 33 30M29 19C32 22 33 26 36 26C38 26 38 23 36 23"/><circle cx="16.5" cy="13.5" r="1.3"/><circle cx="23.5" cy="13.5" r="1.3"/><path d="M18.5 16.5Q20 17.7 21.5 16.5"/>`,
@@ -138,7 +138,7 @@ const defs = Object.entries(DIBUJOS)
 for (const [archivo, color, opacidad] of [["claro.svg", "#000000", 0.08], ["oscuro.svg", "#ffffff", 0.07]]) {
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" width="${LADO}" height="${LADO}" viewBox="0 0 ${LADO} ${LADO}">` +
-    `<!-- Vocero: el fondo del chat. Dibujos propios en línea; el tono lo pone la opacidad. -->` +
+    `<!-- Vestro: el fondo del chat. Dibujos propios en línea; el tono lo pone la opacidad. -->` +
     `<defs>${defs}</defs>` +
     `<g opacity="${opacidad}" fill="none" stroke="${color}" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">${conCopias.join("")}</g>` +
     `</svg>\n`;

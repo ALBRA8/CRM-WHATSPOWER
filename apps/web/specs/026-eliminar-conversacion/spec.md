@@ -8,7 +8,7 @@
 guiones E2E en verde. Probada en vivo con la imagen `1.6.0-rc.3` (bitácora).
 
 **Input**: quinta spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
-2026-10-13). Puerto de Vocero Cloud #106 (`fdf3c17`): `DELETE
+2026-10-13). Puerto de Vestro Cloud #106 (`fdf3c17`): `DELETE
 /api/conversations/{id}`, `src/server/inbox/eliminar.ts`, el evento
 `conversation.deleted` y su diálogo. Sin lo que es de cloud: cuotas de
 almacenamiento, cotizaciones, cerebros compartidos y la prueba de activación.
@@ -92,9 +92,9 @@ conversación `is_test` responde 404: no vive en la bandeja.
 }
 ```
 
-- Cabeceras: `x-vocero-signature` (igual que un turno), `x-vocero-event:
-  conversation.deleted` y `x-vocero-organization`. No lleva
-  `x-vocero-dispatch-id`: no es un despacho.
+- Cabeceras: `x-vestro-signature` (igual que un turno), `x-vestro-event:
+  conversation.deleted` y `x-vestro-organization`. No lleva
+  `x-vestro-dispatch-id`: no es un despacho.
 - **Un intento, sin cola y con 8 segundos de espera.** El borrado ya ocurrió y
   no depende de esto. La respuesta de `DELETE` dice qué pasó: `agente:
   "avisado"`, `"sin_confirmar"` o `"no_aplica"` (sin despacho: el agente
@@ -103,7 +103,7 @@ conversación `is_test` responde 404: no vive en la bandeja.
   nuevo para una identidad que el cerebro ya conocía es una conversación
   nueva, y lo anterior se olvida. Así un aviso perdido no deja memoria en uso.
 - No lleva nada de lo borrado, solo con qué encontrarlo.
-- Es el mismo cuerpo, byte a byte, que manda Vocero Cloud y que Nea ya sabe
+- Es el mismo cuerpo, byte a byte, que manda Vestro Cloud y que AGENTE-GENERAL ya sabe
   recibir: una prueba gemela lo fija en los dos repositorios.
 
 **D7 — La bandeja se entera sola.** Un evento `conversation.deleted` por el
@@ -142,7 +142,7 @@ SSE quita la conversación de las pestañas abiertas de todo el equipo.
   y sin historial; con `hilo`, del mismo contacto.
 - **AC10** Otra pestaña abierta deja de mostrar la conversación sin recargar.
 - **AC11** El evento firmado coincide byte a byte con el de la prueba gemela
-  de `nea-agent` (`tests/test_olvido.py`).
+  de `AGENTE-GENERAL` (`tests/test_olvido.py`).
 
 ## Constitution Check
 

@@ -9,7 +9,7 @@ import {
  * 015 — Las citas del contacto en el contexto de un cerebro externo
  * (`GET /api/bot/context` → `booking`).
  *
- * Nea pega este bloque tal cual en su prompt y lo trata como LA verdad sobre
+ * AGENTE-GENERAL pega este bloque tal cual en su prompt y lo trata como LA verdad sobre
  * las citas (`_booking_lines`): sin él, en la edición cloud, reservó una
  * segunda cita a quien no llegó a la primera, dijo a las 17:04 que la demo era
  * «hoy a las 10:30» y negó con un motivo inventado una cita que el equipo

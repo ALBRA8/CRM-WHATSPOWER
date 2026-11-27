@@ -30,12 +30,12 @@ const req = ctx.request;
 console.log("== Setup ==");
 let r = await req.post(`${BASE}/api/auth/sign-up/email`, {
   headers: { origin: BASE },
-  data: { email: process.env.E2E_EMAIL ?? "e2e@vocero.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123", name: "Operador E2E" },
+  data: { email: process.env.E2E_EMAIL ?? "e2e@vestro.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123", name: "Operador E2E" },
 });
 if (!r.ok())
   r = await req.post(`${BASE}/api/auth/sign-in/email`, {
     headers: { origin: BASE },
-    data: { email: process.env.E2E_EMAIL ?? "e2e@vocero.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123" },
+    data: { email: process.env.E2E_EMAIL ?? "e2e@vestro.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123" },
   });
 ok("login", r.ok());
 await req.put(`${BASE}/api/settings/whatsapp`, {
@@ -47,7 +47,7 @@ const PHONE = `521462${SUF}`; // Meta manda 521…; el CRM canoniza a 52…
 const PHONE2 = `521559${SUF}`;
 const FMT = `+52 462 ${SUF.slice(0, 3)} ${SUF.slice(3)}`;
 const people = [
-  { from: PHONE, name: `Zoraida${S} Belier`, text: "hola, vi su anuncio" },
+  { from: PHONE, name: `Zoraida${S} Beltrán`, text: "hola, vi su anuncio" },
   { from: PHONE2, name: `Josué${S} Ramírez`, text: "quiero informes" },
   { fromUserId: `bsu_${S}`, name: `Anónima${S} Sin Tel`, text: "buenas" },
 ];
@@ -102,7 +102,7 @@ ok("teléfono con guiones", has(list, `Zoraida${S}`), JSON.stringify(list));
 list = await search("vi su anuncio");
 ok("NO busca dentro de los mensajes (el nombre del dueño los inunda)",
    !has(list, `Zoraida${S}`), JSON.stringify(list));
-list = await search(`Zoraida${S} Belier`);
+list = await search(`Zoraida${S} Beltrán`);
 ok("nombre completo, con espacio, coincide", has(list, `Zoraida${S}`), JSON.stringify(list.length));
 list = await search(`zzz-no-existe-${S}`);
 ok("sin coincidencias → lista vacía", list.length === 0, JSON.stringify(list));

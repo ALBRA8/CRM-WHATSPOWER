@@ -1,5 +1,5 @@
 /**
- * Self-test E2E — 048: Vocero en el celular (PWA).
+ * Self-test E2E — 048: Vestro en el celular (PWA).
  * Guion: tests/e2e/us-pwa.md.
  *
  * Que el navegador lo dé por instalable con la marca de la organización, que
@@ -25,7 +25,7 @@ async function abrirCuenta(p) {
 }
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_PWA_EMAIL ?? "e2e-pwa@vocero.test";
+const EMAIL = process.env.E2E_PWA_EMAIL ?? "e2e-pwa@vestro.test";
 const PASSWORD = process.env.E2E_PWA_PASSWORD ?? "password-e2e-pwa";
 
 let failures = 0;
@@ -44,7 +44,7 @@ function dimensiones(buf) {
   return [buf.readUInt32BE(16), buf.readUInt32BE(20)];
 }
 
-const perfil = mkdtempSync(path.join(os.tmpdir(), "vocero-pwa-"));
+const perfil = mkdtempSync(path.join(os.tmpdir(), "vestro-pwa-"));
 mkdirSync(".tmp", { recursive: true });
 const ctx = await chromium.launchPersistentContext(perfil, {
   viewport: { width: 1280, height: 860 },
@@ -74,7 +74,7 @@ try {
   ok("name es el de la marca", m.name === nombre, m.name);
   ok("short_name cabe en 12", typeof m.short_name === "string" && m.short_name.length <= 12, m.short_name);
   ok("standalone, abre en la Bandeja", m.display === "standalone" && m.start_url === "/inbox", JSON.stringify([m.display, m.start_url]));
-  ok("ningún «Vocero» cableado", !/vocero/i.test(JSON.stringify(m)));
+  ok("ningún «Vestro» cableado", !/vestro/i.test(JSON.stringify(m)));
   ok(
     "iconos 192 y 512 (any) y 512 (maskable)",
     JSON.stringify(m.icons.map((i) => `${i.sizes} ${i.purpose}`)) === JSON.stringify(["192x192 any", "512x512 any", "512x512 maskable"])
@@ -165,7 +165,7 @@ try {
   const texto = await page.locator("body").innerText().catch(() => "");
   ok("una navegación sin red muestra «Sin conexión»", /Sin conexión/.test(texto), texto.slice(0, 120));
   ok("con un botón para reintentar", (await page.getByRole("button", { name: "Reintentar" }).count()) === 1);
-  ok("sin nombre de marca (white-label)", !texto.includes(nombre) && !/vocero/i.test(texto));
+  ok("sin nombre de marca (white-label)", !texto.includes(nombre) && !/vestro/i.test(texto));
   await page.screenshot({ path: ".tmp/e2e-048-sin-conexion.png" });
   const apiSinRed = await page.evaluate(async () => {
     try {

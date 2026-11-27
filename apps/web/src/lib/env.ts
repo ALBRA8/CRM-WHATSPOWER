@@ -69,8 +69,8 @@ export const envSchema = z.object({
   // API key de un cerebro externo que conduzca la conversación por /api/bot/*.
   // Sin ella, toda esa superficie responde 401.
   BOT_API_KEY: z.string().optional(),
-  // «Quién responde a tus clientes»: el /health del cerebro externo (Nea),
-  // consultado desde el servidor. Ej.: http://nea:8000/health (alias de la
+  // «Quién responde a tus clientes»: el /health del cerebro externo (AGENTE-GENERAL),
+  // consultado desde el servidor. Ej.: http://agente:8000/api/v1/health (alias de la
   // red de Coolify). Sin ella, la tarjeta del Agente no pregunta a nadie.
   // No se valida aquí a propósito: es opcional y solo de diagnóstico, y con
   // `.url()` un valor mal escrito tumbaba el CRM entero (el entorno no
@@ -78,7 +78,7 @@ export const envSchema = z.object({
   // configuración y lo demás sigue funcionando (server/bot/status.ts).
   BRAIN_HEALTH_URL: z.string().optional(),
   // 021: a dónde le despacha el CRM cada turno al cerebro externo. Ej.:
-  // http://nea:8000/vocero/dispatch. Con ella, `BOT_API_KEY` y el interruptor
+  // http://agente:8000/crm/dispatch. Con ella, `BOT_API_KEY` y el interruptor
   // del Agente encendido, contesta el cerebro (036). Tampoco se valida aquí,
   // por lo mismo que la de arriba: mal escrita, el despacho queda inactivo y
   // la tarjeta lo dice (server/brains/config.ts).

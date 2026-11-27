@@ -7,7 +7,7 @@
 **Status**: Especificada antes de escribir código.
 
 **Input**: primera spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
-2026-10-13). Es el puerto a la raíz de tres arreglos que Vocero Cloud ya tiene
+2026-10-13). Es el puerto a la raíz de tres arreglos que Vestro Cloud ya tiene
 en producción: #111 `439386e`, #116 `5325273` + `2fdeff2` y #117 `2624262`
 (migración `0035_dispatch_message_ids`). Su historia, con lo medido en
 producción, está en `docs/bitacora-cloud.md` de ese repo (entradas del 8 y del
@@ -83,7 +83,7 @@ conversación ya tenga una respuesta después.
 - **D7 — Sin debidos nada se mueve.** El Laboratorio llama al turno sin
   debidos y lee el historial igual que siempre. Las filas de `dispatch`
   anteriores a la columna la tienen nula y se comportan como antes.
-- **D8 — Nea no cambia.** Ya deduplica por id de mensaje (nea-agent #40, en
+- **D8 — AGENTE-GENERAL no cambia.** Ya deduplica por id de mensaje (AGENTE-GENERAL #40, en
   `main`). El evento no gana ni pierde llaves.
 
 ## Alcance
@@ -108,7 +108,7 @@ conversación ya tenga una respuesta después.
 |---|---|
 | Pasar el turno del agente incluido por el outbox | En la raíz sus dos caminos son excluyentes por diseño (021 · D3) y el agente incluido se retira en #106. Sus debidos viven en memoria, como su `pending`: si el proceso muere a mitad de un turno, se pierde lo mismo que hoy. |
 | Cambiar la forma del evento | No hace falta. Sigue firmándose byte a byte igual. |
-| Tocar Nea | D8. |
+| Tocar AGENTE-GENERAL | D8. |
 | `brain-mock` de cloud (`2fdeff2`) | En la raíz el cerebro de prueba vive en el arnés (021 · D8). Lo que ese commit protegía —saber de qué conversación es cada despacho— el arnés ya lo hace con `cerebro.de(convId)`. |
 | Cortacircuitos y «necesita humano» de cloud | La raíz no los tiene (021 · D7). |
 | Avisar si el cerebro recibió el turno y nunca contestó | Sigue siendo otra feature (021). |

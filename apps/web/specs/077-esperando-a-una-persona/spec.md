@@ -135,7 +135,7 @@ conversaciones escaladas esperando desde la noche anterior.
   con la página al frente.
 - **D7 — Lo que elige cada persona vive en su cookie, como su apariencia
   (062).** La edición cloud lo guarda en su tabla de preferencias de push, que
-  el raíz no tiene. La cookie `vocero-esperando` evita una tabla y una
+  el raíz no tiene. La cookie `vestro-esperando` evita una tabla y una
   migración, y el layout la lee en el servidor para que el primer pintado ya
   la sepa. El costo es el mismo que el de la apariencia: vale por navegador.
 - **D8 — «Una vez» se guarda en el navegador** (`localStorage`, por persona;

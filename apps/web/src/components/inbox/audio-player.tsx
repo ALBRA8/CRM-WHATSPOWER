@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 const BARRAS = 40;
 const VELOCIDADES = [1, 1.5, 2] as const;
 type Velocidad = (typeof VELOCIDADES)[number];
-const CLAVE_VELOCIDAD = "vocero.audio.velocidad";
+const CLAVE_VELOCIDAD = "vestro.audio.velocidad";
 
 type Analisis = { barras: number[]; duracion: number | null };
 

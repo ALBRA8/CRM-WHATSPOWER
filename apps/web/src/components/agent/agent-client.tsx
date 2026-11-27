@@ -226,7 +226,7 @@ export function AgentClient() {
 }
 
 /**
- * 034 — El rol y sus herramientas. Las respeta el agente conectado (Nea); el
+ * 034 — El rol y sus herramientas. Las respeta el agente conectado (AGENTE-GENERAL); el
  * CRM se las entrega en su perfil (`/api/bot/profile`).
  */
 function RolSection({

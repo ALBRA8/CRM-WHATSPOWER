@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; gates, arnés E2E (37/37 en base limpia), self-test general (280/280) y capturas en claro y oscuro en verde.
 
-**Input**: tercera spec de la 2.2, elegida por Kevin el 2026-10-23
+**Input**: tercera spec de la 2.2, elegida por el propietario del producto el 2026-10-23
 ([046 research.md](../046-referencias-2.2/research.md)). Referencias:
 
 - **Chatwoot (MIT, observado en la Fase 1, captura `cw-06`)**: al teclear `/`
@@ -17,7 +17,7 @@
 - **wacrm (MIT)**: respuestas compartidas por la cuenta.
 
 No se copia código de ninguno: el menú se escribe sobre el compositor de
-Vocero, con sus tokens.
+Vestro, con sus tokens.
 
 **Carril**: ciclo completo (Principio VI): tabla nueva. No toca contratos
 publicados (`/api/bot/*`, despacho, webhook, SSE).

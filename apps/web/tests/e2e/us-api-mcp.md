@@ -20,7 +20,7 @@ proceso.
 4. **MCP.** Sin credencial 401 con `resource_metadata` de esta instancia;
    `initialize`; `tools/list` según el permiso (configurar primero, nunca
    mandar mensajes); `tools/call` de lectura y de cambio; sin permiso no llega a
-   la API; un 404 llega como `isError`; el prompt `configurar_vocero`.
+   la API; un 404 llega como `isError`; el prompt `configurar_vestro`.
 5. **Simulación.** Tres turnos: el agente contesta, traspasa a una persona y el
    tercero sale `skipped: "handoff"`. El cerebro recibió los despachos, nada
    salió al wa-mock y el contacto y la conversación de prueba ya no existen. Más

@@ -8,7 +8,7 @@ La ingesta, tras guardar el mensaje, encola un despacho en vez de llamar al
 agente incluido cuando hay un cerebro configurado. Un worker dentro del proceso
 toma los despachos vencidos, arma el evento normalizado, lo firma con
 `BOT_API_KEY` y lo entrega por HTTP. Es un puerto de `src/server/dispatch/` y
-`src/server/brains/` de Vocero Cloud sin organizaciones múltiples, tipos de
+`src/server/brains/` de Vestro Cloud sin organizaciones múltiples, tipos de
 cerebro, generación ni cortacircuitos.
 
 ## Technical Context
@@ -61,7 +61,7 @@ tests/e2e/us-despacho.md, scripts/e2e-despacho.mjs
 .env.example, AGENTS.md, README.md, CHANGELOG.md
 ```
 
-Mismas rutas que en Vocero Cloud a propósito: al sincronizar el fork, git
+Mismas rutas que en Vestro Cloud a propósito: al sincronizar el fork, git
 enfrenta archivo contra archivo en vez de dejar dos despachadores conviviendo.
 
 ## Riesgos
@@ -71,6 +71,6 @@ enfrenta archivo contra archivo en vez de dejar dos despachadores conviviendo.
   optimización; el barrido recoge lo que encoló otro proceso.
 - **`next dev` evalúa los módulos varias veces**: el estado del worker vive en
   `globalThis`, como el bus de eventos.
-- **Quien ya usa Nea 1.x delante del CRM** no debe poner `BRAIN_DISPATCH_URL`
-  hasta que su cerebro reciba despachos (nea-agent#37): le llegaría cada
+- **Quien ya usa AGENTE-GENERAL 1.x delante del CRM** no debe poner `BRAIN_DISPATCH_URL`
+  hasta que su cerebro reciba despachos (AGENTE-GENERAL#37): le llegaría cada
   mensaje por dos caminos.

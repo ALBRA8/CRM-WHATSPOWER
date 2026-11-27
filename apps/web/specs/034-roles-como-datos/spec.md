@@ -1,13 +1,13 @@
 # 034 — Roles como datos
 
-**Feature Branch**: `feat/034-roles-como-datos` (en `vocero-crm` y en `nea-agent`)
+**Feature Branch**: `feat/034-roles-como-datos` (en `vestro-crm` y en `AGENTE-GENERAL`)
 
 **Created**: 2026-10-20
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: tercera pieza de la 2.0.0 (`PLAN-2.0.md`): kevinrivm/vocero-crm#90.
-Kevin autorizó en el chat del 2026-10-20 mergear la 033 y seguir con la #90.
+**Input**: tercera pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#90.
+el propietario del producto autorizó en el chat del 2026-10-20 mergear la 033 y seguir con la #90.
 
 **Carril**: ciclo completo (Principio VI). Toca el modelo de datos (migración
 aditiva en `agent_profile`) y un contrato publicado (`GET /api/bot/profile`
@@ -16,9 +16,9 @@ en [tasks.md](tasks.md).
 
 ## Problema
 
-Un rol —qué hace el agente— hoy es código: las herramientas que Nea le enseña
+Un rol —qué hace el agente— hoy es código: las herramientas que AGENTE-GENERAL le enseña
 al modelo están cableadas, y las personas del Laboratorio también. Encender o
-apagar una herramienta exige tocar código y redesplegar. Kevin lo planteó así
+apagar una herramienta exige tocar código y redesplegar. el propietario del producto lo planteó así
 (chat del 2026-10-19): arreglar o cambiar al agente no debe obligar a
 redesplegar nada.
 
@@ -36,7 +36,7 @@ las instrucciones, las herramientas y las personas del Laboratorio de ese rol.
 
 **D1 — El catálogo de herramientas, con nombres estables** (`src/lib/agent-roles.ts`):
 
-| Clave | Qué hace | Herramientas de Nea |
+| Clave | Qué hace | Herramientas de AGENTE-GENERAL |
 |---|---|---|
 | `ficha` | Llena la ficha del lead; el CRM mueve la etapa cuando la ficha lo pide | `update_ficha` |
 | `agendar` | Ofrece horarios y reserva | `propose_slots`, `book_session` (y en cloud, `list_bookings`, `cancel_session`) |
@@ -44,14 +44,14 @@ las instrucciones, las herramientas y las personas del Laboratorio de ese rol.
 | `salida` | Despide con dignidad a quien no califica, con recursos | `route_out` |
 | `escalar` | Pasa la conversación a una persona | `handoff` |
 
-«Mover etapa», que el issue nombra aparte, no es una herramienta de Nea: el CRM
+«Mover etapa», que el issue nombra aparte, no es una herramienta de AGENTE-GENERAL: el CRM
 mueve la etapa cuando la ficha lo pide. Va dentro de `ficha`.
 
 **D2 — `escalar` no se apaga.** Es la red de seguridad: quien pide una persona
 y la hostilidad sostenida la usan. Viaja siempre y la pantalla la enseña fija.
 
 **D3 — `agendar` y `reprogramar` solo aparecen con `AGENDA=on`.** Sin la
-bandera, la pantalla no los ofrece; Nea ya los quita sola cuando el CRM no
+bandera, la pantalla no los ofrece; AGENTE-GENERAL ya los quita sola cuando el CRM no
 agenda.
 
 **D4 — Modelo de datos**: `agent_profile.role` (texto, `calificador` por
@@ -65,7 +65,7 @@ apague una.
 cerebro que no las conozca las ignora; si no vienen, el cerebro enciende todo,
 como hoy.
 
-**D6 — Nea**: lee `role` y `tools` y le enseña al modelo solo las herramientas
+**D6 — AGENTE-GENERAL**: lee `role` y `tools` y le enseña al modelo solo las herramientas
 encendidas. Sin `agendar`, además, el prompt dice que por aquí no se agenda
 (el mismo camino que cuando el CRM no tiene agenda). El perfil se relee cada
 5 minutos (`PROFILE_TTL_SECONDS`): ese es el «en cuanto relee el perfil».
@@ -90,10 +90,10 @@ respeta el agente conectado.
 - **AC2** — `GET /api/bot/profile` trae `role` y `tools`; sin configurar, todas.
 - **AC3** — Cargar el preset deja rol, instrucciones, reglas de escalado,
   herramientas y personas del Calificador.
-- **AC4** — Nea: con `tools` sin `agendar`, al modelo no se le enseñan
+- **AC4** — AGENTE-GENERAL: con `tools` sin `agendar`, al modelo no se le enseñan
   `propose_slots` ni `book_session` y el prompt dice que no agenda; sin `tools`
   en el perfil, todas como hoy.
-- **AC5** — En vivo: apagar «agendar» en `vocero20` hace que una corrida del
+- **AC5** — En vivo: apagar «agendar» en `vestro20` hace que una corrida del
   Laboratorio o una conversación ya no ofrezca horarios, sin redesplegar
   (esperando el TTL del perfil).
 - **AC6** — Gates verdes en los dos repos; migración probada sobre base vacía

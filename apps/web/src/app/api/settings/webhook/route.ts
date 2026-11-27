@@ -41,7 +41,7 @@ export const GET = withAuth(async () => {
  * para reintentar si Meta falló, sin volver a pegar el token.
  *
  * 035 — Con `{"recuperar": true}`, «Recuperar el webhook»: aunque la WABA
- * enrute a un override ajeno (quien venía con Nea 1.x delante del CRM), el
+ * enrute a un override ajeno (quien venía con AGENTE-GENERAL 1.x delante del CRM), el
  * del número queda apuntando aquí. Quien recibía por el override deja de
  * recibir: solo quien administra.
  */

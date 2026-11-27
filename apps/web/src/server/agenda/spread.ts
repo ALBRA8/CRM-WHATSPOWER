@@ -65,7 +65,7 @@ export function spreadByDay(
  * Qué se consultó de verdad, para que quien ofrece no invente «ese día no hay
  * agenda» ni «solo tengo en la mañana».
  *
- * En la prueba de punta a punta con Nea (sep 2026) un cliente pidió «mañana en
+ * En la prueba de punta a punta con AGENTE-GENERAL (sep 2026) un cliente pidió «mañana en
  * la tarde» y el agente le ofreció 10:00, 10:30 y 11:00 diciendo que el martes
  * solo había mañana, con la agenda libre de 12:00 a 18:30. El reparto (tres
  * horas por día) no mentía; lo que faltaba era decir hasta dónde llegaba, y

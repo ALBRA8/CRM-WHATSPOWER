@@ -4,7 +4,7 @@
  *
  * Conduce la app real con los mocks de canal y hace de CEREBRO con el cerebro
  * falso compartido (`scripts/lib/cerebro-falso.mjs`), que acusa recibo de
- * cada despacho y contesta por `/api/bot/messages` como lo haría Nea. Por
+ * cada despacho y contesta por `/api/bot/messages` como lo haría AGENTE-GENERAL. Por
  * conversación decide si manda `dispatchId` (un cerebro que conoce el turno
  * superado) o no (uno de terceros), si calla, y cuánto tarda.
  *
@@ -156,7 +156,7 @@ async function main() {
 }
 
 async function preparar() {
-  const email = "e2e@vocero.test";
+  const email = "e2e@vestro.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

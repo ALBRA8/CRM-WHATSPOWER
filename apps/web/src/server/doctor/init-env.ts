@@ -41,8 +41,8 @@ export const GENERATED_SECRETS = {
     generate: () => randomBytes(32).toString("hex"),
     openssl: "openssl rand -hex 32",
   },
-  // 2.0 — Firma el despacho y con ella el agente (Nea) le contesta al CRM por
-  // /api/bot/*. El compose ya cablea el despacho a Nea: sin esta llave, el
+  // 2.0 — Firma el despacho y con ella el agente (AGENTE-GENERAL) le contesta al CRM por
+  // /api/bot/*. El compose ya cablea el despacho a AGENTE-GENERAL: sin esta llave, el
   // par arrancaría con el despacho apagado.
   BOT_API_KEY: {
     generate: () => randomBytes(32).toString("hex"),

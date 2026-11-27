@@ -20,7 +20,7 @@ import type { SlotUtc } from "@/lib/time/slots";
  * Huecos por fecha, repartidos a lo largo del día, y hasta dónde llega lo
  * consultado.
  *
- * Fija el fallo de la prueba de punta a punta raíz + Nea: a «¿tienen algo
+ * Fija el fallo de la prueba de punta a punta raíz + AGENTE-GENERAL: a «¿tienen algo
  * mañana en la tarde?» el agente ofreció 10:00, 10:30 y 11:00 y dijo que el
  * martes solo había mañana, con la agenda libre de 12:00 a 18:30. El CRM
  * ignoraba `date` y solo devolvía las tres primeras horas de cada día.

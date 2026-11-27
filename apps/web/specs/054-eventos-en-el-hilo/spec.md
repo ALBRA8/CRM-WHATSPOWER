@@ -7,7 +7,7 @@
 **Status**: Especificada antes de escribir código. Implementada; unitarias, arnés E2E (15/15, en claro y oscuro) y capturas en verde.
 
 **Input**: candidata 8 del estudio de la 2.2
-([046 research.md](../046-referencias-2.2/research.md)). Kevin la eligió el
+([046 research.md](../046-referencias-2.2/research.md)). el propietario del producto la eligió el
 2026-10-23 junto con la 055, como cierre de la 2.4.0. Referencias: Chatwoot
 (MIT), que pinta en el hilo «X cambió el estado» o «asignado a Y», y
 FalconChat (observado).
@@ -80,7 +80,7 @@ en el embudo y no pinta etapas.
 ## Qué NO se hace y por qué
 
 - **Historial de pausar y reanudar la IA a mano**: ver D2.
-- **Asignaciones** («asignado a Y»): no hay asignación; sería la 053, que Kevin
+- **Asignaciones** («asignado a Y»): no hay asignación; sería la 053, que el propietario del producto
   dejó fuera.
 - **Eventos de la agenda** (cita creada o cancelada): viven en su módulo
   opcional y tienen su propia pantalla. Se puede agregar después con la misma

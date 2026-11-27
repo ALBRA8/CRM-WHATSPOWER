@@ -111,7 +111,7 @@ barrido cada 10 s (instrumentation-node)
 
 ## Contrato del webhook (enmienda)
 
-`specs/001-vocero-core/contracts/webhook.md`, punto 3. Antes decía «200
+`specs/001-vestro-core/contracts/webhook.md`, punto 3. Antes decía «200
 SIEMPRE tras encolar/procesar, nunca 5xx». Pasa a decir: «200 tras guardar el
 evento; **503 solo si no se pudo guardar**, para que la fuente reintente;
 nunca 5xx por un error al procesar». AGENTS.md («Webhooks de entrada») se

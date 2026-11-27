@@ -17,7 +17,7 @@
  *   1) app corriendo (`pnpm dev`) con WA_MOCK_ENABLED=true,
  *      META_GRAPH_BASE_URL → wa-mock, OPENROUTER_BASE_URL → ai-mock (+ token y
  *      modelo), BOT_API_KEY, AGENT_COALESCE_MS=1500, AGENDA=on,
- *      BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vocero/dispatch (sin
+ *      BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch (sin
  *      BRAIN_HEALTH_URL) y BD migrada
  *   2) node --env-file=.env.e2e-036 scripts/e2e-selftest.mjs
  *
@@ -127,7 +127,7 @@ async function main() {
   });
 
   console.log("== Setup: registro/login + conexión WhatsApp ==");
-  const email = "e2e@vocero.test";
+  const email = "e2e@vestro.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",
@@ -254,7 +254,7 @@ async function main() {
     body: JSON.stringify({
       phoneNumberId: PN,
       from: "5215550001234",
-      name: "Kevin MX",
+      name: "Karla MX",
       text: "uno",
     }),
   });
@@ -265,7 +265,7 @@ async function main() {
   });
   await sleep(800);
   const contacts =
-    (await api("/api/contacts?q=Kevin%20MX")).json?.contacts ?? [];
+    (await api("/api/contacts?q=Karla%20MX")).json?.contacts ?? [];
   ok(
     "521 y 52 resuelven a UN solo contacto",
     contacts.length === 1,
@@ -273,7 +273,7 @@ async function main() {
   );
 
   const mxConv = ((await api("/api/conversations")).json?.conversations ?? []).find(
-    (c) => c.contact.name === "Kevin MX"
+    (c) => c.contact.name === "Karla MX"
   );
   ok("el contacto reconciliado conserva su conversación", !!mxConv);
 
@@ -895,7 +895,7 @@ async function main() {
      * sin respuesta aunque por dentro el traspaso ocurría.
      *
      * 036 — El patrón de respaldo que lo decidía dentro del CRM se fue con el
-     * agente incluido: ahora lo decide el cerebro (Nea avisa y traspasa). Lo
+     * agente incluido: ahora lo decide el cerebro (AGENTE-GENERAL avisa y traspasa). Lo
      * que el CRM sigue debiendo, y esto protege, es entregar el acuse que el
      * cerebro manda, registrar el traspaso con el motivo `cliente` y NO volver
      * a despacharle una conversación ya traspasada. Con el interruptor
@@ -1590,7 +1590,7 @@ async function quienResponde(convId, estado) {
  * final se deja como estaba para lo que sigue.
  *
  * 036 — Entra el paso OPCIONAL «Conecta tu agente» (listo con el despacho
- * configurado y el `/health` del cerebro contestando). Sin cerebro, Vocero es
+ * configurado y el `/health` del cerebro contestando). Sin cerebro, Vestro es
  * una bandeja manual: con los demás pasos listos la guía está completa y la
  * raíz NO atrapa a nadie en /onboarding; encender da 409 `sin_cerebro`. Con
  * el cerebro falso encendido, la guía vuelve a pedir encender, como antes.
@@ -1831,7 +1831,7 @@ async function guiaChecks() {
   const htmlManual = await pantallaHtml();
   ok(
     "la tarjeta final dice «bandeja manual» y no ofrece encender",
-    htmlManual.includes("Vocero funciona como bandeja manual") && !htmlManual.includes("Encender a Sofi"),
+    htmlManual.includes("Vestro funciona como bandeja manual") && !htmlManual.includes("Encender a Sofi"),
     htmlManual.includes("Encender a Sofi") ? "ofrece encender" : "sin el texto de bandeja manual"
   );
   const sinCerebro = await api("/api/agent/profile", {
@@ -1907,7 +1907,7 @@ async function guiaChecks() {
  *
  * Y lo de siempre: en Meta, `POST {WABA}/subscribed_apps` SIN cuerpo es la
  * forma documentada de BORRAR el override de callback de la WABA, y el CRM lo
- * mandaba en cada "Guardar": un cerebro externo (Nea) que recibe los webhooks
+ * mandaba en cada "Guardar": un cerebro externo (AGENTE-GENERAL) que recibe los webhooks
  * por ese override quedaba sordo sin que nada lo avisara. El override del
  * número ganaría igual, así que con uno ajeno en la WABA el CRM no lo pone.
  * El wa-mock se comporta como Meta, así que si el CRM vuelve a pisar a
@@ -1917,7 +1917,7 @@ async function guiaChecks() {
 async function overrideChecks() {
   console.log("\n== us5: guardar registra el webhook y no desconecta a un cerebro externo ==");
   const WABA = "WABA-E2E";
-  const NEA = "https://nea.e2e.test/api/webhooks/meta";
+  const NEA = "https://agente.e2e.test/api/webhooks/meta";
   const graph = `/api/dev/wa-mock/graph/v25.0/${WABA}/subscribed_apps`;
   const comoMeta = { authorization: "Bearer tok-e2e" };
 
@@ -1983,7 +1983,7 @@ async function overrideChecks() {
   );
   await guardar("tok-e2e");
 
-  // El cerebro externo fija SU override contra Meta (lo que hace Nea).
+  // El cerebro externo fija SU override contra Meta (lo que hace AGENTE-GENERAL).
   const fijado = await api(graph, {
     method: "POST",
     headers: comoMeta,
@@ -2015,7 +2015,7 @@ async function overrideChecks() {
   ok(
     "y el número queda SIN override propio: el cerebro externo sigue recibiendo",
     guardado.json?.webhook?.skipped === "waba_override" &&
-      guardado.json.webhook.host === "nea.e2e.test" &&
+      guardado.json.webhook.host === "agente.e2e.test" &&
       (await webhookDelNumero()) === null,
     JSON.stringify({ webhook: guardado.json?.webhook, enMeta: await webhookDelNumero() })
   );
@@ -2242,7 +2242,7 @@ async function agendaChecks() {
    *
    * Sin esto un cerebro externo solo conoce la cita por el historial, y en la
    * edición cloud eso acabó en una segunda cita para quien no llegó a la
-   * primera y en «tu demo es hoy a las 10:30» dicho por la tarde. Nea lee este
+   * primera y en «tu demo es hoy a las 10:30» dicho por la tarde. AGENTE-GENERAL lee este
    * bloque tal cual; la raíz no lo mandaba.
    */
   const ctxConCita = await bot(`/api/bot/context?conversationId=${convA.id}`);
@@ -2558,7 +2558,7 @@ async function agendaChecks() {
 /* ============================================================
  * R10 — Huecos por fecha (tests/e2e/us-agenda.md, US3b)
  *
- * El fallo que lo motivó, en la prueba de punta a punta raíz + Nea: a
+ * El fallo que lo motivó, en la prueba de punta a punta raíz + AGENTE-GENERAL: a
  * «¿tienen algo mañana en la tarde?» el cerebro solo recibía las tres
  * primeras horas de mañana y contestó que solo había mañana. Aquí se pide el
  * día con `date`, se reserva una hora de la TARDE y se comprueba que el
@@ -3090,7 +3090,7 @@ async function atribucionChecks() {
  *
  * Corre con la bandera ATRIBUCION apagada Y encendida: el origen del anuncio
  * se ve siempre, y lo único que cambia es si Meta identificó el clic. Puerto
- * de las secciones 1-4b del guion de la spec 212 de Vocero Cloud, sin las
+ * de las secciones 1-4b del guion de la spec 212 de Vestro Cloud, sin las
  * comprobaciones entre organizaciones (aquí hay una).
  *
  * Los creativos los sirve el wa-mock (`/api/dev/wa-mock/media-file/creativo-*`),
@@ -3343,7 +3343,7 @@ async function r11BotChecks() {
 
   /*
    * 1. Una inundación sin key desde UNA IP no le quita el turno al cerebro.
-   *    Antes: un cubo global contado ANTES de autenticar → 429 para Nea el
+   *    Antes: un cubo global contado ANTES de autenticar → 429 para AGENTE-GENERAL el
    *    resto de la ventana, y clientes sin respuesta.
    */
   console.log("\n== R11: 700 requests sin key desde una IP vs. el cerebro ==");
@@ -3461,7 +3461,7 @@ async function r11BotChecks() {
    * 3. (036: retirado) «Pedir cita con la agenda apagada no termina en
    *    "Error del proveedor de IA"» probaba el esquema del turno del agente
    *    incluido y la rama de agenda del ai-mock; los dos se fueron con él. Qué
-   *    contesta un cerebro a una cita sin agenda es asunto del cerebro (Nea
+   *    contesta un cerebro a una cita sin agenda es asunto del cerebro (AGENTE-GENERAL
    *    lo prueba en su repo); el CRM solo ve `booking` ausente en el contexto,
    *    que se comprueba arriba (us-bot-api: contexto conversacional).
    */

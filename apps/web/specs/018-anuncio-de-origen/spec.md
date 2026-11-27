@@ -9,7 +9,7 @@ bandeja.
 **Status**: Especificada antes de escribir código.
 
 **Input**: decisión del dueño el 2026-09-21: traer al raíz la pieza visible de
-la spec 212 de Vocero Cloud («de qué anuncio llegó cada conversación») sin nada
+la spec 212 de Vestro Cloud («de qué anuncio llegó cada conversación») sin nada
 de su código multitenant, con el origen del anuncio **siempre visible**.
 
 **Carril**: ciclo completo (Principio VI). Añade una columna y un índice
@@ -26,7 +26,7 @@ Anuncios, como actividad de la Conversions API. Dejó fuera a propósito «la
 miniatura del creativo y la ficha de de qué anuncio vino», guardando el `raw`
 para que alguien la pintara sin migrar nada.
 
-Vocero Cloud la pintó en su spec 212 (bandeja, panel y cajón del trato). Esta
+Vestro Cloud la pintó en su spec 212 (bandeja, panel y cajón del trato). Esta
 spec la trae al raíz con la estructura de la tabla de 016, para que los dos
 repos sigan compartiendo `ad_attribution`.
 

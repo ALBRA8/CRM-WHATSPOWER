@@ -4,12 +4,12 @@
 
 **Created**: 2026-10-25
 
-**Status**: Implementada; unitarias y arnés E2E (`scripts/e2e-diseno-061.mjs`, sección 063) en verde. Ya corre en Vocero Cloud (kevinrivm/vocerocrm-cloud#140).
+**Status**: Implementada; unitarias y arnés E2E (`scripts/e2e-diseno-061.mjs`, sección 063) en verde. Ya corre en Vestro Cloud (ALBRA8/vestrocrm-cloud#140).
 
-**Input**: Kevin, el 2026-10-25, con una captura del fondo de WhatsApp: «para
+**Input**: el propietario del producto, el 2026-10-25, con una captura del fondo de WhatsApp: «para
 el fondo de la ventana de chat, WhatsApp tiene unos vectores que me gustaría
 replicar. No exactamente los mismos». Pidió además meter dibujos de la casa:
-un carnero (Belier es carnero en francés), un pulpo, unos platos de DJ y uno
+un carnero, un pulpo, unos platos de DJ y uno
 parecido al logo de AISHIA. Para el raíz eligió el mismo mosaico que Cloud,
 con los cuatro.
 
@@ -41,7 +41,7 @@ con los cuatro.
   borraba en escritorio la imagen de fondo de lo que también es tarjeta (el
   brillo de `.thread-bg` ya no se veía en la pantalla vacía).
 - **D4 — White-label.** Los dibujos de la casa van también aquí, por decisión
-  de Kevin. Ninguno lleva texto ni el nombre del producto.
+  del propietario del producto. Ninguno lleva texto ni el nombre del producto.
 
 ## Verificación
 

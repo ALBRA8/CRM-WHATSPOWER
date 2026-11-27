@@ -1,8 +1,8 @@
 # Guion E2E — Búsqueda de la Bandeja y filtro por etapa del embudo
 
 > Automatizado en `scripts/e2e-search-filters.mjs` (26 checks, Playwright
-> contra `pnpm dev` con wa-mock). Nace del reporte de Kevin del 2026-08-05:
-> «escribo Kevin en el buscador y no me da los resultados».
+> contra `pnpm dev` con wa-mock). Nace del reporte del propietario del producto del 2026-08-05:
+> «escribo el propietario del producto en el buscador y no me da los resultados».
 
 ## El fallo original: teclear mientras la página aún carga
 

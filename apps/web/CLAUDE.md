@@ -1,20 +1,20 @@
-# Vocero CRM — Guía para Claude
+# Vestro CRM — Guía para Claude
 
 Lee primero [AGENTS.md](AGENTS.md): el mapa del código y las reglas de
 modificación viven ahí; este archivo solo añade lo específico de Claude Code.
 
-Vocero es un CRM de WhatsApp open source (MIT), self-hosted, con el perfil y el
+Vestro es un CRM de WhatsApp open source (MIT), self-hosted, con el perfil y el
 conocimiento del agente y un Laboratorio de auto-evaluación. Desde la 2.0 no
-trae agente: contesta un cerebro conectado al lado (Nea u otro). Una
+trae agente: contesta un cerebro conectado al lado (AGENTE-GENERAL u otro). Una
 instancia = un negocio. Este archivo guía a Claude Code (u otro asistente)
 para operar y **modificar** este repositorio —
-el caso típico: una agencia adaptando Vocero para un cliente.
+el caso típico: una agencia adaptando Vestro para un cliente.
 
 ## Stack
 
 **Next.js 15 (App Router) + React 19** en monolito · TypeScript estricto
 (`strict` + `noUncheckedIndexedAccess`) · Tailwind CSS (sistema de diseño de la
-marca Vocero, el mismo de vocerocrm.com: tokens en `src/app/globals.css`, tema
+marca Vestro, el mismo de vestro.app: tokens en `src/app/globals.css`, tema
 claro/oscuro, acento white-label por defecto `#0d5bff`, fuentes Archivo +
 Instrument Serif + IBM Plex Mono self-hosted vía `next/font`; el logo vive en
 `src/lib/brand.ts` y se dibuja con `src/components/brand-mark.tsx`) ·
@@ -35,7 +35,7 @@ es in-process.
 | Quieres cambiar… | Toca… |
 |---|---|
 | El proveedor LLM (juez del Laboratorio y proxy del cerebro) | `src/lib/ai/` (adaptador OpenRouter-compatible, `chatJson<T>`; `provider.ts` resuelve Ajustes → IA o `OPENROUTER_*`) |
-| El comportamiento del agente | No vive aquí: el CRM no trae agente (036). Lo que el agente lee —perfil, conocimiento (`renderKb` en `src/server/ai/prompts.ts`), `role`, `tools`, `llm`— sale por `src/server/bot/profile.ts`; lo demás es del cerebro (Nea) |
+| El comportamiento del agente | No vive aquí: el CRM no trae agente (036). Lo que el agente lee —perfil, conocimiento (`renderKb` en `src/server/ai/prompts.ts`), `role`, `tools`, `llm`— sale por `src/server/bot/profile.ts`; lo demás es del cerebro (AGENTE-GENERAL) |
 | Cómo piensa el cerebro con la llave del CRM | `src/server/bot/llm-proxy.ts` + `src/app/api/bot/llm/[...ruta]/route.ts` |
 | Las personas o el juez del Laboratorio | `src/server/lab/personas.ts` · `src/server/lab/judge.ts` |
 | El canal WhatsApp (Graph API) | `src/lib/meta/` (cliente único) + `src/server/whatsapp/` |
@@ -43,7 +43,7 @@ es in-process.
 | Campos/tablas | `src/lib/db/schema.ts` → `pnpm db:generate` → migración nueva en `drizzle/` |
 | La ingesta/envío de mensajes | `src/server/inbox/` (ingest idempotente, send con guard de sandbox, ventana 24h) |
 | Cómo se identifica a un contacto | `src/server/inbox/identity.ts` (teléfono normalizado o `bsuid:<id>`) |
-| Conectar el cerebro (Nea o el tuyo) | despacho: `src/server/dispatch/encolar.ts` (`despacharAlCerebro`) + red de seguridad y turno superado (075): `src/server/dispatch/red-de-seguridad.ts` + `src/server/brains/` (`config.ts`: `despachoActivo`, `urlSaludCerebro`) · `src/app/api/bot/*` + `src/server/bot/auth.ts` (X-API-Key o Bearer) · contrato en `docs/openapi.json` · quién responde (avisos `sin_cerebro`, `apagado`): `src/server/bot/status.ts` + `GET /api/agent/brain-status` |
+| Conectar el cerebro (AGENTE-GENERAL o el tuyo) | despacho: `src/server/dispatch/encolar.ts` (`despacharAlCerebro`) + red de seguridad y turno superado (075): `src/server/dispatch/red-de-seguridad.ts` + `src/server/brains/` (`config.ts`: `despachoActivo`, `urlSaludCerebro`) · `src/app/api/bot/*` + `src/server/bot/auth.ts` (X-API-Key o Bearer) · contrato en `docs/openapi.json` · quién responde (avisos `sin_cerebro`, `apagado`): `src/server/bot/status.ts` + `GET /api/agent/brain-status` |
 | La API pública v1, el MCP y su OAuth | `src/server/api-v1/` (bandera `API_V1`, llaves, `withApiKey`, `openapi.json`) · `src/server/mcp/` · `src/server/oauth/` · handlers compartidos con la UI en `src/server/http/` · guía: [docs/api-v1.md](docs/api-v1.md) · spec [069](specs/069-api-mcp/spec.md) |
 | La agenda (horarios, huecos, citas) | `src/server/agenda/` — detrás de la bandera `AGENDA` (`flag.ts`) |
 | Cómo se entrega la reunión (Zoom, Meet…) | `src/server/agenda/connectors/` + catálogo en `src/lib/agenda-connectors.ts` · guía: [docs/agenda-conectores.md](docs/agenda-conectores.md) |
@@ -118,7 +118,7 @@ OPENROUTER_JUDGE_MODEL=anthropic/claude-haiku-4.5   # opcional: juez más barato
 ```
 
 Para el self-test local existe además el modo de pruebas interno (mocks) —
-ver `specs/001-vocero-core/quickstart.md`. Nunca actives mocks en producción.
+ver `specs/001-vestro-core/quickstart.md`. Nunca actives mocks en producción.
 
 ## Manejo de credenciales (obligatorio)
 

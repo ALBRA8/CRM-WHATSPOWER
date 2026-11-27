@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "vestro": {
+      "type": "http",
+      "url": "${VESTRO_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${VESTRO_API_KEY}"
+      }
+    }
+  }
+}

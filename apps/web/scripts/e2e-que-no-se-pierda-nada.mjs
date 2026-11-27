@@ -39,7 +39,7 @@ const BOT_KEY = process.env.BOT_API_KEY ?? "";
 const COALESCE = Number(process.env.AGENT_COALESCE_MS ?? 6000);
 const CHANNELS = (process.env.CHANNELS ?? "").split(",").map((c) => c.trim());
 const CAPTURAS = process.env.CAPTURAS_DIR || "";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-123";
 
 const RUN = Date.now().toString(36);

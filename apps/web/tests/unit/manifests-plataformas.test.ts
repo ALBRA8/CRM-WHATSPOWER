@@ -18,7 +18,7 @@ const RAIZ = path.resolve(import.meta.dirname, "..", "..");
 const pkg = JSON.parse(
   readFileSync(path.join(RAIZ, "package.json"), "utf8")
 ) as { version: string };
-const IMAGEN = `ghcr.io/kevinrivm/vocero-crm:${pkg.version}`;
+const IMAGEN = `ghcr.io/albra8/crm-whatpower:${pkg.version}`;
 
 // Un checkout de Windows con autocrlf deja CRLF: se normaliza para que las
 // expresiones con `\n` lean lo mismo en cualquier máquina.
@@ -82,7 +82,7 @@ describe.each([
     // manifest instala la versión anterior mientras el CHANGELOG habla de
     // la nueva.
     expect(texto).toContain(IMAGEN);
-    expect(texto).not.toMatch(/vocero-crm:latest/);
+    expect(texto).not.toMatch(/vestro-crm:latest/);
   });
 
   it("apunta al healthcheck, al volumen de /data y al puerto de la imagen", () => {
@@ -127,8 +127,8 @@ describe("render.yaml: el Blueprint declara todo lo que Render deja declarar", (
   });
 
   it("DATABASE_URL viene de la base del Blueprint y APP_BASE_URL de la URL del servicio", () => {
-    expect(bloqueRender("DATABASE_URL")).toMatch(/fromDatabase:[\s\S]*name: vocero-db[\s\S]*property: connectionString/);
-    expect(activo).toMatch(/^databases:\n\s*- name: vocero-db$/m);
+    expect(bloqueRender("DATABASE_URL")).toMatch(/fromDatabase:[\s\S]*name: vestro-db[\s\S]*property: connectionString/);
+    expect(activo).toMatch(/^databases:\n\s*- name: vestro-db$/m);
     expect(bloqueRender("APP_BASE_URL")).toMatch(/fromService:[\s\S]*envVarKey: RENDER_EXTERNAL_URL/);
   });
 
@@ -174,8 +174,8 @@ describe("fly.toml: lo que cabe en el archivo y los comandos de lo que no", () =
       // Y no en [env], que es visible en el fly.toml del repo.
       expect(activo, clave).not.toMatch(new RegExp(`^\\s*${clave} =`, "m"));
     }
-    expect(fly).toMatch(/fly postgres attach vocero-db --app vocero-crm/);
-    expect(fly).toMatch(/fly volumes create vocero_data --app vocero-crm/);
+    expect(fly).toMatch(/fly postgres attach vestro-db --app vestro-crm/);
+    expect(fly).toMatch(/fly volumes create vestro_data --app vestro-crm/);
   });
 });
 

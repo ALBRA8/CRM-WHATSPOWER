@@ -7,7 +7,7 @@ Spec: [spec.md](spec.md) · Plan: [plan.md](plan.md).
 - [x] T001 Enmendar `specs/021-despacho-estandar/contracts/despacho.md`: evento `conversation.deleted` y la red de seguridad
 - [x] T002 `src/server/brains/contract.ts`: `EventoOlvido`, `TIPO_OLVIDO`, `construirEventoOlvido`
 - [x] T003 `src/lib/db/ids.ts`: prefijo `olv`
-- [x] T004 `tests/unit/olvido-contrato.test.ts`: cuerpo y firma gemelos de nea-agent
+- [x] T004 `tests/unit/olvido-contrato.test.ts`: cuerpo y firma gemelos de AGENTE-GENERAL
 
 ## Servidor
 

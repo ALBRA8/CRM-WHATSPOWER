@@ -32,7 +32,7 @@
 
 - [x] T015 `tests/unit/webhook-eventos.test.ts` (espera, huella, resolución, recibir, guardarraíl de rutas)
 - [x] T016 `tests/e2e/us-webhook-fallos.md` + `scripts/e2e-webhook-fallos.mjs`
-- [x] T017 Enmendar `specs/001-vocero-core/contracts/webhook.md` y AGENTS.md (webhooks de entrada, `/api/health`, mapa de `src/server/`)
+- [x] T017 Enmendar `specs/001-vestro-core/contracts/webhook.md` y AGENTS.md (webhooks de entrada, `/api/health`, mapa de `src/server/`)
 - [x] T018 Gates: `pnpm typecheck && pnpm lint && pnpm test && pnpm build` (banderas apagadas y `CHANNELS` + `AGENDA`)
 - [x] T019 Self-test en vivo con mocks (arnés + Playwright en la tarjeta), capturas en claro y oscuro
 - [x] T020 Bitácora 2.2 y PR contra `main` (sobre #146)

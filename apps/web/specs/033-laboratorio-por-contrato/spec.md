@@ -1,13 +1,13 @@
 # 033 — Laboratorio por contrato
 
-**Feature Branch**: `feat/033-laboratorio-por-contrato` (en `vocero-crm` y en `nea-agent`)
+**Feature Branch**: `feat/033-laboratorio-por-contrato` (en `vestro-crm` y en `AGENTE-GENERAL`)
 
 **Created**: 2026-10-20
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: segunda pieza de la 2.0.0 (`PLAN-2.0.md`): kevinrivm/vocero-crm#91.
-Kevin autorizó en el chat del 2026-10-20 mergear la 031 y seguir. Es la
+**Input**: segunda pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#91.
+el propietario del producto autorizó en el chat del 2026-10-20 mergear la 031 y seguir. Es la
 condición previa para retirar el agente incluido (#106).
 
 **Carril**: ciclo completo (Principio VI). Cambia dos contratos publicados, los
@@ -20,7 +20,7 @@ conversación de prueba. Plan en [plan.md](plan.md), tareas en
 ## Problema
 
 El Laboratorio solo sabe probar al agente incluido: `src/server/lab/runner.ts`
-llama a `runAgentTurn` dentro del mismo proceso. Quien usa Nea —desde la 2.0,
+llama a `runAgentTurn` dentro del mismo proceso. Quien usa AGENTE-GENERAL —desde la 2.0,
 todo el que quiera agente— no tiene Laboratorio, y lo que se evalúa no es lo
 que contesta en producción. Sin esto no se puede retirar el agente incluido:
 el CRM se quedaría sin forma de probar a quien contesta.
@@ -62,7 +62,7 @@ runner.
 
 **D4 — El evento lleva `conversation.test: true`, solo en las de prueba.**
 Como las llaves de la 031: aparece cuando aplica, y el cuerpo gemelo no
-cambia. Le dice al cerebro que es una prueba (Nea: pasa aunque la identidad no
+cambia. Le dice al cerebro que es una prueba (AGENTE-GENERAL: pasa aunque la identidad no
 esté en `ALLOWED_WA_IDS` y no programa seguimiento).
 
 **D5 — `POST /api/bot/messages` en una conversación de prueba guarda la
@@ -88,8 +88,8 @@ iniciar queda para la #106: hoy, sin despacho, el agente incluido siempre
 contesta las pruebas si hay IA, y eso ya lo valida `ai_not_configured`.
 
 **D7b — Un silencio con el despacho entregado es una respuesta** (decidido
-tras la prueba en vivo del 2026-10-20). Nea calla a propósito ante el relleno
-después de despedirse (candado de cierre): la primera corrida en `vocero20`
+tras la prueba en vivo del 2026-10-20). AGENTE-GENERAL calla a propósito ante el relleno
+después de despedirse (candado de cierre): la primera corrida en `vestro20`
 marcó «Sin rumbo» como `agent_failed` por eso. Entregado el despacho, el runner
 espera la respuesta hasta 45 s; si no llega, el silencio queda en la
 transcripción y el juez lo evalúa. Falla es solo un despacho que no se
@@ -120,12 +120,12 @@ del agente incluido (#106).
 - **AC5** — Con el cerebro caído, la corrida termina `failed` con un motivo
   legible en menos de 2 minutos por caso, y sin colgarse.
 - **AC6** — Después de cada caso le llega al cerebro `conversation.deleted`.
-- **AC7** — Nea: una conversación de prueba pasa la lista de permitidos y no
+- **AC7** — AGENTE-GENERAL: una conversación de prueba pasa la lista de permitidos y no
   programa seguimiento; una real fuera de la lista sigue sin respuesta.
 - **AC8** — Sin despacho, el Laboratorio sigue corriendo contra el agente
   incluido (`e2e-selftest.mjs` en verde).
 - **AC9** — Gates verdes en los dos repos.
-- **AC10** — En vivo: una corrida en `vocero20` contra Nea, en verde, con el
+- **AC10** — En vivo: una corrida en `vestro20` contra AGENTE-GENERAL, en verde, con el
   número sin tocar.
 
 ## Constitution Check
@@ -137,4 +137,4 @@ del agente incluido (#106).
 | IV Idempotencia | El despacho de prueba usa la misma cola, lease y dedup del despacho real |
 | Sandbox del Laboratorio | `sendText` sigue lanzando con `is_test`; `/api/bot/messages` guarda sin enviar; las citas de prueba no tocan conectores |
 | VI Spec antes de código | Este documento |
-| IX Hecho = probado en vivo | AC10: una corrida real contra Nea en Coolify |
+| IX Hecho = probado en vivo | AC10: una corrida real contra AGENTE-GENERAL en Coolify |

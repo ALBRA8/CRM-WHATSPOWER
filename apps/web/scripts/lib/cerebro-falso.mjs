@@ -5,22 +5,22 @@
  * (`BRAIN_DISPATCH_URL`), y solo con el interruptor del Agente encendido, que
  * a su vez exige que el `/health` del cerebro conteste. Los guiones que
  * necesitan una respuesta levantan este servidor HTTP EN SU PROCESO, en el
- * host y puerto de `BRAIN_DISPATCH_URL`, y hace lo que hace Nea:
+ * host y puerto de `BRAIN_DISPATCH_URL`, y hace lo que hace AGENTE-GENERAL:
  *
  *   - `GET /health` → 200 `{status:"ok", mode, version, llm:"crm"}` (o 503, o
  *     nunca contesta: `estado.salud`).
- *   - `POST <ruta del despacho>` → verifica la firma `X-Vocero-Signature`
+ *   - `POST <ruta del despacho>` → verifica la firma `X-Vestro-Signature`
  *     sobre el cuerpo CRUDO con `BOT_API_KEY`, acusa 200 (o 500, 422, tarde o
  *     nunca: `estado.modo`) y DESPUÉS contesta por `/api/bot/*`:
  *       · texto con «humano» o «asesor» → avisa al cliente por
  *         `/api/bot/messages` y traspasa con `POST /api/bot/handoff`
- *         (motivo `cliente`), como Nea;
+ *         (motivo `cliente`), como AGENTE-GENERAL;
  *       · lo demás → piensa por `POST /api/bot/llm/chat/completions` con
  *         `Authorization: Bearer` (el proxy del CRM; en pruebas contesta el
  *         ai-mock con «Respuesta de prueba sobre: <texto>») y manda eso por
  *         `/api/bot/messages`;
  *       · un caso del Laboratorio que termina en «sale» → calla (el candado de
- *         cierre de Nea).
+ *         cierre de AGENTE-GENERAL).
  *       · 038 — texto con «califica» → lee el contexto por `conversationId`
  *         y mueve al lead a la primera de `lead.nextStages` con
  *         `POST /api/bot/stage` (o a la etapa que diga «califica a <etapa>»),
@@ -31,7 +31,7 @@
  * superado (todas apagadas por defecto: los demás guiones no cambian):
  *   · `estado.conDispatchId` (o una función del evento): si el despacho
  *     anuncia `dispatch_superado`, responde con `dispatchId` y
- *     `dropIfSuperseded: true`, como Nea en Cloud. Ante el 409 calla.
+ *     `dropIfSuperseded: true`, como AGENTE-GENERAL en Cloud. Ante el 409 calla.
  *   · `estado.callar(evento)`: si devuelve true, acusa recibo y no contesta
  *     nada (el turno que se cuelga).
  *   · `estado.demora(evento)`: cuánto «piensa» ese despacho (ms); sin ella,
@@ -46,7 +46,7 @@
  * La app (`pnpm dev`) y el guion leen el MISMO archivo de entorno:
  *
  *   APP_BASE_URL=http://localhost:3260        PORT=3260
- *   DATABASE_URL=postgresql://postgres:postgres@localhost:5433/vocero_036_e2e
+ *   DATABASE_URL=postgresql://postgres:postgres@localhost:5433/vestro_036_e2e
  *   WA_MOCK_ENABLED=true
  *   META_GRAPH_BASE_URL=http://localhost:3260/api/dev/wa-mock/graph
  *   OPENROUTER_BASE_URL=http://localhost:3260/api/dev/ai-mock
@@ -60,7 +60,7 @@
  *                                   espera lo mismo que lo demás)
  *   MEDIA_DIR=./.dev-media
  *   BOT_API_KEY=<16+ caracteres>
- *   BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vocero/dispatch
+ *   BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch
  *   (sin BRAIN_HEALTH_URL: el CRM pregunta al /health del mismo origen)
  *   + BETTER_AUTH_SECRET, ENCRYPTION_KEY, META_WEBHOOK_VERIFY_TOKEN
  *
@@ -73,7 +73,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { createServer } from "node:http";
 
-/** Lo que dice el `/health` de esta Nea de mentira. */
+/** Lo que dice el `/health` de esta AGENTE-GENERAL de mentira. */
 export const SALUD_FALSA = {
   status: "ok",
   db: "ok",
@@ -85,7 +85,7 @@ export const SALUD_FALSA = {
   relay: { pendientes: 0, masViejoSegundos: null, ultimoErrorEn: null },
 };
 
-/** El acuse que manda antes de traspasar (Nea lo manda; Resultados lo cuenta). */
+/** El acuse que manda antes de traspasar (AGENTE-GENERAL lo manda; Resultados lo cuenta). */
 export const ACUSE_TRASPASO = "Claro, te comunico con una persona del equipo.";
 
 /**
@@ -100,7 +100,7 @@ export function urlDelDespacho(env = process.env) {
   } catch {
     console.error(
       "Falta BRAIN_DISPATCH_URL. Arranca la app (y corre el guion) con algo como\n" +
-        "  BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vocero/dispatch\n" +
+        "  BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch\n" +
         "Ver la configuración estándar en scripts/lib/cerebro-falso.mjs."
     );
     process.exit(1);
@@ -214,7 +214,7 @@ export async function levantarCerebroFalso({
     try {
       const r = await fetch(`${base}/api/bot/llm/chat/completions`, {
         method: "POST",
-        // Como el SDK de OpenAI de Nea: la llave como Bearer.
+        // Como el SDK de OpenAI de AGENTE-GENERAL: la llave como Bearer.
         headers: { "content-type": "application/json", authorization: `Bearer ${botKey}` },
         body: JSON.stringify({
           model: "mock/agente",
@@ -234,7 +234,7 @@ export async function levantarCerebroFalso({
     }
   }
 
-  /** 038 — Como la herramienta `move_stage` de Nea: el contexto dice a dónde. */
+  /** 038 — Como la herramienta `move_stage` de AGENTE-GENERAL: el contexto dice a dónde. */
   async function moverEtapa(convId, texto) {
     let contexto = null;
     try {
@@ -250,7 +250,7 @@ export async function levantarCerebroFalso({
     await alCrm("/api/bot/stage", { conversationId: convId, stage: etapa }, convId, "etapa");
   }
 
-  /** 075 — Lo que Nea agrega a su respuesta si el CRM anuncia el turno superado. */
+  /** 075 — Lo que AGENTE-GENERAL agrega a su respuesta si el CRM anuncia el turno superado. */
   function sobreDelTurno(evento) {
     const quiere =
       typeof estado.conDispatchId === "function" ? estado.conDispatchId(evento) : estado.conDispatchId;
@@ -263,7 +263,7 @@ export async function levantarCerebroFalso({
     if (typeof estado.callar === "function" && estado.callar(evento)) return;
     const ultimo = evento.messages.at(-1) ?? {};
     const texto = ultimo.text ?? ultimo.caption ?? "";
-    // Como Nea con el candado de cierre: ante el relleno final, calla.
+    // Como AGENTE-GENERAL con el candado de cierre: ante el relleno final, calla.
     if (evento.conversation.test === true && texto === "sale") return;
     if (/humano|asesor/i.test(texto)) {
       await alCrm("/api/bot/messages", { conversationId: convId, text: ACUSE_TRASPASO }, convId, "acuse");
@@ -316,11 +316,11 @@ export async function levantarCerebroFalso({
         modo,
         crudo: crudo.toString("utf8"),
         evento,
-        firmaOk: firmaValida(botKey, crudo, req.headers["x-vocero-signature"]),
+        firmaOk: firmaValida(botKey, crudo, req.headers["x-vestro-signature"]),
         cabeceras: {
-          dispatch: req.headers["x-vocero-dispatch-id"] ?? null,
-          org: req.headers["x-vocero-organization"] ?? null,
-          evento: req.headers["x-vocero-event"] ?? null,
+          dispatch: req.headers["x-vestro-dispatch-id"] ?? null,
+          org: req.headers["x-vestro-organization"] ?? null,
+          evento: req.headers["x-vestro-event"] ?? null,
           tipo: req.headers["content-type"] ?? null,
         },
       });

@@ -41,7 +41,7 @@ que `/api/bot/messages` guarda la respuesta en vez de rechazarla.
    `/api/bot/messages` (y uno caído).
 8. Contrato 021 enmendado.
 
-### Nea
+### AGENTE-GENERAL
 
 1. `InboundMessage.prueba` desde `conversation.test`.
 2. Gate 1 de `run_turn`: una prueba no pasa por `ALLOWED_WA_IDS`.

@@ -71,7 +71,7 @@ const ctx = await browser.newContext({ viewport: DESKTOP });
 // la ~15ª carga el servidor deja de contestar. La imagen se espera por la API
 // antes de abrir la página, así que la tarjeta no depende del refetch en vivo.
 await ctx.route("**/api/events*", (route) => route.abort());
-await ctx.addInitScript(() => localStorage.setItem("vocero.panelOpen", "true"));
+await ctx.addInitScript(() => localStorage.setItem("vestro.panelOpen", "true"));
 ctx.setDefaultNavigationTimeout(120000);
 ctx.setDefaultTimeout(30000);
 const req = ctx.request;
@@ -82,12 +82,12 @@ try {
   console.log("== Setup ==");
   let r = await req.post(`${BASE}/api/auth/sign-up/email`, {
     headers: { origin: BASE },
-    data: { email: process.env.E2E_EMAIL ?? "e2e@vocero.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123", name: "Operador E2E" },
+    data: { email: process.env.E2E_EMAIL ?? "e2e@vestro.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123", name: "Operador E2E" },
   });
   if (!r.ok())
     r = await req.post(`${BASE}/api/auth/sign-in/email`, {
       headers: { origin: BASE },
-      data: { email: process.env.E2E_EMAIL ?? "e2e@vocero.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123" },
+      data: { email: process.env.E2E_EMAIL ?? "e2e@vestro.test", password: process.env.E2E_PASSWORD ?? "password-e2e-123" },
     });
   ok("login", r.ok());
   await req.put(`${BASE}/api/settings/whatsapp`, {
@@ -170,7 +170,7 @@ try {
     });
 
   for (const tema of ["light", "dark"]) {
-    await ctx.addCookies([{ name: "vocero-theme", value: tema, url: BASE }]);
+    await ctx.addCookies([{ name: "vestro-theme", value: tema, url: BASE }]);
     page = await ctx.newPage();
     await page.setViewportSize(DESKTOP);
 

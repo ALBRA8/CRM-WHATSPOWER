@@ -18,9 +18,9 @@ import { cn } from "@/lib/utils";
 /**
  * «Quién responde a tus clientes»: arriba de la pantalla del Agente.
  *
- * 036 — Vocero no trae agente: contesta el cerebro que se conecta al lado
- * (Nea u otro) y solo si el interruptor de esta página está encendido (el CRM
- * le despacha). Sin cerebro, Vocero es una bandeja manual: el aviso
+ * 036 — Vestro no trae agente: contesta el cerebro que se conecta al lado
+ * (AGENTE-GENERAL u otro) y solo si el interruptor de esta página está encendido (el CRM
+ * le despacha). Sin cerebro, Vestro es una bandeja manual: el aviso
  * `sin_cerebro` informa, no alarma. Con cerebro y el interruptor apagado,
  * `apagado` sí avisa: nadie contesta en automático.
  */
@@ -48,7 +48,7 @@ export function BrainStatusCard({
       <CardHeader className="pb-4">
         <CardTitle>Quién responde a tus clientes</CardTitle>
         <CardDescription>
-          Vocero no trae agente: contesta el que conectas al lado (Nea, o el
+          Vestro no trae agente: contesta el que conectas al lado (AGENTE-GENERAL, o el
           tuyo), y solo con el interruptor de arriba encendido. Sin agente,
           contestas tú desde la bandeja.
         </CardDescription>
@@ -56,7 +56,7 @@ export function BrainStatusCard({
       <CardContent className="space-y-3">
         {status.warning === "sin_cerebro" && (
           <Callout tone="info" icon={Info} title="Sin agente conectado">
-            Vocero funciona como bandeja manual: tus clientes reciben lo que
+            Vestro funciona como bandeja manual: tus clientes reciben lo que
             contestes tú. Para que un agente conteste, levántalo al lado del CRM
             y pon <Env>BRAIN_DISPATCH_URL</Env> y <Env>BOT_API_KEY</Env> en el
             entorno.{" "}
@@ -84,7 +84,7 @@ export function BrainStatusCard({
             id="external"
             icon={Cable}
             label="Tu agente"
-            hint="El cerebro que contesta (Nea u otro), por la API del CRM."
+            hint="El cerebro que contesta (AGENTE-GENERAL u otro), por la API del CRM."
             view={externalView(status, now)}
           />
           {(status.dispatch.host !== null || status.dispatch.problem !== null) && (
@@ -161,7 +161,7 @@ function externalView(s: BrainStatusDto, now: number): RowView {
     return {
       tone: "warn",
       headline: "No se puede consultar su estado",
-      detail: `BRAIN_HEALTH_URL no es una URL http:// o https:// válida (p. ej. http://nea:8000/health): corrígela y vuelve a desplegar el CRM.${
+      detail: `BRAIN_HEALTH_URL no es una URL http:// o https:// válida (p. ej. http://agente:8000/api/v1/health): corrígela y vuelve a desplegar el CRM.${
         keyConfigured ? ` ${capitalize(llamada)}.` : ""
       }`,
     };
@@ -188,7 +188,7 @@ function dispatchView(d: BrainDispatchDto, now: number): RowView {
     return {
       tone: "warn",
       headline: "No se puede despachar",
-      detail: `BRAIN_DISPATCH_URL no es una URL http:// o https:// válida, o lleva usuario y clave (p. ej. http://nea:8000/vocero/dispatch): corrígela y vuelve a desplegar el CRM. ${mientras}`,
+      detail: `BRAIN_DISPATCH_URL no es una URL http:// o https:// válida, o lleva usuario y clave (p. ej. http://agente:8000/crm/dispatch): corrígela y vuelve a desplegar el CRM. ${mientras}`,
     };
   }
   if (d.problem === "sin_llave") {

@@ -10,7 +10,7 @@ Sin violaciones: migración aditiva, contrato aditivo.
 
 | Pregunta | Respuesta |
 |---|---|
-| ¿Qué herramientas tiene Nea? | `update_ficha`, `propose_slots`, `book_session`, `reschedule_session`, `route_out`, `handoff`; en cloud con agenda v2, `list_bookings`, `cancel_session`, `coordination_consent` (`app/tools.py`) |
+| ¿Qué herramientas tiene AGENTE-GENERAL? | `update_ficha`, `propose_slots`, `book_session`, `reschedule_session`, `route_out`, `handoff`; en cloud con agenda v2, `list_bookings`, `cancel_session`, `coordination_consent` (`app/tools.py`) |
 | ¿Cómo las elige hoy? | `tool_schemas(agenda_enabled, agenda_v2, coordination)` en `_tool_loop`; sin agenda quita `AGENDA_TOOLS` y el prompt lo dice |
 | ¿Cada cuánto relee el perfil? | `PROFILE_TTL_SECONDS = 300` (`app/profile.py`) |
 | ¿Qué guarda `agent_profile`? | `enabled`, `name`, `tone`, `instructions`, `escalation_rules`, `greeting` |
@@ -34,7 +34,7 @@ Sin violaciones: migración aditiva, contrato aditivo.
 7. Pantalla Agente: tarjeta «Herramientas» (con despacho) y el botón del
    preset con confirmación.
 
-### Nea
+### AGENTE-GENERAL
 
 1. `BusinessProfile.role`, `BusinessProfile.tools` (`frozenset | None`).
 2. `tool_schemas(..., herramientas)`: filtra por clave del catálogo.

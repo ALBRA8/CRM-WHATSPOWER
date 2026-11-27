@@ -3,7 +3,7 @@
 ## `dispatch` (nueva)
 
 El outbox del despachador. Mismos nombres de tabla, columnas, estados e índices
-que la tabla `dispatch` de Vocero Cloud, sin lo que allá es de la plataforma
+que la tabla `dispatch` de Vestro Cloud, sin lo que allá es de la plataforma
 (`brain_generation`, `expires_at`, `brain_kind`, `responded_message_id`): los
 dos repos comparten la forma y cloud queda como superconjunto. Un índice
 difiere, y se explica abajo.
@@ -54,7 +54,7 @@ Caer a un humano usa lo que ya hay: `ai_enabled = false`, `handoff_at` y
 
 | Variable | Notas |
 |---|---|
-| `BRAIN_DISPATCH_URL` | Nueva, opcional. A dónde se despacha, p. ej. `http://nea:8000/vocero/dispatch`. No se valida en el esquema del entorno, como `BRAIN_HEALTH_URL`: una URL mal escrita no debe tumbar el CRM. |
+| `BRAIN_DISPATCH_URL` | Nueva, opcional. A dónde se despacha, p. ej. `http://agente:8000/crm/dispatch`. No se valida en el esquema del entorno, como `BRAIN_HEALTH_URL`: una URL mal escrita no debe tumbar el CRM. |
 | `BOT_API_KEY` | Ya existía. Ahora además firma el despacho. |
 | `AGENT_COALESCE_MS` | Ya existía. Es también la ventana de agrupado del despacho. |
 

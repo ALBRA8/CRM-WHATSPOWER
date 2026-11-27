@@ -26,7 +26,7 @@ export function RegistrarServiceWorker() {
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
     navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => {
-      // Sin service worker Vocero funciona igual, en la pestaña.
+      // Sin service worker Vestro funciona igual, en la pestaña.
     });
   }, []);
   return null;
@@ -35,26 +35,26 @@ export function RegistrarServiceWorker() {
 // El aviso puede llegar antes de que el menú se monte (o mientras se navega
 // entre pantallas): se guarda fuera de React para no perderlo.
 const g = globalThis as unknown as {
-  __voceroInstalacion?: EventoInstalacion | null;
-  __voceroInstalacionOyentes?: Set<() => void>;
+  __vestroInstalacion?: EventoInstalacion | null;
+  __vestroInstalacionOyentes?: Set<() => void>;
 };
 function oyentes(): Set<() => void> {
-  g.__voceroInstalacionOyentes ??= new Set();
-  return g.__voceroInstalacionOyentes;
+  g.__vestroInstalacionOyentes ??= new Set();
+  return g.__vestroInstalacionOyentes;
 }
 function avisar() {
   for (const f of oyentes()) f();
 }
-if (typeof window !== "undefined" && !("__voceroInstalacionEscucha" in window)) {
-  Object.defineProperty(window, "__voceroInstalacionEscucha", { value: true });
+if (typeof window !== "undefined" && !("__vestroInstalacionEscucha" in window)) {
+  Object.defineProperty(window, "__vestroInstalacionEscucha", { value: true });
   window.addEventListener("beforeinstallprompt", (e) => {
     // Sin esto, Chrome enseña su propia barra en el celular en el peor momento.
     e.preventDefault();
-    g.__voceroInstalacion = e as EventoInstalacion;
+    g.__vestroInstalacion = e as EventoInstalacion;
     avisar();
   });
   window.addEventListener("appinstalled", () => {
-    g.__voceroInstalacion = null;
+    g.__vestroInstalacion = null;
     avisar();
   });
 }
@@ -70,7 +70,7 @@ export function BotonInstalar({ className }: { className?: string }) {
   const [evento, setEvento] = useState<EventoInstalacion | null>(null);
 
   useEffect(() => {
-    const leer = () => setEvento(yaInstalada() ? null : (g.__voceroInstalacion ?? null));
+    const leer = () => setEvento(yaInstalada() ? null : (g.__vestroInstalacion ?? null));
     leer();
     oyentes().add(leer);
     return () => {
@@ -84,7 +84,7 @@ export function BotonInstalar({ className }: { className?: string }) {
       type="button"
       onClick={async () => {
         // `prompt()` solo se puede llamar una vez por aviso.
-        g.__voceroInstalacion = null;
+        g.__vestroInstalacion = null;
         setEvento(null);
         await evento.prompt().catch(() => {});
       }}

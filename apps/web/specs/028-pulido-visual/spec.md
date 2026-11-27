@@ -9,7 +9,7 @@ guiones E2E y capturas en verde. D5 y D6 se añadieron al implementar; D7, en la
 
 **Input**: séptima spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
 2026-10-13): «filtro de la bandeja por canal; distintivos de canal con TikTok;
-estados vacíos por canal; lo que Kevin liste». Al llegar aquí, dos de los tres
+estados vacíos por canal; lo que el propietario del producto liste». Al llegar aquí, dos de los tres
 ya estaban hechos: el filtro por canal existe desde la 014 (las píldoras de la
 cabecera de la bandeja) y el distintivo de TikTok llegó con la 022. La spec 214
 de cloud que el plan daba como referencia no está en el clon de cloud; los
@@ -63,8 +63,7 @@ Marca enseña la misma. Lo mismo el título de la pestaña y la pantalla de
 entrada: «CRM multicanal con agente de IA» en lugar de «CRM de WhatsApp…».
 
 **D7 — Las iniciales del avatar ignoran los emojis** (añadido en la prueba en
-vivo). Los nombres de perfil de Instagram y Facebook traen emojis: «Kevin
-Belier 🐏» salía como «K�» (el emoji partido a la mitad) y «Vivir con virtud
+vivo). Los nombres de perfil de Instagram y Facebook traen emojis: «Karla Beltrán 🐏» salía como «K�» (el emoji partido a la mitad) y «Vivir con virtud
 ⚖️ 🌿» como «V⚖». Las iniciales son la primera letra o cifra de la primera y
 la última palabra que tengan alguna.
 
@@ -75,7 +74,7 @@ salir en la conversación de otra, y con D1 un panel de WhatsApp abierto
 aparecía en una de Instagram. El compositor se monta de nuevo con cada
 conversación.
 
-**D4 — Lo que Kevin liste** entra en una spec aparte, si lo pide; esta no se
+**D4 — Lo que el propietario del producto liste** entra en una spec aparte, si lo pide; esta no se
 queda esperando.
 
 ## Código
@@ -100,7 +99,7 @@ queda esperando.
 - **Capturas** en claro y oscuro con Playwright: el compositor en WhatsApp y en
   Instagram, la bandeja vacía con varios canales y el filtro de un canal sin
   conversaciones. `tests/unit/contraste-temas.test.ts` en verde.
-- **En vivo**: en `vocero-clase`, abrir la conversación de Instagram y ver el
+- **En vivo**: en `vestro-clase`, abrir la conversación de Instagram y ver el
   compositor sin clip, ubicación ni contacto (captura).
 
 ## Constitution Check

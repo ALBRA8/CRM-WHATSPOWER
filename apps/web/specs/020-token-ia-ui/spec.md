@@ -6,8 +6,7 @@
 
 **Status**: Implementada en la rama; pendiente de revisión del dueño.
 
-**Input**: issue #85 y el punto 3 de `docs/plan-1.5-y-2.0.md`: portar
-`ai_credentials` de Vocero Cloud al raíz. Sin `isCloud()`, sin agencias ni
+`ai_credentials` de Vestro Cloud al raíz. Sin `isCloud()`, sin agencias ni
 planes, sin el modelo fijo por plataforma (PR #102 de cloud).
 
 **Carril**: ligero, con el modelo de datos dentro de esta spec. Toca el modelo

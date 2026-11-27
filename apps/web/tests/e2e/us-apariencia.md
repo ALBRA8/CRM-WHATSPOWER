@@ -6,7 +6,7 @@
 
 ## Por qué
 
-Kevin quería temas como los de Ableton, y elegir la letra y el tamaño. Cada
+el propietario del producto quería temas como los de Ableton, y elegir la letra y el tamaño. Cada
 quien en su equipo, con un predeterminado del negocio.
 
 ## Camino verificado

@@ -1,7 +1,7 @@
 # 038 — El cerebro mueve la etapa
 
-**Feature Branch**: `feat/038-cerebro-mueve-etapa` (en `vocero-crm`; en
-`nea-agent`, su propia rama y su propio PR)
+**Feature Branch**: `feat/038-cerebro-mueve-etapa` (en `vestro-crm`; en
+`AGENTE-GENERAL`, su propia rama y su propio PR)
 
 **Created**: 2026-10-20
 
@@ -21,7 +21,7 @@ catálogo de herramientas), todo de forma aditiva. Sin migración. Plan en
 
 El agente incluido (borrado en la 036) podía decir «mueve a este lead a
 Calificado» y el CRM lo hacía por la puerta única
-(`src/server/leads/stage-history.ts`, `source = "bot"`). Nea nunca tuvo esa
+(`src/server/leads/stage-history.ts`, `source = "bot"`). AGENTE-GENERAL nunca tuvo esa
 acción, y la 034 (D1) supuso que «el CRM mueve la etapa cuando la ficha lo
 pide»; el código no lo hace: `upsertFicha` solo guarda la ficha. Resultado: en
 la 2.0 el pipeline solo avanza a mano o al agendar (`advanceLeadStage`). Un
@@ -67,7 +67,7 @@ válidas, para que el modelo se corrija en el mismo turno.
 /api/bot/context` gana `lead.nextStages: [{ id, name }]` (en el orden del
 Pipeline; vacía si el lead ya está en la última abierta o en una de cierre).
 El contexto se pide en cada turno; el perfil, cada 5 minutos
-(`PROFILE_TTL_SECONDS` de Nea). La lista depende de la etapa actual del lead,
+(`PROFILE_TTL_SECONDS` de AGENTE-GENERAL). La lista depende de la etapa actual del lead,
 que cambia de un turno a otro, así que en el perfil estaría vieja. Y un
 cerebro que no la conozca la ignora (regla de versión del OpenAPI).
 
@@ -101,7 +101,7 @@ no mueve nada. Una conversación de pruebas (`is_test`) sí mueve: es dato del
 CRM, no toca Meta, y la conversión ya excluye el Laboratorio
 (`reportStageChange`). Sin lead para el contacto, 404 `sin_lead`.
 
-**D7 — Nea: herramienta `move_stage`** (`app/tools.py`), clave `etapa` en
+**D7 — AGENTE-GENERAL: herramienta `move_stage`** (`app/tools.py`), clave `etapa` en
 `CLAVE_DE_HERRAMIENTA`, argumento `etapa` (nombre). Se le enseña al modelo solo
 si el perfil la tiene encendida **y** el contexto trae `lead.nextStages` con al
 menos una etapa: contra un CRM que no la tiene (cloud o un raíz anterior) no
@@ -130,10 +130,10 @@ detalle}`; un fallo del CRM nunca tumba el turno.
 - **AC8** — E2E con el cerebro falso (`scripts/e2e-etapa.mjs`): un mensaje
   real por el despacho llega al cerebro falso, que lee el contexto y mueve el
   lead; el Pipeline lo enseña en la etapa nueva y la bitácora dice «bot».
-- **AC9** — Nea: pytest con respx de la herramienta (encendida, apagada, sin
+- **AC9** — AGENTE-GENERAL: pytest con respx de la herramienta (encendida, apagada, sin
   `nextStages`, 409 del CRM). Gates verdes en los dos repos.
 - **AC10** — En vivo: pendiente de coordinar (otra sesión usa el número
-  Soporte y `vocero20`). Queda «pendiente de verificación humana» hasta
+  Soporte y `vestro20`). Queda «pendiente de verificación humana» hasta
   entonces.
 
 ## Constitution Check
@@ -144,7 +144,7 @@ detalle}`; un fallo del CRM nunca tumba el turno.
 | II Soberanía | Sin terceros nuevos |
 | III Multi-tenancy | Conversación, lead y etapas se buscan con la organización de la instancia (`scoped()`) |
 | IV Idempotencia | Mismo destino = `changed: false` sin evento (D5) |
-| V Calidad verificable | Unit, OpenAPI, E2E con el cerebro falso y pytest en Nea |
+| V Calidad verificable | Unit, OpenAPI, E2E con el cerebro falso y pytest en AGENTE-GENERAL |
 | VI Spec antes de código | Este documento |
 | VII Trazabilidad | Cada movimiento queda en `lead_stage_event` con `source = "bot"`; D4 deja escrita la corrección a la 034 |
 | VIII Foco vertical | Es pipeline de leads: el núcleo del CRM |

@@ -73,9 +73,9 @@ describe("reset-password", () => {
     // que las contraseñas ya guardadas dejen de funcionar en producción y
     // nadie pueda entrar a arreglarlo.
     const congelado =
-      "181acaf1397646b882722b5b5b7f71e7:b8106a42eb4765159f070a73f3bb5cd2f8839753da5b959dc4096a88e6af95a2622146a025f42c10cf6865fbbd065ecdc04766f19c0ba90992fff8080a5c847e";
+      "53900d281b59e30499f1420fe7875642:74e410275e792076dc6715482cfe8406edd10a00a2e06880a7d300b699825ef99f4aa4a8f198d1820f7f3716094e01c57bdab6a134354b037a7e09609f687747";
     expect(
-      await verifyPassword({ hash: congelado, password: "canario-de-formato-vocero" })
+      await verifyPassword({ hash: congelado, password: "canario-de-formato-vestro" })
     ).toBe(true);
   });
 

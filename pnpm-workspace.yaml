@@ -3,7 +3,7 @@ packages:
   - "services/*"
   - "packages/*"
 
-# Reconocimiento de scripts de postinstall de dependencias (heredado de VOCERO).
+# Reconocimiento de scripts de postinstall de dependencias (heredado de VESTRO).
 allowBuilds:
   esbuild: true
   sharp: true

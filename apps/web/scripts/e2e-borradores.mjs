@@ -17,7 +17,7 @@ async function abrirCuenta(p) {
 }
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-borradores@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-borradores@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-borradores";
 const S = Date.now().toString(36);
 const PN = `PN-BOR-${S}`;
@@ -129,19 +129,19 @@ try {
 
   console.log("\n== AC5 · un borrador de más de 7 días no vuelve ==");
   await page.evaluate(({ id }) => {
-    localStorage.setItem(`vocero.borrador.responder.${id}`, JSON.stringify({ t: Date.now() - 8 * 24 * 3600 * 1000, texto: "viejísimo" }));
+    localStorage.setItem(`vestro.borrador.responder.${id}`, JSON.stringify({ t: Date.now() - 8 * 24 * 3600 * 1000, texto: "viejísimo" }));
   }, { id: convs.b.id });
   await abrir(B);
   ok("B no lo restaura", (await caja.inputValue()) === "");
-  ok("y se eliminó del navegador", (await page.evaluate(({ id }) => localStorage.getItem(`vocero.borrador.responder.${id}`), { id: convs.b.id })) === null);
+  ok("y se eliminó del navegador", (await page.evaluate(({ id }) => localStorage.getItem(`vestro.borrador.responder.${id}`), { id: convs.b.id })) === null);
 
   console.log("\n== AC6 · cerrar sesión los borra todos ==");
-  const antesLogout = await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("vocero.borrador.")).length);
+  const antesLogout = await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("vestro.borrador.")).length);
   ok("había borradores", antesLogout >= 2, String(antesLogout));
   await abrirCuenta(page);
   await page.getByRole("button", { name: "Cerrar sesión" }).click();
   await page.waitForURL(/\/login/, { timeout: 15000 }).catch(() => {});
-  const despuesLogout = await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("vocero.borrador.")).length);
+  const despuesLogout = await page.evaluate(() => Object.keys(localStorage).filter((k) => k.startsWith("vestro.borrador.")).length);
   ok("tras cerrar sesión no queda ninguno", despuesLogout === 0, String(despuesLogout));
 } finally {
   await browser.close();

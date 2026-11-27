@@ -8,7 +8,7 @@
 
 **Input**: candidata 10 del estudio de la 2.2
 ([046 research.md](../046-referencias-2.2/research.md)), que se dejó fuera de
-esa versión. Kevin la eligió el 2026-10-23, después de publicar la 2.3.0.
+esa versión. el propietario del producto la eligió el 2026-10-23, después de publicar la 2.3.0.
 Referencias:
 
 - **WhatsApp Web**: notificación del sistema con la pestaña oculta.
@@ -22,7 +22,7 @@ nuevo: vive en el navegador y en el service worker de la 048.
 
 ## Problema
 
-1. **Si Vocero no está a la vista, el operador no se entera.** La 045 suena y
+1. **Si Vestro no está a la vista, el operador no se entera.** La 045 suena y
    cuenta en la pestaña, pero con la ventana minimizada, otra aplicación al
    frente o el sonido apagado del equipo, el mensaje pasa desapercibido.
 2. **Cuando se cae el tiempo real, la bandeja se queda quieta sin decir
@@ -49,7 +49,7 @@ avisos del sistema. Así, «no me molestes» es un solo clic.
 **D2 — Cuándo avisa.** Un mensaje del cliente avisa si se cumple todo esto:
 
 - la campana está activa y el permiso concedido;
-- el operador no está mirando Vocero: la página está oculta o la ventana no
+- el operador no está mirando Vestro: la página está oculta o la ventana no
   tiene el foco. Si la está mirando, ya basta el sonido;
 - la conversación está en la Bandeja. El Laboratorio no avisa: sus
   conversaciones no salen en la lista.
@@ -62,12 +62,12 @@ avisos del sistema. Así, «no me molestes» es un solo clic.
 - **Etiqueta (`tag`):** el id de la conversación. Una ráfaga de un mismo chat
   reemplaza el aviso anterior en vez de apilar diez.
 
-Al tocar el aviso, Vocero pasa al frente con esa conversación abierta: la
+Al tocar el aviso, Vestro pasa al frente con esa conversación abierta: la
 Bandeja acepta `/inbox?conversation=<id>`. Se muestra con
 `registration.showNotification` del service worker de la 048, que es lo único
 que acepta Chrome en Android. Sin service worker, se usa `new Notification`.
 
-**D4 — Sin push.** El aviso sale mientras Vocero siga abierto, aunque esté
+**D4 — Sin push.** El aviso sale mientras Vestro siga abierto, aunque esté
 oculto. Con el navegador cerrado, o en el celular cuando Android congela la
 app en segundo plano, no llega nada. El push real (Web Push) depende del
 servicio de push del fabricante del navegador: es un tercero y queda fuera

@@ -23,7 +23,7 @@ import postgres from "postgres";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-reacciones@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-reacciones@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-reacciones";
 const SALIDA = process.env.CAPTURAS_DIR ?? ".tmp";
 const VERIFY_TOKEN = process.env.META_WEBHOOK_VERIFY_TOKEN ?? "";

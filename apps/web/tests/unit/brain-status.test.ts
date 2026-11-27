@@ -27,7 +27,7 @@ import {
 /**
  * «Quién responde a tus clientes». Lo que se protege: que el dueño sepa si
  * contesta su agente (el cerebro al que el CRM despacha), si está apagado o si
- * la bandeja es manual — y que preguntarle a Nea jamás cuelgue la pantalla ni
+ * la bandeja es manual — y que preguntarle a AGENTE-GENERAL jamás cuelgue la pantalla ni
  * filtre la URL con sus secretos.
  */
 
@@ -37,14 +37,14 @@ const HACE_25_H = new Date(NOW.getTime() - 25 * 3_600_000);
 
 const EN_LINEA: BrainHealthDto = {
   reachable: true,
-  host: "nea:8000",
+  host: "agente:8000",
   checkedAt: NOW.toISOString(),
   version: "1.0.0",
   mode: "estándar",
 };
 const CAIDA: BrainHealthDto = {
   reachable: false,
-  host: "nea:8000",
+  host: "agente:8000",
   checkedAt: NOW.toISOString(),
   problem: "timeout",
 };
@@ -64,7 +64,7 @@ function status(over: Partial<BrainStatusInput>) {
 const DESPACHANDO: BrainDispatchDto = {
   ...SIN_DESPACHO,
   active: true,
-  host: "nea:8000",
+  host: "agente:8000",
 };
 
 describe("computeBrainStatus — 036: contesta el cerebro al que se le despacha", () => {
@@ -112,7 +112,7 @@ describe("computeBrainStatus — 036: contesta el cerebro al que se le despacha"
   });
 
   it("despacho mal configurado cuenta como sin cerebro", () => {
-    const roto: BrainDispatchDto = { ...SIN_DESPACHO, host: "nea:8000", problem: "sin_llave" };
+    const roto: BrainDispatchDto = { ...SIN_DESPACHO, host: "agente:8000", problem: "sin_llave" };
     const s = status({ aiConfigured: true, agentEnabled: true, dispatch: roto });
     expect(s.warning).toBe("sin_cerebro");
     expect(s.dispatch.problem).toBe("sin_llave");
@@ -132,10 +132,10 @@ describe("computeBrainStatus — 036: contesta el cerebro al que se le despacha"
 });
 
 describe("textos compartidos", () => {
-  it("«Nea» solo si su /health habla el contrato de Nea", () => {
+  it("«AGENTE-GENERAL» solo si su /health habla el contrato de AGENTE-GENERAL", () => {
     const conNea = status({ botKeyConfigured: true, health: EN_LINEA });
-    expect(externalBrainName(conNea)).toBe("Nea");
-    expect(externalAnswerLabel(conNea)).toBe("Responde tu cerebro externo (Nea)");
+    expect(externalBrainName(conNea)).toBe("AGENTE-GENERAL");
+    expect(externalAnswerLabel(conNea)).toBe("Responde tu cerebro externo (AGENTE-GENERAL)");
     const sinNombre = status({ botKeyConfigured: true, lastSeenAt: HACE_3_MIN });
     expect(externalBrainName(sinNombre)).toBeNull();
     expect(externalAnswerLabel(sinNombre)).toBe("Responde tu cerebro externo");
@@ -238,9 +238,9 @@ beforeAll(async () => {
   server = createServer((req: IncomingMessage, res) => {
     const path = (req.url ?? "").split("?")[0];
     switch (path) {
-      case "/nea":
+      case "/agente":
         return json(res, 200, NEA);
-      case "/nea-real": // lo que de verdad manda Nea: `status`, no `ok`
+      case "/agente-real": // lo que de verdad manda AGENTE-GENERAL: `status`, no `ok`
         return json(res, 200, { status: "ok", db: "ok", version: "1.1.0", mode: "cloud" });
       case "/vieja":
         return json(res, 200, { status: "ok", db: "ok" });
@@ -304,8 +304,8 @@ afterAll(async () => {
 });
 
 describe("fetchBrainHealth", () => {
-  it("Nea sana con el contrato completo → en línea con versión, modo y relevo", async () => {
-    const h = await fetchBrainHealth(`${base}/nea`);
+  it("AGENTE-GENERAL sana con el contrato completo → en línea con versión, modo y relevo", async () => {
+    const h = await fetchBrainHealth(`${base}/agente`);
     expect(h).toMatchObject({
       reachable: true,
       host: base.replace("http://", ""),
@@ -319,12 +319,12 @@ describe("fetchBrainHealth", () => {
     expect(Date.parse(h.checkedAt)).not.toBeNaN();
   });
 
-  it("la Nea de hoy manda `status: \"ok\"` en vez de `ok` → también en línea", async () => {
-    const h = await fetchBrainHealth(`${base}/nea-real`);
+  it("la AGENTE-GENERAL de hoy manda `status: \"ok\"` en vez de `ok` → también en línea", async () => {
+    const h = await fetchBrainHealth(`${base}/agente-real`);
     expect(h).toMatchObject({ reachable: true, version: "1.1.0", mode: "cloud" });
   });
 
-  it("una Nea vieja (solo `status`) → en línea, sin inventar versión ni modo", async () => {
+  it("una AGENTE-GENERAL vieja (solo `status`) → en línea, sin inventar versión ni modo", async () => {
     const h = await fetchBrainHealth(`${base}/vieja`);
     expect(h.reachable).toBe(true);
     expect(h.version).toBeUndefined();
@@ -380,7 +380,7 @@ describe("fetchBrainHealth", () => {
 
   it("una URL mal escrita ni se intenta → config, sin host", async () => {
     const fetchImpl = vi.fn();
-    for (const url of ["nea:8000/health", "ftp://nea/health", "no es una url"]) {
+    for (const url of ["agente:8000/health", "ftp://agente/health", "no es una url"]) {
       const h = await fetchBrainHealth(url, { fetchImpl: fetchImpl as unknown as typeof fetch });
       expect(h).toMatchObject({ reachable: false, host: "", problem: "config" });
     }
@@ -451,12 +451,12 @@ describe("getBrainHealth (caché de 15 s)", () => {
     const c = contador();
     let t = 1_000_000;
     const opts = { fetchImpl: c.fetchImpl, clock: () => t };
-    await getBrainHealth("http://nea:8000/health", opts);
+    await getBrainHealth("http://agente:8000/api/v1/health", opts);
     t += BRAIN_HEALTH_TTL_MS - 1;
-    await getBrainHealth("http://nea:8000/health", opts);
+    await getBrainHealth("http://agente:8000/api/v1/health", opts);
     expect(c.llamadas()).toBe(1);
     t += 2;
-    await getBrainHealth("http://nea:8000/health", opts);
+    await getBrainHealth("http://agente:8000/api/v1/health", opts);
     expect(c.llamadas()).toBe(2);
   });
 
@@ -464,9 +464,9 @@ describe("getBrainHealth (caché de 15 s)", () => {
     const c = contador();
     const opts = { fetchImpl: c.fetchImpl };
     const rs = await Promise.all([
-      getBrainHealth("http://nea:8000/health", opts),
-      getBrainHealth("http://nea:8000/health", opts),
-      getBrainHealth("http://nea:8000/health", opts),
+      getBrainHealth("http://agente:8000/api/v1/health", opts),
+      getBrainHealth("http://agente:8000/api/v1/health", opts),
+      getBrainHealth("http://agente:8000/api/v1/health", opts),
     ]);
     expect(c.llamadas()).toBe(1);
     expect(rs.every((r) => r?.reachable === true)).toBe(true);

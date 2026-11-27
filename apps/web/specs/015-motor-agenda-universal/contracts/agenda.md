@@ -220,7 +220,7 @@ el camino es handoff.
 ### `GET /api/bot/context` → `booking`
 
 > Añadido después de la implementación de 015 (aditivo, sin migración): se
-> porta de la edición cloud, donde se diseñó y se verificó en vivo con Nea.
+> porta de la edición cloud, donde se diseñó y se verificó en vivo con AGENTE-GENERAL.
 
 A diferencia del resto de esta sección, el contexto existe siempre (es de
 `/api/bot/*`, no de la agenda): lo que depende de la bandera es **un campo**.

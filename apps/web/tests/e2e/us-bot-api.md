@@ -4,7 +4,7 @@ Precondición: app corriendo con mocks (`WA_MOCK_ENABLED=true`,
 `META_GRAPH_BASE_URL` → wa-mock), organización creada, conexión WhatsApp
 guardada y `BOT_API_KEY` configurada (≥16 caracteres).
 
-Esta superficie NO la usa el navegador: la usa el cerebro (Nea o un bot propio
+Esta superficie NO la usa el navegador: la usa el cerebro (AGENTE-GENERAL o un bot propio
 del operador), que conduce la conversación sin que el token de WhatsApp salga
 del CRM. Desde la 036 es la única forma de que alguien conteste solo: el CRM no
 trae agente.
@@ -148,7 +148,7 @@ CRM no impone un cuestionario.
 
 La tarjeta de arriba de la pantalla Agente (`GET /api/agent/brain-status`).
 Para los pasos del `/health`, la app corre con `BRAIN_HEALTH_URL` apuntando a
-un puerto local donde el guion levanta una Nea falsa (con credenciales y query
+un puerto local donde el guion levanta una AGENTE-GENERAL falsa (con credenciales y query
 de prueba en la URL).
 
 40. Sin sesión → **401**. Con sesión → `enabled`, `aiConfigured`, `external`,
@@ -157,20 +157,20 @@ de prueba en la URL).
 41. Una llamada a `/api/bot/*` con key equivocada NO mueve
     `external.lastSeenAt`; `GET /api/bot/context` con la key sí, y el cerebro
     externo queda `active: true`.
-42. Con la Nea falsa sana: `health.reachable: true` con `version`, `mode` y
+42. Con la AGENTE-GENERAL falsa sana: `health.reachable: true` con `version`, `mode` y
     `relay.pendientes`; `health.host` es solo el host, y ni las credenciales
-    ni la query de la URL aparecen en la respuesta (a Nea sí le llegan, como
+    ni la query de la URL aparecen en la respuesta (a AGENTE-GENERAL sí le llegan, como
     `Authorization: Basic`). Tres consultas seguidas = cero pedidos nuevos a
-    Nea (caché de 15 s).
+    AGENTE-GENERAL (caché de 15 s).
 43. **036** `doble_respuesta` ya no existe. Sin despacho → `warning:
     "sin_cerebro"` y la tarjeta dice «bandeja manual», sin rojo. Con
     despacho y el interruptor apagado → `warning: "apagado"`; encenderlo lo
     quita.
-44. Con la Nea falsa colgada: en ≤ 4 s la consulta vuelve con
+44. Con la AGENTE-GENERAL falsa colgada: en ≤ 4 s la consulta vuelve con
     `reachable: false`, `problem: "timeout"`; la llamada reciente la sigue
     contando como activa.
 45. En la bandeja, el panel del contacto dice quién contesta: con el cerebro
-    activo y el interruptor encendido, «Responde tu cerebro externo (Nea)»;
+    activo y el interruptor encendido, «Responde tu cerebro externo (AGENTE-GENERAL)»;
     con el cerebro conectado y el interruptor apagado, «Tu agente está
     conectado pero apagado: contestas tú»; sin cerebro, «Bandeja manual: sin
     agente conectado, contestas tú». En ningún caso pide la clave de IA.

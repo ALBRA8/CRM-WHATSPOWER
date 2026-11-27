@@ -1,5 +1,5 @@
 # ============================================================
-# Vocero CRM — Ruta B: app + Postgres + Caddy (HTTPS automático)
+# Vestro CRM — Ruta B: app + Postgres + Caddy (HTTPS automático)
 # Uso:        pnpm init-env --domain tu.dominio  →  pnpm doctor  →  docker compose up -d
 #             (sin Node: cp .env.example .env y rellenar a mano)
 # Actualizar: git pull  →  docker compose up -d
@@ -17,7 +17,7 @@
 # Lo que construyes queda en tu máquina con este mismo nombre de imagen. En un
 # fork con cambios propios usa siempre --build (o cambia `image:` por un
 # nombre tuyo): sin él, Compose puede correr la imagen oficial en vez de tus
-# cambios. Otra versión publicada: VOCERO_CRM_VERSION=X.Y.Z en tu .env.
+# cambios. Otra versión publicada: VESTRO_CRM_VERSION=X.Y.Z en tu .env.
 #
 # SEGURIDAD (oct-2026): las imágenes publicadas hasta la 2.5.2 traen next
 # 15.5.27, sharp 0.34.5 y Node 22.23.3, vulnerables a RCE sin autenticación en
@@ -25,10 +25,10 @@
 # decodificador Brotli de Node (CVE-2026-111497). La 2.5.3 ya trae next
 # 15.5.28, sharp 0.35.5 y node:22.23.4-alpine: usa la 2.5.3 o una posterior.
 #
-# 2.0 — El agente (Nea) es un servicio al lado del CRM, sobre la MISMA base
-# en su esquema `nea`, y se levanta con todo lo demás. El CRM le despacha cada
-# ráfaga a http://nea:8000 y Nea contesta por /api/bot/*, con la BOT_API_KEY
-# del .env (`pnpm init-env` la genera). Nea no lleva llave de IA: piensa por
+# 2.0 — El agente (AGENTE-GENERAL) es un servicio al lado del CRM, sobre la MISMA base
+# en su esquema `agente`, y se levanta con todo lo demás. El CRM le despacha cada
+# ráfaga a http://agente:8000 y AGENTE-GENERAL contesta por /api/bot/*, con la BOT_API_KEY
+# del .env (`pnpm init-env` la genera). AGENTE-GENERAL no lleva llave de IA: piensa por
 # el CRM con la de Ajustes → IA (036). Para conectar otro cerebro, cambia
 # BRAIN_DISPATCH_URL y BRAIN_HEALTH_URL en el .env; para no usar ninguno
 # (bandeja manual), déjalas vacías: BRAIN_DISPATCH_URL= y BRAIN_HEALTH_URL=.
@@ -45,12 +45,12 @@
 # ============================================================
 services:
   app:
-    image: ghcr.io/kevinrivm/vocero-crm:${VOCERO_CRM_VERSION:-2.12.0}
+    image: ghcr.io/albra8/crm-whatpower:${VESTRO_CRM_VERSION:-2.12.0}
     build: .
     restart: unless-stopped
     environment:
       APP_BASE_URL: ${APP_BASE_URL}
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/vocero
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/vestro
       BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       META_WEBHOOK_VERIFY_TOKEN: ${META_WEBHOOK_VERIFY_TOKEN}
@@ -68,10 +68,10 @@ services:
       AGENDA: ${AGENDA:-}
       ATRIBUCION: ${ATRIBUCION:-}
       BOT_API_KEY: ${BOT_API_KEY:-}
-      # 2.0 — El cerebro: por defecto, el servicio `nea` de abajo. Con la
+      # 2.0 — El cerebro: por defecto, el servicio `agente` de abajo. Con la
       # variable definida pero vacía en el .env, ninguno (bandeja manual).
-      BRAIN_HEALTH_URL: ${BRAIN_HEALTH_URL-http://nea:8000/health}
-      BRAIN_DISPATCH_URL: ${BRAIN_DISPATCH_URL-http://nea:8000/vocero/dispatch}
+      BRAIN_HEALTH_URL: ${BRAIN_HEALTH_URL-http://agente:8000/health}
+      BRAIN_DISPATCH_URL: ${BRAIN_DISPATCH_URL-http://agente:8000/crm/dispatch}
       # 037 — Vacía = disco. `bucket` + las MEDIA_BUCKET_* = el bucket; con el
       # perfil `bucket`, MEDIA_BUCKET_ENDPOINT=http://minio:9000.
       MEDIA_STORE: ${MEDIA_STORE:-}
@@ -83,29 +83,29 @@ services:
     volumes:
       # Adjuntos, logo e icono (la imagen ya trae MEDIA_DIR=/data/media): sin
       # este volumen se pierden al recrear el contenedor.
-      - vocero_app_data:/data
+      - vestro_app_data:/data
     depends_on:
       postgres:
         condition: service_healthy
     # el HEALTHCHECK vive en el Dockerfile (/api/health)
 
-  # 035 — El agente. Misma base que el CRM, en su esquema `nea`: el par no
+  # 035 — El agente. Misma base que el CRM, en su esquema `agente`: el par no
   # pide una segunda base. La llave del despacho es BOT_API_KEY, la misma
-  # con la que Nea le contesta al CRM. Sin dominio público: el CRM le habla
+  # con la que AGENTE-GENERAL le contesta al CRM. Sin dominio público: el CRM le habla
   # por la red interna.
-  nea:
-    image: ghcr.io/kevinrivm/nea-agent:${NEA_VERSION:-2.0.2}
+  agente:
+    image: ghcr.io/albra8/agente-general:${AGENTE_VERSION:-0.1.0}
     restart: unless-stopped
     environment:
       CRM_BASE_URL: http://app:3000
       CRM_BOT_API_KEY: ${BOT_API_KEY:-}
-      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/vocero
-      DATABASE_SCHEMA: nea
-      # 036 — Sin LLM_API_KEY: Nea piensa por el CRM (/api/bot/llm) con la
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/vestro
+      DATABASE_SCHEMA: agente
+      # 036 — Sin LLM_API_KEY: AGENTE-GENERAL piensa por el CRM (/api/bot/llm) con la
       # llave de Ajustes → IA y el modelo que elegiste ahí. Este es solo el
       # de respaldo, si el CRM todavía no tiene modelo.
       LLM_MODEL: ${OPENROUTER_MODEL:-z-ai/glm-5.3-flash}
-      # Mientras pruebas: tu número. Vacía = Nea le contesta a todos.
+      # Mientras pruebas: tu número. Vacía = AGENTE-GENERAL le contesta a todos.
       ALLOWED_WA_IDS: ${ALLOWED_WA_IDS:-}
     depends_on:
       postgres:
@@ -117,11 +117,11 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: vocero
+      POSTGRES_DB: vestro
     volumes:
-      - vocero_pg:/var/lib/postgresql/data
+      - vestro_pg:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d vocero"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d vestro"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -141,7 +141,7 @@ services:
       MINIO_ROOT_USER: ${MEDIA_BUCKET_KEY_ID:-}
       MINIO_ROOT_PASSWORD: ${MEDIA_BUCKET_SECRET:-}
     volumes:
-      - vocero_minio:/data
+      - vestro_minio:/data
     healthcheck:
       test: ["CMD", "mc", "ready", "local"]
       interval: 10s
@@ -156,7 +156,7 @@ services:
     environment:
       KEY_ID: ${MEDIA_BUCKET_KEY_ID:-}
       SECRET: ${MEDIA_BUCKET_SECRET:-}
-      BUCKET: ${MEDIA_BUCKET_NAME:-vocero}
+      BUCKET: ${MEDIA_BUCKET_NAME:-vestro}
     entrypoint: ["/bin/sh", "-c", "mc alias set local http://minio:9000 \"$$KEY_ID\" \"$$SECRET\" && mc mb --ignore-existing \"local/$$BUCKET\""]
     depends_on:
       minio:
@@ -172,8 +172,8 @@ services:
       DOMAIN: ${DOMAIN}
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      - vocero_caddy_data:/data
-      - vocero_caddy_config:/config
+      - vestro_caddy_data:/data
+      - vestro_caddy_config:/config
     depends_on:
       - app
     healthcheck:
@@ -183,8 +183,8 @@ services:
       retries: 5
 
 volumes:
-  vocero_pg:
-  vocero_app_data:
-  vocero_minio:
-  vocero_caddy_data:
-  vocero_caddy_config:
+  vestro_pg:
+  vestro_app_data:
+  vestro_minio:
+  vestro_caddy_data:
+  vestro_caddy_config:

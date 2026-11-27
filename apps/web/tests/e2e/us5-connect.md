@@ -36,7 +36,7 @@
    intacta).
 6. Webhook GET handshake con verify token correcto → challenge; segmento
    incorrecto → 404 (cubierto también en guion US1).
-7. La WABA ya enruta a un override (cerebro externo como Nea, o el backend de
+7. La WABA ya enruta a un override (cerebro externo como AGENTE-GENERAL, o el backend de
    una agencia) → rotar el token y Guardar.
    ✅ Guarda igual, y el override SIGUE en `GET {WABA}/subscribed_apps`: el CRM
    lo consulta antes y no re-suscribe, porque en Meta un POST sin cuerpo borra

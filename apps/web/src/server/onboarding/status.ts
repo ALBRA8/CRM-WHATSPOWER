@@ -9,7 +9,7 @@ import { getBrainHealth } from "@/server/bot/status";
 /**
  * Qué le falta a esta instancia para que el agente conteste (issue #86).
  *
- * Puerto de `onboarding/status.ts` de Vocero Cloud recortado a lo que la raíz
+ * Puerto de `onboarding/status.ts` de Vestro Cloud recortado a lo que la raíz
  * tiene: el perfil del agente, la credencial de IA (la fila de Ajustes → IA
  * o, de respaldo, `OPENROUTER_*` del entorno), el número de WhatsApp y, solo
  * con `AGENDA=on`, la agenda. Nada de modelo de plataforma, dueño invitado,
@@ -138,7 +138,7 @@ type Perfil = { name: string; instructions: string | null; enabled: boolean };
 
 /**
  * 036 — «Conecta tu agente». El CRM ya no trae agente: contesta el cerebro al
- * que se le despacha (Nea u otro). La dirección vive en el entorno
+ * que se le despacha (AGENTE-GENERAL u otro). La dirección vive en el entorno
  * (`BRAIN_DISPATCH_URL`, spec 036 D3), así que el paso no tiene pantalla a la
  * que llevar: dice qué falta y lleva a la guía. Listo cuando el despacho está
  * configurado y el `/health` del cerebro contesta.
@@ -151,7 +151,7 @@ async function pasoCerebro(): Promise<ReadinessStep> {
       ...base,
       status: "pending",
       nextAction:
-        "Levanta tu agente (Nea) al lado del CRM y pon BRAIN_DISPATCH_URL y BOT_API_KEY en el entorno",
+        "Levanta tu agente (AGENTE-GENERAL) al lado del CRM y pon BRAIN_DISPATCH_URL y BOT_API_KEY en el entorno",
       problem:
         despacho.problem === "url"
           ? "BRAIN_DISPATCH_URL no es una dirección válida."

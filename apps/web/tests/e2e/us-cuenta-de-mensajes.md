@@ -1,4 +1,4 @@
-# Guion E2E — 065: la Cuenta de mensajes y las plantillas creadas fuera de Vocero
+# Guion E2E — 065: la Cuenta de mensajes y las plantillas creadas fuera de Vestro
 
 > Automatizado en `scripts/e2e-cuenta-de-mensajes.mjs` (36 checks):
 > `pnpm test:e2e:cuenta-de-mensajes` con la app viva y el wa-mock encendido.
@@ -7,7 +7,7 @@
 El wa-mock parte una cuenta de WhatsApp como Meta desde 2026
 (`POST /api/dev/wa-mock/cuenta-de-mensajes`): pedirle plantillas responde
 `#100` subcode `2388339`, y solo la Cuenta de mensajes las acepta. La misma
-llamada siembra plantillas creadas fuera de Vocero, más de 100 para forzar la
+llamada siembra plantillas creadas fuera de Vestro, más de 100 para forzar la
 segunda página.
 
 ## Sin la Cuenta de mensajes

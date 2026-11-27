@@ -106,7 +106,7 @@ tres responden 403 a quien no sea propietario.
 
 | Qué | Dónde |
 |---|---|
-| Vincular las redes desde Vocero (OAuth) | No: se vinculan en Zernio, con la cuenta del negocio |
+| Vincular las redes desde Vestro (OAuth) | No: se vinculan en Zernio, con la cuenta del negocio |
 | Texto sin formato de WhatsApp en redes y ventana humana | Spec 024 |
 | Filtro de la bandeja por canal y estados vacíos | Spec 028 |
 | Alertas cuando un canal se cae | No se porta (spec 129 de megaparty) |
@@ -149,7 +149,7 @@ tres responden 403 a quien no sea propietario.
 - Los guiones existentes (`e2e-messenger`, `e2e-tiktok`, `e2e-despacho`,
   `e2e-selftest`) siguen en verde con el simulador ampliado.
 - **Interfaz**: las tres pantallas en local, claro y oscuro.
-- **En vivo** (Principio IX): en la instancia `vocero-clase`, reconectar
+- **En vivo** (Principio IX): en la instancia `vestro-clase`, reconectar
   Instagram y Messenger por la API con la llave real, ver el webhook de Zernio
   actualizado y limitado, recibir el evento de prueba firmado por Zernio (200)
   y uno con la firma rota (401), y leer el estado de los canales. Un mensaje

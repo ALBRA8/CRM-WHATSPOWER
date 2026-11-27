@@ -27,7 +27,7 @@ export function origenPublico(): string {
 export function enlacesOpenRouter(origen: string): Enlace[] {
   return [
     { titulo: "Crear la llave en OpenRouter (Keys → Create key)", url: OPENROUTER.llaves },
-    { titulo: "Cargar saldo en OpenRouter (el consumo se cobra ahí, aparte de Vocero)", url: OPENROUTER.saldo },
+    { titulo: "Cargar saldo en OpenRouter (el consumo se cobra ahí, aparte de Vestro)", url: OPENROUTER.saldo },
     { titulo: "Pegar la llave en el CRM: Ajustes → IA (o con save_ai_key)", url: `${origen}/settings/ai` },
   ];
 }
@@ -61,7 +61,7 @@ function enlacesDe(s: ReadinessStep, origen: string): Enlace[] {
   if (s.key === "ai") return enlacesOpenRouter(origen);
   // El agente (cerebro) se conecta en el despliegue, no en una pantalla: la
   // receta del par dice cómo (BRAIN_DISPATCH_URL + BOT_API_KEY).
-  if (s.key === "brain") return [{ titulo: "Cómo conectar tu agente (Nea u otro)", url: GUIA_DEL_PAR }];
+  if (s.key === "brain") return [{ titulo: "Cómo conectar tu agente (AGENTE-GENERAL u otro)", url: GUIA_DEL_PAR }];
   if (!s.href) return [];
   return [{ titulo: `Abrir en el CRM: ${PANTALLA[s.href] ?? s.label}`, url: `${origen}${s.href}` }];
 }

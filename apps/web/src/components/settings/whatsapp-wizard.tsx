@@ -630,7 +630,7 @@ function WebhookCard({
               {registering ? "Registrando…" : "Registrar en Meta"}
             </Button>
             {registration && <RegistrationNotice registration={registration} />}
-            {/* 035 — Quien venía con Nea 1.x delante del CRM: el webhook vive en
+            {/* 035 — Quien venía con AGENTE-GENERAL 1.x delante del CRM: el webhook vive en
                 un override ajeno de la WABA y el registro normal lo respeta. */}
             {registration?.ok && "skipped" in registration && (
               <Button

@@ -29,7 +29,7 @@ import {
  * si el contenedor se reinicia, los pendientes siguen ahí y el arranque los
  * reanuda (`instrumentation-node.ts`).
  *
- * Puerto de `src/server/dispatch/worker.ts` de Vocero Cloud.
+ * Puerto de `src/server/dispatch/worker.ts` de Vestro Cloud.
  */
 
 /**
@@ -62,19 +62,19 @@ type Estado = {
 // ruta) y todas las copias deben compartir el mismo worker: dos temporizadores
 // sobre el mismo outbox se pisarían el lease.
 const globalForWorker = globalThis as unknown as {
-  __voceroDispatchWorker?: Estado;
+  __vestroDispatchWorker?: Estado;
 };
 
 function estado(): Estado {
-  if (!globalForWorker.__voceroDispatchWorker) {
-    globalForWorker.__voceroDispatchWorker = {
+  if (!globalForWorker.__vestroDispatchWorker) {
+    globalForWorker.__vestroDispatchWorker = {
       timer: null,
       corriendo: false,
       cita: null,
       citaEn: null,
     };
   }
-  return globalForWorker.__voceroDispatchWorker;
+  return globalForWorker.__vestroDispatchWorker;
 }
 
 export function iniciarWorker(): void {
@@ -202,7 +202,7 @@ async function procesar(fila: FilaDespacho): Promise<void> {
    *
    * Pasa cuando lo que lo provocó ya lo contestó una persona dentro de la
    * ventana. No es una caída del cerebro: mandárselo vacío sería pedirle un
-   * turno sobre nada —Nea lo rechaza con 422—, y un 4xx no se reintenta: la
+   * turno sobre nada —AGENTE-GENERAL lo rechaza con 422—, y un 4xx no se reintenta: la
    * conversación acabaría con un humano por un fallo que no existió.
    */
   if (evento.messages.length === 0) {

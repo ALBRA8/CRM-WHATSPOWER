@@ -28,7 +28,7 @@ export function isBotKeyConfigured(): boolean {
 }
 
 /**
- * Presupuesto del cerebro AUTENTICADO: 1200/min (20/s sostenidos). Nea hace
+ * Presupuesto del cerebro AUTENTICADO: 1200/min (20/s sostenidos). AGENTE-GENERAL hace
  * ~4-10 llamadas por turno de cliente (contexto, "escribiendo…", 1-3
  * mensajes y, cuando aplica, ficha, handoff, agenda o adjuntos): alcanza para
  * 120-300 turnos por minuto, por encima del pico de un solo negocio. Un

@@ -6,8 +6,8 @@
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: cuarta pieza de la 2.0.0 (`PLAN-2.0.md`): kevinrivm/vocero-crm#92.
-Kevin autorizó en el chat del 2026-10-20 mergear la 034 y seguir con la #92.
+**Input**: cuarta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#92.
+el propietario del producto autorizó en el chat del 2026-10-20 mergear la 034 y seguir con la #92.
 
 **Carril**: ciclo completo (Principio VI). Publica el contrato del par y
 cambia cómo se instala (el compose levanta dos servicios). Plan en
@@ -15,10 +15,10 @@ cambia cómo se instala (el compose levanta dos servicios). Plan en
 
 ## Problema
 
-Con el agente fuera del CRM, el contrato es lo único que une a Vocero con Nea
+Con el agente fuera del CRM, el contrato es lo único que une a Vestro con AGENTE-GENERAL
 o con cualquier otro cerebro. Hoy vive en docstrings de rutas, en el README y
 en `specs/021-despacho-estandar/contracts/despacho.md`. Y quien actualiza no
-tiene una guía: depende de dónde viene. Además, quien tenía Nea 1.x delante
+tiene una guía: depende de dónde viene. Además, quien tenía AGENTE-GENERAL 1.x delante
 del CRM tiene el webhook de Meta en un override que el CRM respeta y no puede
 recuperar desde la interfaz.
 
@@ -30,7 +30,7 @@ de `/api/bot/*` y del despacho, en el repo y servido por la instancia.
 **H2 — El contrato no se rompe sin que una prueba lo diga.** El OpenAPI se
 valida contra las rutas en `pnpm test`.
 
-**H3 — Quien venía con Nea 1.x recupera el webhook desde Ajustes → WhatsApp.**
+**H3 — Quien venía con AGENTE-GENERAL 1.x recupera el webhook desde Ajustes → WhatsApp.**
 
 **H4 — Instalar el par es un solo `docker compose up`.**
 
@@ -72,23 +72,23 @@ recién recuperado (la regla que protege a una agencia). Quitar el de la WABA
 es lo que hace que la recuperación dure.
 
 **D6 — El compose levanta el par.** `docker-compose.yml` suma el servicio
-`nea` (`ghcr.io/kevinrivm/nea-agent:${NEA_VERSION:-2.0.0}`) sobre la **misma
-base**, en su esquema `nea`. El CRM despacha a `http://nea:8000` por defecto y
-le lee el `/health`. Nea pide su llave de IA (`LLM_API_KEY`) hasta que la #106
-la mueva al CRM. *Decidido al implementar:* mientras la imagen de Nea 2.0.0
-no esté publicada, el servicio va detrás del perfil `nea`
-(`docker compose --profile nea up -d`) y el bloque de Render va comentado:
+`agente` (`ghcr.io/ALBRA8/AGENTE-GENERAL:${AGENTE_VERSION:-2.0.0}`) sobre la **misma
+base**, en su esquema `agente`. El CRM despacha a `http://agente:8000` por defecto y
+le lee el `/health`. AGENTE-GENERAL pide su llave de IA (`LLM_API_KEY`) hasta que la #106
+la mueva al CRM. *Decidido al implementar:* mientras la imagen de AGENTE-GENERAL 2.0.0
+no esté publicada, el servicio va detrás del perfil `agente`
+(`docker compose --profile agente up -d`) y el bloque de Render va comentado:
 con la imagen por defecto, un `git pull && docker compose up` desde `main`
 antes del cierre fallaría. En el cierre de la 2.0 se quita el perfil. `render.yaml` gana el segundo servicio; en Fly y Railway, que
-despliegan una app por manifiesto, los comentarios dicen cómo levantar a Nea
+despliegan una app por manifiesto, los comentarios dicen cómo levantar a AGENTE-GENERAL
 al lado.
 
 **D7 — La guía**: `docs/migrar-a-2.0.md`, con los tres casos del issue (solo
-el agente incluido, Nea 1.x delante, cerebro propio), los pasos con «Recuperar
-el webhook», y lo que se quitó de Nea. El README y `INSTALL-IA.md` dejan de
-decir «mueve el webhook a Nea» y enlazan al OpenAPI y a la guía.
+el agente incluido, AGENTE-GENERAL 1.x delante, cerebro propio), los pasos con «Recuperar
+el webhook», y lo que se quitó de AGENTE-GENERAL. El README y `INSTALL-IA.md` dejan de
+decir «mueve el webhook a AGENTE-GENERAL» y enlazan al OpenAPI y a la guía.
 
-**D8 — Fuera**: el starter (`vocero-starter-v2`, otro repo) se actualiza en
+**D8 — Fuera**: el starter (`vestro-starter-v2`, otro repo) se actualiza en
 el cierre de la 2.0 (starter 3.0.0); el retiro del agente incluido es la #106.
 
 ## Criterios de aceptación
@@ -102,11 +102,11 @@ el cierre de la 2.0 (starter 3.0.0); el retiro del agente incluido es la #106.
   el registro normal se salta; recuperarlo quita el de la WABA y deja el del
   número hacia el CRM; un «Guardar» posterior no lo deshace; un miembro del
   equipo recibe 403.
-- **AC4** — `docker compose --profile nea config` válido con los dos
-  servicios (Nea con `DATABASE_SCHEMA=nea` sobre la misma base y
+- **AC4** — `docker compose --profile agente config` válido con los dos
+  servicios (AGENTE-GENERAL con `DATABASE_SCHEMA=agente` sobre la misma base y
   `CRM_BASE_URL=http://app:3000`), y sin el perfil, el compose de siempre.
 - **AC5** — Gates verdes; `manifests-plataformas` en verde.
-- **AC6** — En vivo: `vocero20` sirve el OpenAPI; y «Recuperar el webhook» en
+- **AC6** — En vivo: `vestro20` sirve el OpenAPI; y «Recuperar el webhook» en
   una prueba con el número «Soporte», devolviendo el override al terminar.
 
 ## Constitution Check
@@ -114,6 +114,6 @@ el cierre de la 2.0 (starter 3.0.0); el retiro del agente incluido es la #106.
 | Principio | Cómo se cumple |
 |---|---|
 | I Seguridad | El OpenAPI no lleva secretos; recuperar el webhook exige rol de configuración y usa el token cifrado del negocio |
-| II Soberanía | El compose agrega Nea, que es MIT y self-hosted; ningún tercero |
+| II Soberanía | El compose agrega AGENTE-GENERAL, que es MIT y self-hosted; ningún tercero |
 | VI Spec antes de código | Este documento |
 | IX Hecho = probado en vivo | AC6 |

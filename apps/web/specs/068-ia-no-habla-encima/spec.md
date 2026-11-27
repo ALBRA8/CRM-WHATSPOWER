@@ -8,8 +8,8 @@
 `tests/unit/responder-citando.test.ts`) y arneses E2E
 (`scripts/e2e-despacho.mjs`, `scripts/e2e-responder-citando.mjs`) en verde.
 
-**Input**: Kevin, el 2026-11-22. Tres arreglos que ya corren en instancias
-derivadas de Vocero y que el raíz no tenía. Se reescriben aquí; no se copia
+**Input**: el propietario del producto, el 2026-11-22. Tres arreglos que ya corren en instancias
+derivadas de Vestro y que el raíz no tenía. Se reescriben aquí; no se copia
 código ni texto de esas instancias.
 
 **Carril**: ligero (Principio VI). Sin tabla, migración, variable ni cambio de
@@ -18,7 +18,7 @@ rechaza con `ai_paused` una conversación en pausa.
 
 **Fuera de alcance**: rechazar el turno de un despacho superado (el cerebro
 contesta una ráfaga vieja cuando ya llegó otra). Cambia el contrato con el
-cerebro y va en una spec propia, junto con su lado en Nea.
+cerebro y va en una spec propia, junto con su lado en AGENTE-GENERAL.
 
 ## Problema
 

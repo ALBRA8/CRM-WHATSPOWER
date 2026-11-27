@@ -62,7 +62,7 @@ Con `AGENDA=on`, las mismas rutas responden con normalidad, y el contexto trae
 ## US3b — Un día concreto (huecos por fecha)
 
 Un lead propio, al final de la sección 015 del arnés, que pregunta «¿tienen
-algo mañana en la tarde?». En la prueba de punta a punta raíz + Nea, sin esto,
+algo mañana en la tarde?». En la prueba de punta a punta raíz + AGENTE-GENERAL, sin esto,
 el cerebro solo veía las tres primeras horas de mañana y contestó que solo
 había mañana.
 

@@ -6,7 +6,7 @@
 > 036 — El Laboratorio prueba al agente conectado: las personas le escriben
 > por el despacho (`conversation.test = true`, 033) y el cerebro contesta por
 > `/api/bot/messages`, que guarda la respuesta sin enviarla. Hace falta la app
-> con `BRAIN_DISPATCH_URL` + `BOT_API_KEY` hacia un cerebro (Nea apuntando al
+> con `BRAIN_DISPATCH_URL` + `BOT_API_KEY` hacia un cerebro (AGENTE-GENERAL apuntando al
 > ai-mock, o el cerebro del arnés de `scripts/e2e-despacho.mjs`). El juez usa
 > la llave de Ajustes → IA. El score esperado depende del cerebro; los números
 > de abajo son los del cerebro del arnés.

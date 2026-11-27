@@ -1,9 +1,9 @@
-# AGENTS.md — Guía de Vocero CRM para agentes y personas
+# AGENTS.md — Guía de Vestro CRM para agentes y personas
 
-Vocero es un CRM de WhatsApp open source (MIT) y self-hosted: bandeja en tiempo
+Vestro es un CRM de WhatsApp open source (MIT) y self-hosted: bandeja en tiempo
 real, pipeline kanban, el perfil y el conocimiento del agente, y un Laboratorio
 donde clientes simulados lo evalúan antes de hablar con clientes reales. Desde la
-2.0 el CRM no trae agente (036): contesta un cerebro conectado al lado (Nea u
+2.0 el CRM no trae agente (036): contesta un cerebro conectado al lado (AGENTE-GENERAL u
 otro) por el despacho y `/api/bot/*`. Sin cerebro, es un CRM de bandeja manual.
 Esta guía sirve igual para Claude Code, Codex, OpenCode o una persona: no depende
 de skills, scripts ni plugins de ningún asistente.
@@ -29,7 +29,7 @@ de skills, scripts ni plugins de ningún asistente.
 | Tiempo real | SSE en `GET /api/events` sobre un bus in-process (`src/server/events/bus.ts`); sin WebSockets ni colas: el trabajo en segundo plano corre dentro del proceso |
 | UI | Tailwind CSS con tokens en `src/app/globals.css`, tema claro/oscuro, white-label por organización |
 | Pruebas | Vitest (`tests/unit/`) + guiones E2E (`tests/e2e/*.md`) conducidos por `scripts/e2e-*.mjs` (fetch y, algunos, Playwright) contra la app con mocks |
-| Imagen | Docker multi-stage standalone, healthcheck `/api/health`, publicada en `ghcr.io/kevinrivm/vocero-crm:X.Y.Z` por `.github/workflows/imagen.yml` |
+| Imagen | Docker multi-stage standalone, healthcheck `/api/health`, publicada en `ghcr.io/albra8/crm-whatpower:X.Y.Z` por `.github/workflows/imagen.yml` |
 
 ## Cómo correrlo
 
@@ -85,7 +85,7 @@ Apagada, cada superficie responde 404 (no 403). El despliegue en producción est
 | `ai/` | Ya no hay turno dentro del proceso (036). Queda la credencial del proveedor de IA por organización (cifrada; estado `active` o pausada por 401/402), lo que valida y devuelve Ajustes → IA, el aviso de «sin IA» y, de `prompts.ts`, solo `renderKb` (el conocimiento para el perfil) y el prompt del juez (`JUDGE_MARKER`, `buildJudgePrompt`) | `credentials.ts`, `settings.ts`, `aviso.ts`, `prompts.ts` |
 | `api-v1/` | 069 — La API pública: bandera, llaves (solo sha256), la puerta `withApiKey` (la organización sale de la credencial; permisos `read`/`operate`/`send`/`configure` recortados al rol vigente), la puerta de Ajustes → API y el contrato `openapi.json` (una prueba exige que liste exactamente las rutas) | `flag.ts`, `llaves.ts`, `acceso.ts`, `handler.ts`, `ajustes.ts`, `docs.ts` |
 | `http/` | 069 — Los handlers que comparten la UI (`withAuth` en `src/app/api/*`) y la API v1 (`withApiKey` en `src/app/api/v1/*`): una regla cambia en un solo lugar. `enlaces.ts` arma los pendientes con sus enlaces | `compartido.ts`, `enlaces.ts`, `agent-simulate.ts` |
-| `mcp/` | 069 — Servidor MCP sin estado sobre la v1: cada herramienta arma una petición y la pasa al handler de la ruta v1 con la misma credencial; guías `configurar_vocero` y `probar_agente` (iguales a las skills de `plugin/vocero/`) | `servidor.ts`, `herramientas.ts`, `configuracion.ts`, `guia.ts`, `guia-probar.ts` |
+| `mcp/` | 069 — Servidor MCP sin estado sobre la v1: cada herramienta arma una petición y la pasa al handler de la ruta v1 con la misma credencial; guías `configurar_vestro` y `probar_agente` (iguales a las skills de `plugin/vestro/`) | `servidor.ts`, `herramientas.ts`, `configuracion.ts`, `guia.ts`, `guia-probar.ts` |
 | `oauth/` | 069 — OAuth 2.1 mínimo para conectar el MCP desde claude.ai o ChatGPT: emisor = `APP_BASE_URL`, registro dinámico, PKCE S256, refresco que rota; los tokens `vat_` pasan por la misma puerta que las llaves | `nucleo.ts`, `servidor.ts`, `puerta.ts`, `autorizar.ts` |
 | `analytics/` | Números de Resultados (ventas, agente, anuncios, higiene) agregados en SQL; excluye el Laboratorio | `sales.ts`, `bot.ts`, `ads.ts`, `hygiene.ts`, `shared.ts` |
 | `attribution/` | De qué anuncio llegó cada conversación y reporte a la CAPI tras `ATRIBUCION` | `referral.ts`, `store.ts`, `conversions.ts`, `flag.ts` |
@@ -126,7 +126,7 @@ Sueltos: `notas.ts` (050: notas internas del hilo, en su propia tabla para que n
 | `scripts/` | `e2e-*.mjs` (arneses de los guiones), `migrate.mjs` (migrador del contenedor), `seed/demo.ts`, `reset-password.mjs` (imprime el `UPDATE`, no toca la BD), `screenshots.mjs` |
 | `drizzle/` | `0000…0025_*.sql` + `meta/` (snapshots y `_journal.json`). Se genera, nunca se edita a mano. A la imagen viajan solo los `.sql` y `_journal.json`: el migrador no abre los snapshots (`.dockerignore`) |
 | `specs/` | Specs por feature (001, 002, 003, 014–030) con sus contratos; `specs/README.md` explica qué hay y qué no |
-| `docs/` | ADR-001/002, `agenda-conectores.md`, `atribucion-capi.md`, capturas del README. (`getting-started.md`, `sdd-workflow.md`, `three-agent-architecture.md` y `mcp-setup.md` describen el starter de Claude Code, no Vocero) |
+| `docs/` | ADR-001/002, `agenda-conectores.md`, `atribucion-capi.md`, capturas del README. `agenda-conectores.md` y `atribucion-capi.md` documentan conectores y CAPI |
 
 ## Flujo de una petición: un mensaje de WhatsApp
 
@@ -137,7 +137,7 @@ Sueltos: `notas.ts` (050: notas internas del hilo, en su propia tabla para que n
 5. Los `statuses` del webhook pasan por `inbox/status.ts` (nunca degradan) y salen como `message.status`.
 6. `GET /api/events` (`src/app/api/events/route.ts`) emite los eventos de la organización; `src/components/use-events.ts` los recibe y la bandeja hace catch-up con `since=`.
 
-La ráfaga del despacho es lo posterior al último saliente más lo que el despacho tiene anotado como debido (`dispatch.message_ids`): lo que el cliente escribió mientras el cerebro pensaba viaja aunque ya haya una respuesta después (025). Vale igual para Instagram, Messenger y TikTok: todos los canales pasan por `ingestInboundMessage`. Sin despacho, un cerebro también puede recibir el webhook por su cuenta y conversar por `/api/bot/*` (el modo de Nea 1.x).
+La ráfaga del despacho es lo posterior al último saliente más lo que el despacho tiene anotado como debido (`dispatch.message_ids`): lo que el cliente escribió mientras el cerebro pensaba viaja aunque ya haya una respuesta después (025). Vale igual para Instagram, Messenger y TikTok: todos los canales pasan por `ingestInboundMessage`. Sin despacho, un cerebro también puede recibir el webhook por su cuenta y conversar por `/api/bot/*` (el modo de AGENTE-GENERAL 1.x).
 
 ## Invariantes al modificar
 
@@ -155,7 +155,7 @@ La ráfaga del despacho es lo posterior al último saliente más lo que el despa
 - **Bandeja primero, cerebro después**: un despacho se encola solo cuando el mensaje ya está guardado. Lo que falle después no pierde el mensaje; lo deja con una persona.
 - **«Sin responder» no es «sin entregar»** (025): quien lleva el turno anota el id del entrante que lo provoca —el despacho, en `dispatch.message_ids`— y lo debe hasta que el cerebro lo reciba o una persona conteste. Un saliente del agente no salda un mensaje que no leyó; uno de una persona (`ai_generated = false`) sí. Un despacho sin mensajes se descarta, nunca se entrega.
 - **Módulos opcionales** van tras bandera, apagados por defecto, con superficie en 404 y migración aplicada igual. Nunca en una rama aparte.
-- **UI con tokens**: colores por variables de `globals.css` mapeadas en `tailwind.config.ts` (`bg-background`, `text-foreground`, `bg-primary`, `text-muted-foreground`…); nada de `text-white` ni hex sueltos salvo colores de marca de terceros. `tests/unit/contraste-temas.test.ts` mide los tokens reales en ambos temas. White-label: ningún «Vocero» cableado en la UI.
+- **UI con tokens**: colores por variables de `globals.css` mapeadas en `tailwind.config.ts` (`bg-background`, `text-foreground`, `bg-primary`, `text-muted-foreground`…); nada de `text-white` ni hex sueltos salvo colores de marca de terceros. `tests/unit/contraste-temas.test.ts` mide los tokens reales en ambos temas. White-label: ningún «Vestro» cableado en la UI.
 - **`route.ts` solo exporta handlers** (`GET`, `POST`… y `dynamic`): la lógica va en `src/server/` para poder probarla; Next rechaza otros exports al construir.
 - **Secretos de canal en reposo** (030): el secreto de firma de Zernio de Instagram, Messenger y TikTok solo se escribe con `columnasDelSecreto` y se lee con `secretoDeLaFila` (`src/server/zernio/secreto-guardado.ts`); la columna `webhook_secret` es obsoleta, nada la escribe y se quita en una versión mayor. Un secreto nuevo en cualquier tabla va en columnas `*_cipher`, `*_iv`, `*_tag` con `src/lib/crypto`, nunca en claro.
 - **Credenciales nuevas**: placeholder `REEMPLAZA_...` en `.env.example` con guía inline; en producción van en la plataforma (runtime, no build).
@@ -181,19 +181,19 @@ La ráfaga del despacho es lo posterior al último saliente más lo que el despa
 
 Documentación: README («Tu agente al lado del CRM»), `docs/migrar-a-2.0.md`, guion `tests/e2e/us-bot-api.md`, pruebas `tests/unit/bot-*.test.ts` y, para la agenda, `specs/015-motor-agenda-universal/contracts/agenda.md`.
 
-**Despacho (CRM → cerebro)** — con `BRAIN_DISPATCH_URL`, un `POST` firmado (`X-Vocero-Signature: sha256=<HMAC-SHA256 del cuerpo crudo con BOT_API_KEY>`, `X-Vocero-Dispatch-Id`, `X-Vocero-Organization`) con la ráfaga de la conversación: `dispatchId`, `organization`, `conversation` (`channel`, ventana), `contact` (`identity`) y `messages`. 2xx = recibido; 429 y 5xx se reintentan (tres intentos); otro 4xx no, y la conversación pasa a un humano (`handoff_reason = error`). `messages` nunca viaja vacío, y un mensaje puede ser anterior a la última respuesta del cerebro (025). Contrato en `specs/021-despacho-estandar/contracts/despacho.md`, guion `tests/e2e/us-despacho.md`, arnés `scripts/e2e-despacho.mjs`.
+**Despacho (CRM → cerebro)** — con `BRAIN_DISPATCH_URL`, un `POST` firmado (`X-Vestro-Signature: sha256=<HMAC-SHA256 del cuerpo crudo con BOT_API_KEY>`, `X-Vestro-Dispatch-Id`, `X-Vestro-Organization`) con la ráfaga de la conversación: `dispatchId`, `organization`, `conversation` (`channel`, ventana), `contact` (`identity`) y `messages`. 2xx = recibido; 429 y 5xx se reintentan (tres intentos); otro 4xx no, y la conversación pasa a un humano (`handoff_reason = error`). `messages` nunca viaja vacío, y un mensaje puede ser anterior a la última respuesta del cerebro (025). Contrato en `specs/021-despacho-estandar/contracts/despacho.md`, guion `tests/e2e/us-despacho.md`, arnés `scripts/e2e-despacho.mjs`.
 
-**Webhooks de entrada** — `GET`/`POST /api/webhooks/wa/[token]` (contrato en `specs/001-vocero-core/contracts/webhook.md`); `/api/webhooks/ig/[token]` y `/api/webhooks/messenger/[token]` aceptan Meta o Zernio por la misma URL y existen solo con su canal en `CHANNELS` (specs 014 y 017); `/api/webhooks/tiktok/[token]` acepta solo Zernio (spec 022). Un evento de Zernio se reparte por plataforma llegue a cuál de las tres llegue, y su firma se verifica en `isAuthenticZernioDelivery` (`src/server/zernio/dispatch.ts`): vale cualquier secreto de Zernio de la organización, o el del webhook que Zernio tiene hacia esta instancia. Tras validar, el evento se guarda y se responde 200; el procesamiento es asíncrono y se reintenta si falla. 047 — Solo si no se pudo guardar se responde 503, para que la fuente reintente (enmienda en `specs/001-vocero-core/contracts/webhook.md`).
+**Webhooks de entrada** — `GET`/`POST /api/webhooks/wa/[token]` (contrato en `specs/001-vestro-core/contracts/webhook.md`); `/api/webhooks/ig/[token]` y `/api/webhooks/messenger/[token]` aceptan Meta o Zernio por la misma URL y existen solo con su canal en `CHANNELS` (specs 014 y 017); `/api/webhooks/tiktok/[token]` acepta solo Zernio (spec 022). Un evento de Zernio se reparte por plataforma llegue a cuál de las tres llegue, y su firma se verifica en `isAuthenticZernioDelivery` (`src/server/zernio/dispatch.ts`): vale cualquier secreto de Zernio de la organización, o el del webhook que Zernio tiene hacia esta instancia. Tras validar, el evento se guarda y se responde 200; el procesamiento es asíncrono y se reintenta si falla. 047 — Solo si no se pudo guardar se responde 503, para que la fuente reintente (enmienda en `specs/001-vestro-core/contracts/webhook.md`).
 
-**`GET /api/health`** — `{"ok":true,"version":"X.Y.Z","commit":"…","commitVerified":true|false,"features":{"agenda":bool,"channels":["whatsapp",…],"atribucion":bool,"media":"disco"|"bucket"},"mediaWritable":bool,"webhooks":{"pendientes":n,"agotados":n}|null}`; 503 `db_unavailable` sin base. 047 — `webhooks` cuenta los eventos de entrada que no han entrado (en reintento y agotados); no baja `ok`. `features` sale de las mismas banderas que deciden los 404 (`AGENDA`, `CHANNELS`, `ATRIBUCION`) y de `MEDIA_STORE`; `mediaWritable: false` no baja `ok` ni el código. **`GET /api/events`** — SSE autenticado por sesión (`specs/001-vocero-core/contracts/sse.md`). La API interna (`specs/001-vocero-core/contracts/api.md`) no es contrato público: la consume solo la UI de este repo.
+**`GET /api/health`** — `{"ok":true,"version":"X.Y.Z","commit":"…","commitVerified":true|false,"features":{"agenda":bool,"channels":["whatsapp",…],"atribucion":bool,"media":"disco"|"bucket"},"mediaWritable":bool,"webhooks":{"pendientes":n,"agotados":n}|null}`; 503 `db_unavailable` sin base. 047 — `webhooks` cuenta los eventos de entrada que no han entrado (en reintento y agotados); no baja `ok`. `features` sale de las mismas banderas que deciden los 404 (`AGENDA`, `CHANNELS`, `ATRIBUCION`) y de `MEDIA_STORE`; `mediaWritable: false` no baja `ok` ni el código. **`GET /api/events`** — SSE autenticado por sesión (`specs/001-vestro-core/contracts/sse.md`). La API interna (`specs/001-vestro-core/contracts/api.md`) no es contrato público: la consume solo la UI de este repo.
 
 ## Cómo contribuir
 
 1. Rama desde `main` (`feat/…`, `fix/…`, `docs/…`, `chore/…`) y PR contra `main`. El autor del proyecto hace los merges.
 2. Antes de abrir el PR: `pnpm typecheck && pnpm lint && pnpm test && pnpm build`. El CI (`.github/workflows/ci.yml`) corre esos cuatro gates en dos configuraciones, banderas apagadas y `CHANNELS` + `AGENDA` encendidas; `imagen.yml` construye la imagen Docker en cada PR.
-3. Comportamiento observable nuevo: amplía o escribe su guion en `tests/e2e/` y, si se puede, su arnés en `scripts/e2e-*.mjs`; córrelo contra la app con mocks (`WA_MOCK_ENABLED=true`, `META_GRAPH_BASE_URL` → `/api/dev/wa-mock/graph`, `OPENROUTER_BASE_URL` → `/api/dev/ai-mock`, `BOT_API_KEY`; receta en `specs/001-vocero-core/quickstart.md`). Prueba también el camino infeliz.
+3. Comportamiento observable nuevo: amplía o escribe su guion en `tests/e2e/` y, si se puede, su arnés en `scripts/e2e-*.mjs`; córrelo contra la app con mocks (`WA_MOCK_ENABLED=true`, `META_GRAPH_BASE_URL` → `/api/dev/wa-mock/graph`, `OPENROUTER_BASE_URL` → `/api/dev/ai-mock`, `BOT_API_KEY`; receta en `specs/001-vestro-core/quickstart.md`). Prueba también el camino infeliz.
 4. Specs (`specs/`): si tocas el modelo de datos o un contrato publicado, ciclo completo en `specs/NNN-nombre/`; comportamiento nuevo sin eso, un `spec.md` ligero; arreglos, refactors y dependencias quedan exentos (Principio VI de la constitución).
-5. Versión y release: sube `version` en `package.json`, el default de `VOCERO_CRM_VERSION` en `docker-compose.yml` (`tests/unit/version.test.ts` exige que coincidan) y la etiqueta de la imagen en `render.yaml`, `fly.toml` y `railway.toml` (`tests/unit/manifests-plataformas.test.ts`), añade la entrada en `CHANGELOG.md` con su «Actualizar desde…» y actualiza la etiqueta de la imagen en `INSTALL-IA.md`. El tag `vX.Y.Z` publica la imagen.
+5. Versión y release: sube `version` en `package.json`, el default de `VESTRO_CRM_VERSION` en `docker-compose.yml` (`tests/unit/version.test.ts` exige que coincidan) y la etiqueta de la imagen en `render.yaml`, `fly.toml` y `railway.toml` (`tests/unit/manifests-plataformas.test.ts`), añade la entrada en `CHANGELOG.md` con su «Actualizar desde…» y actualiza la etiqueta de la imagen en `INSTALL-IA.md`. El tag `vX.Y.Z` publica la imagen.
 6. Dependencias: `pnpm install --frozen-lockfile` debe pasar; un tercero nuevo en el núcleo necesita justificación constitucional (Principio II).
 
 Las instrucciones específicas de Claude Code están en `CLAUDE.md`.

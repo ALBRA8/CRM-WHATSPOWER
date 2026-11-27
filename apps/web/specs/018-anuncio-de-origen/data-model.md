@@ -15,7 +15,7 @@ conversaciones.
 
 Migración `0014`: aditiva y re-ejecutable (`ADD COLUMN IF NOT EXISTS`, la clave
 foránea en bloque `DO`, `CREATE INDEX IF NOT EXISTS`). Mismo nombre de columna
-e índice que la `0023` de Vocero Cloud (spec 212), para que los dos repos
+e índice que la `0023` de Vestro Cloud (spec 212), para que los dos repos
 compartan la forma de la tabla.
 
 ## `media_asset` (sin cambios)

@@ -30,4 +30,3 @@
 ## Verificación (2026-10-13)
 
 Gates, E2E en los dos modos, migración y las dos pruebas en vivo: ver
-[`docs/bitacora-2.0.md`](../../docs/bitacora-2.0.md).

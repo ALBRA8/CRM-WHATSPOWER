@@ -1,7 +1,7 @@
 /**
  * 069 — Herramientas MCP de CONFIGURACIÓN.
  *
- * Son el corazón de «Vocero agent first»: el dueño le pide a Claude «quiero
+ * Son el corazón de «Vestro agent first»: el dueño le pide a Claude «quiero
  * que mi agente agende así» y Claude lo configura con estas herramientas.
  * Igual que las operativas, cada una es una llamada a una ruta de la API v1
  * con la misma credencial: permisos, aislamiento y límites salen de ahí, no
@@ -10,8 +10,8 @@
  * Todas exigen el permiso `configure` (Ajustes → API → «Configurar el
  * agente»), que a su vez exige que quien la creó sea dueño o administrador.
  *
- * Diferencias con Vocero Cloud: la raíz no guarda versiones de la
- * configuración ni recordatorios de citas, y el cerebro (Nea u otro) se
+ * Diferencias con Vestro Cloud: la raíz no guarda versiones de la
+ * configuración ni recordatorios de citas, y el cerebro (AGENTE-GENERAL u otro) se
  * conecta en el despliegue (`BRAIN_DISPATCH_URL`), así que aquí solo se lee.
  */
 import * as profile from "@/app/api/v1/agent/profile/route";
@@ -57,7 +57,7 @@ function resumenListo(json: unknown) {
   const pendientes = r.pendientes ?? [];
   return {
     agenteEncendido: r.enabled ?? false,
-    // «Tu agente» (el cerebro) es opcional: sin él Vocero es una bandeja manual.
+    // «Tu agente» (el cerebro) es opcional: sin él Vestro es una bandeja manual.
     listoParaContestar: pendientes.length === 0,
     pendientes,
     pasos: (r.steps ?? []).map((s) => ({ key: s.key, label: s.label, status: s.status })),

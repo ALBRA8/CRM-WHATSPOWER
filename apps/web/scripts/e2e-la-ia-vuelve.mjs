@@ -3,7 +3,7 @@
  *
  * Conduce la app real con el wa-mock y hace de CEREBRO con el cerebro falso
  * compartido (`scripts/lib/cerebro-falso.mjs`), que contesta cada despacho
- * por `/api/bot/messages` como lo haría Nea. El paso del tiempo se simula
+ * por `/api/bot/messages` como lo haría AGENTE-GENERAL. El paso del tiempo se simula
  * moviendo horas en la base (`DATABASE_URL`): nadie espera 24 horas.
  *
  *   1. Un negocio nuevo nace con 24 h; el ajuste se guarda y valida en la
@@ -216,7 +216,7 @@ async function main() {
 
 async function preparar() {
   console.log("== Setup ==");
-  const email = "e2e@vocero.test";
+  const email = "e2e@vestro.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

@@ -10,7 +10,7 @@
 compartir imágenes sin pasar por el disco: hoy, para mandarle a un cliente la
 foto que mandó otro (o una captura de pantalla), el operador tiene que
 guardarla, buscarla con el clip y adjuntarla. La función ya funciona en el CRM
-de ese negocio; aquí se vuelve a montar sobre el `main` de Vocero 2.0, con el
+de ese negocio; aquí se vuelve a montar sobre el `main` de Vestro 2.0, con el
 almacenamiento de la 037 (disco o bucket S3-compatible).
 
 **Carril**: ligero (Principio VI). Sin migración. Añade una ruta a la API

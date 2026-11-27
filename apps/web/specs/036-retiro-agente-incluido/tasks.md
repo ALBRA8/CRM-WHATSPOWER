@@ -9,5 +9,5 @@
 - [ ] T7 Guía de inicio con «Conecta tu agente»
 - [ ] T8 Ajustes → IA, OpenAPI, compose, docs
 - [ ] T9 E2E: arnés adaptado + `e2e-sin-agente.mjs`
-- [ ] T10 Nea: pensar por el CRM + `/health` + pruebas
+- [ ] T10 AGENTE-GENERAL: pensar por el CRM + `/health` + pruebas
 - [ ] T11 Gates, PRs, rc.7, prueba en vivo, bitácora

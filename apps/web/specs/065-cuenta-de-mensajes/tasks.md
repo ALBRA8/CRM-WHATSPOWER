@@ -1,4 +1,4 @@
-# Tasks: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vocero
+# Tasks: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vestro
 
 **Spec**: [spec.md](spec.md) · **Plan**: [plan.md](plan.md)
 
@@ -12,5 +12,5 @@
 - [x] T008 `tests/unit/cuenta-de-mensajes.test.ts`, `importableTemplate` en `templates.test.ts`, casos 065 en `whatsapp-save-webhook.test.ts`
 - [x] T009 Gates: typecheck, lint, test (y build)
 - [x] T010 `migrar.md`, `specs/README.md`
-- [ ] T011 Verificación en vivo en la instancia del caso real (con el OK de Kevin) y confirmar `paid_messaging_account_id`
+- [ ] T011 Verificación en vivo en la instancia del caso real (con el OK del propietario del producto) y confirmar `paid_messaging_account_id`
 - [x] T012 Ampliar el arnés E2E (wa-mock: responder 2388339 en la cuenta de WhatsApp) y PR — `scripts/e2e-cuenta-de-mensajes.mjs` (36 checks) + guion `tests/e2e/us-cuenta-de-mensajes.md`

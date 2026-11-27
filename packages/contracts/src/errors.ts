@@ -4,8 +4,8 @@
  * Fuente canónica: `CONTEXTO CRM/06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` §7.
  *
  * REGLA DE COMPATIBILIDAD (D-013): los códigos existentes NO se renombran.
- * Los códigos marcados `compat: "vocero"` / `"ecosistema"` / `"agente"`
- * provienen de sistemas ya conectados al contrato VOCERO, a los puentes del
+ * Los códigos marcados `compat: "vestro"` / `"ecosistema"` / `"agente"`
+ * provienen de sistemas ya conectados al contrato VESTRO, a los puentes del
  * ecosistema o al motor del agente, y están congelados por la prueba de vigía
  * `tests/errors.test.ts`.
  */
@@ -15,36 +15,36 @@ import { z } from "zod";
 export const ERROR_CATALOG = {
   ai_paused: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "IA pausada (por ajuste o por fallo de credencial)",
     callerAction: "No reintentar; avisar",
   },
   window_closed: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "Ventana de 24 h cerrada",
     callerAction: "Enviar plantilla aprobada o rendirse",
   },
   sandbox_violation: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "Intento de envío real en conversación is_test",
     callerAction: "Corregir; es un guardrail",
   },
   message_limit: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "El canal no admite más mensajes (p. ej. TikTok)",
     callerAction: "No reintentar",
   },
   sin_cerebro: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "No hay agente conectado/en línea",
     callerAction: "Fallback a bandeja manual",
   },
@@ -57,15 +57,15 @@ export const ERROR_CATALOG = {
   },
   unauthorized_scope: {
     httpStatus: 403,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "Scope insuficiente (read/operate/send/configure)",
     callerAction: "Solicitar scope",
   },
   rate_limited: {
     httpStatus: 429,
     origin: "todos",
-    compat: "vocero",
+    compat: "vestro",
     meaning: "Límite alcanzado",
     callerAction: "Esperar Retry-After",
   },
@@ -122,22 +122,22 @@ export const ERROR_CATALOG = {
   },
   not_offered: {
     httpStatus: 409,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "Se intentó reservar un hueco que no se ofreció",
     callerAction: "Re-consultar disponibilidad",
   },
   credential_invalid: {
     httpStatus: 402,
-    origin: "vocero",
-    compat: "vocero",
+    origin: "vestro",
+    compat: "vestro",
     meaning: "Credencial rechazada por el proveedor (401/402)",
     callerAction: "Pausar y avisar en Ajustes",
   },
   validation_failed: {
     httpStatus: 422,
     origin: "todos",
-    compat: "vocero",
+    compat: "vestro",
     meaning: "Input inválido",
     callerAction: "Corregir payload",
   },

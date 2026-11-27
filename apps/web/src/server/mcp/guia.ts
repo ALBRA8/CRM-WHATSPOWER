@@ -1,20 +1,20 @@
 /**
- * 069 — La guía «configurar Vocero»: cómo configura Claude, BIEN, el
+ * 069 — La guía «configurar Vestro»: cómo configura Claude, BIEN, el
  * agente de un negocio con las herramientas del MCP, y cómo lo revisa y lo
  * mejora en el día a día. Trae un ejemplo real, sin datos privados.
  *
  * Una sola fuente: el servidor MCP la ofrece como prompt (`prompts/get
- * configurar_vocero`, para cualquier cliente) y el plugin de Claude Code la
- * trae como skill en `plugin/vocero/skills/configurar-vocero/SKILL.md`.
+ * configurar_vestro`, para cualquier cliente) y el plugin de Claude Code la
+ * trae como skill en `plugin/vestro/skills/configurar-vestro/SKILL.md`.
  * `tests/unit/mcp.test.ts` exige que los dos textos sean el mismo.
  *
- * Puerto de la guía de Vocero Cloud: en la raíz no hay historial de
- * versiones ni recordatorios, y el agente (Nea u otro) se conecta en el
+ * Puerto de la guía de Vestro Cloud: en la raíz no hay historial de
+ * versiones ni recordatorios, y el agente (AGENTE-GENERAL u otro) se conecta en el
  * despliegue, no con una herramienta.
  */
-export const GUIA_CONFIGURAR = `# Configurar y operar el agente de Vocero
+export const GUIA_CONFIGURAR = `# Configurar y operar el agente de Vestro
 
-Vas a configurar y cuidar el agente que contesta el WhatsApp (y Messenger/Instagram) de UN negocio en Vocero CRM, usando las herramientas del MCP de Vocero. El objetivo es que el agente conteste bien y cumpla el objetivo del negocio (casi siempre agendar; a veces vender o atender una campaña): datos reales, pasos claros y nada inventado.
+Vas a configurar y cuidar el agente que contesta el WhatsApp (y Messenger/Instagram) de UN negocio en Vestro CRM, usando las herramientas del MCP de Vestro. El objetivo es que el agente conteste bien y cumpla el objetivo del negocio (casi siempre agendar; a veces vender o atender una campaña): datos reales, pasos claros y nada inventado.
 
 ## Reglas que no se rompen
 
@@ -35,8 +35,8 @@ Llama a \`whoami\`: dice de qué negocio son los datos y qué permisos tienes. S
 
 Llama a \`get_setup_status\`. Resume en pocas líneas qué está listo y qué falta. Separa:
 
-- **Lo que solo puede hacer el dueño en el CRM** (conectar WhatsApp, Google Calendar o Zoom, pegar la llave de la IA): explica para qué sirve cada cosa y da sus enlaces. Para OpenRouter son tres: crear la llave (https://openrouter.ai/settings/keys), cargar saldo (el consumo se cobra ahí, aparte de Vocero) y la pantalla Ajustes → IA donde se pega.
-- **Lo que se hace en el despliegue** (lo hace quien instaló Vocero, no tú ni la pantalla): conectar el agente que contesta (Nea u otro, con \`BRAIN_DISPATCH_URL\` y \`BOT_API_KEY\`) y encender la agenda (\`AGENDA=on\`). Da el enlace de la receta que trae \`get_setup_status\`.
+- **Lo que solo puede hacer el dueño en el CRM** (conectar WhatsApp, Google Calendar o Zoom, pegar la llave de la IA): explica para qué sirve cada cosa y da sus enlaces. Para OpenRouter son tres: crear la llave (https://openrouter.ai/settings/keys), cargar saldo (el consumo se cobra ahí, aparte de Vestro) y la pantalla Ajustes → IA donde se pega.
+- **Lo que se hace en el despliegue** (lo hace quien instaló Vestro, no tú ni la pantalla): conectar el agente que contesta (AGENTE-GENERAL u otro, con \`BRAIN_DISPATCH_URL\` y \`BOT_API_KEY\`) y encender la agenda (\`AGENDA=on\`). Da el enlace de la receta que trae \`get_setup_status\`.
 - **Lo que haces tú con las herramientas**: instrucciones, conocimiento, agenda, embudo y respuestas rápidas.
 
 Si el negocio no agenda citas (por ejemplo, un agente que solo atiende una campaña o vende un producto), dile al dueño que el pendiente de la agenda no le impide contestar al agente: lo puede dejar así.
@@ -45,7 +45,7 @@ No esperes a que el dueño termine lo suyo: puedes avanzar con lo tuyo en parale
 
 ## 2. El agente que contesta
 
-Vocero no trae agente: contesta el que se conecta al lado (Nea u otro). \`get_brain\` dice si hay uno conectado y si responde. Si no lo hay, Vocero funciona como bandeja manual: puedes configurar todo igual, pero no se puede encender ni probar con \`simulate_conversation\` hasta que quien instaló Vocero lo conecte (el enlace a la receta viene en \`get_setup_status\`).
+Vestro no trae agente: contesta el que se conecta al lado (AGENTE-GENERAL u otro). \`get_brain\` dice si hay uno conectado y si responde. Si no lo hay, Vestro funciona como bandeja manual: puedes configurar todo igual, pero no se puede encender ni probar con \`simulate_conversation\` hasta que quien instaló Vestro lo conecte (el enlace a la receta viene en \`get_setup_status\`).
 
 ## 3. Entrevista al dueño
 

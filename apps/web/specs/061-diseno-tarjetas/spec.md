@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; unitarias, arnés E2E (40/40, en claro y oscuro, a 1440 y 390 px), los arneses de la Bandeja y responsive en verde.
 
-**Input**: Kevin vio las dos versiones del rediseño hechas sobre crm.s4luia.com
+**Input**: el propietario del producto vio las dos versiones del rediseño hechas sobre crm.s4luia.com
 (#166 con REA y #167 sin REA). Le gustaron, pero «se puede hacer algo más
 bonito». Pidió referencias en la web y, de las 10 que le mostré, eligió la 6:
 «me enamoró la 6». Es un concepto de Dribbble, un chat de bienes raíces que
@@ -38,7 +38,7 @@ sin migración. Reemplaza a #166 y #167, que se cierran sin fusionar.
 
 ## Decisiones
 
-**D1 — El marco de tarjetas es el diseño base de Vocero.** En escritorio
+**D1 — El marco de tarjetas es el diseño base de Vestro.** En escritorio
 (`lg` y más):
 
 - la app vive sobre un fondo de marco (`--marco`), con 12 px de margen y de
@@ -127,7 +127,7 @@ selectores que haga falta.
 
 - **Otras pantallas** (Pipeline, Contactos, Ajustes…): heredan el marco y los
   tokens, pero su rediseño propio va en specs posteriores.
-- **Fotos de los contactos**: la referencia las tiene, pero Vocero no guarda
+- **Fotos de los contactos**: la referencia las tiene, pero Vestro no guarda
   fotos; se quedan las iniciales.
 - **Copiar la referencia** (imágenes, logo): solo es inspiración.
 
@@ -142,4 +142,4 @@ selectores que haga falta.
 | V · Hecho | Contraste en unitarias y arnés E2E propio (marco, riel, burbujas, 390 px, claro y oscuro), más los arneses vecinos y el self-test |
 | VI · Specs | Este documento, antes del código; carril ligero |
 | VIII · Foco | Una bandeja más bonita y más clara para quien la usa todo el día |
-| IX · En vivo | Capturas de antes y después, y RC en dev para que Kevin la pruebe |
+| IX · En vivo | Capturas de antes y después, y RC en dev para que el propietario del producto la pruebe |

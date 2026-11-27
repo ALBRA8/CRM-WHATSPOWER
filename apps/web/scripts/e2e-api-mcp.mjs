@@ -32,7 +32,7 @@ const BASE = (process.env.APP_BASE_URL ?? "http://localhost:3000").replace(/\/+$
 const BOT_KEY = process.env.BOT_API_KEY ?? "";
 const PN = "PN-E2E-API";
 const RUN = Date.now().toString(36);
-const EMAIL = process.env.E2E_EMAIL ?? "e2e@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-123";
 
 const sql = postgres(process.env.DATABASE_URL, { max: 1, onnotice: () => {} });
@@ -140,7 +140,7 @@ async function guion(cerebro, duena) {
   if (!r.res.ok) r = await duena("/api/auth/sign-in/email", { method: "POST", body: JSON.stringify({ email: EMAIL, password: PASSWORD }) });
   ok("login de la dueña", r.res.ok, r.texto);
   await duena("/api/settings/whatsapp", { method: "PUT", body: JSON.stringify({ wabaId: "WABA-API", phoneNumberId: PN, token: "tok-api" }) });
-  const mEmail = `miembro-api-${RUN}@vocero.test`;
+  const mEmail = `miembro-api-${RUN}@vestro.test`;
   r = await duena("/api/settings/team", { method: "POST", body: JSON.stringify({ name: "Laura API", email: mEmail, password: "password-miembro-api" }) });
   ok("alta de un miembro del equipo", r.res.status === 201, r.texto);
   const miembro = sesion();
@@ -254,8 +254,8 @@ async function guion(cerebro, duena) {
   ok("sin permiso, la herramienta no llega a la API", t.isError && JSON.stringify(t.crudo).includes("insufficient_scope"));
   t = await herramienta(claude.secret, "get_contact", { contactId: "ct_no_existe" });
   ok("un 404 de la API llega como isError, no como fallo del protocolo", t.isError && !t.error);
-  r = await mcp(claude.secret, "prompts/get", { name: "configurar_vocero" });
-  ok("prompt configurar_vocero", /Configurar y operar el agente de Vocero/.test(r.json?.result?.messages?.[0]?.content?.text ?? ""));
+  r = await mcp(claude.secret, "prompts/get", { name: "configurar_vestro" });
+  ok("prompt configurar_vestro", /Configurar y operar el agente de Vestro/.test(r.json?.result?.messages?.[0]?.content?.text ?? ""));
 
   console.log("\n== 5 · simulate_conversation con el cerebro conectado ==");
   const outbox = async () => ((await (await fetch(`${BASE}/api/dev/wa-mock/outbox`)).json()).outbox ?? []).length;

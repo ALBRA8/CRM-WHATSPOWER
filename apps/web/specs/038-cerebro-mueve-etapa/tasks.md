@@ -8,5 +8,5 @@
 - [x] T6 `docs/openapi.json`, AGENTS.md, README y `docs/migrar-a-2.0.md` (tabla de `/api/bot/*`)
 - [x] T7 Cerebro falso que mueve etapa; `tests/e2e/us-etapa.md` + `scripts/e2e-etapa.mjs`
 - [x] T8 Gates (`typecheck`, `lint`, `test`, `build`) y E2E en verde; bitácora
-- [x] T9 Nea: `move_stage` en su rama, pytest, PR
-- [ ] T10 En vivo: pendiente de coordinar con la sesión que usa Soporte y `vocero20`
+- [x] T9 AGENTE-GENERAL: `move_stage` en su rama, pytest, PR
+- [ ] T10 En vivo: pendiente de coordinar con la sesión que usa Soporte y `vestro20`

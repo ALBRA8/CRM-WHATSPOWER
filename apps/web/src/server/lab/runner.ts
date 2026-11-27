@@ -36,7 +36,7 @@ export const TURNO_TIMEOUT_MS = 90_000;
 const SONDEO_MS = 500;
 /**
  * Entregado el despacho, cuánto se espera la respuesta antes de leer el
- * silencio como respuesta. Un turno de Nea con el modelo tarda de 3 a 20 s.
+ * silencio como respuesta. Un turno de AGENTE-GENERAL con el modelo tarda de 3 a 20 s.
  */
 export const SILENCIO_MS = 45_000;
 
@@ -329,7 +329,7 @@ async function runConversation(
  * espera, con tope, lo primero que pase.
  *
  * Devuelve null si contestó, traspasó o CALLÓ: un cerebro que recibió el
- * despacho y no escribe también está contestando (Nea calla ante el relleno
+ * despacho y no escribe también está contestando (AGENTE-GENERAL calla ante el relleno
  * después de despedirse: es el candado de cierre, y el juez lo evalúa). Es una
  * falla solo si el despacho no se entregó: el cerebro no lo aceptó (cayó a
  * humano) o no lo recibió a tiempo.

@@ -2,7 +2,7 @@
   "name": "vestro",
   "version": "0.1.0",
   "private": true,
-  "description": "Vestro — CRM SaaS multi-tenant. Núcleo funcional VOCERO + AGENTE-GENERAL como único cerebro. Repositorio: ALBRA8/CRM-WHATSPOWER.",
+  "description": "Vestro — CRM SaaS multi-tenant. Núcleo funcional VESTRO + AGENTE-GENERAL como único cerebro. Repositorio: ALBRA8/CRM-WHATSPOWER.",
   "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@9.15.9",

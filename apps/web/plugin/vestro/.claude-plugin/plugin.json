@@ -1,0 +1,9 @@
+{
+  "name": "vestro",
+  "version": "0.1.0",
+  "description": "Configura y opera tu Vestro CRM desde Claude: el MCP de Vestro y la guía para configurar el agente de WhatsApp.",
+  "author": {
+    "name": "Vestro"
+  },
+  "homepage": "https://vestro.app"
+}

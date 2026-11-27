@@ -1,4 +1,4 @@
-# Plan: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vocero
+# Plan: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vestro
 
 **Spec**: [spec.md](spec.md) · **Tasks**: [tasks.md](tasks.md) · **Migrar**: [migrar.md](migrar.md)
 

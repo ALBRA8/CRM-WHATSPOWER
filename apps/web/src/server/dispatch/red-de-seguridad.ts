@@ -32,7 +32,7 @@ import { publish } from "@/server/events/bus";
  */
 
 /**
- * Lo que se espera desde la entrega antes de actuar. Nea descarta un despacho
+ * Lo que se espera desde la entrega antes de actuar. AGENTE-GENERAL descarta un despacho
  * que no empezó a los 5 minutos y corta su turno a los 4: pasados 10, ningún
  * cerebro que cumpla el contrato sigue con él, y relanzar antes sería pisarle
  * un turno que todavía está pensando.
@@ -48,11 +48,11 @@ const POR_BARRIDO = 50;
 
 type Estado = { timer: NodeJS.Timeout | null; corriendo: boolean };
 // En globalThis, como el worker: en dev los módulos se evalúan más de una vez.
-const globalForRed = globalThis as unknown as { __voceroRedDeSeguridad?: Estado };
+const globalForRed = globalThis as unknown as { __vestroRedDeSeguridad?: Estado };
 
 function estado(): Estado {
-  globalForRed.__voceroRedDeSeguridad ??= { timer: null, corriendo: false };
-  return globalForRed.__voceroRedDeSeguridad;
+  globalForRed.__vestroRedDeSeguridad ??= { timer: null, corriendo: false };
+  return globalForRed.__vestroRedDeSeguridad;
 }
 
 /**

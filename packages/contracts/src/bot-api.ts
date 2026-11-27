@@ -1,8 +1,8 @@
 /**
- * API bot v1 (Agente → CRM) — contrato conservado de VOCERO.
+ * API bot v1 (Agente → CRM) — contrato conservado de VESTRO.
  *
  * Fuente canónica: `CONTEXTO CRM/06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` §5.
- * Las 13 rutas de VOCERO se conservan con sus códigos de error. Autenticación:
+ * Las 13 rutas de VESTRO se conservan con sus códigos de error. Autenticación:
  * `X-API-Key: BOT_API_KEY` (se acepta `Authorization: Bearer`).
  */
 
@@ -17,7 +17,7 @@ export interface BotRoute {
 }
 
 /**
- * Las 13 rutas del contrato bot v1 heredado de VOCERO.
+ * Las 13 rutas del contrato bot v1 heredado de VESTRO.
  * La prueba de vigía (`tests/bot-api.test.ts`) congela esta tabla: añadir rutas
  * nuevas es compatible; renombrar o retirar una existente rompe el contrato.
  */

@@ -1,5 +1,5 @@
 # ============================================================
-# Vocero CRM — Blueprint de Render (render.com/docs/blueprint-spec)
+# Vestro CRM — Blueprint de Render (render.com/docs/blueprint-spec)
 #
 # Un servicio web desde la imagen publicada (sin build en Render), una base
 # Postgres gestionada y un disco persistente en /data. Se aplica desde el
@@ -33,17 +33,17 @@
 # ============================================================
 services:
   - type: web
-    name: vocero
+    name: vestro
     runtime: image
     image:
       # Pública: sin `creds`. Es linux/amd64, lo único que corre Render.
-      url: ghcr.io/kevinrivm/vocero-crm:2.12.0
+      url: ghcr.io/albra8/crm-whatpower:2.12.0
     plan: starter
     # Misma región para el servicio y la base; no se cambia después.
     # region: oregon   # ohio · virginia · frankfurt · singapore
     healthCheckPath: /api/health
     disk:
-      name: vocero-data
+      name: vestro-data
       mountPath: /data
       sizeGB: 1
     envVars:
@@ -54,11 +54,11 @@ services:
         # cámbiala en el panel: de ella sale la URL del webhook.
         fromService:
           type: web
-          name: vocero
+          name: vestro
           envVarKey: RENDER_EXTERNAL_URL
       - key: DATABASE_URL
         fromDatabase:
-          name: vocero-db
+          name: vestro-db
           property: connectionString
       - key: BETTER_AUTH_SECRET
         generateValue: true
@@ -73,15 +73,15 @@ services:
         sync: false
       - key: META_GRAPH_API_VERSION
         value: v25.0
-      # 2.0 — El agente (Nea, el servicio `vocero-nea` de abajo). La llave
-      # firma el despacho y con ella Nea le contesta al CRM: se genera aquí y
-      # Nea la toma de este servicio.
+      # 2.0 — El agente (AGENTE-GENERAL, el servicio `vestro-agente` de abajo). La llave
+      # firma el despacho y con ella AGENTE-GENERAL le contesta al CRM: se genera aquí y
+      # AGENTE-GENERAL la toma de este servicio.
       - key: BOT_API_KEY
         generateValue: true
       - key: BRAIN_DISPATCH_URL
-        value: http://vocero-nea:8000/vocero/dispatch
+        value: http://vestro-agente:8000/vestro/dispatch
       - key: BRAIN_HEALTH_URL
-        value: http://vocero-nea:8000/health
+        value: http://vestro-agente:8000/health
       # Opcionales, cuando los tengas (guía en .env.example):
       # - key: OPENROUTER_API_TOKEN
       #   sync: false
@@ -92,36 +92,36 @@ services:
       # - key: AGENDA
       #   value: "on"
 
-  # 2.0 — El agente, servicio privado sobre la misma base (esquema `nea`).
+  # 2.0 — El agente, servicio privado sobre la misma base (esquema `agente`).
   # Sin llave de IA: piensa por el CRM con la de Ajustes → IA. Sin disco ni
   # dominio. Guía: docs/migrar-a-2.0.md.
   - type: pserv
-    name: vocero-nea
+    name: vestro-agente
     runtime: image
     image:
-      url: ghcr.io/kevinrivm/nea-agent:2.0.2
+      url: ghcr.io/ALBRA8/AGENTE-GENERAL:2.0.2
     plan: starter
     envVars:
       - key: PORT
         value: "8000"
       - key: CRM_BASE_URL
-        value: http://vocero:3000
+        value: http://vestro:3000
       - key: CRM_BOT_API_KEY
         fromService:
           type: web
-          name: vocero
+          name: vestro
           envVarKey: BOT_API_KEY
       - key: DATABASE_URL
         fromDatabase:
-          name: vocero-db
+          name: vestro-db
           property: connectionString
       - key: DATABASE_SCHEMA
-        value: nea
+        value: agente
 
 databases:
-  - name: vocero-db
-    databaseName: vocero
-    user: vocero
+  - name: vestro-db
+    databaseName: vestro
+    user: vestro
     plan: basic-256mb
     postgresMajorVersion: "16"
     # region: oregon   # la misma que el servicio

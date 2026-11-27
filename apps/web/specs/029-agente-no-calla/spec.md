@@ -8,13 +8,13 @@
 guiones E2E en verde. D5 se añadió al implementar (marcado abajo).
 
 **Input**: hallazgo de la prueba en vivo de la 027 (bitácora, 2026-10-14). Los
-«Hola prueba 1» de Kevin a Instagram, a Messenger y por WhatsApp se quedaron
+«Hola prueba 1» del propietario del producto a Instagram, a Messenger y por WhatsApp se quedaron
 sin respuesta, y ya había pasado en la clase con la 1.5.1. No es una regresión
 de la 1.6.0: es el prompt del agente incluido.
 
 **Carril**: ligero (Principio VI). Solo cambia el texto del prompt del agente
 incluido (`src/server/ai/prompts.ts`). No toca el modelo de datos, ni las
-acciones que el agente puede tomar, ni ningún contrato publicado. Nea no tiene
+acciones que el agente puede tomar, ni ningún contrato publicado. AGENTE-GENERAL no tiene
 una acción de callar: no le aplica.
 
 ## Problema
@@ -23,7 +23,7 @@ En cada turno el agente elige una acción, y una de ellas es `none`. El prompt
 la describe solo como «no responder nada», sin decir cuándo usarla, y el
 modelo la usa cuando decide que el mensaje no va en serio. Reproducido fuera
 de la app con el prompt, el perfil, el conocimiento y el modelo
-(`openai/gpt-4o-mini`) de `vocero-clase`, ocho vueltas por mensaje:
+(`openai/gpt-4o-mini`) de `vestro-clase`, ocho vueltas por mensaje:
 
 | Mensaje del cliente | Se queda sin respuesta |
 |---|---|
@@ -35,7 +35,7 @@ de la app con el prompt, el perfil, el conocimiento y el modelo
 
 «Hola, prueba» es lo primero que escribe un dueño al estrenar su agente, y lo
 que escribe cualquier cliente para ver si alguien contesta. Si no contesta
-nadie, el dueño concluye que Vocero no funciona y el cliente que nadie atiende.
+nadie, el dueño concluye que Vestro no funciona y el cliente que nadie atiende.
 
 Hay un camino más al mismo silencio: `update_lead` y `move_stage` llevan la
 respuesta como opcional, y el modelo puede guardar la nota o mover el lead sin
@@ -83,7 +83,7 @@ con el prompt nuevo:
 | `openai/gpt-4o-mini` | 0 de 42 | 0 | «Ok gracias» 6/6, «👍» 2/6 |
 | `anthropic/claude-sonnet-4.5` | 0 de 42 | 0 | 6/6 y 6/6 |
 
-Con el perfil y el conocimiento de `vocero-clase` y `gpt-4o-mini`, ocho
+Con el perfil y el conocimiento de `vestro-clase` y `gpt-4o-mini`, ocho
 vueltas: de 22 mensajes sin respuesta con el prompt de `main` a 0.
 
 ## Código
@@ -104,11 +104,11 @@ vueltas: de 22 mensajes sin respuesta con el prompt de `main` a 0.
   modelo del `.env`; no corre en CI): un negocio de ejemplo y los mensajes de
   la tabla, varias vueltas cada uno. Pasa si los saludos y las pruebas se
   contestan siempre y los cierres pueden quedar en silencio. Se corre con
-  `gpt-4o-mini` (el de `vocero-clase`) y con el modelo por defecto del
+  `gpt-4o-mini` (el de `vestro-clase`) y con el modelo por defecto del
   `.env.example`.
 - **Los guiones E2E existentes** siguen en verde: corren con el ai-mock, que
   no lee el prompt, así que solo confirman que nada más se movió.
-- **En vivo** (Principio IX): con la imagen nueva en `vocero-clase`, Kevin
+- **En vivo** (Principio IX): con la imagen nueva en `vestro-clase`, el propietario del producto
   manda «Hola prueba 2» a Instagram o a la página y el agente contesta. Si no
   se puede, queda «pendiente de verificación humana».
 

@@ -15,8 +15,8 @@ export type Modo = "light" | "dark";
 export const TEMA_IDS = [
   "menta",
   "noche",
-  "vocero",
-  "vocero-oscuro",
+  "vestro",
+  "vestro-oscuro",
   "papel",
   "carbon",
   "medianoche",
@@ -49,11 +49,11 @@ export const TEMAS: Record<TemaId, Tema> = {
     pareja: "menta",
     tokens: {},
   },
-  vocero: {
-    nombre: "Vocero",
+  vestro: {
+    nombre: "Vestro",
     descripcion: "El azul papel frío de la 2.x.",
     modo: "light",
-    pareja: "vocero-oscuro",
+    pareja: "vestro-oscuro",
     tokens: {
       "--bg": "#ffffff",
       "--bg-subtle": "#f6f8fc",
@@ -91,11 +91,11 @@ export const TEMAS: Record<TemaId, Tema> = {
       "--radio-tarjeta": "20px",
     },
   },
-  "vocero-oscuro": {
-    nombre: "Vocero oscuro",
+  "vestro-oscuro": {
+    nombre: "Vestro oscuro",
     descripcion: "El azul marino de la 2.x.",
     modo: "dark",
-    pareja: "vocero",
+    pareja: "vestro",
     tokens: {
       "--bg-subtle": "#141c30",
       "--bg": "#1c263c",
@@ -350,11 +350,11 @@ export const APARIENCIA_POR_DEFECTO: Apariencia = {
 };
 
 /** Cookie con la elección de esta persona en este equipo (D5). */
-export const APARIENCIA_COOKIE = "vocero-apariencia";
+export const APARIENCIA_COOKIE = "vestro-apariencia";
 
 /**
  * Lo que vale: la cookie de la persona si es válida; si no, el del negocio;
- * si no, el de Vocero. Nunca lanza: una cookie manipulada cae al siguiente.
+ * si no, el de Vestro. Nunca lanza: una cookie manipulada cae al siguiente.
  */
 export function resolverApariencia(
   cookie: string | null | undefined,

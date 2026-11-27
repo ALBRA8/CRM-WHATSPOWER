@@ -1,7 +1,7 @@
 /**
  * Self-test E2E — 035: «Recuperar el webhook».
  *
- * Simula a quien venía con Nea 1.x delante del CRM: la WABA enruta sus
+ * Simula a quien venía con AGENTE-GENERAL 1.x delante del CRM: la WABA enruta sus
  * webhooks a un override ajeno. Guardar la conexión lo respeta (no registra
  * el del número); «Recuperar el webhook» quita el de la WABA y deja el del
  * número hacia el CRM, y un «Guardar» posterior no lo deshace. Todo contra el
@@ -16,7 +16,7 @@ const VERIFY = process.env.META_WEBHOOK_VERIFY_TOKEN ?? "";
 const WABA = "WABA-E2E-035";
 const PN = "PN-E2E-035";
 const TOKEN = "tok-e2e-035";
-const AJENO = "https://nea-vieja.example.com/webhook/segmento-secreto";
+const AJENO = "https://agente-vieja.example.com/webhook/segmento-secreto";
 
 let cookie = "";
 let failures = 0;
@@ -47,13 +47,13 @@ const graph = (path, opts = {}) =>
 
 async function main() {
   console.log("== Setup ==");
-  const email = "e2e-035@vocero.test";
+  const email = "e2e-035@vestro.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", { method: "POST", body: JSON.stringify({ email, password, name: "Operador 035" }) });
   if (!su.res.ok) su = await api("/api/auth/sign-in/email", { method: "POST", body: JSON.stringify({ email, password }) });
   ok("registro o login del operador", su.res.ok, JSON.stringify(su.json));
 
-  // Lo que dejó Nea 1.x: la WABA enruta a su override, y el número sin el nuestro.
+  // Lo que dejó AGENTE-GENERAL 1.x: la WABA enruta a su override, y el número sin el nuestro.
   await graph(`${WABA}/subscribed_apps`, { method: "POST", body: JSON.stringify({ override_callback_uri: AJENO }) });
 
   console.log("\n== Guardar la conexión respeta el override ajeno ==");
@@ -64,7 +64,7 @@ async function main() {
   ok("se guarda", guardar.res.ok, JSON.stringify(guardar.json));
   ok(
     "y se salta el registro: skipped waba_override",
-    guardar.json?.webhook?.skipped === "waba_override" && guardar.json?.webhook?.host === "nea-vieja.example.com",
+    guardar.json?.webhook?.skipped === "waba_override" && guardar.json?.webhook?.host === "agente-vieja.example.com",
     JSON.stringify(guardar.json?.webhook)
   );
   let numero = (await graph(`${PN}?fields=webhook_configuration`)).json?.webhook_configuration?.phone_number ?? null;

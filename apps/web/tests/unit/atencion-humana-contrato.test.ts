@@ -5,11 +5,11 @@ import { armarAtencion, MAX_TEXTO_ATENCION, recortarParaNota } from "@/server/br
 /**
  * 076 — «Hubo una persona», tal como lo ve un cerebro.
  *
- * `EVENTO_GEMELO` es el mismo cuerpo que fija Vocero Cloud, y el que prueba
- * `tests/test_atencion_humana.py` de nea-agent del otro lado: que
- * Nea lee este campo, lo pone en el prompt y, sin él, el prompt no cambia. Si
+ * `EVENTO_GEMELO` es el mismo cuerpo que fija Vestro Cloud, y el que prueba
+ * `tests/test_atencion_humana.py` de AGENTE-GENERAL del otro lado: que
+ * AGENTE-GENERAL lee este campo, lo pone en el prompt y, sin él, el prompt no cambia. Si
  * aquí cambia un nombre o el orden de una clave, esta prueba falla antes de
- * que Nea vuelva a contradecir al equipo.
+ * que AGENTE-GENERAL vuelva a contradecir al equipo.
  */
 const EVENTO_GEMELO =
   '{"humanAttention":{"since":"2026-11-20T15:00:00.000Z",' +

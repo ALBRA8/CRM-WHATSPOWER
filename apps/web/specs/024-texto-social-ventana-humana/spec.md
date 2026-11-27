@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; gates y
 guiones E2E en verde. En vivo con la imagen `1.6.0-rc.2` (bitácora).
-Verificado por Kevin el 2026-10-14 (imagen `rc.4`): sus DMs con una pregunta a
+Verificado por el propietario del producto el 2026-10-14 (imagen `rc.4`): sus DMs con una pregunta a
 Instagram y a la página recibieron respuesta del agente, sin asteriscos.
 
 **Input**: cuarta spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
@@ -21,7 +21,7 @@ cambia es que el CRM pasa a cumplirlo también en Instagram y Messenger (D3).
 
 ## Problema
 
-1. **El agente escribe como si todo fuera WhatsApp.** El agente incluido y Nea
+1. **El agente escribe como si todo fuera WhatsApp.** El agente incluido y AGENTE-GENERAL
    marcan negritas con asteriscos y a veces devuelven Markdown. WhatsApp lo
    dibuja; Instagram, Messenger y TikTok enseñan los asteriscos tal cual.
 2. **Pasadas 24 horas, la bandeja trata Instagram y Messenger como WhatsApp.**
@@ -86,7 +86,7 @@ confunden.
 |---|---|
 | Recordarle al operador que la ventana está por cerrarse | No se porta (spec 126 de megaparty: envío sin que el cliente escriba, Principio VIII) |
 | Adjuntos salientes en redes | Otra spec |
-| Que el agente escriba distinto según el canal (tono, emojis) | 2.0: el cerebro lee `conversation.channel` (nea-agent#37) |
+| Que el agente escriba distinto según el canal (tono, emojis) | 2.0: el cerebro lee `conversation.channel` (AGENTE-GENERAL#37) |
 | Formato del texto del operador | No: escribe lo que quiere |
 
 ## Código
@@ -115,7 +115,7 @@ confunden.
 - Los guiones existentes siguen en verde.
 - **Interfaz**: el aviso de atención humana y el de ventana cerrada, en claro
   y oscuro.
-- **En vivo** (Principio IX): en `vocero-clase`, un turno real del agente por
+- **En vivo** (Principio IX): en `vestro-clase`, un turno real del agente por
   WhatsApp sigue saliendo con su formato. Lo de Instagram y Messenger necesita
   que una persona escriba desde su cuenta: queda pendiente de verificación
   humana.

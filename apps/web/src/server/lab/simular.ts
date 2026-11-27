@@ -9,8 +9,8 @@ import { olvidar, turnoPorDespacho } from "./runner";
  * 069 — Probar el agente sin WhatsApp (`POST /api/v1/agent/simulate` y la
  * herramienta `simulate_conversation` del MCP).
  *
- * En Vocero Cloud esto es un «ensayo» que Nea corre aparte. En la raíz el
- * cerebro puede ser cualquiera (Nea u otro), así que se usa el mismo camino
+ * En Vestro Cloud esto es un «ensayo» que AGENTE-GENERAL corre aparte. En la raíz el
+ * cerebro puede ser cualquiera (AGENTE-GENERAL u otro), así que se usa el mismo camino
  * que ya prueba el Laboratorio: cada línea entra como un mensaje del cliente
  * en una conversación `is_test`, se le despacha al cerebro que de verdad
  * contesta, y su respuesta vuelve por `/api/bot/messages`, que la guarda sin
@@ -66,7 +66,7 @@ export async function simular(input: {
       ok: false,
       code: "sin_cerebro",
       detalle:
-        "No hay un agente conectado: la simulación prueba al cerebro que contesta a tus clientes (Nea u otro).",
+        "No hay un agente conectado: la simulación prueba al cerebro que contesta a tus clientes (AGENTE-GENERAL u otro).",
     };
   }
 

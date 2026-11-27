@@ -22,7 +22,7 @@ Sin violaciones.
 2. `tests/unit/openapi.test.ts` (D2): exporta los cuerpos gemelos desde sus pruebas o los relee del OpenAPI y compara contra `armarEvento`/`construirEventoOlvido` de los mismos datos.
 3. `registerWebhookForNumber({ forzar })` y `POST /api/settings/webhook` con `{recuperar: true}` (403 sin `canConfigure`).
 4. Tarjeta del webhook (`whatsapp-wizard.tsx`): botón «Recuperar el webhook» cuando la última respuesta fue `skipped`, con confirmación.
-5. `docker-compose.yml` con `nea`; `render.yaml` con el segundo servicio; comentarios en `fly.toml` y `railway.toml`; `.env.example` con `NEA_VERSION` y `LLM_API_KEY` para Nea.
+5. `docker-compose.yml` con `agente`; `render.yaml` con el segundo servicio; comentarios en `fly.toml` y `railway.toml`; `.env.example` con `AGENTE_VERSION` y `LLM_API_KEY` para AGENTE-GENERAL.
 6. `docs/migrar-a-2.0.md`; README («Trae tu propio agente», «Instalación», «Versiones»); `INSTALL-IA.md`; CHANGELOG.
 7. `scripts/e2e-recuperar-webhook.mjs` contra el wa-mock.
 

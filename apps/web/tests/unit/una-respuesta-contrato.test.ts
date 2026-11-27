@@ -17,8 +17,8 @@ import { HANDOFF_LABEL } from "@/lib/analytics";
 /**
  * 075 — Una sola respuesta por ráfaga, tal como la ve un cerebro.
  *
- * Las cadenas son contrato compartido con Vocero Cloud y con Nea
- * (`tests/test_despacho_superado.py` en nea-agent fija este mismo cuerpo):
+ * Las cadenas son contrato compartido con Vestro Cloud y con AGENTE-GENERAL
+ * (`tests/test_despacho_superado.py` en AGENTE-GENERAL fija este mismo cuerpo):
  * un cerebro que sirve a las dos ediciones manda exactamente esto.
  */
 const CUERPO_GEMELO =
@@ -56,7 +56,7 @@ const BASE = [
 ];
 
 describe("el CRM anuncia el turno superado", () => {
-  it("con la misma cadena que Vocero Cloud", () => {
+  it("con la misma cadena que Vestro Cloud", () => {
     expect(CAPACIDAD_SUPERADO).toBe("dispatch_superado");
     // 076: después anuncia también la nota de atención humana.
     expect(capacidadesDelCrm()).toEqual([CAPACIDAD_SUPERADO, "atencion_humana"]);
@@ -119,7 +119,7 @@ describe("el cuerpo de POST /api/bot/messages", () => {
     ).toBe(false);
   });
 
-  it("el código del 409 es el que Nea calla", () => {
+  it("el código del 409 es el que AGENTE-GENERAL calla", () => {
     expect(DISPATCH_SUPERADO).toBe("dispatch_superado");
     expect(JSON.parse(ERROR_GEMELO).error.code).toBe(DISPATCH_SUPERADO);
     expect(JSON.parse(ERROR_GEMELO).error.message).toBe(MENSAJE_SUPERADO);

@@ -4,11 +4,11 @@
  * contacto). Solo tipos y textos: lo importan componentes de cliente, así que
  * aquí no entra nada de servidor. El cálculo vive en `server/bot/status.ts`.
  *
- * Desde la 036 el CRM no trae agente: contesta el cerebro conectado (Nea u
+ * Desde la 036 el CRM no trae agente: contesta el cerebro conectado (AGENTE-GENERAL u
  * otro), y solo si el interruptor del Agente lo deja.
  */
 
-/** Los modos de Nea tal como los reporta su `/health`. */
+/** Los modos de AGENTE-GENERAL tal como los reporta su `/health`. */
 export const BRAIN_MODES = ["estándar", "cloud", "multiorg"] as const;
 export type BrainMode = (typeof BRAIN_MODES)[number];
 
@@ -27,7 +27,7 @@ export type BrainHealthProblem =
   /** `BRAIN_HEALTH_URL` no es una URL http(s): no se le preguntó a nadie. */
   | "config";
 
-/** La cola de Nea hacia el CRM (el «relevo» de los webhooks). */
+/** La cola de AGENTE-GENERAL hacia el CRM (el «relevo» de los webhooks). */
 export type BrainRelayDto = {
   /** Mensajes entrantes que esperan llegar al CRM. */
   pendientes: number | null;
@@ -110,12 +110,12 @@ export type BrainStatusDto = {
 };
 
 /**
- * El nombre que se puede afirmar. «Nea» solo si su `/health` habla el
- * contrato de Nea (trae `mode`); con un bot propio o una Nea vieja no se
+ * El nombre que se puede afirmar. «AGENTE-GENERAL» solo si su `/health` habla el
+ * contrato de AGENTE-GENERAL (trae `mode`); con un bot propio o una AGENTE-GENERAL vieja no se
  * inventa ninguno.
  */
 export function externalBrainName(status: BrainStatusDto): string | null {
-  return status.external.health?.mode ? "Nea" : null;
+  return status.external.health?.mode ? "AGENTE-GENERAL" : null;
 }
 
 /**
@@ -141,7 +141,7 @@ function healthKnown(h: BrainHealthDto | null): h is BrainHealthDto {
   return h !== null && h.problem !== "config";
 }
 
-/** «Responde tu cerebro externo (Nea)», o sin paréntesis si no se sabe quién es. */
+/** «Responde tu cerebro externo (AGENTE-GENERAL)», o sin paréntesis si no se sabe quién es. */
 export function externalAnswerLabel(status: BrainStatusDto): string {
   const name = externalBrainName(status);
   return name

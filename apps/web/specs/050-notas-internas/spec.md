@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código. Implementada; gates, arnés E2E (28/28) y capturas en claro y oscuro en verde. D7 se agregó al implementar.
 
-**Input**: cuarta spec de la 2.2, elegida por Kevin el 2026-10-23
+**Input**: cuarta spec de la 2.2, elegida por el propietario del producto el 2026-10-23
 ([046 research.md](../046-referencias-2.2/research.md)). Referencias:
 
 - **Chatwoot (MIT)**, observado en la Fase 1 (`cw-02`, `cw-05`): pestañas
@@ -115,7 +115,7 @@ conversación va en Nota interna. No cambia nada de los datos.
 
 - **Editar notas** (D3).
 - **Menciones `@persona` con aviso** (Chatwoot): necesitan notificaciones por
-  persona, que Vocero aún no tiene.
+  persona, que Vestro aún no tiene.
 - **Adjuntos en la nota** (DeskcommCRM): primero el texto.
 - **Notas visibles para el cerebro** (D5).
 - **Migrar el campo «Notas» del contacto**: sigue donde está. Sirve para

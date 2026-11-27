@@ -28,7 +28,7 @@ import postgres from "postgres";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-123";
 const database = new URL(process.env.DATABASE_URL);
 assert(

@@ -20,7 +20,7 @@ import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
 const S = Date.now().toString(36).toUpperCase();
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-lista@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-lista@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-lista";
 const PN = `PN-LC-${S}`;
 

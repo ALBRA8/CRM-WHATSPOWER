@@ -50,11 +50,11 @@ export function aiMockModels(): { id: string; name: string }[] {
 type Peticion = { at: string; mensajes: InMessage[] };
 type EstadoIa = { demoraMs: number; peticiones: Peticion[] };
 
-const globalForIa = globalThis as unknown as { __voceroAiMock?: EstadoIa };
+const globalForIa = globalThis as unknown as { __vestroAiMock?: EstadoIa };
 
 function estadoIa(): EstadoIa {
-  globalForIa.__voceroAiMock ??= { demoraMs: 0, peticiones: [] };
-  return globalForIa.__voceroAiMock;
+  globalForIa.__vestroAiMock ??= { demoraMs: 0, peticiones: [] };
+  return globalForIa.__vestroAiMock;
 }
 
 /** Consulta o configura el mock: `?demoraMs=3000`, `?reset=1`. */

@@ -15,7 +15,7 @@ import { getSettings } from "@/server/agenda/settings";
  * llegó a la suya (la vieja siguió «agendada»), le repitió a un cliente a las
  * cinco de la tarde que su demo era «hoy a las 10:30», y ante «pásame la liga»
  * escaló a un humano en vez de mandar el enlace que el CRM tenía guardado.
- * Nea ya sabe leer este bloque (`_booking_lines` en su `prompt.py`); lo que
+ * AGENTE-GENERAL ya sabe leer este bloque (`_booking_lines` en su `prompt.py`); lo que
  * faltaba era que la raíz lo mandara.
  *
  * La FORMA es la de la edición cloud, para que un mismo cerebro sirva contra

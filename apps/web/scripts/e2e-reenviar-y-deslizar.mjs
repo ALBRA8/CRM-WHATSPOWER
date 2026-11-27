@@ -13,7 +13,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-reenvio@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-reenvio@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-reenvio";
 const TEMA = process.env.TEMA === "dark" ? "dark" : "light";
 const SALIDA = process.env.CAPTURAS_DIR ?? ".tmp";
@@ -43,7 +43,7 @@ async function hasta(fn, ms = 15000) {
 mkdirSync(SALIDA, { recursive: true });
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
-await ctx.addCookies([{ name: "vocero-theme", value: TEMA, url: BASE }]);
+await ctx.addCookies([{ name: "vestro-theme", value: TEMA, url: BASE }]);
 const req = ctx.request;
 const errores = [];
 
@@ -203,7 +203,7 @@ try {
     storageState: await ctx.storageState(),
     permissions: ["clipboard-read", "clipboard-write"],
   });
-  await movil.addCookies([{ name: "vocero-theme", value: TEMA, url: BASE }]);
+  await movil.addCookies([{ name: "vestro-theme", value: TEMA, url: BASE }]);
   const cel = await movil.newPage();
   cel.on("pageerror", (e) => errores.push(e.message));
   const cdp = await movil.newCDPSession(cel);

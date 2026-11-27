@@ -6,7 +6,7 @@ import type { CalendarSettings } from "@/server/agenda/settings";
  * oferta y lo que contesta. El motor de huecos es el de verdad; solo se
  * sustituyen la BD, la llave y el reloj.
  *
- * El cerebro externo (Nea) lee `query.date` para saber si el CRM consultó el
+ * El cerebro externo (AGENTE-GENERAL) lee `query.date` para saber si el CRM consultó el
  * día que pidió; si no vuelve, no afirma nada de ese día. Y solo puede
  * reservar lo que quedó registrado aquí (`POST /api/bot/bookings` compara por
  * epoch exacto contra la oferta vigente).
@@ -193,7 +193,7 @@ describe("fecha inválida", () => {
     expect((json!.query as { date: unknown }).date).toBeNull();
   });
 
-  it("sin conversationId sigue siendo 422 (la sonda de Nea depende de eso)", async () => {
+  it("sin conversationId sigue siendo 422 (la sonda de AGENTE-GENERAL depende de eso)", async () => {
     const { status } = await pedir("date=2026-09-22");
     expect(status).toBe(422);
   });

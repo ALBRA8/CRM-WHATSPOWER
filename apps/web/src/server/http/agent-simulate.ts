@@ -74,7 +74,7 @@ export const POST = conSesion(async (session, req: Request) => {
         error: {
           code: r.code,
           message: `${r.detalle} Se conecta en el despliegue con BRAIN_DISPATCH_URL y BOT_API_KEY.`,
-          enlaces: [{ titulo: "Cómo conectar tu agente (Nea u otro)", url: GUIA_DEL_PAR }],
+          enlaces: [{ titulo: "Cómo conectar tu agente (AGENTE-GENERAL u otro)", url: GUIA_DEL_PAR }],
         },
       },
       { status: 409 }

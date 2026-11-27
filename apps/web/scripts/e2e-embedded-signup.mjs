@@ -22,7 +22,7 @@ import { existsSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e@vocero.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e@vestro.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-123";
 
 let cookie = "";
@@ -212,7 +212,7 @@ const SDK_FALSO = `
       window.__fb.login = o;
       const f = document.createElement("iframe");
       f.style.display = "none";
-      f.src = "https://www.facebook.com/__vocero_e2e_es";
+      f.src = "https://www.facebook.com/__vestro_e2e_es";
       document.body.appendChild(f);
       setTimeout(() => cb({ authResponse: { code: "es-code-ui-${n}" } }), 800);
     },
@@ -247,7 +247,7 @@ async function enElNavegador() {
     await ctx.route("https://connect.facebook.net/**", (route) =>
       route.fulfill({ contentType: "application/javascript", body: SDK_FALSO })
     );
-    await ctx.route("https://www.facebook.com/__vocero_e2e_es", (route) =>
+    await ctx.route("https://www.facebook.com/__vestro_e2e_es", (route) =>
       route.fulfill({ contentType: "text/html", body: IFRAME_DE_META })
     );
     ctx.setDefaultNavigationTimeout(120000);
