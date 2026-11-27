@@ -243,8 +243,17 @@ conseguir verdes.
 
 ## 10. Commits publicados
 
-- **VER_COMMITS** (se completa con los SHAs reales tras el push y la
-  verificación con `git ls-remote` de ambos repos).
+- **ALBRA8/CRM-WHATSPOWER → `main`: `52372f6`** — push verificado con
+  `git ls-remote` (`f03048a..52372f6`): rol runtime (005 + DATABASE_URL_RUNTIME
+  + verificador), backplane SSE (D-024) + tests, /api/health aditivo, backups
+  y restauración real (infra/backup), checklist del puente (D-028),
+  infra/SECRETOS.md, observabilidad, ENTREGA_F5.md y CONTEXTO CRM actualizado
+  (D-024..D-028, TEST_INDEX §F5, SESSION_2026-11-28, PROJECT_STATE, INDEX).
+- **ALBRA8/AGENTE-GENERAL → `main`: `7f6e908` SIN CAMBIOS** — el árbol del
+  cerebro quedó intacto en esta fase (git status 0 entradas): F5 fue trabajo
+  del lado CRM/infra; el estado verificado de S4.4 se conserva byte-a-byte.
+- **No se crearon ramas ni PRs nuevos** (push directo a main del CRM, misma
+  vía que S4.3/S4.4; el repo del cerebro no fue tocado).
 
 *Evidencia cruda: `apps/web/scripts/verificar-rol-runtime.mjs`,
 `apps/web/scripts/verificar-restauracion.mjs`, `apps/web/scripts/
