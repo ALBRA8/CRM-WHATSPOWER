@@ -1,5 +1,5 @@
-import { conCors, errorOAuth, leerFormulario, negocioOAuth, noExiste, preflight } from "@/server/oauth/puerta";
-import { revocarToken } from "@/server/oauth/servidor";
+import { conCors, errorOAuth, leerFormulario, negocioOAuth, noExiste, preflight } from "@/server/integrations/oauth/puerta";
+import { revocarToken } from "@/server/integrations/oauth/servidor";
 
 export const dynamic = "force-dynamic";
 

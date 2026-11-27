@@ -2,10 +2,10 @@ import { headers } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { leerSesion } from "@/lib/auth/leer-sesion";
-import { rolPuede } from "@/server/api-v1/acceso";
-import { destinoVisible, validarAutorizacion } from "@/server/oauth/autorizar";
-import { OAUTH_SCOPES, PERMISOS_OAUTH } from "@/server/oauth/nucleo";
-import { negocioOAuth } from "@/server/oauth/puerta";
+import { rolPuede } from "@/server/integrations/api-v1/acceso";
+import { destinoVisible, validarAutorizacion } from "@/server/integrations/oauth/autorizar";
+import { OAUTH_SCOPES, PERMISOS_OAUTH } from "@/server/integrations/oauth/nucleo";
+import { negocioOAuth } from "@/server/integrations/oauth/puerta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 

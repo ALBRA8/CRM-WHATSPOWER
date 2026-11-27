@@ -16,7 +16,7 @@ const st = vi.hoisted(() => ({
   respuesta: null as null | Response,
 }));
 
-vi.mock("@/server/api-v1/handler", () => ({
+vi.mock("@/server/integrations/api-v1/handler", () => ({
   LIMITE_POR_MINUTO: 120,
   limitado: () => Response.json({ error: { code: "rate_limited" } }, { status: 429 }),
   autenticarLlave: async () =>
@@ -66,10 +66,10 @@ vi.mock("@/app/api/v1/quick-replies/[id]/route", () => ({ PATCH: espia("quick-re
 vi.mock("@/app/api/v1/brain/route", () => ({ GET: espia("brain") }));
 vi.mock("@/app/api/v1/ai/route", () => ({ GET: espia("ai"), PUT: espia("ai") }));
 
-import { responderMcp, VERSIONES } from "@/server/mcp/servidor";
-import { HERRAMIENTAS } from "@/server/mcp/herramientas";
-import { GUIA_CONFIGURAR } from "@/server/mcp/guia";
-import { GUIA_PROBAR } from "@/server/mcp/guia-probar";
+import { responderMcp, VERSIONES } from "@/server/integrations/mcp/servidor";
+import { HERRAMIENTAS } from "@/server/integrations/mcp/herramientas";
+import { GUIA_CONFIGURAR } from "@/server/integrations/mcp/guia";
+import { GUIA_PROBAR } from "@/server/integrations/mcp/guia-probar";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 

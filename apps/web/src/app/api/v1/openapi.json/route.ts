@@ -1,5 +1,5 @@
-import { contratoPara, origenPublico } from "@/server/api-v1/docs";
-import { apiV1DisabledResponse, apiV1Enabled } from "@/server/api-v1/flag";
+import { contratoPara, origenPublico } from "@/server/integrations/api-v1/docs";
+import { apiV1DisabledResponse, apiV1Enabled } from "@/server/integrations/api-v1/flag";
 
 export const dynamic = "force-dynamic";
 

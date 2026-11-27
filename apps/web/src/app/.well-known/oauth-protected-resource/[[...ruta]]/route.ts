@@ -1,5 +1,5 @@
-import { metadatosRecurso } from "@/server/oauth/nucleo";
-import { conCors, negocioOAuth, noExiste, preflight } from "@/server/oauth/puerta";
+import { metadatosRecurso } from "@/server/integrations/oauth/nucleo";
+import { conCors, negocioOAuth, noExiste, preflight } from "@/server/integrations/oauth/puerta";
 
 export const dynamic = "force-dynamic";
 

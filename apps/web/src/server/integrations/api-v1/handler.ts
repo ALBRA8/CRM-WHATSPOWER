@@ -4,7 +4,7 @@ import type { SessionContext } from "@/lib/auth/session";
 import { getDb, schema } from "@/lib/db";
 import { checkRateLimit, clientIp } from "@/lib/rate-limit";
 import { resolveInstanceOrg } from "@/server/agents/bot/auth";
-import { accesoPorValor, registrarUsoGrant } from "@/server/oauth/servidor";
+import { accesoPorValor, registrarUsoGrant } from "@/server/integrations/oauth/servidor";
 import { rolPuede, rolVigente, type Capacidad } from "./acceso";
 import { apiV1DisabledResponse, apiV1Enabled } from "./flag";
 import { llavePorValor, type ApiScope } from "./llaves";

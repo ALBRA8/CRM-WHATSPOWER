@@ -1,4 +1,4 @@
-import { responderMcp } from "@/server/mcp/servidor";
+import { responderMcp } from "@/server/integrations/mcp/servidor";
 
 export const dynamic = "force-dynamic";
 

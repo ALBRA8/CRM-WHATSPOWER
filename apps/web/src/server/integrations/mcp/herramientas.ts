@@ -8,7 +8,7 @@
  * llave, el límite por minuto y la bitácora de uso; aquí solo se traduce
  * entre «argumentos de herramienta» y «petición HTTP».
  */
-import type { ApiScope } from "@/server/api-v1/llaves";
+import type { ApiScope } from "@/server/integrations/api-v1/llaves";
 import * as bookings from "@/app/api/v1/bookings/route";
 import * as contacts from "@/app/api/v1/contacts/route";
 import * as contact from "@/app/api/v1/contacts/[id]/route";

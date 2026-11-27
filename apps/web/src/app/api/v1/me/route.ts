@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { credencialPorValor, LIMITE_ENVIOS_POR_MINUTO, LIMITE_POR_MINUTO, withApiKey } from "@/server/api-v1/handler";
+import { credencialPorValor, LIMITE_ENVIOS_POR_MINUTO, LIMITE_POR_MINUTO, withApiKey } from "@/server/integrations/api-v1/handler";
 
 export const dynamic = "force-dynamic";
 

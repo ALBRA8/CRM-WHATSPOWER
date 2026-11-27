@@ -1,5 +1,5 @@
-import { withApiSettingsAuth } from "@/server/api-v1/ajustes";
-import { listarApps } from "@/server/oauth/servidor";
+import { withApiSettingsAuth } from "@/server/integrations/api-v1/ajustes";
+import { listarApps } from "@/server/integrations/oauth/servidor";
 
 export const dynamic = "force-dynamic";
 

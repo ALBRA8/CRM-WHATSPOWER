@@ -1,6 +1,6 @@
 import { apiError } from "@/lib/api";
-import { withApiSettingsAuth } from "@/server/api-v1/ajustes";
-import { revocarLlave } from "@/server/api-v1/llaves";
+import { withApiSettingsAuth } from "@/server/integrations/api-v1/ajustes";
+import { revocarLlave } from "@/server/integrations/api-v1/llaves";
 
 export const dynamic = "force-dynamic";
 

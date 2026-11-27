@@ -2,7 +2,7 @@ import { and, desc, eq, gt, inArray, isNull, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
-import { rolPuede, rolVigente } from "@/server/api-v1/acceso";
+import { rolPuede, rolVigente } from "@/server/integrations/api-v1/acceso";
 import {
   hashToken,
   normalizar,

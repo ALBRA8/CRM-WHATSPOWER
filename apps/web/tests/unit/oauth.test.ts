@@ -15,7 +15,7 @@ import {
   urlDeRegreso,
   urlMetadatosRecurso,
   verificarPkce,
-} from "@/server/oauth/nucleo";
+} from "@/server/integrations/oauth/nucleo";
 
 /**
  * 069 — Las piezas puras del OAuth del MCP. El camino completo (registro,

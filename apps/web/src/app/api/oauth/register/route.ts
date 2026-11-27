@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { redirectRegistrable } from "@/server/oauth/nucleo";
-import { conCors, errorOAuth, ipDe, negocioOAuth, noExiste, preflight } from "@/server/oauth/puerta";
-import { MAX_REDIRECTS, registrarCliente } from "@/server/oauth/servidor";
+import { redirectRegistrable } from "@/server/integrations/oauth/nucleo";
+import { conCors, errorOAuth, ipDe, negocioOAuth, noExiste, preflight } from "@/server/integrations/oauth/puerta";
+import { MAX_REDIRECTS, registrarCliente } from "@/server/integrations/oauth/servidor";
 
 export const dynamic = "force-dynamic";
 

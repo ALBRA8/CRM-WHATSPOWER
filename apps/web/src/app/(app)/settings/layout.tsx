@@ -1,7 +1,7 @@
 import { SettingsNav } from "@/components/settings/settings-nav";
 import { canConfigure } from "@/lib/auth/roles";
 import { getSessionOrNull } from "@/lib/auth/session";
-import { apiV1Enabled } from "@/server/api-v1/flag";
+import { apiV1Enabled } from "@/server/integrations/api-v1/flag";
 import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { atribucionEnabled } from "@/server/attribution/flag";
 import { isChannelEnabled } from "@/server/channels/enabled";

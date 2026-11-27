@@ -1,5 +1,5 @@
 import spec from "./openapi.json";
-import { origenInstancia } from "@/server/oauth/puerta";
+import { origenInstancia } from "@/server/integrations/oauth/puerta";
 
 /**
  * La documentación de la API v1, servida por el propio CRM.

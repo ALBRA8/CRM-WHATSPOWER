@@ -2,8 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import { canConfigure } from "@/lib/auth/roles";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { ApiDocs } from "@/components/settings/api-docs";
-import { contratoPara, origenPublico } from "@/server/api-v1/docs";
-import { apiV1Enabled } from "@/server/api-v1/flag";
+import { contratoPara, origenPublico } from "@/server/integrations/api-v1/docs";
+import { apiV1Enabled } from "@/server/integrations/api-v1/flag";
 
 export const dynamic = "force-dynamic";
 

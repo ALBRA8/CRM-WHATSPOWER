@@ -1,9 +1,9 @@
 import { requireSession } from "@/lib/auth/session";
-import { rolPuede } from "@/server/api-v1/acceso";
-import { validarAutorizacion } from "@/server/oauth/autorizar";
-import { normalizar, OAUTH_SCOPES, urlDeRegreso, type OAuthScope } from "@/server/oauth/nucleo";
-import { mismoOrigen, negocioOAuth, noExiste } from "@/server/oauth/puerta";
-import { emitirCodigo } from "@/server/oauth/servidor";
+import { rolPuede } from "@/server/integrations/api-v1/acceso";
+import { validarAutorizacion } from "@/server/integrations/oauth/autorizar";
+import { normalizar, OAUTH_SCOPES, urlDeRegreso, type OAuthScope } from "@/server/integrations/oauth/nucleo";
+import { mismoOrigen, negocioOAuth, noExiste } from "@/server/integrations/oauth/puerta";
+import { emitirCodigo } from "@/server/integrations/oauth/servidor";
 
 export const dynamic = "force-dynamic";
 

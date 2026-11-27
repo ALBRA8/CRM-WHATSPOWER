@@ -1,6 +1,6 @@
 import { checkRateLimit } from "@/lib/rate-limit";
-import { conCors, errorOAuth, leerFormulario, negocioOAuth, noExiste, preflight } from "@/server/oauth/puerta";
-import { canjearCodigo, clienteDe, refrescar } from "@/server/oauth/servidor";
+import { conCors, errorOAuth, leerFormulario, negocioOAuth, noExiste, preflight } from "@/server/integrations/oauth/puerta";
+import { canjearCodigo, clienteDe, refrescar } from "@/server/integrations/oauth/servidor";
 
 export const dynamic = "force-dynamic";
 

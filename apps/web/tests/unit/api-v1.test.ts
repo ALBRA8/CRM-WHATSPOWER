@@ -20,15 +20,15 @@ const st = vi.hoisted(() => ({
 }));
 
 vi.mock("@/server/agents/bot/auth", () => ({ resolveInstanceOrg: async () => st.instancia }));
-vi.mock("@/server/api-v1/acceso", async (orig) => {
-  const real = await orig<typeof import("@/server/api-v1/acceso")>();
+vi.mock("@/server/integrations/api-v1/acceso", async (orig) => {
+  const real = await orig<typeof import("@/server/integrations/api-v1/acceso")>();
   return { ...real, rolVigente: async () => st.role };
 });
 vi.mock("@/lib/rate-limit", () => ({
   checkRateLimit: () => ({ allowed: st.limite, remaining: 0 }),
   clientIp: () => "1.2.3.4",
 }));
-vi.mock("@/server/oauth/servidor", () => ({ accesoPorValor: async () => null, registrarUsoGrant: async () => {} }));
+vi.mock("@/server/integrations/oauth/servidor", () => ({ accesoPorValor: async () => null, registrarUsoGrant: async () => {} }));
 vi.mock("@/lib/db", () => {
   const update = () => ({
     set: () => ({
@@ -40,14 +40,14 @@ vi.mock("@/lib/db", () => {
   });
   return { getDb: () => ({ update }), schema: { organization: {}, apiKey: {} } };
 });
-vi.mock("@/server/api-v1/llaves", async (orig) => {
-  const real = await orig<typeof import("@/server/api-v1/llaves")>();
+vi.mock("@/server/integrations/api-v1/llaves", async (orig) => {
+  const real = await orig<typeof import("@/server/integrations/api-v1/llaves")>();
   return { ...real, llavePorValor: async () => st.llave };
 });
 
-import { generarLlave, hashLlave, normalizarScopes } from "@/server/api-v1/llaves";
-import { withApiKey } from "@/server/api-v1/handler";
-import { parseApiV1Flag } from "@/server/api-v1/flag";
+import { generarLlave, hashLlave, normalizarScopes } from "@/server/integrations/api-v1/llaves";
+import { withApiKey } from "@/server/integrations/api-v1/handler";
+import { parseApiV1Flag } from "@/server/integrations/api-v1/flag";
 
 const LLAVE = "vk_" + "a".repeat(40);
 const pedir = (auth: string | null = `Bearer ${LLAVE}`) =>

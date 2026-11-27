@@ -8,7 +8,7 @@
  */
 import { GUIA_DEL_PAR } from "@/server/organizations/onboarding/guide";
 import type { ReadinessStep } from "@/server/organizations/onboarding/status";
-import { origenInstancia } from "@/server/oauth/puerta";
+import { origenInstancia } from "@/server/integrations/oauth/puerta";
 
 export type Enlace = { titulo: string; url: string };
 

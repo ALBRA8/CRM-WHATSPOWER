@@ -13,9 +13,9 @@
  */
 import { apiError } from "@/lib/api";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { autenticarLlave, LIMITE_POR_MINUTO, limitado } from "@/server/api-v1/handler";
-import { urlMetadatosRecurso } from "@/server/oauth/nucleo";
-import { CORS, origenInstancia } from "@/server/oauth/puerta";
+import { autenticarLlave, LIMITE_POR_MINUTO, limitado } from "@/server/integrations/api-v1/handler";
+import { urlMetadatosRecurso } from "@/server/integrations/oauth/nucleo";
+import { CORS, origenInstancia } from "@/server/integrations/oauth/puerta";
 import { GUIA_CONFIGURAR } from "./guia";
 import { GUIA_PROBAR } from "./guia-probar";
 import { HERRAMIENTAS, herramientaPorNombre, permitidaPara, type Herramienta, type Llamada } from "./herramientas";

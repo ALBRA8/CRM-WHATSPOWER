@@ -1,5 +1,5 @@
-import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/kb";
+import { withApiKey } from "@/server/integrations/api-v1/handler";
+import * as h from "@/server/knowledge/http/kb";
 
 export const dynamic = "force-dynamic";
 

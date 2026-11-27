@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/kb-entry";
+import * as http from "@/server/knowledge/http/kb-entry";
 
 export const dynamic = "force-dynamic";
 

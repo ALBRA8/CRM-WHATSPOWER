@@ -1,4 +1,4 @@
-import { withApiKey } from "@/server/api-v1/handler";
+import { withApiKey } from "@/server/integrations/api-v1/handler";
 import * as h from "@/server/crm/http/contact";
 
 export const dynamic = "force-dynamic";

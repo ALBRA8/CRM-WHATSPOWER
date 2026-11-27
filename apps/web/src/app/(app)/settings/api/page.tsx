@@ -2,8 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import { canConfigure } from "@/lib/auth/roles";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { ApiKeysClient } from "@/components/settings/api-keys-client";
-import { apiV1Enabled } from "@/server/api-v1/flag";
-import { origenPublico } from "@/server/api-v1/docs";
+import { apiV1Enabled } from "@/server/integrations/api-v1/flag";
+import { origenPublico } from "@/server/integrations/api-v1/docs";
 
 export const dynamic = "force-dynamic";
 

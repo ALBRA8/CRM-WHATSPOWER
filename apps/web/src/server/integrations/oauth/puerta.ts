@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { apiV1Enabled } from "@/server/api-v1/flag";
+import { apiV1Enabled } from "@/server/integrations/api-v1/flag";
 import { resolveInstanceOrg } from "@/server/agents/bot/auth";
 
 /**
