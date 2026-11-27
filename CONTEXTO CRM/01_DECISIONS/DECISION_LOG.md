@@ -121,3 +121,33 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** la memoria de AGENTE-GENERAL añade `org_id` como PRIMERA componente de la clave de aislamiento `(org_id, agent_id, domain, user_id, context_id)`: campo en `MemoryRecord`, `MemoryIsolator.validate_org_id` (formato `org_<id>` fail-closed) y `assert_org_consistent` (si el `agent_id` lleva el prefijo D-014 `org:<X>`, un `org_id` explícito distinto es `PermissionError`), filtrado por cubeta de org en los tres stores (SQLite/InMemory/Vector) y validación en cada operación del `MemoryManager` (incluidas lecturas/borrados por `record_id`). Migración aditiva de BD pre-S4.4 (`ALTER TABLE ADD COLUMN org_id`; los registros existentes quedan en la cubeta legacy `""` que jamás se mezcla con una org) con el formato de índice legacy preservado byte-a-byte. `render_app.py` registra SQLite + MemoryManager y el health reporta `memory_store`/`memory_manager` configurados. El puente CRM escribe cada turno con `domain="crm"` y la org del evento firmado; el agent loop propaga `org_id` vía `Session`→`RunContext`.
 - **Motivo:** bloqueador D-014/T9 para activar el agente; sin dimensión de organización, dos tenants podrían compartir cubeta si el `agent_id` no lleva prefijo.
 - **Evidencia:** `AGENTE-GENERAL/tests/unit/test_memory_org_isolation.py` (15 pruebas, incluida migración legacy real y negativas cruzadas por store); pruebas de integración HTTP con org A/org B; suite del cerebro 821/821 sin perder ningún test de memoria preexistente.
+
+## D-024 — Backplane SSE vía LISTEN/NOTIFY de la misma PostgreSQL (F5, cierra A1)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** con `SSE_BACKPLANE=postgres` el bus de eventos de bandeja atraviesa instancias usando LISTEN/NOTIFY de la MISMA base de datos (canal `vestro_sse`, conexión dedicada por proceso, reconexión con reintentos exponenciales). `publish()` en modo backplane NO emite localmente: el propio publicador recibe su evento por LISTEN y cada instancia entrega cada evento exactamente una vez. Payload ≤7900 bytes en claro; mayor → gzip+base64 automático; si aún excede, reparto local de respaldo + contador `droppedOversize` (el cliente hace catch-up con `since=`, contrato sse.md). `off` (default) conserva el EventEmitter in-process de S3/S4 byte-a-byte. Estado visible en `/api/health` (`sse.*`).
+- **Motivo:** riesgo A1 heredado (mono-instancia) era bloqueador de producción multi-replica; la Constitución prohíbe servicios nuevos de cola, y la propia BD del CRM ya es el punto de encuentro natural entre instancias.
+- **Evidencia:** `apps/web/tests/unit/sse-backplane.test.ts` 6/6 contra PostgreSQL 16.16 real (pg_notify de OTRA instancia llega al suscriptor local; exactly-once; compresión >7900 bytes íntegra; filtro por org) — F5.
+
+## D-025 — Rol LOGIN de runtime `vestro_runtime` (F5, operativo sobre el riesgo de S4.4 §7.2)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** `infra/sql/005_runtime_login.sql` crea el rol LOGIN `vestro_runtime`, miembro del grupo `app_runtime` (DML de 004), con `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS`. La app conecta con `DATABASE_URL_RUNTIME` si el despliegue la define (`apps/web/src/lib/db/index.ts`); sin ella usa `DATABASE_URL` como siempre. Verificación real: `apps/web/scripts/verificar-rol-runtime.mjs` 24/24 (solo DML+secuencias; DDL prohibido; RLS muerde sin contexto/cruzado; DML en su org; audit append-only; app operativa). El corte completo del HTTP al rol runtime exige propagar `app.current_org` por transacción en el pool (MODELO_MULTI_TENANT §5.3) — trabajo operativo declarado, no hecho en F5.
+- **Motivo:** el runtime nunca debe ser dueño de los objetos; S4.4 dejó el cambio «como trabajo operativo de F5».
+- **Evidencia:** batería multi-tenant 26/26 + verificador R1-R7 contra PostgreSQL real; `/api/health` reporta `dbRole:"owner"|"runtime"` según el despliegue.
+
+## D-026 — Backups `pg_dump -Fc` con restauración verificada obligatoria (F5)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** respaldo en formato CUSTOM (`pg_dump -Fc`, restaurable y verificable con `pg_restore --list`), retención por días configurable, bitácora; restauración a base APARTE y verificación comparativa obligatoria (`verificar-restauracion.mjs`: conteos por tabla 44/44, RLS 39/39 con FORCE, cadena de hash de audit_log, migraciones). Ciclos repetibles en `infra/backup/` (backup.sh, restaurar.sh, prueba-respaldo-restauracion.sh, prueba-persistencia-recuperacion.sh). Programación con cron/systemd documentada; el `.dump` a almacenamiento externo (regla 3-2-1).
+- **Motivo:** «un respaldo que nunca se restauró es una esperanza, no un respaldo»; riesgo O1 heredado.
+- **Evidencia:** ciclo completo 5/5 (44 tablas idénticas, RLS restaurada, hash íntegro, 34 migraciones) y persistencia/crash PASS sobre PostgreSQL 16.16 real — F5.
+
+## D-027 — Arista `platform→conversations` +1: /api/health observa el backplane
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** el grafo congelado de `fronteras-dominios.test.ts` pasa de `platform->conversations: 1` a `2` con comentario: la segunda arista es `/api/health` leyendo el estado del backplane (read-only, observabilidad). Además `SseEvent` se extrae a `server/conversations/events/types.ts` para que bus y backplane compartan el tipo SIN ciclo de import nuevo (el vigía de ciclos siguió en 2, sin ciclo nuevo).
+- **Motivo:** el vigía exige que todo acoplamiento nuevo sea una decisión consciente y documentada, no un accidente.
+- **Evidencia:** `fronteras-dominios.test.ts` 9/9 tras la edición consciente; suite 1.825/1.825.
+
+## D-028 — Checklist de producción del puente como puerta de salida de F5
+- **Estado:** VIGENTE (por ejecutar en el despliegue real).
+- **Decisión:** `CONTEXTO CRM/06_INTEGRATIONS/CHECKLIST_PRODUCCION_PUENTE.md` (A1-A4 secretos/rotación, B1-B7 cerebro, C1-C7 CRM, D1-D6 datos/operación) es la puerta de salida operativa: cada ítem exige evidencia verificable. La exposición pública queda PROHIBIDA sin autorización expresa (mandato F5 §7); el E2E completo (302) debe correrse en el host de despliegue (≥8 GB).
+- **Motivo:** F5 autoriza preparación y validación de producción, no activación; el checklist deja explícito qué falta ejecutar FUERA del sandbox.
+- **Evidencia:** documento con estado por ítem y límites declarados de F5.

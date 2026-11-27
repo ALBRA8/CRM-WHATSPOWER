@@ -17,3 +17,4 @@
 5. Pendientes y próximo paso.
 6. No registrar secretos ni credenciales.
 | SES-2026-11-27-b | 2026-11-27 | S4.2: rebrand VOCERO→Vestro y reorganización de src/server en los 14 dominios (refactorización estructural sin cambio de comportamiento) | Suite 1.801 verde; 142 rutas intactas (diff vacío vs baseline); atribución MIT consolidada en THIRD_PARTY_NOTICES.md; commits c370cc4 + 6287317…1b711fe | `SESSION_2026-11-27_S4.2_DOMINIOS.md` |
+| SES-2026-11-28 | 2026-11-28 | F5: preparación y validación de producción — rol runtime `vestro_runtime` (verificador 24/24), backplane SSE LISTEN/NOTIFY (6/6 contra PG real), backups con restauración verificada (5/5) y persistencia/crash PASS, checklist del puente, secretos, observabilidad | Suite 1.825/1.825; batería 26/26 (RLS 39/39); cerebro 821; typecheck/lint/build verdes; 142 rutas; E2E 036 re-corrida — ver ENTREGA_F5.md | `SESSION_2026-11-28_F5.md` |

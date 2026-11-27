@@ -1,69 +1,25 @@
 import { EventEmitter } from "node:events";
+import {
+  backplaneMode,
+  ensureBackplane,
+  notifyBackplane,
+  watchBackplane,
+} from "./backplane";
+import type { SseEvent } from "./types";
+
+export type { SseEvent };
 
 /**
- * Bus de eventos in-process por organización (contrato sse.md).
- * Publicar SIEMPRE después del commit de BD. Una instancia = un proceso,
- * así que un EventEmitter es suficiente (sin colas externas — Constitución II).
+ * Bus de eventos por organización (contrato sse.md).
+ * Publicar SIEMPRE después del commit de BD.
+ *
+ * Transporte: en `SSE_BACKPLANE=off` (default, comportamiento de S4.3/S4.4)
+ * los eventos van por EventEmitter in-process — una instancia = un proceso.
+ * En `SSE_BACKPLANE=postgres` (F5, riesgo A1) `publish()` atraviesa instancias
+ * vía LISTEN/NOTIFY y cada instancia re-emite localmente lo que recibe: el
+ * publicador también recibe su propio evento por LISTEN, así el reparto es
+ * exactamente una vez por instancia (ver backplane.ts).
  */
-
-export type SseEvent =
-  | { type: "message.new"; data: { conversationId: string; message: unknown } }
-  | {
-      type: "message.status";
-      data: {
-        conversationId: string;
-        messageId: string;
-        status: string;
-        /** Motivo del fallo, presente solo cuando status = "failed". */
-        error?: string | null;
-      };
-    }
-  /**
-   * 044 — El adjunto de un mensaje terminó de descargarse (o falló): sin
-   * esto la burbuja se quedaba en «descargando…» hasta recargar.
-   */
-  | {
-      type: "message.media";
-      data: { conversationId: string; messageId: string; media: unknown };
-    }
-  /** 074 — Un mensaje se editó (texto o pie): se pinta el nuevo y la marca. */
-  | {
-      type: "message.updated";
-      data: {
-        conversationId: string;
-        messageId: string;
-        text: string | null;
-        /** Pie nuevo si lo editado fue el de un adjunto; si no, null. */
-        caption: string | null;
-        editedAt: string;
-        originalText: string | null;
-      };
-    }
-  | { type: "conversation.updated"; data: { conversation: unknown } }
-  /** 026 — alguien del equipo eliminó la conversación: se quita de la bandeja. */
-  | {
-      type: "conversation.deleted";
-      data: { conversationId: string; contactId: string; contactDeleted: boolean };
-    }
-  /** 050 — una nota interna nueva o borrada: el hilo abierto la pinta o la quita. */
-  | { type: "note.new"; data: { conversationId: string; note: unknown } }
-  /** 072 — Cambiaron las reacciones de un mensaje (del cliente o del equipo). */
-  | {
-      type: "reaction.updated";
-      data: { conversationId: string; messageId: string; reactions: unknown };
-    }
-  | { type: "note.deleted"; data: { conversationId: string; noteId: string } }
-  /** 015 — algo cambió en la agenda: la pantalla de Citas se refresca sola. */
-  | { type: "booking.updated"; data: { bookingId: string } }
-  | {
-      type: "lab.run";
-      data: {
-        runId: string;
-        status: string;
-        progress: { done: number; total: number };
-        score?: number | null;
-      };
-    };
 
 const globalForBus = globalThis as unknown as { __vestroBus?: EventEmitter };
 
@@ -77,13 +33,35 @@ function getBus(): EventEmitter {
 }
 
 export function publish(organizationId: string, event: SseEvent): void {
+  if (backplaneMode() === "postgres") {
+    // Atraviesa instancias: pg_notify y el LISTEN local lo re-emite.
+    // Si la conexión aún no está, este mismo proceso se la da al listener
+    // de respaldo para no perder el evento del commit que acaba de confirmar.
+    void notifyBackplane(organizationId, event).then((enCola) => {
+      if (!enCola) emitLocal(organizationId, event);
+    });
+    return;
+  }
+  emitLocal(organizationId, event);
+}
+
+function emitLocal(organizationId: string, event: SseEvent): void {
   getBus().emit(`org:${organizationId}`, event);
+}
+
+function reemitirDesdeBackplane(organizationId: string, event: SseEvent): void {
+  emitLocal(organizationId, event);
 }
 
 export function subscribe(
   organizationId: string,
   listener: (event: SseEvent) => void
 ): () => void {
+  if (backplaneMode() === "postgres") {
+    // Garantiza un LISTEN por proceso; el vigía reconecta si la BD cayó.
+    void ensureBackplane(reemitirDesdeBackplane);
+    watchBackplane(reemitirDesdeBackplane);
+  }
   const bus = getBus();
   const channel = `org:${organizationId}`;
   bus.on(channel, listener);

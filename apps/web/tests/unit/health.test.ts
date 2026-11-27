@@ -19,7 +19,7 @@ const { getEnv, getDb } = vi.hoisted(() => ({
   getDb: vi.fn(),
 }));
 vi.mock("@/lib/env", () => ({ getEnv }));
-vi.mock("@/lib/db", () => ({ getDb, schema: {} }));
+vi.mock("@/lib/db", () => ({ getDb, schema: {}, dbRoleInUse: () => "owner" }));
 
 import { checkHealth, healthFeatures } from "@/server/platform/health";
 import {

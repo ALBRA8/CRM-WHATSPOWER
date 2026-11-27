@@ -181,6 +181,7 @@ describe("un commit que no salió del build se presenta como NO verificado", () 
       }
       vi.doMock("@/lib/db", () => ({
         getDb: () => ({ execute: async () => [] }),
+        dbRoleInUse: () => "owner",
       }));
       const { GET } = await import("@/app/api/health/route");
       return (await GET()).json();

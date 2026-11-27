@@ -11,6 +11,19 @@ import { z } from "zod";
 export const envSchema = z.object({
   APP_BASE_URL: z.string().url(),
   DATABASE_URL: z.string().min(1),
+  // F5 — rol de runtime con privilegios mínimos (MODELO_MULTI_TENANT.md §4.1,
+  // infra/sql/005_runtime_login.sql). Si está presente, la app CONECTA con este
+  // rol de BD (vestro_runtime, miembro del grupo app_runtime: DML sin DDL, sin
+  // dueño de objetos) en vez de con el dueño de DATABASE_URL. Es opcional para
+  // no romper los despliegues existentes: sin ella, el comportamiento es el de
+  // siempre (heredado de S4.3/S4.4). El verificador real del rol es
+  // apps/web/scripts/verificar-rol-runtime.mjs.
+  DATABASE_URL_RUNTIME: z.string().optional(),
+  // F5 — backplane SSE multi-instancia (riesgo A1, ver
+  // server/conversations/events/backplane.ts). `off` (default) conserva el bus
+  // in-process de siempre; `postgres` usa LISTEN/NOTIFY de la MISMA base para
+  // cruzar instancias sin servicios nuevos. Mal escrito, vale `off`.
+  SSE_BACKPLANE: z.string().optional(),
   BETTER_AUTH_SECRET: z.string().min(16),
   ENCRYPTION_KEY: z
     .string()

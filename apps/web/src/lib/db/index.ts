@@ -39,10 +39,22 @@ const globalForDb = globalThis as unknown as {
 
 function createClient() {
   const env = getEnv();
-  return postgres(env.DATABASE_URL, {
+  // F5 — rol de runtime con privilegios mínimos (infra/sql/005_runtime_login.sql).
+  // Si el despliegue define DATABASE_URL_RUNTIME, la app conecta con ese rol
+  // (vestro_runtime: miembro de app_runtime — DML sin DDL, dueño de nada, y
+  // FORCE RLS le aplica). Sin ella se usa DATABASE_URL como siempre: los
+  // despliegues existentes no cambian de comportamiento.
+  const url = env.DATABASE_URL_RUNTIME?.trim() || env.DATABASE_URL;
+  return postgres(url, {
     max: 10,
     ...PG_CONNECTION_OPTIONS,
   });
+}
+
+/** Rol de BD con el que corre la app («runtime» o «owner») — lo lee /api/health. */
+export function dbRoleInUse(): "runtime" | "owner" {
+  const env = getEnv();
+  return env.DATABASE_URL_RUNTIME?.trim() ? "runtime" : "owner";
 }
 
 export function getSql() {

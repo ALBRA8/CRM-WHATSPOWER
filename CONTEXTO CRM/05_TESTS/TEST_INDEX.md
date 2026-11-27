@@ -143,3 +143,37 @@ Comandos: `pytest tests` (cerebro) · `pnpm -r test` · `pnpm -r typecheck` ·
 2. Rol runtime de BD y backplane SSE — trabajo operativo de F5 (heredado).
 3. Activación en producción del puente: secretos fuertes, memoria persistente,
    autenticador real y firewall default-deny (riesgo S2 vigente para el demo).
+
+---
+
+## Resultados F5 (2026-11-28) — preparación y validación de producción
+
+Comandos: `pnpm -r test` · `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r build` ·
+`pnpm --filter @vestro/web test:multi-tenant` · `node scripts/verificar-rol-runtime.mjs` ·
+`node scripts/verificar-restauracion.mjs` · `infra/backup/prueba-persistencia-recuperacion.sh` ·
+`pytest tests` (cerebro) · self-test E2E (036) · `vitest tests/unit/sse-backplane.test.ts`.
+
+| Verificación | Resultado real |
+|---|---|
+| Suite completa CRM (`pnpm -r test`, con DATABASE_URL real y AGENTE_GENERAL_DIR al cerebro) | **1.825/1.825 PASS** — apps/web **1.729** (143 archivos: 142 + sse-backplane) · contracts 49 · tenant 15 · flows 8 · campaigns 5 · agent-gateway 19 (integración real cerebro 9/9 incluida) |
+| Typecheck / lint / build | 0 errores · Done (tras corregir 2 variables muertas) · OK (7 paquetes) |
+| Rutas API / contratos / fronteras | **142** (vigía) · 49/49 · **9/9** (grafo congelado con la arista F5 documentada D-027; ciclos sin nuevos) |
+| Batería multi-tenant (PostgreSQL 16.16 real) | **26/26 PASS** — RLS **39/39 tablas org-scoped** (clon TEMPLATE de base migrada limpia) |
+| **F5.1 rol runtime** (`verificar-rol-runtime.mjs`) | **24/24 PASS** — `vestro_runtime` LOGIN miembro de `app_runtime`: solo DML+secuencias (44/44 tablas), DDL rechazado (CREATE/DROP TABLE, CREATE ROLE → 42501), fail-closed sin contexto, cruzado 0 filas/42501, DML en su org, audit append-only, app operativa (R1-R7) |
+| **F5.2 backplane SSE** (LISTEN/NOTIFY, PostgreSQL real) | **6/6 PASS** — pg_notify de OTRA instancia llega al suscriptor local; exactly-once por instancia; payload >7900 viaja comprimido e íntegro; filtro por org; modo off conserva el contrato previo |
+| **F5.3 ciclo respaldo→restauración→verificación** | **5/5 PASS** — 44/44 tablas con conteos idénticos, RLS 39/39 restaurada con FORCE, cadena de hash de audit_log íntegra, 34 migraciones, base operable (`pg_dump -Fc` + `pg_restore` 16.9 sobre servidor 16.16) |
+| **F5.3 persistencia y recuperación** | **PASS** — marcador con nonce único sobrevive reinicio controlado (P3) y crash real SIGKILL al postmaster con replay de WAL (F3); cadena de hash íntegra tras ambos |
+| Cerebro AGENTE-GENERAL (`pytest tests`) | **821 passed, 1 skipped** (el skip es `test_nvidia_glm_flash`: requiere `NVIDIA_API_KEY`, prueba en vivo condicionada al entorno) |
+| E2E self-test 036 (turbo dev + heap 2 GB, :3260, corrida B corregida) | **270/302 checks OK, 0 FAIL** — parada reproducible al inicio de R11 por OOM del kernel (dmesg «Killed process next-server»; sandbox 3,9 GB; el guion completo exige ≥8 GB); corrida A abortada por defecto de configuración del arnés (D-F5-3, log conservado) |
+| `/api/health` con campos F5 | verificado en el servidor real: `dbRole:"owner"`, `sse:{mode:"off", connected:null, ...}` — aditivo, sin romper el contrato previo |
+| Escaneo de secretos del repo | sin hallazgos reales (0 tokens/claves en 1.272 archivos; solo fixtures E2E `password-e2e-*`) |
+
+### Corrida E2E F5 (036)
+
+Entorno reconstruido desde cero: BD `vestro_036_e2e` limpia (34 migraciones +
+audit_log), `.env.e2e-036` recreado (wa-mock/ai-mock/zoom-mock en la app,
+BOT_API_KEY ≥16, AGENT_COALESCE_MS=1500, AGENT_COALESCE_LARGO_MS=1500,
+AGENDA=on, BRAIN_DISPATCH_URL → cerebro falso 3261, WA_MOCK_ENABLED=true),
+servidor dev turbo + heap 2 GB en :3260. Resultado al cierre: ver
+`ENTREGA_F5.md` §pruebas. El host sigue en 3,9 GB RAM — el límite R11+
+documentado en S4.4 sigue siendo condición física del sandbox, no del producto.

@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import { CHANNEL_ORDER, type Channel } from "@/lib/channels";
-import { getDb } from "@/lib/db";
+import { getDb, dbRoleInUse } from "@/lib/db";
+import { backplaneStatus } from "@/server/conversations/events/backplane";
 import { APP_VERSION, resolveCommit } from "@/lib/version";
 import { parseAgendaFlag } from "@/server/scheduling/agenda/flag";
 import { parseAtribucionFlag } from "@/server/attribution/flag";
@@ -62,6 +63,17 @@ export type HealthOk = {
   features: HealthFeatures;
   mediaWritable: boolean;
   webhooks: { pendientes: number; agotados: number } | null;
+  /** F5 — rol de BD con el que corre la app (verificar-rol-runtime.mjs). */
+  dbRole: "runtime" | "owner";
+  /** F5 — estado del backplane SSE (A1): modo, conexión y contadores. */
+  sse: {
+    mode: "off" | "postgres";
+    connected: boolean | null;
+    notified: number;
+    received: number;
+    droppedOversize: number;
+    lastError: string | null;
+  };
 };
 
 export type HealthDown = {
@@ -116,6 +128,7 @@ export async function checkHealth(): Promise<HealthResult> {
   const { commit, verified } = resolveCommit();
   const media = await mediaDirStatus();
   const webhooks = await conteoGlobal().catch(() => null);
+  const bp = backplaneStatus();
   return {
     status: 200,
     body: {
@@ -125,6 +138,15 @@ export async function checkHealth(): Promise<HealthResult> {
       features: healthFeatures(),
       mediaWritable: media?.writable ?? false,
       webhooks,
+      dbRole: dbRoleInUse(),
+      sse: {
+        mode: bp.mode,
+        connected: bp.connected,
+        notified: bp.notified,
+        received: bp.received,
+        droppedOversize: bp.droppedOversize,
+        lastError: bp.lastError,
+      },
     },
   };
 }

@@ -1,7 +1,7 @@
 # PROJECT STATE — CRM WHATSPOWER (Vestro)
 
-**Estado unificado:** FASE 4 EN CURSO — etapas 1 y 2 (monorepo + 14 dominios) y etapa 3 (S4.3: fronteras, PostgreSQL real y E2E) CONSTRUIDAS Y VERIFICADAS.
-**Última actualización:** 2026-11-27.
+**Estado unificado:** FASE 4 COMPLETADA (S4.1-S4.4) + **F5 EN CURSO — preparación y validación de producción ENTREGADA** (sin activación pública: mandato F5 §7).
+**Última actualización:** 2026-11-28 (F5).
 **Fuente:** ejecución real en sandbox de construcción + documentos rectores de F0-F3.
 
 ## Estado por fase
@@ -12,8 +12,9 @@
 | F1 Auditoría técnica y legal | COMPLETADA | `04_AUDITS/REPOSITORIOS_AUDITORIA.md` (6/6 repos clonados y auditados) |
 | F2 Matriz de paridad | COMPLETADA | `00_MASTER/MATRIZ_PARIDAD_VOCERO.md` (156/156 mapeadas) |
 | F3 Arquitectura y modelo | COMPLETADA | `00_MASTER/ARQUITECTURA_MAESTRA_CRM.md`, `00_MASTER/MODELO_MULTI_TENANT.md`, `06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` |
-| F4 Base funcional y modularización | **EN CURSO — etapas 1-3 completadas** | sesiones 2026-11-27 (etapa 1, S4.2, S4.3); verificación real en `05_TESTS/TEST_INDEX.md`; entrega en `ENTREGA_S4_3.md` |
-| F5-F12 | PENDIENTES | dependencias duras: F5←F4 |
+| F4 Base funcional y modularización | **COMPLETADA (S4.1-S4.4)** | sesiones 2026-11-27; `ENTREGA_S4_3.md`, `ENTREGA_S4_4.md` (R-AG-1 + T9 cerrados, PR #77 merged `7f6e908`) |
+| F5 Preparación producción | **ENTREGADA 2026-11-28 — sin exposición pública** | `ENTREGA_F5.md`: rol runtime verificado 24/24 (D-025), backplane SSE 6/6 (D-024, A1 cerrado), backups+restauración 5/5 y persistencia/crash PASS (D-026), checklist del puente (D-028), secretos (infra/SECRETOS.md), observabilidad; suite 1.825/1.825, batería 26/26, cerebro 821 |
+| F6-F12 | PENDIENTES | F6 requiere autorización expresa de activación + host de despliegue (≥8 GB para E2E completo) |
 
 ## Hito Fase 4 — etapa 1 (2026-11-27)
 
@@ -29,9 +30,9 @@
 ## Bloqueadores
 
 - **L1/L2 (licencias):** CRM-ALBRA y WHATSPOWER-ULTRA sin respuesta de licencia. Mitigación vigente: cero código copiado; solo especificaciones. El bloqueo legal debe resolverse antes de F9.
-- **O1 (operación):** sin backups configurados aún; obligatorio antes de cualquier entorno con datos reales.
-- **A1 (SSE mono-instancia):** backplane multi-replica requerido en F5; hoy el núcleo conserva su comportamiento actual.
+- **O1 (operación): RESUELTO EN F5** — backups automáticos programables + ciclo de restauración verificado (5/5) y persistencia/crash PASS; programación por cron/systemd documentada (D-026).
+- **A1 (SSE mono-instancia): RESUELTO EN F5** — backplane LISTEN/NOTIFY (`SSE_BACKPLANE=postgres`) probado contra PostgreSQL real 6/6; `off` por defecto conserva el comportamiento de una instancia (D-024).
 
 ## Próximo paso
 
-**S4.4 ENTREGADA** (2026-11-27): los dos bloqueadores del cerebro quedaron cerrados con evidencia — R-AG-1 (`/crm/dispatch` real en AGENTE-GENERAL: despacho 200 verificado desde el adaptador del CRM contra el uvicorn real, HMAC ±300 s, eco de org, RBAC, firewall, HITL, envelope D-013, idempotencia y rate limit por org; D-022) y T9 (memoria del cerebro con dimensión de organización fail-closed y compatibilidad total con memoria preexistente; D-023). Verificaciones: suite CRM **1.819/1.819**, cerebro **821/821**, batería PostgreSQL real **26/26** (RLS 39/39), typecheck/lint/build verdes, 142 rutas y contratos 49/49 intactos, E2E **269/302 checks (0 FAIL)** con parada reproducible en R11 por memoria del sandbox (3,9 GB; la corrida completa exige ≥8 GB según el mandato). Informe en `ENTREGA_S4_4.md`. Pendientes habilitantes para F5: rol runtime `app_runtime` (grants en 004), backplane SSE, backups y el despliegue operativo del puente (secretos fuertes, memoria persistente, autenticador real, firewall default-deny).
+**F5 ENTREGADA** (2026-11-28): preparación y validación de producción sobre los estados publicados `f03048a` (CRM) y `7f6e908` (cerebro) — SIN exposición pública (mandato F5 §7). Entregado con evidencia real: rol runtime `vestro_runtime` con privilegios mínimos verificado 24/24 (D-025; corte completo del HTTP = operativo pendiente declarado), backplane SSE LISTEN/NOTIFY 6/6 (D-024), ciclo respaldo→restauración→verificación 5/5 + persistencia tras reinicio + recuperación tras crash SIGKILL (D-026), checklist de producción del puente (D-028), gestión de secretos (infra/SECRETOS.md), observabilidad (OBSERVABILIDAD.md + /api/health con `dbRole` y `sse`). Verificación: suite **1.825/1.825**, batería **26/26** (RLS 39/39), cerebro **821** (1 skip condicionado a NVIDIA_API_KEY), typecheck/lint/build verdes, 142 rutas y contratos 49/49 intactos, E2E 036 re-corrida (resultado exacto en `ENTREGA_F5.md`). Antes de activar para clientes: E2E completo en host ≥8 GB, checklist del puente ejecutado en el despliegue real, y autorización expresa del propietario.

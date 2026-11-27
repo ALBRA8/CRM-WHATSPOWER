@@ -1,7 +1,7 @@
 # CONTEXTO CRM — INDEX
 
-**Estado:** BASELINE INICIALIZADO / FASE 4 EN_CURSO
-**Última actualización:** 2026-11-27 (Fase 4 etapa 1: monorepo creado, VOCERO migrado a `apps/web`, contracts + tenant + services + infra construidos y verificados — ver SESSION_2026-11-27)
+**Estado:** FASE 4 COMPLETADA (S4.1-S4.4) / F5 PREPARACIÓN DE PRODUCCIÓN ENTREGADA (sin activación pública)
+**Última actualización:** 2026-11-28 (F5: rol runtime, backplane SSE, backups con restauración verificada, checklist del puente, secretos, observabilidad — ver SESSION_2026-11-28_F5.md y ENTREGA_F5.md)
 
 | Área | Archivo | Estado | Propósito |
 |---|---|---|---|
@@ -18,9 +18,11 @@
 | Audits | `04_AUDITS/AUDIT_INDEX.md` | POPULATED | auditorías de los 6 repos + auditoría del monorepo |
 | Tests | `05_TESTS/TEST_INDEX.md` | POPULATED | inventario de pruebas: ejecutadas con resultado real vs reportadas |
 | Integrations | `06_INTEGRATIONS/INTEGRATION_INDEX.md` | POPULATED | AGENTE-GENERAL, flujos, campañas, canales oficiales |
+| Integrations | `06_INTEGRATIONS/CHECKLIST_PRODUCCION_PUENTE.md` | VIGENTE (F5) | puerta de salida de producción del puente CRM↔cerebro con evidencia por ítem |
 | Failures | `07_FAILURES/FAILURE_INDEX.md` | POPULATED | riesgos top, incidentes y prohibiciones |
 | Sessions | `08_SESSIONS/SESSION_INDEX.md` | POPULATED | continuidad entre sesiones de trabajo |
 | Knowledge | `09_KNOWLEDGE/KNOWLEDGE_INDEX.md` | POPULATED | licencias, stack, patrones y reglas técnicas |
+| Knowledge | `09_KNOWLEDGE/OBSERVABILIDAD.md` | VIGENTE (F5) | probes, señales y convención de logs del CRM y del cerebro |
 
 ## Hitos vigentes
 

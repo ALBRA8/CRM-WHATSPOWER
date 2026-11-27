@@ -190,7 +190,10 @@ const GRAFO_CONGELADO: Record<string, number> = {
   "platform->agents": 2,
   "platform->attribution": 1,
   "platform->channels": 3,
-  "platform->conversations": 1,
+  // F5: la segunda arista es /api/health observando el estado del backplane
+  // SSE (server/conversations/events/backplane.ts) — decisión consciente de
+  // observabilidad, read-only, documentada en ENTREGA_F5.md.
+  "platform->conversations": 2,
   "platform->crm": 1,
   "platform->integrations": 1,
   "platform->organizations": 1,
