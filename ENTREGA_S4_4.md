@@ -198,10 +198,17 @@ puerto 3261 ocupado por un cerebro falso huérfano.
 
 ## 8. Commits publicados y verificación del push
 
-- Commits S4.4 en ambos repositorios (ver `git log` — trazabilidad completa de
-  esta entrega); el push se verifica con `git ls-remote` tras subir:
-  - `ALBRA8/CRM-WHATSPOWER` → `main`
-  - `ALBRA8/AGENTE-GENERAL` → `main`
+- `ALBRA8/CRM-WHATSPOWER` → `main`: push directo verificado
+  (`419c57b..b0d8650`; la rama no está protegida).
+- `ALBRA8/AGENTE-GENERAL`: `main` está PROTEGIDA por reglas de repositorio
+  (3 status checks requeridos; el push directo a `main` es rechazado por
+  GitHub — intentado y documentado). El commit `e0d8442` se publicó en la
+  rama **`s4.4/crm-dispatch-t9`** y quedó abierto el **PR #77**
+  (`https://github.com/ALBRA8/AGENTE-GENERAL/pull/77`) para que la CI del
+  cerebro (3 checks requeridos) corra y el propietario haga merge. Los
+  checks de la CI del cerebro corren contra este mismo árbol: la suite
+  local ya dio **821/821** sin `llm_real` (los flujos de CI que exigen
+  credenciales externas son los que decidan en el PR).
 - Criterio de finalización: R-AG-1 y T9 **resueltos con pruebas reales**,
   integración satisfactoria (1.819 CRM + 821 cerebro + 26/26 RLS + 269/302
   E2E), documentación entregada. Lo no verificable está enumerado exactamente
