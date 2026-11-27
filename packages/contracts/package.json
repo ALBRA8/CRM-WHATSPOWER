@@ -1,0 +1,23 @@
+{
+  "name": "@vestro/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Contratos de integración versionados de Vestro: catálogo de errores tipados, contexto de tenant, despacho estándar, bot API v1, API v1 comercial, flujos, campañas y agenda. Fuente: CONTRATOS_INTEGRACION.md.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

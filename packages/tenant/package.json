@@ -1,0 +1,23 @@
+{
+  "name": "@vestro/tenant",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Contexto de tenant de Vestro: AsyncLocalStorage fail-closed, verificación de eco de organización y lectura de cabeceras estándar. Modelo: MODELO_MULTI_TENANT.md §5.",
+  "license": "MIT",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@vestro/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}

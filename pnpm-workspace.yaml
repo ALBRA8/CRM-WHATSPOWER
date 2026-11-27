@@ -1,0 +1,13 @@
+packages:
+  - "apps/*"
+  - "services/*"
+  - "packages/*"
+
+# Reconocimiento de scripts de postinstall de dependencias (heredado de VOCERO).
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+
+overrides:
+  sharp: ^0.35.5

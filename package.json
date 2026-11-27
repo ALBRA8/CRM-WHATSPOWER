@@ -1,0 +1,20 @@
+{
+  "name": "vestro",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Vestro — CRM SaaS multi-tenant. Núcleo funcional VOCERO + AGENTE-GENERAL como único cerebro. Repositorio: ALBRA8/CRM-WHATSPOWER.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "infra:up": "docker compose -f infra/docker-compose.yml up -d",
+    "infra:down": "docker compose -f infra/docker-compose.yml down"
+  }
+}

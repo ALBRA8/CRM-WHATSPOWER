@@ -1,0 +1,40 @@
+# CI — verificación obligatoria de cada push (criterios de aceptación §8 del mandato)
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile=false
+
+      - name: Typecheck
+        run: pnpm -r typecheck
+
+      - name: Lint
+        run: pnpm -r lint
+
+      - name: Pruebas unitarias
+        run: pnpm -r test
+
+      - name: Build
+        run: pnpm -r build
+
+      # Fase 5 (S5.3): la batería T1-T15 sobre PostgreSQL real se añade aquí y
+      # bloquea el pipeline si alguna prueba de fuga falla.
