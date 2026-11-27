@@ -209,7 +209,7 @@ describe("withApiKey", () => {
 
 describe("OpenAPI de la v1", () => {
   const raiz = join(process.cwd(), "src/app/api/v1");
-  const spec = JSON.parse(readFileSync(join(process.cwd(), "src/server/api-v1/openapi.json"), "utf8")) as {
+  const spec = JSON.parse(readFileSync(join(process.cwd(), "src/server/integrations/api-v1/openapi.json"), "utf8")) as {
     paths: Record<string, Record<string, unknown>>;
   };
 

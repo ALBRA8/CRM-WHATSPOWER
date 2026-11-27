@@ -97,7 +97,7 @@ describe("guardarraíles del reporte", () => {
   });
 
   it("la emisión cuelga de la puerta única de etapas", () => {
-    const gate = readFileSync("src/server/leads/stage-history.ts", "utf8");
+    const gate = readFileSync("src/server/crm/leads/stage-history.ts", "utf8");
     expect(gate).toContain("reportStageChange");
     // Y ocurre DESPUÉS del commit: una llamada de red dentro de la transacción
     // la mantendría abierta mientras Meta piensa.
