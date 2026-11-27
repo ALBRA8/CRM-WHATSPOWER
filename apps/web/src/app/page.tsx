@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSessionOrNull } from "@/lib/auth/session";
-import { guideFirst } from "@/server/onboarding/guide";
+import { guideFirst } from "@/server/organizations/onboarding/guide";
 
 export const dynamic = "force-dynamic";
 

@@ -6,8 +6,8 @@
  * sacarla. Por eso cada pendiente lleva la URL exacta donde se resuelve: la
  * del proveedor y la pantalla de ESTA instancia, absolutas.
  */
-import { GUIA_DEL_PAR } from "@/server/onboarding/guide";
-import type { ReadinessStep } from "@/server/onboarding/status";
+import { GUIA_DEL_PAR } from "@/server/organizations/onboarding/guide";
+import type { ReadinessStep } from "@/server/organizations/onboarding/status";
 import { origenInstancia } from "@/server/oauth/puerta";
 
 export type Enlace = { titulo: string; url: string };

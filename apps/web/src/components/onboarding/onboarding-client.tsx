@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ArrowUpRight, Check, Inbox, Power } from "lucide-react";
-import type { Guide, GuideStep } from "@/server/onboarding/guide";
+import type { Guide, GuideStep } from "@/server/organizations/onboarding/guide";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";

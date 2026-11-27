@@ -7,7 +7,7 @@
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { GUIA_DEL_PAR } from "@/server/onboarding/guide";
+import { GUIA_DEL_PAR } from "@/server/organizations/onboarding/guide";
 import { MAX_HISTORIAL, MAX_TEXTO, MAX_TURNOS, simular } from "@/server/lab/simular";
 import { conSesion } from "./compartido";
 

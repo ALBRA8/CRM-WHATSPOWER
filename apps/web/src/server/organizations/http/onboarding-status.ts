@@ -1,8 +1,8 @@
 import { conSesion } from "@/server/http/compartido";
 import { apiError } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
-import { guideFrom } from "@/server/onboarding/guide";
-import { onboardingStatus } from "@/server/onboarding/status";
+import { guideFrom } from "@/server/organizations/onboarding/guide";
+import { onboardingStatus } from "@/server/organizations/onboarding/status";
 
 
 /**

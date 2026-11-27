@@ -19,8 +19,8 @@ vi.mock("@/lib/ai/provider", async (importOriginal) => ({
 const getBrainHealth = vi.hoisted(() => vi.fn());
 vi.mock("@/server/bot/status", () => ({ getBrainHealth }));
 
-import { onboardingStatus } from "@/server/onboarding/status";
-import { verifyCalendar, hasWeeklyHours } from "@/server/onboarding/calendar-verifiers";
+import { onboardingStatus } from "@/server/organizations/onboarding/status";
+import { verifyCalendar, hasWeeklyHours } from "@/server/organizations/onboarding/calendar-verifiers";
 
 // Identidades REALES de las tablas; solo se reemplaza el transporte.
 const rows = new Map<unknown, unknown[]>();

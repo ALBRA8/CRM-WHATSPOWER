@@ -13,7 +13,7 @@ vi.mock("@/lib/db", () => ({
   schema: { organization: {} },
 }));
 
-import { isPublicSignupAllowed } from "@/server/auth/registration";
+import { isPublicSignupAllowed } from "@/server/identity/auth/registration";
 
 afterEach(() => vi.unstubAllEnvs());
 

@@ -8,10 +8,10 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
  */
 
 const onboardingStatus = vi.hoisted(() => vi.fn());
-vi.mock("@/server/onboarding/status", () => ({ onboardingStatus }));
+vi.mock("@/server/organizations/onboarding/status", () => ({ onboardingStatus }));
 
-import { GUIA_DEL_PAR, guideFirst, guideFrom } from "@/server/onboarding/guide";
-import type { ReadinessStep } from "@/server/onboarding/status";
+import { GUIA_DEL_PAR, guideFirst, guideFrom } from "@/server/organizations/onboarding/guide";
+import type { ReadinessStep } from "@/server/organizations/onboarding/status";
 
 const step = (
   key: ReadinessStep["key"],

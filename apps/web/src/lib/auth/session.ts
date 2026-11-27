@@ -1,6 +1,6 @@
 import { headers } from "next/headers";
 import { leerSesion } from "@/lib/auth/leer-sesion";
-import { resolveMembership } from "@/server/auth/on-signup";
+import { resolveMembership } from "@/server/identity/auth/on-signup";
 
 export type SessionContext = {
   userId: string;

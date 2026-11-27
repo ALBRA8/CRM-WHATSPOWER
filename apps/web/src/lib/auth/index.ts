@@ -9,8 +9,8 @@ import { AUTH_RATE_LIMIT, checkRateLimit, clientIp } from "@/lib/rate-limit";
 import {
   onUserCreated,
   resolveActiveOrganizationId,
-} from "@/server/auth/on-signup";
-import { isPublicSignupAllowed } from "@/server/auth/registration";
+} from "@/server/identity/auth/on-signup";
+import { isPublicSignupAllowed } from "@/server/identity/auth/registration";
 
 /**
  * Contexto interno del proceso: permite que el alta de cuentas de equipo

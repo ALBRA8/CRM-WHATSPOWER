@@ -1,4 +1,4 @@
-import { onboardingStatus } from "@/server/onboarding/status";
+import { onboardingStatus } from "@/server/organizations/onboarding/status";
 import { conSesion } from "./compartido";
 import { origenPublico, pendientesConEnlaces } from "./enlaces";
 
