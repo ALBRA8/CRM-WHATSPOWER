@@ -63,6 +63,14 @@ beforeAll(async () => {
       if (path === "/api/v1/health") return json(200, { status: "ok" });
       if (path === "/api/v1/approvals/pending")
         return json(200, [{ id: "ap_1", action: "send_template", organizationId: ORG }]);
+      // Forma REAL del cerebro (AGENTE-GENERAL): objeto con sobre {storage_scope, approvals}
+      if (path === "/envelope-cerebro/api/v1/approvals/pending")
+        return json(200, {
+          storage_scope: "process-local",
+          approvals: [
+            { approval_id: "ap_2", action: "send_template", status: "awaiting_approval" },
+          ],
+        });
       if (path === "/api/v1/execution/ex_1")
         return json(200, {
           executionId: "ex_1",
@@ -177,6 +185,23 @@ describe("HITL y resultados (contrato §6)", () => {
     expect(res.ok).toBe(true);
     expect(res.data?.[0]?.["id"]).toBe("ap_1");
     expect(hits.get("/api/v1/approvals/pending")).toBe(1);
+  });
+
+  it("normaliza el sobre REAL del cerebro {storage_scope, approvals} a la lista (regresión S4.3)", async () => {
+    // apiUrl con prefijo → el mock responde con el sobre real del cerebro
+    const gw = new AgentGateway({
+      dispatchUrl: `${baseUrl}/crm/dispatch`,
+      apiUrl: `${baseUrl}/envelope-cerebro`,
+      apiKey: KEY,
+      signingSecret: SECRET,
+      organizationId: ORG,
+      timeoutMs: 1000,
+      maxRetries: 0,
+    });
+    const res = await gw.approvalsPending("req-uuid-8b");
+    expect(res.ok).toBe(true);
+    expect(res.data?.[0]?.["approval_id"]).toBe("ap_2");
+    expect(res.data?.[0]?.["status"]).toBe("awaiting_approval");
   });
 
   it("resultado de ejecución con traza; firewall_denied tipado", async () => {

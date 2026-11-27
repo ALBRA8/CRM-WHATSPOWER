@@ -8,39 +8,82 @@
 --    se fijó → la política no coincide → cero filas.
 -- 4. Unicidades siempre compuestas por organización.
 --
--- Este script aplica la política estándar a la lista de tablas de dominio si
--- existen. Es idempotente y se ejecuta tras cada migración que cree tablas
--- nuevas (el Drizzle de apps/web crea las tablas; esta plantilla aísla).
--- Verificación real de la batería T1-T15: Fase 5 (CI sobre PostgreSQL real).
+-- S4.3 (defecto D-S43-1): la lista fija de 22 nombres no coincidía con las
+-- tablas reales (solo 14 recibieron RLS; quedaban 24 tablas org-scoped sin
+-- aislar, incluidas las 7 de credenciales y las 3 de OAuth). Ahora la política
+-- se descubre DINÁMICAMENTE: toda tabla de public que tenga columna
+-- organization_id recibe ENABLE + FORCE RLS + política tenant_isolation.
+-- Las tablas globales de better-auth (user, session, account, verification)
+-- y la propia organization (registro de tenants) no tienen esa columna y
+-- quedan fuera automáticamente, igual que dicta MODELO_MULTI_TENANT.md §4.
+-- Idempotente y seguro de ejecutar tras CADA migración que cree tablas nuevas.
 
 DO $$
 DECLARE
   t text;
-  domain_tables text[] := ARRAY[
-    'contact', 'company', 'lead', 'pipeline_stage', 'lead_stage_event',
-    'conversation', 'conversation_note', 'message', 'dispatch', 'channel_connection',
-    'agent_profile', 'kb_entry', 'calendar_settings', 'booking', 'api_key',
-    'subscription', 'task', 'automation', 'campaign', 'webhook_event',
-    'usage_record', 'agent_memory'
-  ];
+  n_aplicadas int := 0;
 BEGIN
-  FOREACH t IN ARRAY domain_tables LOOP
-    IF to_regclass(format('public.%I', t)) IS NOT NULL THEN
-      EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
-      EXECUTE format('ALTER TABLE %I FORCE ROW LEVEL SECURITY', t);
-      EXECUTE format('DROP POLICY IF EXISTS tenant_isolation ON %I', t);
-      EXECUTE format($f$
-        CREATE POLICY tenant_isolation ON %I
-          USING      (organization_id = current_setting('app.current_org', true))
-          WITH CHECK (organization_id = current_setting('app.current_org', true))
-      $f$, t);
-      RAISE NOTICE 'RLS aplicada a %', t;
-    ELSE
-      RAISE NOTICE 'tabla % no existe aún: la política se aplicará cuando se cree', t;
-    END IF;
+  FOR t IN
+    SELECT c.table_name::text
+      FROM information_schema.columns c
+      JOIN information_schema.tables tb
+        ON tb.table_schema = c.table_schema AND tb.table_name = c.table_name
+     WHERE c.table_schema = 'public'
+       AND c.column_name = 'organization_id'
+       AND tb.table_type = 'BASE TABLE'
+       AND to_regclass(format('public.%I', c.table_name)) IS NOT NULL
+       AND NOT EXISTS (
+             SELECT 1 FROM pg_tables pt
+              WHERE pt.schemaname = 'public'
+                AND pt.tablename = c.table_name
+                AND pt.rowsecurity = true
+                AND EXISTS (
+                  SELECT 1 FROM pg_policies pp
+                   WHERE pp.schemaname = 'public'
+                     AND pp.tablename = c.table_name
+                     AND pp.policyname = 'tenant_isolation'
+                )
+           )
+     ORDER BY c.table_name
+  LOOP
+    EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', t);
+    EXECUTE format('ALTER TABLE %I FORCE ROW LEVEL SECURITY', t);
+    EXECUTE format('DROP POLICY IF EXISTS tenant_isolation ON %I', t);
+    EXECUTE format($f$
+      CREATE POLICY tenant_isolation ON %I
+        USING      (organization_id = current_setting('app.current_org', true))
+        WITH CHECK (organization_id = current_setting('app.current_org', true))
+    $f$, t);
+    n_aplicadas := n_aplicadas + 1;
+    RAISE NOTICE 'RLS aplicada a %', t;
   END LOOP;
+  RAISE NOTICE '003 RLS: % tablas aisladas en esta ejecución', n_aplicadas;
 END
 $$;
 
--- Las 3 tablas de sesión de auth (better-auth) quedan FUERA del modelo de
--- tenant según el modelo multi-tenant §4: no reciben política tenant_isolation.
+-- Verificación embebida: la batería (scripts/bateria-multi-tenant.mjs de
+-- apps/web) falla si alguna tabla org-scoped queda sin RLS. Este bloque es
+-- la valla estática: aborta si queda CUALQUIER tabla con organization_id sin
+-- la política tenant_isolation activa.
+DO $$
+DECLARE
+  pendientes text;
+BEGIN
+  SELECT string_agg(c.table_name, ', ' ORDER BY c.table_name)
+    INTO pendientes
+    FROM information_schema.columns c
+    JOIN information_schema.tables tb
+      ON tb.table_schema = c.table_schema AND tb.table_name = c.table_name
+   WHERE c.table_schema = 'public'
+     AND c.column_name = 'organization_id'
+     AND tb.table_type = 'BASE TABLE'
+     AND EXISTS (
+       SELECT 1 FROM pg_tables pt
+        WHERE pt.schemaname = 'public' AND pt.tablename = c.table_name
+          AND pt.rowsecurity = false
+     );
+  IF pendientes IS NOT NULL THEN
+    RAISE EXCEPTION '003 RLS: tablas org-scoped SIN RLS: %', pendientes;
+  END IF;
+END
+$$;

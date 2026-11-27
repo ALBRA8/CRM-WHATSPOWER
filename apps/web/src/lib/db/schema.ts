@@ -105,6 +105,9 @@ export const invitation = pgTable("invitation", {
   role: text("role"),
   status: text("status").notNull().default("pending"),
   expiresAt: timestamp("expires_at").notNull(),
+  /** S4.3 (D-S43-3): better-auth (plugin organization) la exige; faltaba en
+   *  schema y migraciones — el registro/invitación fallaba contra BD real. */
+  createdAt: timestamp("created_at").notNull().defaultNow(),
   inviterId: text("inviter_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),

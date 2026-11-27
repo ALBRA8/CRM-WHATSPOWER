@@ -234,7 +234,26 @@ export class AgentGateway {
       const err = this.classifyFailure(status, json);
       return { ok: false, status, error: { code: err.code, message: err.message } };
     }
-    return { ok: true, status, data: (json as Array<Record<string, unknown>>) ?? [] };
+    // El cerebro real (AGENTE-GENERAL /api/v1/approvals/pending) responde
+    // {"storage_scope": …, "approvals": […]}. Normalizamos a la lista de
+    // aprobaciones; un array plano también se acepta (compatibilidad).
+    if (Array.isArray(json)) return { ok: true, status, data: json };
+    if (
+      json !== null &&
+      typeof json === "object" &&
+      Array.isArray((json as Record<string, unknown>).approvals)
+    ) {
+      return { ok: true, status, data: (json as { approvals: Array<Record<string, unknown>> }).approvals };
+    }
+    return {
+      ok: false,
+      status,
+      error: {
+        code: "network_error",
+        message: "Respuesta de aprobaciones sin lista reconocible (ni array ni {approvals})",
+        details: json,
+      },
+    };
   }
 
   /** §3 operación 15: resultado de una ejecución con traza. */
