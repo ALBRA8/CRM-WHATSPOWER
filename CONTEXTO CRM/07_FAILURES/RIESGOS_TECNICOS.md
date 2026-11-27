@@ -103,7 +103,7 @@
 
 | # | ID | Riesgo | Nivel | Decisión clave |
 |---|---|---|---|---|
-| 1 | D2 | Memoria del agente sin tenant (SQLite, sin org) | 16 | Backend Postgres tenant-safe + mapeo `org:*` en F7 (condición para activar el agente) |
+| 1 | D2 | Memoria del agente sin tenant (SQLite, sin org) | 16 | **CERRADO lado cerebro en S4.4** (D-023: dimensión `org_id` fail-closed + cubeta legacy + pruebas negativas 15/15 y por HTTP; suite del cerebro 821/821). La actividad de negocio del CRM sigue en Postgres del CRM con RLS (D-014); para producción falta solo despliegue operativo (F5) |
 | 2 | L1 | CRM-ALBRA sin licencia | 15 | Especificación de solo lectura; acción legal en F0/F1 |
 | 3 | L2 | ULTRA sin licencia | 15 | Ídem; plan clean-room para F9 |
 | 4 | O1 | Sin backups/drill | 15 | Backups + drill desde F4 (no llega a F12) |
@@ -122,3 +122,12 @@
 2. Cualquier riesgo nuevo detectado en construcción se añade con ID secuencial (categoría-prefijo + número) y dueño.
 3. Los riesgos críticos (nivel ≥ 15) requieren decisión de dirección documentada (minuta en `docs/decisiones/`) antes de cerrar su fase.
 4. Los riesgos que se materializan en incidentes de piloto (F12) se analizan con el runbook de incidentes y alimentan la matriz final.
+
+### Registro S4.4 (2026-11-27)
+
+| ID | Cambio de estado | Evidencia |
+|---|---|---|
+| D2 | **CERRADO lado cerebro** (bloqueador T9): memoria de AGENTE-GENERAL con dimensión de organización fail-closed, compatible con memoria preexistente (migración aditiva probada) | `AGENTE-GENERAL/tests/unit/test_memory_org_isolation.py` 15/15; integración HTTP org A/org B; suite cerebro 821/821; `cerebro-real.test.ts` 9/9 (`memory_store: configured`) |
+| R-AG-1 | **CERRADO** (bloqueador): `/crm/dispatch` implantado en el cerebro (D-022) con HMAC ±300 s, eco de org, RBAC, firewall, HITL 202, envelope D-013, idempotencia y rate limit por org | `AGENTE-GENERAL/tests/integration/test_crm_dispatch.py` 25/25; `cerebro-real.test.ts` 9/9 contra uvicorn real (despacho 200 `{accepted, event_id, approvalRequired:false}`) |
+| S2 | Sigue VIGENTE para staging/producción: `render_app.py` demo trae firewall allow-all `*`; el despliegue real exige reglas default-deny explícitas + autenticador real + `ALBRA_CRM_HMAC_SECRET` fuerte + `ALBRA_MEMORY_DB` persistente | `AGENTE-GENERAL/render_app.py`; `ENTREGA_S4_4.md` §7 |
+| Limitación de entorno | E2E 036 completa requiere ≥8 GB RAM (mandato); el sandbox tiene 3,9 GB → corrida continua hasta **269/302 checks (0 FAIL)**, parada reproducible al inicio de R11, igual que S4.3; 4 configuraciones probadas; nada simulado | `ENTREGA_S4_4.md` §5; `SESSION_2026-11-27_S4.4_CIERRE_BLOQUEOS_AGENTE.md` §3 |

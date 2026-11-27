@@ -107,3 +107,39 @@ Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r bu
 3. **Endpoint `/crm/dispatch` en el cerebro**: 404 real; el despacho del CRM falla tipado hasta publicar el adaptador en AGENTE-GENERAL (R-AG-1).
 4. **Runtime sobre el rol dueño**: el `DATABASE_URL` documentado conecta como `vestro` (dueño/superusuario, ignora RLS). La valla de BD muerde al operar como `app_runtime` (probado); el cambio de rol de runtime queda como trabajo operativo de F5 (los grants ya están en 004).
 5. **E2E corrida completa**: R11+ (~33 checks) sin verificar en corrida continua por memoria del sandbox (4 GB); en un host con ≥8 GB el mismo guion corre completo (`node --env-file=.env.e2e-036 scripts/e2e-selftest.mjs`).
+
+---
+
+## Resultados S4.4 (2026-11-27) — cierre de bloqueos del cerebro (R-AG-1 + T9)
+
+Comandos: `pytest tests` (cerebro) · `pnpm -r test` · `pnpm -r typecheck` ·
+`pnpm -r lint` · `pnpm -r build` · `pnpm --filter @vestro/web test:multi-tenant`
+· self-test E2E documentado (036).
+
+| Verificación | Resultado real |
+|---|---|
+| Suite del cerebro AGENTE-GENERAL | **821/821** — baseline 781 intacta + 40 nuevas (15 memoria-org T9 + 25 integración `/crm/dispatch`) |
+| Integración real CRM ↔ cerebro | **9/9** contra el uvicorn real (`cerebro-real.test.ts`): health con memoria configurada (T9), despacho real **200** `{accepted, event_id, approvalRequired:false}` (R-AG-1 cerrado), idempotencia real, firma HMAC manipulada → 401 tipado, organización cruzada → **403 `tenant_mismatch`** (envelope del catálogo), HITL 200, identidad de organización |
+| Suite completa CRM | **1.819/1.819** — apps/web 1.723 (142 archivos) · contracts 49 · tenant 15 · flows 8 · campaigns 5 · agent-gateway **19**; baseline 1.816 íntegra, 0 pruebas eliminadas o debilitadas |
+| Typecheck / lint / build | 6/6 Done · Done · OK |
+| Rutas API / contratos / fronteras | 142 · 49/49 · 9/9 (vigías intactos) |
+| Batería multi-tenant (PostgreSQL 16.16 real, clúster limpio `pgdata-s44`, 34 migraciones) | **26/26 PASS** — cobertura RLS **39/39 tablas org-scoped**; T1–T15, audit hash-chained, transacciones, credenciales e ISO |
+| Memoria del cerebro por organización (T9) | 15/15 unitarias (`test_memory_org_isolation.py`: clave `(org_id, agent_id, domain, user_id, context_id)`, identidad↔org fail-closed, consultas cruzadas = 0 filas / `PermissionError`, migración legacy real sin pérdida) + negativas por HTTP |
+| Vigía de contaminación del seed del cerebro | 0 hallazgos críticos (el puente vive en `albra_specialization/crm`, hook genérico `extra_extensions`; D-022) |
+| E2E real (self-test 036, corrida continua, turbo dev + heap 2 GB) | **269/302 checks verdes (0 FAIL)** — parada reproducible al inicio de R11 por memoria del sandbox (3,9 GB; el guion completo exige ≥8 GB, condición del propio mandato); 4 configuraciones probadas (webpack/turbo × heap 1,6–2,5 GB); R11+ (~33 checks) sin verificar, nada simulado |
+
+### Defectos registrados y corregidos en S4.4 (§6)
+
+| ID | Defecto | Causa raíz | Corrección | Prueba anti-regresión |
+|---|---|---|---|---|
+| D-S44-1 | `SQLiteMemoryStore` con BD migrada leía `full_json` de la columna equivocada | acceso posicional `row[-1]` asumía `full_json` última; `ALTER TABLE ADD COLUMN org_id` la añade al final | acceso por NOMBRE de columna (`sqlite3.Row`) | `test_legacy_sqlite_database_migrates_without_data_loss` (BD legacy real → migración → lectura intacta) |
+| D-S44-2 | health del cerebro sin `memory_manager` — T9 no verificable por HTTP | lista fija de componentes en `Runtime.health()` | componente añadido (genérico) | `cerebro-real.test.ts`: `memory_store` + `memory_manager` = `configured` |
+| D-S44-3 | vigía de contaminación del seed en rojo (55 hallazgos `crm`) | primera ubicación del puente dentro de `src/albra_seed/` | puente en `albra_specialization/crm/bridge.py` + hook `extra_extensions`; el seed no importa dominio | `tests/contamination` 0 críticos; suite cerebro 821/821 |
+
+### Pendientes documentados (no ocultados)
+
+1. **E2E R11+ (~33 checks)** requiere host ≥8 GB (mandato); sandbox 3,9 GB —
+   corrida continua detenida en la frontera física, misma de S4.3.
+2. Rol runtime de BD y backplane SSE — trabajo operativo de F5 (heredado).
+3. Activación en producción del puente: secretos fuertes, memoria persistente,
+   autenticador real y firewall default-deny (riesgo S2 vigente para el demo).

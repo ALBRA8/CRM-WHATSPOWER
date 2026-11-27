@@ -4,6 +4,9 @@
 |---|---|---|---|---|
 | SES-2026-11-26 | 2026-11-26 | Auditoría real de los 6 repositorios y producción de los 8 documentos rectores (F0-F3) | 8/8 documentos entregados; matriz de paridad 156 capacidades; licencias registradas; riesgos catalogados | `SESSION_2026-11-26_AUDITORIA_Y_DOCS_RECTORES.md` |
 | SES-2026-11-27 | 2026-11-27 | Fase 4 etapa 1: monorepo, migración de VOCERO, contracts, tenant, services, infra y verificación real | Base construida y verificada; publicada en ALBRA8/CRM-WHATSPOWER | `SESSION_2026-11-27_FASE4_ETAPA1.md` |
+| SES-S4.2 | 2026-11-27 | Reorganización en los 14 dominios | 1.801 verdes; rutas intactas; publicada | `SESSION_2026-11-27_S4.2_DOMINIOS.md` |
+| SES-S4.3 | 2026-11-27 | Fronteras entre dominios y validación E2E | 1.816 verdes; RLS 39/39 real; E2E 269/302; R-AG-1 y T9 documentados | `SESSION_2026-11-27_S4.3_FRONTERAS_Y_E2E.md` |
+| SES-S4.4 | 2026-11-27 | Cierre de bloqueos del cerebro (R-AG-1 + T9) | 1.819 + 821 verdes; despacho real 200; memoria org-scoped; E2E 269/302 (frontera física del sandbox); publicados ambos repos | `SESSION_2026-11-27_S4.4_CIERRE_BLOQUEOS_AGENTE.md` |
 
 ## Formato de una sesión
 

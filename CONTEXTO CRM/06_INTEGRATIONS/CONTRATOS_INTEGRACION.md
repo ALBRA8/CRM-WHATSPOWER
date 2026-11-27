@@ -158,6 +158,17 @@ Las 13 rutas de VOCERO se conservan con sus códigos de error; añadidos en curs
 3. La decisión se envía por `POST /api/v1/approvals/{id}/decision` **por parte del usuario** (el CRM nunca auto-aprueba; el ApprovalEngine del agente tampoco).
 4. La decisión y su autor quedan auditadas en ambos lados.
 
+### 6.4 Estado de implantación (S4.4, 2026-11-27)
+
+| Bloqueador | Estado | Evidencia |
+|---|---|---|
+| R-AG-1 (`/crm/dispatch` en el cerebro) | **CERRADO** — endpoint real en `AGENTE-GENERAL` (`albra_specialization/crm/bridge.py`, montado vía hook genérico `extra_extensions`): HMAC ±300 s timing-safe, eco de organización + identidad D-014, RBAC `crm:dispatch`, firewall (default-deny), HITL 202 `approval_required`, envelope D-013, idempotencia `(org, conversación, event_id)`, rate limit por org, persistencia en memoria de tenant antes del ACK | `test_crm_dispatch.py` 25/25 (app real); `cerebro-real.test.ts` 9/9 contra uvicorn real — despacho 200, firma manipulada 401, org cruzada 403 tipado |
+| T9 (memoria del cerebro por organización) | **CERRADO** — dimensión `org_id` primera componente de la clave `(org_id, agent_id, domain, user_id, context_id)`, validación identidad↔org fail-closed en cada operación, cubeta legacy `""` para registros pre-S4.4 (migración aditiva probada sin pérdida), health reporta `memory_store`/`memory_manager` configurados | `test_memory_org_isolation.py` 15/15; suite del cerebro 821/821; health verificado contra el servidor real |
+
+La activación en producción exige además (F5+): `ALBRA_CRM_HMAC_SECRET` fuerte
+compartido, `ALBRA_MEMORY_DB` persistente, autenticador real (el dev token
+jamás corre en producción) y firewall default-deny del cerebro.
+
 ### 6.3 Reglas del adaptador (independiente, versionado)
 
 - El adaptador vive en el núcleo (`src/server/agent-adapter/`): encola, firma, reintenta, clasifica y audita. El agente **no** recibe credenciales de BD ni del canal.
