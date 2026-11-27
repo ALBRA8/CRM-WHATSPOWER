@@ -332,3 +332,17 @@ Las incorpora la nueva plataforma desde otros orígenes o como diseño nuevo (fu
 ## 6. Conclusión
 
 El inventario completo de VOCERO (156 capacidades inventariadas en 16 dominios) queda mapeado al 100 %: 67 se conservan, 69 se adaptan conservando comportamiento y contrato, 5 se reconstruyen de forma controlada (auditoría general, rate-limits multi-replica, multi-tenancy operativa, instalador guiado, identidad visual) y 15 capacidades nuevas del chaleco se suman sin eliminar nada. La paridad se verificará fase por fase en el roadmap con los guiones E2E de VOCERO como base de pruebas de regresión.
+
+## Nota de verificación S4.2 (2026-11-27)
+
+Tras el rebrand VOCERO→Vestro y la reorganización de `src/server/*` en los 14
+dominios (sesión `08_SESSIONS/SESSION_2026-11-27_S4.2_DOMINIOS.md`), la matriz
+**no registra ninguna baja ni cambio de estado de capacidad**: 156/156
+capacidades conservadas con su estado anterior (67 conservadas, 69 adaptación
+pendiente, 5 refactor, 15 nuevas planificadas). Evidencia objetiva de paridad:
+- Suite completa 1.801/1.801 verde (1.714 heredadas sin modificación de
+  aserciones salvo: cadenas de marca, rutas de guardarraíles hacia los
+  directorios nuevos, y 2 canarios regenerados con verificación independiente).
+- 142 rutas API idénticas (`git diff` de rutas entre el commit base `c370cc4`
+  y el HEAD: vacío).
+- Catálogo de errores y contratos bot v1 congelados por vigía: verdes.

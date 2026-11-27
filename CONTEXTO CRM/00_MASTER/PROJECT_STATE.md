@@ -1,6 +1,6 @@
 # PROJECT STATE — CRM WHATSPOWER (Vestro)
 
-**Estado unificado:** FASE 4 EN CURSO — etapa 1 (base del monorepo) CONSTRUIDA Y VERIFICADA.
+**Estado unificado:** FASE 4 EN CURSO — etapas 1 y 2 (base del monorepo + reorganización en los 14 dominios) CONSTRUIDAS Y VERIFICADAS.
 **Última actualización:** 2026-11-27.
 **Fuente:** ejecución real en sandbox de construcción + documentos rectores de F0-F3.
 
@@ -12,7 +12,7 @@
 | F1 Auditoría técnica y legal | COMPLETADA | `04_AUDITS/REPOSITORIOS_AUDITORIA.md` (6/6 repos clonados y auditados) |
 | F2 Matriz de paridad | COMPLETADA | `00_MASTER/MATRIZ_PARIDAD_VOCERO.md` (156/156 mapeadas) |
 | F3 Arquitectura y modelo | COMPLETADA | `00_MASTER/ARQUITECTURA_MAESTRA_CRM.md`, `00_MASTER/MODELO_MULTI_TENANT.md`, `06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` |
-| F4 Base funcional y modularización | **EN CURSO — etapa 1 completada** | sesión 2026-11-27; verificación real en `05_TESTS/TEST_INDEX.md` |
+| F4 Base funcional y modularización | **EN CURSO — etapas 1 y 2 completadas** | sesiones 2026-11-27 (etapa 1 y S4.2); verificación real en `05_TESTS/TEST_INDEX.md` |
 | F5-F12 | PENDIENTES | dependencias duras: F5←F4 |
 
 ## Hito Fase 4 — etapa 1 (2026-11-27)

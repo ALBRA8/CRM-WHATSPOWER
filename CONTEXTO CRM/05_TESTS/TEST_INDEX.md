@@ -56,3 +56,16 @@ Comandos ejecutados en la raíz del monorepo: `pnpm -r typecheck`, `pnpm -r lint
 | Guiones E2E de VOCERO (test:e2e:* con servidor y BD) | S4.3 | Reportados; requieren entorno con PostgreSQL |
 | Prueba de vigilancia de fronteras entre los 14 dominios | S4.3 | PENDIENTE |
 | Verificación de licencias desde lockfile + THIRD_PARTY_NOTICES | S4.1 (siguiente sprint) | PENDIENTE |
+
+## Resultados S4.2 (2026-11-27) — reorganización en los 14 dominios
+
+| Verificación | Resultado real |
+|---|---|
+| Typecheck monorepo | 6/6 Done, 0 errores |
+| Lint monorepo | Done, 0 errores |
+| Suite completa | **1.801** (apps/web 1.714/1.714 · contracts 49 · tenant 15 · flows 8 · campaigns 5 · agent-gateway 10) |
+| Build (`next build`) | OK (28 páginas) |
+| Rutas API | 142 bajo `src/app/api` (+2 `.well-known/` OAuth); `git diff` de rutas baseline↔HEAD vacío |
+| Contratos | api-v1/openapi/bot-twin/despacho 70 verdes; contracts 49 verdes (catálogo congelado intacto) |
+| Guardarraíles de dominio | notas-internas, stage-history-guard, ficha-guard, api-v1, conversions con rutas nuevas; invariantes intactas |
+| Canarios regenerados con doble verificación | scrypt (better-auth) y SigV4 (spec AWS en Python vs implementación del código, coinciden) |

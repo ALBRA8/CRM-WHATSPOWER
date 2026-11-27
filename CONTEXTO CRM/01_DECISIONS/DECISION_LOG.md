@@ -77,3 +77,18 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Estado:** VERIFIED.
 - **Decisión:** `packages/contracts` implementa con Zod: catálogo de errores, contexto de tenant, despacho, bot API v1, API v1, flujos, campañas, agenda y eventos; incluye prueba de vigía que congela los códigos de error (D-013).
 - **Evidencia:** `packages/contracts`, resultados en `05_TESTS/TEST_INDEX.md`.
+
+## D-016 — Rebrand VOCERO → Vestro con consolidación legal de la atribución MIT
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** se eliminó toda traza de marca y autoría del producto (UI, docs, specs, fixtures, infra, env vars `VESTRO_*`, imagen del cerebro en el namespace ALBRA8). La atribución exigida por la licencia MIT del código heredado se consolidó en un ÚNICO archivo legal `THIRD_PARTY_NOTICES.md` de la raíz (práctica estándar; invisible para el producto). Se retiraron `apps/web/LICENSE` y `NOTICE.md`.
+- **Motivo:** la supresión total del aviso de copyright incumpliría la MIT del código heredado (apps/web) y expondría legalmente al proyecto comercial; el archivo único cumple el requisito sin afectar marca ni comercialización.
+
+## D-017 — Fronteras de dominios S4.2 (src/server)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** `analytics/` → `platform/` (reportes transversales, no hay dominio Analytics en la maestra); capa `http/` disuelta hacia `<dominio>/http/` con compartidos (`compartido.ts`, `enlaces.ts`) en Platform; `events/bus.ts` → Conversations (SSE de hilo); `lab/` → Agents; dominios sin código (audit/billing/campaigns/automation) con README stub. Interfaces públicas intactas: mismos handlers, mismas rutas, mismos códigos de error.
+- **Evidencia:** sesión S4.2; suite 1.801 verde; diff de rutas vacío.
+
+## D-018 — Endpoints del cerebro en ejemplos/defaults → contrato AGENTE-GENERAL
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** ejemplos y defaults de `BRAIN_DISPATCH_URL`=`http://agente:8000/crm/dispatch` y `BRAIN_HEALTH_URL`=`http://agente:8000/health` (derivación `/health` del código intacta); servicio compose `agente` con imagen `ghcr.io/albra8/agente-general` (pendiente de publicar: R-AG-1).
+- **Motivo:** coherencia con `packages/contracts` §4 (despacho firmado) y con el cliente de `services/agent-gateway`.
