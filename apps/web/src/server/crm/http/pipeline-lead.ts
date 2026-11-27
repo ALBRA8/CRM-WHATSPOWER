@@ -5,7 +5,7 @@ import { apiError, parseBody } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { publish } from "@/server/events/bus";
-import { moveLeadToStage } from "@/server/leads/stage-history";
+import { moveLeadToStage } from "@/server/crm/leads/stage-history";
 import { getBranding } from "@/server/branding";
 
 

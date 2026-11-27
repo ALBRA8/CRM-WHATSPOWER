@@ -70,7 +70,7 @@ vi.mock("@/server/agenda/connectors", () => ({
   markConnectorAuthError: async () => {},
 }));
 
-vi.mock("@/server/leads/stage-history", () => ({ moveLeadToStage }));
+vi.mock("@/server/crm/leads/stage-history", () => ({ moveLeadToStage }));
 vi.mock("@/server/events/bus", () => ({ publish: () => {} }));
 
 /** Cola de resultados para cada `select(...).limit(n)` en orden de llamada. */

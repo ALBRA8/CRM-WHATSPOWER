@@ -22,7 +22,7 @@ vi.mock("@/lib/db", async (importOriginal) => {
   return { ...actual, getDb: () => builder };
 });
 
-vi.mock("@/server/leads/stage-history", () => ({
+vi.mock("@/server/crm/leads/stage-history", () => ({
   moveLeadToStage: async (input: { leadId: string; toStageId: string }) => {
     movimientos.llamadas.push(input);
     return {

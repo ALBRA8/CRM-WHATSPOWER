@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/contact";
+import * as http from "@/server/crm/http/contact";
 
 export const dynamic = "force-dynamic";
 

@@ -4,7 +4,7 @@ import { getDb, schema } from "@/lib/db";
 import { apiError, parseBody } from "@/lib/api";
 import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
 import { publish } from "@/server/events/bus";
-import { moveLeadToStage } from "@/server/leads/stage-history";
+import { moveLeadToStage } from "@/server/crm/leads/stage-history";
 
 export const dynamic = "force-dynamic";
 

@@ -4,7 +4,7 @@ import {
   isSourceValue,
   SOURCE_LABELS,
   SOURCE_VALUES,
-} from "@/server/contact-source";
+} from "@/server/crm/contact-source";
 
 /* Fuente del prospecto: lo capturado manda, lo demás queda sin identificar. */
 

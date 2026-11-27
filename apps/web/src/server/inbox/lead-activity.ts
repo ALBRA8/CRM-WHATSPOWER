@@ -1,7 +1,7 @@
 import { and, asc, eq, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
-import { recordLeadCreated } from "@/server/leads/stage-history";
+import { recordLeadCreated } from "@/server/crm/leads/stage-history";
 import type { StageChangeSource } from "@/lib/types";
 
 /**

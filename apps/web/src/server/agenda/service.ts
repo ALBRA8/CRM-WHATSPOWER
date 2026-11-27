@@ -22,7 +22,7 @@ import {
   markConnectorAuthError,
 } from "@/server/agenda/connectors";
 import { ConnectorError } from "@/server/agenda/connectors/types";
-import { moveLeadToStage } from "@/server/leads/stage-history";
+import { moveLeadToStage } from "@/server/crm/leads/stage-history";
 import { publish } from "@/server/events/bus";
 
 /**

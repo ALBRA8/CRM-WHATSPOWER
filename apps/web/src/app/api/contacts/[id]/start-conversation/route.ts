@@ -3,7 +3,7 @@ import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { getContactById } from "@/server/contacts";
+import { getContactById } from "@/server/crm/contacts";
 import { getOrCreateConversation } from "@/server/inbox/ingest";
 import { anotarSalidaDelEquipo } from "@/server/inbox/reactivacion";
 import { SendError } from "@/server/inbox/send";

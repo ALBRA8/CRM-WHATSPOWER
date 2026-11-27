@@ -9,7 +9,7 @@ import {
   type SourceKey,
   type SourceRowDto,
 } from "@/lib/analytics";
-import { SOURCE_LABELS, SOURCE_VALUES } from "@/server/contact-source";
+import { SOURCE_LABELS, SOURCE_VALUES } from "@/server/crm/contact-source";
 import type { ResolvedPeriod } from "@/server/analytics/period";
 import {
   effectiveSourceExpr,

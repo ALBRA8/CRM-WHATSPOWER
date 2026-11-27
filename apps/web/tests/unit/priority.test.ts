@@ -5,14 +5,14 @@ import {
   PRIORITY_LABELS,
   PRIORITY_VALUES,
   priorityRank,
-} from "@/server/leads/priority";
+} from "@/server/crm/leads/priority";
 
 describe("prioridad del lead", () => {
   it("nada la escribe sola: no hay función que la sugiera", async () => {
     // Este test es el contrato del módulo. Si alguien agrega una heurística
     // que rellene la prioridad, el dueño dejará de poder confiar en que lo que
     // ve es lo que él puso — y este test es el lugar donde discutirlo.
-    const mod = await import("@/server/leads/priority");
+    const mod = await import("@/server/crm/leads/priority");
     expect(Object.keys(mod)).not.toContain("suggestPriority");
   });
 

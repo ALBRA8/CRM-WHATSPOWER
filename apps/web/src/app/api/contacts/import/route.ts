@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { IMPORT_MAX_ROWS, prepareImport } from "@/lib/contact-import";
-import { importContacts } from "@/server/contacts-import";
+import { importContacts } from "@/server/crm/contacts-import";
 
 export const dynamic = "force-dynamic";
 

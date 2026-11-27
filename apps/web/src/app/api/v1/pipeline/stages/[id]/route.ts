@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/pipeline-stage";
+import * as h from "@/server/crm/http/pipeline-stage";
 
 export const dynamic = "force-dynamic";
 

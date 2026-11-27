@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { effectiveSource } from "@/server/contact-source";
+import { effectiveSource } from "@/server/crm/contact-source";
 import type { FichaDto, PriorityValue } from "@/lib/types";
 
 export function serializeContact(

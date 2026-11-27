@@ -8,9 +8,9 @@ import {
   getContactById,
   getContactStage,
   serializeContact,
-} from "@/server/contacts";
+} from "@/server/crm/contacts";
 import { upsertFicha } from "@/server/bot/ficha";
-import { pauseConversations } from "@/server/contacts-import";
+import { pauseConversations } from "@/server/crm/contacts-import";
 import { cuentaComoAnuncio } from "@/lib/anuncios";
 import {
   anuncioDelContacto,

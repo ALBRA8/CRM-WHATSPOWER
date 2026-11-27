@@ -63,7 +63,7 @@ vi.mock("@/server/agenda/connectors", () => ({
   bindConnector,
   markConnectorAuthError: async () => {},
 }));
-vi.mock("@/server/leads/stage-history", () => ({
+vi.mock("@/server/crm/leads/stage-history", () => ({
   moveLeadToStage: async () => ({ ok: true }),
 }));
 vi.mock("@/server/events/bus", () => ({ publish: () => {} }));

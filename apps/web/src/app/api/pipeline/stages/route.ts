@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/pipeline-stages";
+import * as http from "@/server/crm/http/pipeline-stages";
 
 export const dynamic = "force-dynamic";
 

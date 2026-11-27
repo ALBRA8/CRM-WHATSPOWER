@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import type { PriorityValue } from "@/lib/types";
-import { PRIORITY_LABELS, PRIORITY_VALUES } from "@/server/leads/priority";
+import { PRIORITY_LABELS, PRIORITY_VALUES } from "@/server/crm/leads/priority";
 
 const TONO: Record<PriorityValue, string> = {
   alta: "border-danger-soft bg-danger-tint text-danger-text",

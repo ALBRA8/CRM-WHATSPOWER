@@ -7,7 +7,7 @@ import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { normalizeMx } from "@/lib/meta/client";
 import { digitsOnly, normalizeText } from "@/lib/search";
-import { serializeContact } from "@/server/contacts";
+import { serializeContact } from "@/server/crm/contacts";
 import { createLeadForContact } from "@/server/inbox/lead-activity";
 
 

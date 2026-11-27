@@ -16,7 +16,7 @@ import {
   crearFreno,
   serializarAnuncio,
 } from "@/server/attribution/store";
-import { effectiveSource } from "@/server/contact-source";
+import { effectiveSource } from "@/server/crm/contact-source";
 import {
   cuentaComoAnuncio,
   etiquetaDeOrigen,

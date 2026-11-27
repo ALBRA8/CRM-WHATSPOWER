@@ -4,7 +4,7 @@ import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { relocateLeadsFromStage } from "@/server/leads/stage-history";
+import { relocateLeadsFromStage } from "@/server/crm/leads/stage-history";
 
 
 type Params = { params: Promise<{ id: string }> };
