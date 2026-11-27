@@ -92,3 +92,20 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Estado:** VERIFIED (vigente).
 - **Decisión:** ejemplos y defaults de `BRAIN_DISPATCH_URL`=`http://agente:8000/crm/dispatch` y `BRAIN_HEALTH_URL`=`http://agente:8000/health` (derivación `/health` del código intacta); servicio compose `agente` con imagen `ghcr.io/albra8/agente-general` (pendiente de publicar: R-AG-1).
 - **Motivo:** coherencia con `packages/contracts` §4 (despacho firmado) y con el cliente de `services/agent-gateway`.
+
+## D-019 — RLS dinámica sobre TODA tabla org-scoped (corrige D-S43-1)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** `infra/sql/003_rls_policies.sql` ya no lleva una lista fija de 22 nombres: descubre dinámicamente toda tabla de `public` con columna `organization_id` y le aplica `ENABLE + FORCE ROW LEVEL SECURITY` + política `tenant_isolation` fail-closed (`current_setting('app.current_org', true)`). El script además ABORTA si queda cualquier tabla org-scoped sin RLS. Se añade `infra/sql/004_grants.sql` (privilegios DML del rol `app_runtime` + privilegios por defecto para tablas futuras), completando el modelo de roles §4.1 del MODELO_MULTI_TENANT.
+- **Motivo:** la batería real demostró que solo 15 de 39 tablas org-scoped tenían RLS (24 sin aislar, incluidas las 7 de credenciales y las 3 de OAuth). La lista fija se desalineaba de los nombres reales de las migraciones.
+- **Evidencia:** batería multi-tenant 26/26 en PostgreSQL 16 real (`apps/web/scripts/bateria-multi-tenant.mjs`, `pnpm test:multi-tenant`); cobertura 39/39.
+
+## D-020 — Ciclos de import heredados congelados por vigía, sin refactor en S4.3
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** la prueba `fronteras-dominios.test.ts` congela el grafo de dependencias entre dominios (38 aristas) y los ciclos de archivo: en RUNTIME el único ciclo de valores es `conversations/inbox` (`ingest→reacciones→send→ingest`, heredado de VOCERO, verificado en el baseline pre-S4.2 `c370cc4`) y en FUENTE existe además el ciclo benigno de solo-tipos `integrations/mcp` (se borra en runtime). Cualquier arista o ciclo NUEVO rompe la prueba. No se refactorizó: el mandato S4.3 prohíbe refactors no demostrados por defectos de comportamiento; la reducción de acoplamiento (eventos de dominio) queda para su etapa.
+- **Motivo:** congelar la frontera impide que el acoplamiento heredado crezca sin decisión consciente, sin arriesgar el comportamiento conservado.
+
+## D-021 — `invitation.created_at` (corrige D-S43-3, defecto latente de VOCERO)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** se añade `created_at` a la tabla `invitation` (schema Drizzle + migración aditiva `0033_next_captain_stacy.sql`). better-auth (plugin organization) exige la columna y el registro/invitación devolvía 500 `SCHEMA_MISMATCH` contra PostgreSQL real; el defecto era invisible en unitarios (sin BD) y en el flujo documentado se manifiesta al primer E2E real.
+- **Motivo:** defecto demostrado por la prueba E2E; corrección mínima y aditiva (una columna con default `now()`), sin tocar comportamiento existente.
+- **Evidencia:** self-test E2E: registro y 269 verificaciones verdes tras la corrección; sin ella, 0 verificaciones posibles.

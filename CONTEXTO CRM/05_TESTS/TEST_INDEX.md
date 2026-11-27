@@ -69,3 +69,41 @@ Comandos ejecutados en la raíz del monorepo: `pnpm -r typecheck`, `pnpm -r lint
 | Contratos | api-v1/openapi/bot-twin/despacho 70 verdes; contracts 49 verdes (catálogo congelado intacto) |
 | Guardarraíles de dominio | notas-internas, stage-history-guard, ficha-guard, api-v1, conversions con rutas nuevas; invariantes intactas |
 | Canarios regenerados con doble verificación | scrypt (better-auth) y SigV4 (spec AWS en Python vs implementación del código, coinciden) |
+
+---
+
+## Resultados S4.3 (2026-11-27) — fronteras entre dominios, PostgreSQL real y E2E
+
+Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r build`
+· `pnpm --filter @vestro/web test:multi-tenant` · self-test E2E documentado (036).
+
+| Verificación | Resultado real |
+|---|---|
+| Typecheck monorepo | 6/6 Done, 0 errores |
+| Lint monorepo | Done, 0 errores |
+| Suite completa | **1.816** — apps/web **1.723/1.723 (142 archivos)** · contracts 49 · tenant 15 · flows 8 · campaigns 5 · agent-gateway **16** (2 archivos, uno contra el cerebro real) |
+| Baseline VOCERO 1.801 | **Intacta**: 0 pruebas eliminadas o debilitadas; +15 nuevas (9 fronteras + 1 sobre HITL + 5 integración cerebro) |
+| Build (`next build`) | OK — compilación completa |
+| Rutas API | 142 bajo `src/app/api` (vigía permanente en `fronteras-dominios.test.ts`) |
+| Batería multi-tenant (T1-T15 subset BD + audit + txns) | **26/26 PASS** sobre PostgreSQL 16.16 REAL (`vestro_s43_bateria`, rol `app_runtime` con FORCE RLS) |
+| Cobertura RLS | **39/39 tablas org-scoped** con `ENABLE + FORCE RLS` (defecto D-S43-1 corregido: antes 15/39) |
+| Contratos versionados | contracts 49 verdes; vigía de 13 rutas bot del contrato contra los `route.ts` reales; 142 rutas congeladas |
+| Fronteras de dominios | **9/9** (`fronteras-dominios.test.ts`): 14 dominios + Platform, 4 stubs honestos, grafo congelado de 38 aristas, 12 pares bidireccionales documentados, 2 ciclos conocidos congelados |
+| AGENTE-GENERAL (integración real) | **5/5 contra el servidor FastAPI real** (health 200 healthy/ready; despacho → 404 tipado: endpoint `/crm/dispatch` PENDIENTE en el cerebro (R-AG-1); HITL approvals 200 con sobre real normalizado; `memory_store: not_configured` → T9 pendiente) |
+| E2E real (self-test 036, servidor dev + PostgreSQL + wa-mock/ai-mock/cerebro-falso) | **269/302 checks verdes (0 FAIL)** en una sola corrida; la corrida se detiene por memoria del sandbox (4 GB) al inicio de la ráfaga R11 (700 peticiones); secciones R11+, ~33 checks, quedaron sin ejecutar en corrida continua |
+
+### Defectos registrados y corregidos en S4.3 (§6 del mandato)
+
+| ID | Defecto | Causa raíz | Corrección | Prueba anti-regresión |
+|---|---|---|---|---|
+| D-S43-1 | 24 de 39 tablas org-scoped sin RLS (credenciales Meta/IG/Messenger/TikTok/Google/Zoom, OAuth ×3, `member`, `invitation`, `media_asset`, …) | `003_rls_policies.sql` con lista fija de 22 nombres que no coincidía con las tablas reales | RLS dinámica por descubrimiento + valla estática que aborta si falta una; `004_grants.sql` para el rol `app_runtime` | Batería 26/26 (`test:multi-tenant`) — la batería es el vigía permanente |
+| D-S43-2 | `approvalsPending()` del adaptador esperaba array plano; el cerebro real responde `{storage_scope, approvals}` | El adaptador se escribió contra el contrato §6 sin verificación contra el cerebro real | Normalización compatible (array o sobre) en `services/agent-gateway/src/client.ts` | Test de sobre real en `client.test.ts` + integración real en `cerebro-real.test.ts` |
+| D-S43-3 | `POST /api/auth/sign-up/email` → 500 `SCHEMA_MISMATCH` (falta `invitation.createdAt`) | better-auth exige la columna; schema y migraciones de VOCERO no la tenían (invisible sin BD real) | Columna añadida a schema + migración aditiva `0033` (D-021) | Self-test E2E completo de registro; 269 checks verdes tras la corrección |
+
+### Deuda y pendientes documentados (no ocultados)
+
+1. **Ciclo de valores heredado** `conversations/inbox` (`ingest→reacciones→send→ingest`) — preexistente en VOCERO (verificado en `c370cc4`); congelado por vigía; refactor futuro fuera de S4.3 (D-020).
+2. **T9 (memoria por tenant del cerebro)**: el `memory_store` de AGENTE-GENERAL está `not_configured` en core_only y su esquema aísla por `(agent_id, domain, user_id, context_id)` SIN dimensión de organización — pendiente lado cerebro (bloquea activación en producción, D-014).
+3. **Endpoint `/crm/dispatch` en el cerebro**: 404 real; el despacho del CRM falla tipado hasta publicar el adaptador en AGENTE-GENERAL (R-AG-1).
+4. **Runtime sobre el rol dueño**: el `DATABASE_URL` documentado conecta como `vestro` (dueño/superusuario, ignora RLS). La valla de BD muerde al operar como `app_runtime` (probado); el cambio de rol de runtime queda como trabajo operativo de F5 (los grants ya están en 004).
+5. **E2E corrida completa**: R11+ (~33 checks) sin verificar en corrida continua por memoria del sandbox (4 GB); en un host con ≥8 GB el mismo guion corre completo (`node --env-file=.env.e2e-036 scripts/e2e-selftest.mjs`).

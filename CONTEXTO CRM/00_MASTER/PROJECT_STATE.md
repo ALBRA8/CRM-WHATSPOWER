@@ -1,6 +1,6 @@
 # PROJECT STATE — CRM WHATSPOWER (Vestro)
 
-**Estado unificado:** FASE 4 EN CURSO — etapas 1 y 2 (base del monorepo + reorganización en los 14 dominios) CONSTRUIDAS Y VERIFICADAS.
+**Estado unificado:** FASE 4 EN CURSO — etapas 1 y 2 (monorepo + 14 dominios) y etapa 3 (S4.3: fronteras, PostgreSQL real y E2E) CONSTRUIDAS Y VERIFICADAS.
 **Última actualización:** 2026-11-27.
 **Fuente:** ejecución real en sandbox de construcción + documentos rectores de F0-F3.
 
@@ -12,7 +12,7 @@
 | F1 Auditoría técnica y legal | COMPLETADA | `04_AUDITS/REPOSITORIOS_AUDITORIA.md` (6/6 repos clonados y auditados) |
 | F2 Matriz de paridad | COMPLETADA | `00_MASTER/MATRIZ_PARIDAD_VOCERO.md` (156/156 mapeadas) |
 | F3 Arquitectura y modelo | COMPLETADA | `00_MASTER/ARQUITECTURA_MAESTRA_CRM.md`, `00_MASTER/MODELO_MULTI_TENANT.md`, `06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` |
-| F4 Base funcional y modularización | **EN CURSO — etapas 1 y 2 completadas** | sesiones 2026-11-27 (etapa 1 y S4.2); verificación real en `05_TESTS/TEST_INDEX.md` |
+| F4 Base funcional y modularización | **EN CURSO — etapas 1-3 completadas** | sesiones 2026-11-27 (etapa 1, S4.2, S4.3); verificación real en `05_TESTS/TEST_INDEX.md`; entrega en `ENTREGA_S4_3.md` |
 | F5-F12 | PENDIENTES | dependencias duras: F5←F4 |
 
 ## Hito Fase 4 — etapa 1 (2026-11-27)
@@ -34,4 +34,4 @@
 
 ## Próximo paso
 
-**S4.2:** reorganizar `apps/web/src/server/*` en los 14 dominios de la arquitectura maestra (extracción sin cambios de comportamiento), crear la tabla `audit_log` con ganchos de auditoría en operaciones sensibles y portar los guiones E2E. Criterio de salida: regresión VOCERO verde + test de vigilancia de fronteras entre dominios.
+**S4.3 ENTREGADA** (2026-11-27): fronteras congeladas por vigía, batería multi-tenant 26/26 sobre PostgreSQL 16 real (RLS 39/39 tras corregir D-S43-1), adaptador del cerebro 16/16 con integración real (R-AG-1 y T9 pendientes lado cerebro), E2E real 269/302 checks verdes (resto por memoria del sandbox). Ver `ENTREGA_S4_3.md`. Pendientes habilitantes para F5: rol runtime `app_runtime` (grants en 004), backplane SSE, backups.
