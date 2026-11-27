@@ -64,10 +64,10 @@ describe("guardarraíl: las notas nunca llegan al cliente ni al cerebro", () => 
   }
   const raiz = join(process.cwd(), "src", "server");
   const vigilados = [
-    ...["dispatch", "brains", "bot", "analytics", "lab"].flatMap((d) => archivos(join(raiz, d))),
-    join(raiz, "inbox", "send.ts"),
-    join(raiz, "inbox", "ingest.ts"),
-    join(raiz, "inbox", "window.ts"),
+    ...["agents/dispatch", "agents/brains", "agents/bot", "platform/analytics", "agents/lab"].flatMap((d) => archivos(join(raiz, d))),
+    join(raiz, "conversations", "inbox", "send.ts"),
+    join(raiz, "conversations", "inbox", "ingest.ts"),
+    join(raiz, "conversations", "inbox", "window.ts"),
     join(process.cwd(), "src", "lib", "meta", "client.ts"),
   ];
 
