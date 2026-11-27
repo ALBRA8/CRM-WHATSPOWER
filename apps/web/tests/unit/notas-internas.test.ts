@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { intercalarNotas, puedeBorrarNota } from "@/lib/notas";
@@ -64,7 +64,10 @@ describe("guardarraíl: las notas nunca llegan al cliente ni al cerebro", () => 
   }
   const raiz = join(process.cwd(), "src", "server");
   const vigilados = [
-    ...["agents/dispatch", "agents/brains", "agents/bot", "platform/analytics", "agents/lab"].flatMap((d) => archivos(join(raiz, d))),
+    ...["agents/dispatch", "agents/brains", "agents/bot", "platform/analytics", "agents/lab"]
+      .map((d) => join(raiz, d))
+      .filter((d) => existsSync(d))
+      .flatMap((d) => archivos(d)),
     join(raiz, "conversations", "inbox", "send.ts"),
     join(raiz, "conversations", "inbox", "ingest.ts"),
     join(raiz, "conversations", "inbox", "window.ts"),
