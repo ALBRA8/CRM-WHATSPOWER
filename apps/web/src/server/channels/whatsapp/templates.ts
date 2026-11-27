@@ -9,16 +9,16 @@ import { newId } from "@/lib/db/ids";
 import { graphRequest, MetaApiError, normalizeRecipient } from "@/lib/meta/client";
 import { destinatarioMeta } from "@/lib/meta/destinatario";
 import { scoped } from "@/lib/db/tenant";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import {
   cuentaDePlantillas,
   getCredentialsByOrg,
   getCredentialsByWabaId,
   markReconnectRequired,
 } from "@/server/channels/whatsapp/credentials";
-import { callGraphSend, SendError } from "@/server/inbox/send";
-import { serializeMessage } from "@/server/inbox/ingest";
-import type { WebhookValue } from "@/server/inbox/webhook";
+import { callGraphSend, SendError } from "@/server/conversations/inbox/send";
+import { serializeMessage } from "@/server/conversations/inbox/ingest";
+import type { WebhookValue } from "@/server/conversations/inbox/webhook";
 
 /** Errores tipados del servicio de plantillas → HTTP en la capa de API. */
 export class TemplateError extends Error {

@@ -1,12 +1,12 @@
 import { and, desc, eq, gt, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { isWindowOpen, replyWindow, windowRemainingMs } from "@/server/inbox/window";
+import { isWindowOpen, replyWindow, windowRemainingMs } from "@/server/conversations/inbox/window";
 import { capabilitiesFor, windowMsFor } from "@/server/channels/capabilities";
 import type { ConversationDto } from "@/lib/types";
 import { businessTimezone } from "@/server/analytics/period";
-import { finDePausa, type DuracionPausa } from "@/server/inbox/reactivacion";
-import { aFecha, esperaConVentana, esperaDesdeSql } from "@/server/inbox/esperando";
+import { finDePausa, type DuracionPausa } from "@/server/conversations/inbox/reactivacion";
+import { aFecha, esperaConVentana, esperaDesdeSql } from "@/server/conversations/inbox/esperando";
 import type { EsperaDto } from "@/lib/esperando";
 
 /**

@@ -6,7 +6,7 @@ import {
   editarRespuesta,
   QuickReplyError,
   respuestaSchema,
-} from "@/server/quick-replies";
+} from "@/server/conversations/quick-replies";
 
 
 type Params = { params: Promise<{ id: string }> };

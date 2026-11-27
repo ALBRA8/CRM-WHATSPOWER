@@ -2,7 +2,7 @@ import { and, asc, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { textoEventoEtapa, textoTraspaso, textoVuelta, type EventoHiloDto } from "@/lib/eventos-hilo";
-import { vueltasDeConversacion } from "@/server/inbox/reactivacion";
+import { vueltasDeConversacion } from "@/server/conversations/inbox/reactivacion";
 
 /**
  * 054 — Los eventos del hilo de una conversación, por hora: los cambios de

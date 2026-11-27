@@ -44,13 +44,13 @@ vi.mock("@/lib/auth/session", async (original) => ({
   ...(await original<typeof import("@/lib/auth/session")>()),
   requireSession: m.session,
 }));
-vi.mock("@/server/inbox/pins", async (original) => ({
-  ...(await original<typeof import("@/server/inbox/pins")>()),
+vi.mock("@/server/conversations/inbox/pins", async (original) => ({
+  ...(await original<typeof import("@/server/conversations/inbox/pins")>()),
   pinConversation: m.pin,
   unpinConversation: m.unpin,
   withPins: m.withPins,
 }));
-vi.mock("@/server/inbox/queries", () => ({ listConversations: m.list }));
+vi.mock("@/server/conversations/inbox/queries", () => ({ listConversations: m.list }));
 
 const ctx = { params: Promise.resolve({ id: "cv_1" }) };
 const req = new Request("http://x/api", { method: "POST" });
@@ -71,7 +71,7 @@ describe("POST/DELETE /api/conversations/[id]/pin", () => {
   });
 
   it("el cuarto → 409 pin_limit con el mensaje", async () => {
-    const { PinError } = await import("@/server/inbox/pins");
+    const { PinError } = await import("@/server/conversations/inbox/pins");
     m.pin.mockRejectedValue(new PinError(409, "pin_limit", MENSAJE_LIMITE_FIJADOS));
     const { POST } = await import("@/app/api/conversations/[id]/pin/route");
     const res = await POST(req, ctx);
@@ -80,7 +80,7 @@ describe("POST/DELETE /api/conversations/[id]/pin", () => {
   });
 
   it("ajena o del Laboratorio → 404", async () => {
-    const { PinError } = await import("@/server/inbox/pins");
+    const { PinError } = await import("@/server/conversations/inbox/pins");
     m.unpin.mockRejectedValue(new PinError(404, "not_found", "Conversación no encontrada"));
     const { DELETE } = await import("@/app/api/conversations/[id]/pin/route");
     expect((await DELETE(req, ctx)).status).toBe(404);
@@ -101,7 +101,7 @@ describe("la lista de conversaciones", () => {
   it("con sesión de la UI trae pinnedAt del usuario", async () => {
     m.list.mockResolvedValue(lista);
     m.withPins.mockResolvedValue([{ id: "cv_1", pinnedAt: "2026-11-23T12:00:00.000Z" }, { id: "cv_2", pinnedAt: null }]);
-    const { GET } = await import("@/server/http/conversations");
+    const { GET } = await import("@/server/conversations/http/conversations");
     const res = await GET({ organizationId: "org_a", userId: "usr_1", role: "member" } as never, new Request("http://x/api"));
     expect(m.withPins).toHaveBeenCalledWith(lista, "org_a", "usr_1");
     expect((await res.json()).conversations[0].pinnedAt).toBe("2026-11-23T12:00:00.000Z");
@@ -109,7 +109,7 @@ describe("la lista de conversaciones", () => {
 
   it("con la API v1 (sesión con capabilities) no los trae", async () => {
     m.list.mockResolvedValue(lista);
-    const { GET } = await import("@/server/http/conversations");
+    const { GET } = await import("@/server/conversations/http/conversations");
     const res = await GET(
       { organizationId: "org_a", userId: "usr_1", role: "member", capabilities: ["read"] } as never,
       new Request("http://x/api")

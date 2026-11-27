@@ -3,7 +3,7 @@ import { z } from "zod";
 import { getDb, schema } from "@/lib/db";
 import { apiError, parseBody } from "@/lib/api";
 import { requireBotKey, resolveInstanceOrg } from "@/server/bot/auth";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import { moveLeadToStage } from "@/server/crm/leads/stage-history";
 
 export const dynamic = "force-dynamic";

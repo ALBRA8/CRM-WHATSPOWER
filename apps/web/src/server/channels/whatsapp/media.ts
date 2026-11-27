@@ -8,13 +8,13 @@ import {
   type Credentials,
 } from "@/server/channels/whatsapp/credentials";
 import { isForbiddenUploadMime } from "@/server/channels/whatsapp/media-headers";
-import { descargarAdjuntoRemoto } from "@/server/inbox/descarga-remota";
+import { descargarAdjuntoRemoto } from "@/server/conversations/inbox/descarga-remota";
 import {
   origenOf,
   sourceUrlOf,
   TOPE_ADJUNTO_REMOTO,
   type KindRemoto,
-} from "@/server/inbox/remote-media";
+} from "@/server/conversations/inbox/remote-media";
 
 /**
  * 008 — Única frontera de media con la Graph API (constitución II: todo el

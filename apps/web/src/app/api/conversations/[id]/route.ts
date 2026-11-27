@@ -4,9 +4,9 @@ import { canConfigure } from "@/lib/auth/roles";
 import { newId } from "@/lib/db/ids";
 import { construirEventoOlvido } from "@/server/brains/contract";
 import { avisarOlvido, type ResultadoOlvido } from "@/server/brains/deliver";
-import { publish } from "@/server/events/bus";
-import { eliminarConversacion } from "@/server/inbox/eliminar";
-import { serializeConversation, getConversation, updateConversation } from "@/server/inbox/queries";
+import { publish } from "@/server/conversations/events/bus";
+import { eliminarConversacion } from "@/server/conversations/inbox/eliminar";
+import { serializeConversation, getConversation, updateConversation } from "@/server/conversations/inbox/queries";
 
 export const dynamic = "force-dynamic";
 

@@ -1,12 +1,12 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { FB_PREFIX } from "@/server/inbox/identity";
-import { ingerirPartes } from "@/server/inbox/partes";
+import { FB_PREFIX } from "@/server/conversations/inbox/identity";
+import { ingerirPartes } from "@/server/conversations/inbox/partes";
 import {
   splitInbound,
   type OrigenRemoto,
   type RemoteAttachment,
-} from "@/server/inbox/remote-media";
+} from "@/server/conversations/inbox/remote-media";
 import {
   getMessengerCredentialsByAccountRef,
   getMessengerCredentialsByPageId,

@@ -1,7 +1,7 @@
 import { and, eq, isNotNull, isNull, or } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
-import { publish } from "@/server/events/bus";
-import { anotarSalidaDelEquipo } from "@/server/inbox/reactivacion";
+import { publish } from "@/server/conversations/events/bus";
+import { anotarSalidaDelEquipo } from "@/server/conversations/inbox/reactivacion";
 
 /**
  * 068 — Una persona del negocio contestó: la IA se hace a un lado.

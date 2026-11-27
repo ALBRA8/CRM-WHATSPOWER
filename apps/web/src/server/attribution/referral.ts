@@ -1,4 +1,4 @@
-import type { WebhookReferral } from "@/server/inbox/webhook";
+import type { WebhookReferral } from "@/server/conversations/inbox/webhook";
 
 /**
  * 018 — Del `referral` de WhatsApp a UN anuncio de origen.

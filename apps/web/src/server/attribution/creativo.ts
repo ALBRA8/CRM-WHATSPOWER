@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { isMockEnabled } from "@/lib/env";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import { deleteMediaFile, saveMediaFile } from "@/server/channels/whatsapp/media";
 
 /**

@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { SQL } from "drizzle-orm";
 import { PgDialect } from "drizzle-orm/pg-core";
-import { findContactByIdentity, parseIdentity } from "@/server/inbox/identity";
+import { findContactByIdentity, parseIdentity } from "@/server/conversations/inbox/identity";
 
 /**
  * R11 — El cerebro externo pregunta por `bsuid:<id>` y el contacto escribió

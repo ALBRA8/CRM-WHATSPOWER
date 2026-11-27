@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/quick-replies";
+import * as http from "@/server/conversations/http/quick-replies";
 
 export const dynamic = "force-dynamic";
 

@@ -1,7 +1,7 @@
 import { eq, inArray } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import type { WebhookMessage } from "@/server/inbox/webhook";
+import type { WebhookMessage } from "@/server/conversations/inbox/webhook";
 
 /**
  * 039 — Responder citando un mensaje.

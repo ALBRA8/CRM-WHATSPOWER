@@ -1,5 +1,5 @@
-import type { WebhookPayload } from "@/server/inbox/webhook";
-import { processEchoesValue, processMessagesValue } from "@/server/inbox/ingest";
+import type { WebhookPayload } from "@/server/conversations/inbox/webhook";
+import { processEchoesValue, processMessagesValue } from "@/server/conversations/inbox/ingest";
 import { processTemplateStatusValue } from "@/server/channels/whatsapp/template-events";
 import { processMetaInstagramPayload } from "@/server/channels/instagram/ingest";
 import { processMetaPagePayload } from "@/server/channels/messenger/ingest";

@@ -23,7 +23,7 @@ import {
 } from "@/server/agenda/connectors";
 import { ConnectorError } from "@/server/agenda/connectors/types";
 import { moveLeadToStage } from "@/server/crm/leads/stage-history";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 
 /**
  * 015 — Ciclo de vida de la cita y las dos reglas INNEGOCIABLES:

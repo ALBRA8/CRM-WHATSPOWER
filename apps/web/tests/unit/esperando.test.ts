@@ -21,7 +21,7 @@ import {
   primerMensajeSinRespuesta,
   VENTANA_MAXIMA_MS,
   type MensajeParaEspera,
-} from "@/server/inbox/esperando";
+} from "@/server/conversations/inbox/esperando";
 
 /** 077 — «Esperando a una persona»: la regla, el semáforo y los textos. */
 

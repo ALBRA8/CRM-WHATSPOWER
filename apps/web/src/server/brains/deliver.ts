@@ -17,7 +17,7 @@ import {
 } from "@/server/brains/contract";
 import { leerConfigDespacho } from "@/server/brains/config";
 import type { FilaDespacho } from "@/server/dispatch/outbox";
-import { isWindowOpen, windowExpiresAt } from "@/server/inbox/window";
+import { isWindowOpen, windowExpiresAt } from "@/server/conversations/inbox/window";
 import { windowMsFor } from "@/server/channels/capabilities";
 import { atencionHumanaPara } from "@/server/brains/atencion-humana";
 

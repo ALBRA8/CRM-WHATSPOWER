@@ -2,7 +2,7 @@ import { eq, inArray } from "drizzle-orm";
 import type { getDb } from "@/lib/db";
 import { schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
-import { RESPUESTAS_DEMO } from "@/server/quick-replies";
+import { RESPUESTAS_DEMO } from "@/server/conversations/quick-replies";
 
 /**
  * Negocio de demostración "Ferretería El Martillo" (FR-075).

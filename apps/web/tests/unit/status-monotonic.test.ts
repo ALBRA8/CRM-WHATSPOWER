@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isUpgrade } from "@/server/inbox/status";
+import { isUpgrade } from "@/server/conversations/inbox/status";
 
 describe("estados monotónicos del mensaje (FR-004)", () => {
   it("progresión normal: pending → sent → delivered → read", () => {

@@ -1,5 +1,5 @@
 import { getEnv } from "@/lib/env";
-import { isValidSignature, isValidWebhookToken } from "@/server/inbox/webhook";
+import { isValidSignature, isValidWebhookToken } from "@/server/conversations/inbox/webhook";
 import { recibirEvento } from "@/server/channels/webhooks/recibir";
 
 /**

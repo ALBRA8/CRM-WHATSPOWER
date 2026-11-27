@@ -1,5 +1,5 @@
 import { apiError, withAuth } from "@/lib/api";
-import { eventosDeConversacion } from "@/server/inbox/eventos";
+import { eventosDeConversacion } from "@/server/conversations/inbox/eventos";
 
 export const dynamic = "force-dynamic";
 

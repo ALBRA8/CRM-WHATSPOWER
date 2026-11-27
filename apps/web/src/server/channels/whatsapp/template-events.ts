@@ -1,4 +1,4 @@
-import type { WebhookValue } from "@/server/inbox/webhook";
+import type { WebhookValue } from "@/server/conversations/inbox/webhook";
 import { applyTemplateStatusEvent } from "@/server/channels/whatsapp/templates";
 
 /**

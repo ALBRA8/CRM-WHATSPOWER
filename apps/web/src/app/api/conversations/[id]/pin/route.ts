@@ -1,5 +1,5 @@
 import { apiError, withAuth } from "@/lib/api";
-import { PinError, pinConversation, unpinConversation } from "@/server/inbox/pins";
+import { PinError, pinConversation, unpinConversation } from "@/server/conversations/inbox/pins";
 
 export const dynamic = "force-dynamic";
 

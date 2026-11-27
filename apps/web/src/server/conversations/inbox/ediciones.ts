@@ -1,13 +1,13 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
-import { publish } from "@/server/events/bus";
-import { resolveIdentity } from "@/server/inbox/identity";
+import { publish } from "@/server/conversations/events/bus";
+import { resolveIdentity } from "@/server/conversations/inbox/identity";
 import type {
   WebhookMediaPayload,
   WebhookMessage,
   WebhookValue,
-} from "@/server/inbox/webhook";
+} from "@/server/conversations/inbox/webhook";
 
 /**
  * 074 — Mensajes editados en WhatsApp (`type: "edit"`, coexistencia).

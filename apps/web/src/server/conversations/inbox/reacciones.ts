@@ -12,12 +12,12 @@ import {
   MOTIVO_VENTANA_CERRADA,
   type ReaccionDto,
 } from "@/lib/reacciones";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import { isChannelEnabled } from "@/server/channels/enabled";
-import { FB_PREFIX, IG_PREFIX, resolveIdentity } from "@/server/inbox/identity";
-import type { WebhookMessage, WebhookValue } from "@/server/inbox/webhook";
-import { replyWindow } from "@/server/inbox/window";
-import { callGraphSend, SendError } from "@/server/inbox/send";
+import { FB_PREFIX, IG_PREFIX, resolveIdentity } from "@/server/conversations/inbox/identity";
+import type { WebhookMessage, WebhookValue } from "@/server/conversations/inbox/webhook";
+import { replyWindow } from "@/server/conversations/inbox/window";
+import { callGraphSend, SendError } from "@/server/conversations/inbox/send";
 import { getCredentialsByOrg } from "@/server/channels/whatsapp/credentials";
 import {
   getInstagramCredentialsByOrg,

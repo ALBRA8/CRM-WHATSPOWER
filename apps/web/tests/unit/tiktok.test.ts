@@ -8,7 +8,7 @@ import {
   IG_PREFIX,
   TT_PREFIX,
   parseIdentity,
-} from "@/server/inbox/identity";
+} from "@/server/conversations/inbox/identity";
 import {
   MAX_TEXT_CHARS_ANY_CHANNEL,
   capabilitiesFor,
@@ -20,12 +20,12 @@ import {
 } from "@/server/channels/capabilities";
 import { parseChannels } from "@/server/channels/enabled";
 import { healthFeatures } from "@/server/health";
-import { cabeOtroMensaje } from "@/server/inbox/outbound-cap";
+import { cabeOtroMensaje } from "@/server/conversations/inbox/outbound-cap";
 import {
   isWindowOpen,
   windowExpiresAt,
   windowRemainingMs,
-} from "@/server/inbox/window";
+} from "@/server/conversations/inbox/window";
 import { channelMark } from "@/components/channel-badge";
 import { normalizeZernioTiktokEvent } from "@/server/channels/tiktok/ingest";
 import { normalizeZernioEvent as normalizeMessenger } from "@/server/channels/messenger/ingest";

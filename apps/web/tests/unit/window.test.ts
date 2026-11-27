@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isWindowOpen, WINDOW_MS, windowRemainingMs } from "@/server/inbox/window";
+import { isWindowOpen, WINDOW_MS, windowRemainingMs } from "@/server/conversations/inbox/window";
 
 describe("ventana de 24 horas (FR-005)", () => {
   const now = new Date("2026-07-09T12:00:00Z");

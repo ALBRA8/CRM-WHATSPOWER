@@ -1,8 +1,8 @@
 import { apiError } from "@/lib/api";
 import { estaEsperando, minutosDeEspera } from "@/lib/esperando";
 import { conSesion } from "@/server/http/compartido";
-import { listConversations } from "@/server/inbox/queries";
-import { withPins } from "@/server/inbox/pins";
+import { listConversations } from "@/server/conversations/inbox/queries";
+import { withPins } from "@/server/conversations/inbox/pins";
 
 /**
  * `?filter=esperando` (077): solo las que esperan a una persona, de la que más

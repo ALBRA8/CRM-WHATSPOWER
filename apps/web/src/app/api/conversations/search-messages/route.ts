@@ -1,6 +1,6 @@
 import { apiError, withAuth } from "@/lib/api";
 import { BUSQUEDA_MAX_CARACTERES, BUSQUEDA_MIN_CARACTERES } from "@/lib/busqueda-mensajes";
-import { buscarMensajes } from "@/server/inbox/buscar-mensajes";
+import { buscarMensajes } from "@/server/conversations/inbox/buscar-mensajes";
 
 export const dynamic = "force-dynamic";
 

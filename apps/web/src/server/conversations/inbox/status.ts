@@ -1,8 +1,8 @@
 import { and, eq } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { describeSendError } from "@/lib/meta/send-errors";
-import { publish } from "@/server/events/bus";
-import type { WebhookStatus } from "@/server/inbox/webhook";
+import { publish } from "@/server/conversations/events/bus";
+import type { WebhookStatus } from "@/server/conversations/inbox/webhook";
 
 /** Orden monotónico de estados: nunca degradar (un delivered tardío no pisa read). */
 const STATUS_RANK: Record<string, number> = {

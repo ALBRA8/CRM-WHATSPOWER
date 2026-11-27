@@ -66,7 +66,7 @@ vi.mock("@/server/agenda/connectors", () => ({
 vi.mock("@/server/crm/leads/stage-history", () => ({
   moveLeadToStage: async () => ({ ok: true }),
 }));
-vi.mock("@/server/events/bus", () => ({ publish: () => {} }));
+vi.mock("@/server/conversations/events/bus", () => ({ publish: () => {} }));
 
 const selectRows: unknown[][] = [];
 let lastInsert: Record<string, unknown> | null = null;

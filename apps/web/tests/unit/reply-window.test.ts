@@ -5,7 +5,7 @@ import {
   capabilitiesFor,
   windowClosedMessage,
 } from "@/server/channels/capabilities";
-import { replyWindow } from "@/server/inbox/window";
+import { replyWindow } from "@/server/conversations/inbox/window";
 
 const HORA = 60 * 60 * 1000;
 const DIA = 24 * HORA;

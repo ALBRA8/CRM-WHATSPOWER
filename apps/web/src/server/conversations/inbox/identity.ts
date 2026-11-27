@@ -3,7 +3,7 @@ import { CHANNEL_LABEL, type Channel } from "@/lib/channels";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { normalizeMx } from "@/lib/meta/client";
-import type { WebhookMessage, WebhookValue } from "@/server/inbox/webhook";
+import type { WebhookMessage, WebhookValue } from "@/server/conversations/inbox/webhook";
 
 /**
  * Identidad resiliente de contacto (003).

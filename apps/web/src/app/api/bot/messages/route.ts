@@ -8,7 +8,7 @@ import {
   pideCallarSiSuperado,
 } from "@/server/bot/respuesta";
 import { despachoDe, despachoSuperado } from "@/server/dispatch/outbox";
-import { SendError, sendText } from "@/server/inbox/send";
+import { SendError, sendText } from "@/server/conversations/inbox/send";
 import { guardarRespuestaDePrueba } from "@/server/lab/sandbox";
 
 export const dynamic = "force-dynamic";

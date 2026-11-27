@@ -37,20 +37,20 @@ vi.mock("@/server/channels/whatsapp/media", async (original) => ({
     }
   },
 }));
-vi.mock("@/server/inbox/send", async (original) => ({
-  ...(await original<typeof import("@/server/inbox/send")>()),
+vi.mock("@/server/conversations/inbox/send", async (original) => ({
+  ...(await original<typeof import("@/server/conversations/inbox/send")>()),
   sendMediaMessage: mocks.send,
 }));
-vi.mock("@/server/inbox/queries", () => ({ getConversation: mocks.conversation }));
+vi.mock("@/server/conversations/inbox/queries", () => ({ getConversation: mocks.conversation }));
 vi.mock("@/lib/auth/session", async (original) => ({
   ...(await original<typeof import("@/lib/auth/session")>()),
   requireSession: mocks.session,
 }));
 
-import { forwardImage } from "@/server/inbox/forward-image";
+import { forwardImage } from "@/server/conversations/inbox/forward-image";
 import { POST } from "@/app/api/conversations/[id]/messages/forward-image/route";
 import { UnauthorizedError } from "@/lib/auth/session";
-import { SendError } from "@/server/inbox/send";
+import { SendError } from "@/server/conversations/inbox/send";
 import { IMAGEN_ADJUNTA, validarImagenAdjunta } from "@/lib/imagen-adjunta";
 import { MEDIA_LIMITS } from "@/server/channels/whatsapp/media";
 

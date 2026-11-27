@@ -7,7 +7,7 @@ import {
   ipPublica,
   urlDeAdjuntoPermitida,
   type OrigenRemoto,
-} from "@/server/inbox/remote-media";
+} from "@/server/conversations/inbox/remote-media";
 
 /**
  * 074 — Baja un adjunto de Instagram, Messenger o TikTok desde la URL firmada

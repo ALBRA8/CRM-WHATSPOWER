@@ -5,7 +5,7 @@ import {
   HORAS_REACTIVACION_NUEVAS,
   MOTIVOS_QUE_VUELVEN,
   type EstadoPausa,
-} from "@/server/inbox/reactivacion";
+} from "@/server/conversations/inbox/reactivacion";
 import { textoVuelta } from "@/lib/eventos-hilo";
 
 /** 076 — Cuándo vuelve la IA sola y la pausa con duración. */

@@ -24,16 +24,16 @@ vi.mock("@/lib/auth/session", async (original) => ({
   ...(await original<typeof import("@/lib/auth/session")>()),
   requireSession: m.session,
 }));
-vi.mock("@/server/inbox/queries", () => ({ getConversation: m.conversation }));
-vi.mock("@/server/inbox/send", async (original) => ({
-  ...(await original<typeof import("@/server/inbox/send")>()),
+vi.mock("@/server/conversations/inbox/queries", () => ({ getConversation: m.conversation }));
+vi.mock("@/server/conversations/inbox/send", async (original) => ({
+  ...(await original<typeof import("@/server/conversations/inbox/send")>()),
   sendText: m.sendText,
   sendStructured: m.sendStructured,
   sendMediaMessage: m.sendMedia,
 }));
-vi.mock("@/server/inbox/forward-message", () => ({ forwardMessage: m.forwardMessage }));
-vi.mock("@/server/inbox/forward-image", async (original) => ({
-  ...(await original<typeof import("@/server/inbox/forward-image")>()),
+vi.mock("@/server/conversations/inbox/forward-message", () => ({ forwardMessage: m.forwardMessage }));
+vi.mock("@/server/conversations/inbox/forward-image", async (original) => ({
+  ...(await original<typeof import("@/server/conversations/inbox/forward-image")>()),
   forwardImage: m.forwardImage,
 }));
 vi.mock("@/server/channels/whatsapp/templates", async (original) => ({
@@ -41,7 +41,7 @@ vi.mock("@/server/channels/whatsapp/templates", async (original) => ({
   sendTemplate: m.sendTemplate,
 }));
 
-import { SendError } from "@/server/inbox/send";
+import { SendError } from "@/server/conversations/inbox/send";
 
 const ctx = { params: Promise.resolve({ id: "cv_1" }) };
 const json = (body: unknown) =>
@@ -59,7 +59,7 @@ beforeEach(() => {
     conversation: { id: "cv_1", isTest: false, channel: "whatsapp" },
     contact: { id: "ct_1" },
   });
-  vi.doMock("@/server/inbox/pausa-manual", () => ({
+  vi.doMock("@/server/conversations/inbox/pausa-manual", () => ({
     pausarIaTrasEnvioDeLaBandeja: m.pausar,
   }));
 });
@@ -134,8 +134,8 @@ describe("068 · las rutas de la Bandeja pausan la IA tras enviar", () => {
 
 describe("068 · pausarIaTrasEnvioDeLaBandeja", () => {
   function mockDb(filas: unknown[] | Error) {
-    vi.doUnmock("@/server/inbox/pausa-manual");
-    vi.doMock("@/server/events/bus", () => ({ publish: m.publish }));
+    vi.doUnmock("@/server/conversations/inbox/pausa-manual");
+    vi.doMock("@/server/conversations/events/bus", () => ({ publish: m.publish }));
     vi.doMock("@/lib/db", async (original) => ({
       ...(await original<typeof import("@/lib/db")>()),
       getDb: () => ({
@@ -157,7 +157,7 @@ describe("068 · pausarIaTrasEnvioDeLaBandeja", () => {
 
   it("pausa con manual_reply y avisa a las pantallas", async () => {
     mockDb([{ id: "cv_1" }]);
-    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/inbox/pausa-manual");
+    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/conversations/inbox/pausa-manual");
     await pausarIaTrasEnvioDeLaBandeja("org_a", "cv_1");
     expect(m.update).toHaveBeenCalledWith(
       expect.objectContaining({ aiEnabled: false, handoffReason: "manual_reply" })
@@ -170,7 +170,7 @@ describe("068 · pausarIaTrasEnvioDeLaBandeja", () => {
 
   it("si ya estaba en pausa (otro motivo), no la toca ni avisa", async () => {
     mockDb([]);
-    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/inbox/pausa-manual");
+    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/conversations/inbox/pausa-manual");
     await pausarIaTrasEnvioDeLaBandeja("org_a", "cv_1");
     expect(m.publish).not.toHaveBeenCalled();
   });
@@ -178,7 +178,7 @@ describe("068 · pausarIaTrasEnvioDeLaBandeja", () => {
   it("un fallo de la base no tumba el envío que ya salió", async () => {
     mockDb(new Error("conexión perdida"));
     const spy = vi.spyOn(console, "error").mockImplementation(() => {});
-    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/inbox/pausa-manual");
+    const { pausarIaTrasEnvioDeLaBandeja } = await import("@/server/conversations/inbox/pausa-manual");
     await expect(pausarIaTrasEnvioDeLaBandeja("org_a", "cv_1")).resolves.toBeUndefined();
     spy.mockRestore();
   });

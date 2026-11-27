@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
-import { SendError } from "@/server/inbox/send";
-import { pausarIaTrasEnvioDeLaBandeja } from "@/server/inbox/pausa-manual";
+import { SendError } from "@/server/conversations/inbox/send";
+import { pausarIaTrasEnvioDeLaBandeja } from "@/server/conversations/inbox/pausa-manual";
 import {
   sendTemplate,
   TemplateError,

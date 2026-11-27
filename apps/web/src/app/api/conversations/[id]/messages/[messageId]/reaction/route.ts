@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
 import { emojiValido } from "@/lib/reacciones";
-import { reaccionar, ReaccionError, REACCION_ERROR_STATUS } from "@/server/inbox/reacciones";
+import { reaccionar, ReaccionError, REACCION_ERROR_STATUS } from "@/server/conversations/inbox/reacciones";
 
 export const dynamic = "force-dynamic";
 

@@ -4,7 +4,7 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { NOTA_MAX, puedeBorrarNota, type NotaDto } from "@/lib/notas";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 
 /**
  * 050 — Notas internas de una conversación.

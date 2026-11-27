@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { getEnv } from "@/lib/env";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 
 /**
  * 021 — El outbox del despachador.

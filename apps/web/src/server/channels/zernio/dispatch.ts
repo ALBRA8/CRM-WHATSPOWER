@@ -14,7 +14,7 @@ import {
   storedZernioSecrets,
 } from "@/server/channels/zernio/conexiones";
 import type { ZernioChannel } from "@/server/channels/zernio/cuentas";
-import { registrarReaccionZernio } from "@/server/inbox/reacciones";
+import { registrarReaccionZernio } from "@/server/conversations/inbox/reacciones";
 import {
   ZERNIO_REACTION_EVENT,
   WEBHOOKS_RECHECK_MS,

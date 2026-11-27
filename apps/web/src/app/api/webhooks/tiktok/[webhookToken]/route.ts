@@ -1,5 +1,5 @@
 import { getEnv } from "@/lib/env";
-import { isValidWebhookToken } from "@/server/inbox/webhook";
+import { isValidWebhookToken } from "@/server/conversations/inbox/webhook";
 import {
   channelDisabledResponse,
   isChannelEnabled,

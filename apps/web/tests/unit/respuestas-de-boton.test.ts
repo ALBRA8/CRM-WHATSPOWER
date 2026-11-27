@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { contenidoEntrante, mediaInputFrom } from "@/server/inbox/ingest";
-import type { WebhookMessage } from "@/server/inbox/webhook";
+import { contenidoEntrante, mediaInputFrom } from "@/server/conversations/inbox/ingest";
+import type { WebhookMessage } from "@/server/conversations/inbox/webhook";
 
 /**
  * #78 — Las respuestas de botón (`type: "button"` e `"interactive"`) se

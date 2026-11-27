@@ -43,12 +43,12 @@ vi.mock("@/server/channels/whatsapp/credentials", async (importOriginal) => {
     markReconnectRequired: vi.fn(async () => {}),
   };
 });
-vi.mock("@/server/events/bus", () => ({ publish: () => {} }));
-vi.mock("@/server/inbox/send", () => ({
+vi.mock("@/server/conversations/events/bus", () => ({ publish: () => {} }));
+vi.mock("@/server/conversations/inbox/send", () => ({
   callGraphSend: vi.fn(),
   SendError: class SendError extends Error {},
 }));
-vi.mock("@/server/inbox/ingest", () => ({ serializeMessage: (m: unknown) => m }));
+vi.mock("@/server/conversations/inbox/ingest", () => ({ serializeMessage: (m: unknown) => m }));
 
 /** Base de datos de mentira: lo justo para crear y sincronizar plantillas. */
 const db = vi.hoisted(() => ({

@@ -1,5 +1,5 @@
 import { requireSession, UnauthorizedError } from "@/lib/auth/session";
-import { subscribe } from "@/server/events/bus";
+import { subscribe } from "@/server/conversations/events/bus";
 
 /**
  * Canal SSE de la bandeja (contrato sse.md).

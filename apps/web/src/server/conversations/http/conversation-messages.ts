@@ -5,12 +5,12 @@ import {
 } from "@/server/channels/capabilities";
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
-import { getConversation, listMessages } from "@/server/inbox/queries";
-import { serializeMessage } from "@/server/inbox/ingest";
-import { resolverCitas } from "@/server/inbox/quotes";
-import { reaccionesDe } from "@/server/inbox/reacciones";
-import { SendError, sendStructured, sendText } from "@/server/inbox/send";
-import { pausarIaTrasEnvioDeLaBandeja } from "@/server/inbox/pausa-manual";
+import { getConversation, listMessages } from "@/server/conversations/inbox/queries";
+import { serializeMessage } from "@/server/conversations/inbox/ingest";
+import { resolverCitas } from "@/server/conversations/inbox/quotes";
+import { reaccionesDe } from "@/server/conversations/inbox/reacciones";
+import { SendError, sendStructured, sendText } from "@/server/conversations/inbox/send";
+import { pausarIaTrasEnvioDeLaBandeja } from "@/server/conversations/inbox/pausa-manual";
 
 
 type Params = { params: Promise<{ id: string }> };

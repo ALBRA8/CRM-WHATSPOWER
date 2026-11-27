@@ -1,5 +1,5 @@
-import { ingestInboundMessage, mediaRemota } from "@/server/inbox/ingest";
-import { despiertaLaParte, type InboundPart } from "@/server/inbox/remote-media";
+import { ingestInboundMessage, mediaRemota } from "@/server/conversations/inbox/ingest";
+import { despiertaLaParte, type InboundPart } from "@/server/conversations/inbox/remote-media";
 
 type Base = Omit<
   Parameters<typeof ingestInboundMessage>[0],

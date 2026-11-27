@@ -4,10 +4,10 @@ import { apiError, parseBody, withAuth } from "@/lib/api";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { getContactById } from "@/server/crm/contacts";
-import { getOrCreateConversation } from "@/server/inbox/ingest";
-import { anotarSalidaDelEquipo } from "@/server/inbox/reactivacion";
-import { SendError } from "@/server/inbox/send";
-import { isWindowOpen } from "@/server/inbox/window";
+import { getOrCreateConversation } from "@/server/conversations/inbox/ingest";
+import { anotarSalidaDelEquipo } from "@/server/conversations/inbox/reactivacion";
+import { SendError } from "@/server/conversations/inbox/send";
+import { isWindowOpen } from "@/server/conversations/inbox/window";
 import {
   sendTemplate,
   TemplateError,

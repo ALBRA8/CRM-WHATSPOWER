@@ -6,7 +6,7 @@ import {
   listarRespuestas,
   QuickReplyError,
   respuestaSchema,
-} from "@/server/quick-replies";
+} from "@/server/conversations/quick-replies";
 
 
 /** 049 — Las respuestas rápidas de la organización: las usa todo el equipo. */

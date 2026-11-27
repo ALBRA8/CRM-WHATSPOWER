@@ -127,7 +127,7 @@ describe("sandbox del Laboratorio en el envío de adjuntos", () => {
         contact: { id: "ct_1", phone: "5215511111111" },
       },
     ]);
-    const { sendMediaMessage } = await import("@/server/inbox/send");
+    const { sendMediaMessage } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendMediaMessage({

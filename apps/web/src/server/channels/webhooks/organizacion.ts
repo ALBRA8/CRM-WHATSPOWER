@@ -1,4 +1,4 @@
-import type { WebhookPayload } from "@/server/inbox/webhook";
+import type { WebhookPayload } from "@/server/conversations/inbox/webhook";
 import {
   getCredentialsByPhoneNumberId,
   getCredentialsByWabaId,

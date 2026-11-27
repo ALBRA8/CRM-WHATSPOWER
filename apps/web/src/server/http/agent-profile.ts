@@ -13,7 +13,7 @@ import {
 import { agendaEnabled } from "@/server/agenda/flag";
 import { leerConfigDespacho, urlSaludCerebro } from "@/server/brains/config";
 import { getBrainHealth } from "@/server/bot/status";
-import { HORAS_REACTIVACION_MAX } from "@/server/inbox/reactivacion";
+import { HORAS_REACTIVACION_MAX } from "@/server/conversations/inbox/reactivacion";
 
 
 export const GET = conSesion(async (session) => {

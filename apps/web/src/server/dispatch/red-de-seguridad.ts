@@ -8,7 +8,7 @@ import { windowMsFor } from "@/server/channels/capabilities";
 import { todoEsCierre } from "@/server/dispatch/cierres";
 import { encolarDespacho, type FilaDespacho } from "@/server/dispatch/outbox";
 import { programarTanda } from "@/server/dispatch/worker";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 
 /**
  * 075 — La red de seguridad del despacho: que nadie se quede sin respuesta.

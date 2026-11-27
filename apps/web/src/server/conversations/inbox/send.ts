@@ -3,29 +3,29 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { graphRequest, MetaApiError, normalizeRecipient } from "@/lib/meta/client";
 import { destinatarioMeta, type Destinatario } from "@/lib/meta/destinatario";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import {
   getCredentialsByOrg,
   markReconnectRequired,
   type Credentials,
 } from "@/server/channels/whatsapp/credentials";
-import { isWindowOpen, replyWindow } from "@/server/inbox/window";
+import { isWindowOpen, replyWindow } from "@/server/conversations/inbox/window";
 import { plainSocialText } from "@/lib/social-text";
-import { IG_PREFIX } from "@/server/inbox/identity";
+import { IG_PREFIX } from "@/server/conversations/inbox/identity";
 import {
   getInstagramCredentialsByOrg,
   markInstagramReconnectRequired,
   type InstagramCredentials,
 } from "@/server/channels/instagram/credentials";
 import { sendInstagramText } from "@/server/channels/instagram/send";
-import { FB_PREFIX } from "@/server/inbox/identity";
+import { FB_PREFIX } from "@/server/conversations/inbox/identity";
 import {
   getMessengerCredentialsByOrg,
   markMessengerReconnectRequired,
   type MessengerCredentials,
 } from "@/server/channels/messenger/credentials";
 import { sendMessengerText } from "@/server/channels/messenger/send";
-import { TT_PREFIX } from "@/server/inbox/identity";
+import { TT_PREFIX } from "@/server/conversations/inbox/identity";
 import {
   getTiktokCredentialsByOrg,
   markTiktokReconnectRequired,
@@ -36,7 +36,7 @@ import { prepararAudioSaliente } from "@/server/channels/whatsapp/nota-de-voz";
 import {
   cabeOtroMensaje,
   salientesDesdeElUltimoEntrante,
-} from "@/server/inbox/outbound-cap";
+} from "@/server/conversations/inbox/outbound-cap";
 import {
   capabilitiesFor,
   outboundLimitMessage,
@@ -47,8 +47,8 @@ import {
   aiWindowClosedMessage,
 } from "@/server/channels/capabilities";
 import { isChannelEnabled } from "@/server/channels/enabled";
-import { serializeMessage } from "@/server/inbox/ingest";
-import { conCita, type CitaEncontrada } from "@/server/inbox/quotes";
+import { serializeMessage } from "@/server/conversations/inbox/ingest";
+import { conCita, type CitaEncontrada } from "@/server/conversations/inbox/quotes";
 import {
   saveMediaFile,
   uploadGraphMedia,

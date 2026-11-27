@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { mediaInputFrom } from "@/server/inbox/ingest";
-import type { WebhookMessage } from "@/server/inbox/webhook";
+import { mediaInputFrom } from "@/server/conversations/inbox/ingest";
+import type { WebhookMessage } from "@/server/conversations/inbox/webhook";
 
 /**
  * 008 — Parser tolerante de adjuntos del webhook (entrantes y echoes).

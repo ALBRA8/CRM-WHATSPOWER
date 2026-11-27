@@ -1,6 +1,6 @@
 import { apiError, withAuth } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
-import { borrarNota, NotaError } from "@/server/notas";
+import { borrarNota, NotaError } from "@/server/conversations/notas";
 
 export const dynamic = "force-dynamic";
 

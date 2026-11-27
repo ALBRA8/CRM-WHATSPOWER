@@ -53,7 +53,7 @@ describe("sandbox del Laboratorio en el sender", () => {
         contact: { id: "ct_1", phone: "5215511111111" },
       },
     ]);
-    const { sendText, SendError } = await import("@/server/inbox/send");
+    const { sendText, SendError } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendText({

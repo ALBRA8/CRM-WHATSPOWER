@@ -1,5 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { sourceUrlOf } from "@/server/inbox/remote-media";
+import { sourceUrlOf } from "@/server/conversations/inbox/remote-media";
 
 /**
  * 021 — El contrato del despacho: lo que el CRM le manda a un cerebro externo

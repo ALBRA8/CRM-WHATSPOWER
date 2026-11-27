@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { normalizeMx } from "@/lib/meta/client";
-import { BSUID_PREFIX, resolveIdentity } from "@/server/inbox/identity";
-import type { WebhookMessage, WebhookValue } from "@/server/inbox/webhook";
+import { BSUID_PREFIX, resolveIdentity } from "@/server/conversations/inbox/identity";
+import type { WebhookMessage, WebhookValue } from "@/server/conversations/inbox/webhook";
 
 /** Feature 003: identidad resiliente de contacto (BSUID). */
 

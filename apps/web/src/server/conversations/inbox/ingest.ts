@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
 import { normalizeMx } from "@/lib/meta/client";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import { getCredentialsByPhoneNumberId } from "@/server/channels/whatsapp/credentials";
 import { ensureAssetAvailable } from "@/server/channels/whatsapp/media";
 import type { Channel } from "@/lib/channels";
@@ -11,33 +11,33 @@ import type {
   WebhookMediaPayload,
   WebhookMessage,
   WebhookValue,
-} from "@/server/inbox/webhook";
+} from "@/server/conversations/inbox/webhook";
 import {
   getOrCreateContactByIdentity,
   resolveIdentity,
   type ResolvedIdentity,
-} from "@/server/inbox/identity";
-import { applyStatusUpdate } from "@/server/inbox/status";
+} from "@/server/conversations/inbox/identity";
+import { applyStatusUpdate } from "@/server/conversations/inbox/status";
 import {
   anuncioDeWhatsapp,
   type AnuncioDeOrigen,
 } from "@/server/attribution/referral";
 import { registrarAnuncioDeOrigen } from "@/server/attribution/store";
-import { onLeadActivity } from "@/server/inbox/lead-activity";
+import { onLeadActivity } from "@/server/conversations/inbox/lead-activity";
 import { despachoActivo } from "@/server/brains/config";
 import { despacharAlCerebro } from "@/server/dispatch/encolar";
-import { pausarIaPorRespuestaManual } from "@/server/inbox/pausa-manual";
-import { devolverALaIaSiToca } from "@/server/inbox/reactivacion";
-import { registrarReaccionWhatsApp } from "@/server/inbox/reacciones";
+import { pausarIaPorRespuestaManual } from "@/server/conversations/inbox/pausa-manual";
+import { devolverALaIaSiToca } from "@/server/conversations/inbox/reactivacion";
+import { registrarReaccionWhatsApp } from "@/server/conversations/inbox/reacciones";
 import { esReaccionable, type ReaccionDto } from "@/lib/reacciones";
-import { registrarEdicionWhatsApp } from "@/server/inbox/ediciones";
-import { payloadPublico, type RemoteMedia } from "@/server/inbox/remote-media";
+import { registrarEdicionWhatsApp } from "@/server/conversations/inbox/ediciones";
+import { payloadPublico, type RemoteMedia } from "@/server/conversations/inbox/remote-media";
 import {
   aCitaDto,
   citaDelWebhook,
   resolverCita,
   type CitaEncontrada,
-} from "@/server/inbox/quotes";
+} from "@/server/conversations/inbox/quotes";
 
 /**
  * Tipos que la bandeja sabe dibujar y el cerebro sabe leer. 074: el resto ya

@@ -8,7 +8,7 @@ import {
   rellenarVariables,
   tokenRapido,
 } from "@/lib/respuestas-rapidas";
-import { respuestaSchema } from "@/server/quick-replies";
+import { respuestaSchema } from "@/server/conversations/quick-replies";
 
 /** 049 — Respuestas rápidas: lo puro del menú «/» y la validación. */
 

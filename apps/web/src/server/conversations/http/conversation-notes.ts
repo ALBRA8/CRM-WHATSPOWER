@@ -1,7 +1,7 @@
 import { conSesion } from "@/server/http/compartido";
 import { apiError, parseBody } from "@/lib/api";
 import { canConfigure } from "@/lib/auth/roles";
-import { crearNota, listarNotas, NotaError, notaSchema } from "@/server/notas";
+import { crearNota, listarNotas, NotaError, notaSchema } from "@/server/conversations/notas";
 
 
 type Params = { params: Promise<{ id: string }> };

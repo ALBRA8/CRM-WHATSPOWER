@@ -32,7 +32,7 @@ vi.mock("@/server/channels/whatsapp/media", async (importOriginal) => {
   };
 });
 
-vi.mock("@/server/events/bus", () => ({ publish: h.publish }));
+vi.mock("@/server/conversations/events/bus", () => ({ publish: h.publish }));
 
 vi.mock("@/server/channels/whatsapp/credentials", async (importOriginal) => {
   const original =
@@ -46,8 +46,8 @@ vi.mock("@/server/channels/whatsapp/credentials", async (importOriginal) => {
   };
 });
 
-vi.mock("@/server/inbox/identity", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/inbox/identity")>();
+vi.mock("@/server/conversations/inbox/identity", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/conversations/inbox/identity")>();
   return {
     ...original,
     getOrCreateContactByIdentity: vi.fn(async () => ({
@@ -56,7 +56,7 @@ vi.mock("@/server/inbox/identity", async (importOriginal) => {
   };
 });
 
-vi.mock("@/server/inbox/lead-activity", () => ({
+vi.mock("@/server/conversations/inbox/lead-activity", () => ({
   onLeadActivity: vi.fn(async () => {}),
 }));
 vi.mock("@/server/brains/config", () => ({ despachoActivo: () => false }));
@@ -130,7 +130,7 @@ import {
   aCitaDto,
   citaDelWebhook,
   conCita,
-} from "@/server/inbox/quotes";
+} from "@/server/conversations/inbox/quotes";
 
 const insertsDeMensajes = () =>
   h.inserts.filter((i) => i.table === schema.message).map((i) => i.values);
@@ -236,7 +236,7 @@ describe("ingesta de WhatsApp con context", () => {
         media: { kind: "image", caption: "Martillo de uña" },
       },
     ]);
-    const { processMessagesValue } = await import("@/server/inbox/ingest");
+    const { processMessagesValue } = await import("@/server/conversations/inbox/ingest");
     await processMessagesValue(
       webhookValue({ context: { from: "521", id: "wamid.FOTO" } }) as never
     );
@@ -261,7 +261,7 @@ describe("ingesta de WhatsApp con context", () => {
   });
 
   it("sin context → reply_to_wa_message_id null y replyTo null", async () => {
-    const { processMessagesValue } = await import("@/server/inbox/ingest");
+    const { processMessagesValue } = await import("@/server/conversations/inbox/ingest");
     await processMessagesValue(webhookValue({}) as never);
 
     const [entrante] = insertsDeMensajes();
@@ -274,7 +274,7 @@ describe("ingesta de WhatsApp con context", () => {
 
   it("cita a un mensaje que no está en el CRM → se guarda y se enseña como no disponible", async () => {
     h.selectRows.push([]);
-    const { processMessagesValue } = await import("@/server/inbox/ingest");
+    const { processMessagesValue } = await import("@/server/conversations/inbox/ingest");
     await processMessagesValue(
       webhookValue({ context: { id: "wamid.VIEJO" } }) as never
     );
@@ -287,7 +287,7 @@ describe("ingesta de WhatsApp con context", () => {
 
   it("un eco de coexistence citado también guarda la cita", async () => {
     h.selectRows.push([]); // resolverCita: el citado no está en el CRM
-    const { processEchoesValue } = await import("@/server/inbox/ingest");
+    const { processEchoesValue } = await import("@/server/conversations/inbox/ingest");
     await processEchoesValue({
       metadata: { phone_number_id: "pn_1" },
       message_echoes: [
@@ -349,7 +349,7 @@ describe("envío con context", () => {
   it("sendText citando → Graph recibe context.message_id y el saliente guarda la cita", async () => {
     conectado();
     h.selectRows.push([CONVERSACION_WA], [CITADO]);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await sendText({
       conversationId: "cv_1",
@@ -383,7 +383,7 @@ describe("envío con context", () => {
       )
       .mockResolvedValueOnce({ messages: [{ id: "wamid.OUT2" }] });
     h.selectRows.push([CONVERSACION_WA], [CITADO]);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     const r = await sendText({
       conversationId: "cv_1",
@@ -412,7 +412,7 @@ describe("envío con context", () => {
       new MetaApiError("(#131009) Parameter value is not valid", { status: 400, code: 131009 })
     );
     h.selectRows.push([CONVERSACION_WA]);
-    const { sendText, SendError } = await import("@/server/inbox/send");
+    const { sendText, SendError } = await import("@/server/conversations/inbox/send");
 
     const err = await sendText({ conversationId: "cv_1", organizationId: "org_1", text: "hola" }).catch(
       (e: unknown) => e
@@ -430,7 +430,7 @@ describe("envío con context", () => {
       new MetaApiError("(#131047) Re-engagement message", { status: 400, code: 131047 })
     );
     h.selectRows.push([CONVERSACION_WA], [CITADO]);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendText({ conversationId: "cv_1", organizationId: "org_1", text: "hola", replyToMessageId: "msg_in" })
@@ -441,7 +441,7 @@ describe("envío con context", () => {
   it("sendText sin cita → sin context en el payload", async () => {
     conectado();
     h.selectRows.push([CONVERSACION_WA]);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await sendText({ conversationId: "cv_1", organizationId: "org_1", text: "hola" });
 
@@ -455,7 +455,7 @@ describe("envío con context", () => {
     h.saveMediaFile.mockResolvedValue("org_1/asset.jpg");
     h.uploadGraphMedia.mockResolvedValue("media_1");
     h.selectRows.push([CONVERSACION_WA], [CITADO]);
-    const { sendMediaMessage } = await import("@/server/inbox/send");
+    const { sendMediaMessage } = await import("@/server/conversations/inbox/send");
 
     await sendMediaMessage({
       conversationId: "cv_1",
@@ -475,7 +475,7 @@ describe("envío con context", () => {
   it("ubicación citando → context en el payload", async () => {
     conectado();
     h.selectRows.push([CONVERSACION_WA], [CITADO]);
-    const { sendStructured } = await import("@/server/inbox/send");
+    const { sendStructured } = await import("@/server/conversations/inbox/send");
 
     await sendStructured({
       conversationId: "cv_1",
@@ -495,7 +495,7 @@ describe("envío con context", () => {
   it("citar un mensaje de otra conversación → reply_unavailable sin llamar a Graph", async () => {
     conectado();
     h.selectRows.push([CONVERSACION_WA], []);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendText({
@@ -514,7 +514,7 @@ describe("envío con context", () => {
       [CONVERSACION_WA],
       [{ ...CITADO, message: { ...CITADO.message, waMessageId: null } }]
     );
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendText({
@@ -561,7 +561,7 @@ describe("envío citando en Instagram", () => {
         contact: { ...CONVERSACION_WA.contact, waIdentity: "ig:123" },
       },
     ]);
-    const { sendText } = await import("@/server/inbox/send");
+    const { sendText } = await import("@/server/conversations/inbox/send");
 
     await expect(
       sendText({

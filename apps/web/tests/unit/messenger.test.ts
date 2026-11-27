@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CHANNEL_LABEL, CHANNEL_ORDER, isChannel } from "@/lib/channels";
-import { FB_PREFIX, IG_PREFIX, BSUID_PREFIX } from "@/server/inbox/identity";
+import { FB_PREFIX, IG_PREFIX, BSUID_PREFIX } from "@/server/conversations/inbox/identity";
 import { capabilitiesFor, textFits, windowClosedMessage } from "@/server/channels/capabilities";
 import { parseChannels } from "@/server/channels/enabled";
 import { channelMark } from "@/components/channel-badge";

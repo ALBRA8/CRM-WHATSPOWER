@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
-import { getConversation } from "@/server/inbox/queries";
-import { ForwardImageError } from "@/server/inbox/forward-image";
-import { forwardMessage } from "@/server/inbox/forward-message";
-import { pausarIaTrasEnvioDeLaBandeja } from "@/server/inbox/pausa-manual";
-import { SendError } from "@/server/inbox/send";
+import { getConversation } from "@/server/conversations/inbox/queries";
+import { ForwardImageError } from "@/server/conversations/inbox/forward-image";
+import { forwardMessage } from "@/server/conversations/inbox/forward-message";
+import { pausarIaTrasEnvioDeLaBandeja } from "@/server/conversations/inbox/pausa-manual";
+import { SendError } from "@/server/conversations/inbox/send";
 import { MediaValidationError } from "@/server/channels/whatsapp/media";
 
 export const dynamic = "force-dynamic";

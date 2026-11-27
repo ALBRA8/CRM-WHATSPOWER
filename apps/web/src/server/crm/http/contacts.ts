@@ -8,7 +8,7 @@ import { scoped } from "@/lib/db/tenant";
 import { normalizeMx } from "@/lib/meta/client";
 import { digitsOnly, normalizeText } from "@/lib/search";
 import { serializeContact } from "@/server/crm/contacts";
-import { createLeadForContact } from "@/server/inbox/lead-activity";
+import { createLeadForContact } from "@/server/conversations/inbox/lead-activity";
 
 
 /**

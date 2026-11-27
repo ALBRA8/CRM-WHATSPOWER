@@ -71,7 +71,7 @@ vi.mock("@/server/agenda/connectors", () => ({
 }));
 
 vi.mock("@/server/crm/leads/stage-history", () => ({ moveLeadToStage }));
-vi.mock("@/server/events/bus", () => ({ publish: () => {} }));
+vi.mock("@/server/conversations/events/bus", () => ({ publish: () => {} }));
 
 /** Cola de resultados para cada `select(...).limit(n)` en orden de llamada. */
 const selectRows: unknown[][] = [];

@@ -8,15 +8,15 @@ import {
   splitInbound,
   TOPE_ADJUNTO_REMOTO,
   urlDeAdjuntoPermitida,
-} from "@/server/inbox/remote-media";
-import { lookupPublico } from "@/server/inbox/descarga-remota";
-import { mediaRemota, serializeMessage, tipoDeEntrante } from "@/server/inbox/ingest";
-import { debeAplicarse, extraerEdicion } from "@/server/inbox/ediciones";
+} from "@/server/conversations/inbox/remote-media";
+import { lookupPublico } from "@/server/conversations/inbox/descarga-remota";
+import { mediaRemota, serializeMessage, tipoDeEntrante } from "@/server/conversations/inbox/ingest";
+import { debeAplicarse, extraerEdicion } from "@/server/conversations/inbox/ediciones";
 import { armarEvento, mediaIdDelEvento } from "@/server/brains/contract";
 import { normalizeMetaPagePayload, normalizeZernioEvent } from "@/server/channels/messenger/ingest";
 import { normalizeZernioTiktokEvent } from "@/server/channels/tiktok/ingest";
 import { esNoSoportado, previewText } from "@/components/inbox/helpers";
-import type { WebhookMessage } from "@/server/inbox/webhook";
+import type { WebhookMessage } from "@/server/conversations/inbox/webhook";
 
 /**
  * 074 — Que no se pierda nada: la parte pura de los adjuntos de Instagram,

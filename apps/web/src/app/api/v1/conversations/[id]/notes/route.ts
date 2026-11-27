@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/conversation-notes";
+import * as h from "@/server/conversations/http/conversation-notes";
 
 export const dynamic = "force-dynamic";
 

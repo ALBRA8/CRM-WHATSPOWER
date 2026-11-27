@@ -4,7 +4,7 @@ import {
   isValidSignature,
   isValidWebhookToken,
   safeEqual,
-} from "@/server/inbox/webhook";
+} from "@/server/conversations/inbox/webhook";
 
 describe("capa 1: token en la ruta (FR-041/FR-083)", () => {
   it("segmento correcto → válido", () => {

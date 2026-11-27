@@ -1,6 +1,6 @@
-import { TT_PREFIX } from "@/server/inbox/identity";
-import { ingerirPartes } from "@/server/inbox/partes";
-import { splitInbound, type RemoteAttachment } from "@/server/inbox/remote-media";
+import { TT_PREFIX } from "@/server/conversations/inbox/identity";
+import { ingerirPartes } from "@/server/conversations/inbox/partes";
+import { splitInbound, type RemoteAttachment } from "@/server/conversations/inbox/remote-media";
 import { getTiktokCredentialsByAccountRef } from "@/server/channels/tiktok/credentials";
 import { zernioSentAtSeconds, type ZernioEvent } from "@/server/channels/zernio";
 

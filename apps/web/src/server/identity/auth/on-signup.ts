@@ -1,7 +1,7 @@
 import { count, eq, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
-import { HORAS_REACTIVACION_NUEVAS } from "@/server/inbox/reactivacion";
+import { HORAS_REACTIVACION_NUEVAS } from "@/server/conversations/inbox/reactivacion";
 
 /** Etapas sembradas del pipeline (US2). */
 const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [

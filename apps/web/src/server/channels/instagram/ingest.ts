@@ -1,6 +1,6 @@
-import { IG_PREFIX } from "@/server/inbox/identity";
-import { ingerirPartes } from "@/server/inbox/partes";
-import { splitInbound, type RemoteAttachment } from "@/server/inbox/remote-media";
+import { IG_PREFIX } from "@/server/conversations/inbox/identity";
+import { ingerirPartes } from "@/server/conversations/inbox/partes";
+import { splitInbound, type RemoteAttachment } from "@/server/conversations/inbox/remote-media";
 import {
   getInstagramCredentialsByAccountRef,
   getInstagramCredentialsByIgUserId,

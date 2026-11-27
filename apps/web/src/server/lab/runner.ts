@@ -2,7 +2,7 @@ import { and, asc, count, desc, eq, gt } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { scoped } from "@/lib/db/tenant";
-import { publish } from "@/server/events/bus";
+import { publish } from "@/server/conversations/events/bus";
 import { renderKb } from "@/server/ai/prompts";
 import { construirEventoOlvido } from "@/server/brains/contract";
 import { avisarOlvido } from "@/server/brains/deliver";

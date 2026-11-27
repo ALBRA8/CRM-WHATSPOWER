@@ -2,7 +2,7 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { intercalarNotas, puedeBorrarNota } from "@/lib/notas";
-import { notaSchema } from "@/server/notas";
+import { notaSchema } from "@/server/conversations/notas";
 
 /**
  * 050 — Notas internas: el equipo anota dentro del hilo y el cliente nunca lo
