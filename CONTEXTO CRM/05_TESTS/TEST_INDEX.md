@@ -177,3 +177,31 @@ AGENDA=on, BRAIN_DISPATCH_URL → cerebro falso 3261, WA_MOCK_ENABLED=true),
 servidor dev turbo + heap 2 GB en :3260. Resultado al cierre: ver
 `ENTREGA_F5.md` §pruebas. El host sigue en 3,9 GB RAM — el límite R11+
 documentado en S4.4 sigue siendo condición física del sandbox, no del producto.
+
+---
+
+## Resultados CIERRE POST-F5 (2026-11-28) — checks restantes y controles del puente
+
+Mandato: conservar `ff691d9` (CRM) / `7f6e908` (cerebro sin cambios); ejecutar
+los checks restantes (R11 y posteriores); validar controles del puente; informe
+en `ENTREGA_CIERRE_POSTF5.md`. Sin despliegue público.
+
+| Verificación | Resultado real |
+|---|---|
+| **E2E R11 — PRIMERA EJECUCIÓN REAL** (sección FINAL del self-test 036; en S4.3/S4.4/F5 la corrida murió siempre antes de R11) | **11/11 checks OK, 0 FAIL** (`scripts/e2e-r11-postf5.mjs`, copia verbatim de `r11BotChecks` @ `ff691d9`; servidor dev estándar 036 :3260): ráfaga 700 peticiones → 30×401 + 670×429 por IP, cerebro 200 durante/después (freno por IP, no global), reconciliación BSUID↔teléfono, `/api/bot/context?waIdentity=bsuid:` 200, BSUID desconocido 404 — sin OOM (solo compila las rutas de R11) |
+| Contabilidad «302» | guion = 301 puntos `ok()` (+1 definición); total EN EJECUCIÓN dinámico (bucles ×iteración; ramas por banderas). **Estado: 270 (F5 corrida B) + 11 (R11) = 281 checks con evidencia individual, 0 FAIL acumulado. «302/302» NO declarado** — exige corrida continua completa en host ≥8 GB (checklist D6) |
+| Verificador rol runtime (re-ejecutado) | **24/24 PASS** — clon TEMPLATE; DDL → 42501; fail-closed; cruzado 0 filas/42501; audit append-only; hash encadenado |
+| Backplane SSE (re-ejecutado, PG real) | **6/6 PASS** — exactly-once por instancia; filtro por org; >7900 gzip+base64 |
+| Ciclo respaldo→restauración→verificación (re-ejecutado) | **5/5 PASS** — V1 conteos 44/44 idénticos; V2 RLS 39/39+FORCE; V3 hash íntegro; V4 34 migraciones; V5 operable |
+| Persistencia y recuperación (re-ejecutado) | **PASS** — P3 reinicio controlado (nonce sobrevive) + F3 crash SIGKILL con replay de WAL; cadena íntegra. **ADEMÁS recuperación real no planificada**: el clúster sobrevivió al reciclado del sandbox con replay de WAL y BD F5 intactas |
+| Adaptador ↔ cerebro REAL `7f6e908` | **19/19 PASS** (`services/agent-gateway`): 11 unitarias fail-closed + 8 integración (health, T9 configured, `/crm/dispatch` 200 R-AG-1, idempotencia, HMAC manipulada → 401 tipado, org cruzada → 403 `tenant_mismatch`, HITL 200, X-Org-Id+firma) |
+| `/api/health` | vivo: `ok:true`, 2.12.0, `dbRole:"owner"`, bloque `sse` (contrato F5) |
+| Gate FR-080 verificado en vivo | con `next start` (NODE_ENV=production) los mocks → **404** (comportamiento de seguridad del producto, correcto; el arnés E2E exige dev) |
+| Preservación | `git status` = solo adiciones (runner + docs); **142 rutas** intactas; vigía de stubs intacto (4 stubs «solo README»); cerebro sin tocar |
+
+### Hallazgos de entorno (NO defectos de producto)
+
+| ID | Hallazgo | Causa raíz | Tratamiento |
+|---|---|---|---|
+| D-CP-1 | app arrancaba contra `DATABASE_URL=file:…/custom.db` (ECONNREFUSED) | el sandbox inyecta `DATABASE_URL` global; `node --env-file` no sobreescribe variables existentes | operativo: `env -u DATABASE_URL`; sin cambio de producto |
+| D-CP-2 | mocks 404 con servidor de producción | FR-080 `isMockEnabled()` exige `NODE_ENV !== "production"` (por diseño) | documentado como seguridad del producto; arnés E2E en dev (igual que F5) |
