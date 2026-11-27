@@ -16,7 +16,7 @@ import { describe, expect, it } from "vitest";
  */
 
 const SRC = path.resolve(import.meta.dirname, "..", "..", "src");
-const PUERTA = path.join("server", "leads", "stage-history.ts");
+const PUERTA = path.join("server", "crm", "leads", "stage-history.ts");
 
 function archivosTs(dir: string): string[] {
   const out: string[] = [];
@@ -62,7 +62,7 @@ describe("guardarraíl: una sola puerta escribe la etapa del lead", () => {
     expect(
       infractores,
       `Estos archivos cambian la etapa sin registrar el movimiento. ` +
-        `Usa moveLeadToStage() de server/leads/stage-history.ts:\n` +
+        `Usa moveLeadToStage() de server/crm/leads/stage-history.ts:\n` +
         infractores.map((f) => `  · ${f}`).join("\n")
     ).toEqual([]);
   });

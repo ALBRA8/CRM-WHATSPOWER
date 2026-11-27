@@ -19,7 +19,7 @@ import { describe, expect, it } from "vitest";
  */
 
 const SRC = path.resolve(import.meta.dirname, "..", "..", "src");
-const PUERTA = path.join(SRC, "server", "bot", "ficha.ts");
+const PUERTA = path.join(SRC, "server", "agents", "bot", "ficha.ts");
 
 function archivosTs(dir: string): string[] {
   const out: string[] = [];
