@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
-import { zoomConnector } from "@/server/agenda/connectors/zoom";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { zoomConnector } from "@/server/scheduling/agenda/connectors/zoom";
 import {
   deleteZoomCredentials,
   getZoomCredentials,
   saveZoomCredentials,
   secretLast4,
-} from "@/server/agenda/connectors/zoom-credentials";
+} from "@/server/scheduling/agenda/connectors/zoom-credentials";
 
 export const dynamic = "force-dynamic";
 

@@ -1,5 +1,5 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from "vitest";
-import type { CalendarSettings } from "@/server/agenda/settings";
+import type { CalendarSettings } from "@/server/scheduling/agenda/settings";
 
 /**
  * `GET /api/bot/availability` con `date` (R10): lo que la ruta REGISTRA como
@@ -38,7 +38,7 @@ const SETTINGS: CalendarSettings = {
 // Lunes 21 sep 2026, 09:00 CDMX.
 const NOW = new Date("2026-09-21T15:00:00.000Z");
 
-vi.mock("@/server/agenda/flag", () => ({
+vi.mock("@/server/scheduling/agenda/flag", () => ({
   agendaEnabled: () => true,
   agendaDisabledResponse: () => new Response(null, { status: 404 }),
 }));
@@ -59,13 +59,13 @@ vi.mock("@/lib/db", async () => {
   return { schema, getDb: () => chain };
 });
 
-vi.mock("@/server/agenda/settings", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@/server/agenda/settings")>()),
+vi.mock("@/server/scheduling/agenda/settings", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/server/scheduling/agenda/settings")>()),
   getSettings: async () => SETTINGS,
 }));
 
-vi.mock("@/server/agenda/availability", async (importOriginal) => {
-  const real = await importOriginal<typeof import("@/server/agenda/availability")>();
+vi.mock("@/server/scheduling/agenda/availability", async (importOriginal) => {
+  const real = await importOriginal<typeof import("@/server/scheduling/agenda/availability")>();
   const { addDaysISO, todayInTz } = await import("@/lib/time/slots");
   return {
     ...real,
@@ -86,8 +86,8 @@ vi.mock("@/server/agenda/availability", async (importOriginal) => {
   };
 });
 
-vi.mock("@/server/agenda/offers", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@/server/agenda/offers")>()),
+vi.mock("@/server/scheduling/agenda/offers", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@/server/scheduling/agenda/offers")>()),
   replaceOffers: h.replaceOffers,
 }));
 

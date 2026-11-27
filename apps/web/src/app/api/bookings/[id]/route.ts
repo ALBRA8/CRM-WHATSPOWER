@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { parseBody, withAuth } from "@/lib/api";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
 import {
   cancelBooking,
   markBookingStatus,
   rescheduleBooking,
   retryMeetingLink,
-} from "@/server/agenda/service";
-import { bookingErrorResponse } from "@/server/agenda/http";
+} from "@/server/scheduling/agenda/service";
+import { bookingErrorResponse } from "@/server/scheduling/agenda/http";
 
 export const dynamic = "force-dynamic";
 

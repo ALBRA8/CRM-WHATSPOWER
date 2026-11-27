@@ -1,12 +1,12 @@
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
 import {
   createSessionBooking,
   rescheduleForConversation,
-} from "@/server/agenda/service";
-import { bookingErrorResponse, bookingPayload } from "@/server/agenda/http";
+} from "@/server/scheduling/agenda/service";
+import { bookingErrorResponse, bookingPayload } from "@/server/scheduling/agenda/http";
 
 export const dynamic = "force-dynamic";
 

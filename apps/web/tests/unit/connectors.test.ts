@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { CONNECTOR_META, CONNECTOR_ORDER } from "@/lib/agenda-connectors";
-import { enlaceFijoConnector } from "@/server/agenda/connectors/enlace-fijo";
-import { zoomConnector, ZOOM_SCOPES } from "@/server/agenda/connectors/zoom";
-import { googleConnector } from "@/server/agenda/connectors/google";
-import { ConnectorError } from "@/server/agenda/connectors/types";
-import { clearZoomTokenCache } from "@/server/agenda/connectors/zoom-credentials";
-import { clearGoogleTokenCache } from "@/server/agenda/connectors/google-credentials";
+import { enlaceFijoConnector } from "@/server/scheduling/agenda/connectors/enlace-fijo";
+import { zoomConnector, ZOOM_SCOPES } from "@/server/scheduling/agenda/connectors/zoom";
+import { googleConnector } from "@/server/scheduling/agenda/connectors/google";
+import { ConnectorError } from "@/server/scheduling/agenda/connectors/types";
+import { clearZoomTokenCache } from "@/server/scheduling/agenda/connectors/zoom-credentials";
+import { clearGoogleTokenCache } from "@/server/scheduling/agenda/connectors/google-credentials";
 
 /**
  * 015 — La suite de contrato de conectores.

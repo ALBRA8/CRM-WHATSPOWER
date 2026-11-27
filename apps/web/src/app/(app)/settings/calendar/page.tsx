@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { AgendaClient } from "@/components/settings/agenda-client";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 
 export const dynamic = "force-dynamic";
 

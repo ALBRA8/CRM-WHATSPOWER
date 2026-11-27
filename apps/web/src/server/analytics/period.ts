@@ -7,7 +7,7 @@ import {
   zonedWallClockToUtc,
 } from "@/lib/time/slots";
 import type { PeriodDto } from "@/lib/analytics";
-import { DEFAULT_TIMEZONE } from "@/server/agenda/settings";
+import { DEFAULT_TIMEZONE } from "@/server/scheduling/agenda/settings";
 
 /**
  * 019 — El periodo consultado, resuelto en la zona del NEGOCIO.

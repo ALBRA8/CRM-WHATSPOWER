@@ -32,13 +32,13 @@ vi.mock("@/lib/auth/session", () => ({
   getSessionOrNull: async () => ({ userId: "usr_1", organizationId: "org_a", role: "owner" }),
 }));
 
-vi.mock("@/server/agenda/flag", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/agenda/flag")>();
+vi.mock("@/server/scheduling/agenda/flag", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/scheduling/agenda/flag")>();
   return { ...original, agendaEnabled: () => state.agendaOn };
 });
 
-vi.mock("@/server/agenda/settings", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/agenda/settings")>();
+vi.mock("@/server/scheduling/agenda/settings", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/scheduling/agenda/settings")>();
   return { ...original, getSettings: async () => SETTINGS };
 });
 
@@ -80,7 +80,7 @@ vi.mock("@/lib/db", async (importOriginal) => {
 });
 
 const { GET } = await import("@/app/api/bookings/route");
-const { RANGE_LIMIT } = await import("@/server/agenda/queries");
+const { RANGE_LIMIT } = await import("@/server/scheduling/agenda/queries");
 
 function row(id: string, startIso: string, durationMinutes = 30) {
   return {

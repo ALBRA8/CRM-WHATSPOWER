@@ -8,20 +8,20 @@ import {
   computeAvailability,
   findSlot,
   type AvailableSlot,
-} from "@/server/agenda/availability";
-import { getSettings, type CalendarSettings } from "@/server/agenda/settings";
+} from "@/server/scheduling/agenda/availability";
+import { getSettings, type CalendarSettings } from "@/server/scheduling/agenda/settings";
 import {
   clearOffers,
   findOffered,
   getOffers,
   replaceOffers,
   type OfferedSlot,
-} from "@/server/agenda/offers";
+} from "@/server/scheduling/agenda/offers";
 import {
   bindConnector,
   markConnectorAuthError,
-} from "@/server/agenda/connectors";
-import { ConnectorError } from "@/server/agenda/connectors/types";
+} from "@/server/scheduling/agenda/connectors";
+import { ConnectorError } from "@/server/scheduling/agenda/connectors/types";
 import { moveLeadToStage } from "@/server/crm/leads/stage-history";
 import { publish } from "@/server/conversations/events/bus";
 

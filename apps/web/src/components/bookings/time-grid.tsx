@@ -11,7 +11,7 @@ import {
   workingBands,
   type DaySegment,
 } from "@/lib/time/calendar";
-import type { WeeklyHours } from "@/server/agenda/settings";
+import type { WeeklyHours } from "@/server/scheduling/agenda/settings";
 import { cn } from "@/lib/utils";
 import { bookingTitle, bookingTone, hasDeliveryIssue, type Booking } from "./booking-look";
 

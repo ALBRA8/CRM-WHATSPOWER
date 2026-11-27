@@ -3,7 +3,7 @@ import {
   findOffered,
   sameInstant,
   type OfferedSlot,
-} from "@/server/agenda/offers";
+} from "@/server/scheduling/agenda/offers";
 
 /**
  * 015 — La regla INNEGOCIABLE: solo se reserva lo que se ofreció, comparando

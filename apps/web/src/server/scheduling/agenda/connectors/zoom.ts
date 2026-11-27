@@ -6,12 +6,12 @@ import {
   type MeetingRequest,
   type MeetingResult,
   type TestConnectionResult,
-} from "@/server/agenda/connectors/types";
+} from "@/server/scheduling/agenda/connectors/types";
 import {
   getCachedZoomToken,
   setCachedZoomToken,
   type ZoomCreds,
-} from "@/server/agenda/connectors/zoom-credentials";
+} from "@/server/scheduling/agenda/connectors/zoom-credentials";
 
 /**
  * 015 — Conector Zoom (Server-to-Server OAuth).

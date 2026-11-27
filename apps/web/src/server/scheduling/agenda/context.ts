@@ -2,8 +2,8 @@ import { eq, gte, or } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { dayLabelInTz, timeInTz } from "@/lib/time/slots";
-import { agendaEnabled } from "@/server/agenda/flag";
-import { getSettings } from "@/server/agenda/settings";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { getSettings } from "@/server/scheduling/agenda/settings";
 
 /**
  * 015 — Las citas del contacto, para el contexto de un cerebro externo

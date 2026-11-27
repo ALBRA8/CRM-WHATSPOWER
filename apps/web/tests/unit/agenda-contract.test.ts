@@ -3,9 +3,9 @@ import {
   bookingErrorResponse,
   bookingErrorStatus,
   bookingPayload,
-} from "@/server/agenda/http";
-import { BookingError } from "@/server/agenda/service";
-import { agendaDisabledResponse } from "@/server/agenda/flag";
+} from "@/server/scheduling/agenda/http";
+import { BookingError } from "@/server/scheduling/agenda/service";
+import { agendaDisabledResponse } from "@/server/scheduling/agenda/flag";
 
 /**
  * 015 — El CONTRATO observable de la agenda, fijado en un test.

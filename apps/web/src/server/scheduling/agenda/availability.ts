@@ -12,7 +12,7 @@ import {
   zonedWallClockToUtc,
   type SlotUtc,
 } from "@/lib/time/slots";
-import { getSettings, type CalendarSettings } from "@/server/agenda/settings";
+import { getSettings, type CalendarSettings } from "@/server/scheduling/agenda/settings";
 
 /**
  * 015 — Motor de disponibilidad:

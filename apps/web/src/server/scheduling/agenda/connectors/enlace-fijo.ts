@@ -1,4 +1,4 @@
-import type { AgendaConnector, MeetingResult } from "@/server/agenda/connectors/types";
+import type { AgendaConnector, MeetingResult } from "@/server/scheduling/agenda/connectors/types";
 
 /**
  * 015 — El conector soberano: la sala de siempre.

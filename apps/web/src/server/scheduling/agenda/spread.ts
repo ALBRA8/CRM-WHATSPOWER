@@ -4,7 +4,7 @@ import {
   dayLabelInTz,
   timeInTz,
 } from "@/lib/time/slots";
-import type { AvailableSlot } from "@/server/agenda/availability";
+import type { AvailableSlot } from "@/server/scheduling/agenda/availability";
 
 /**
  * 015 — Reparto de huecos entre días distintos.

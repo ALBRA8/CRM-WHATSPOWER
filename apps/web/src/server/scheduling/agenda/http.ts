@@ -1,4 +1,4 @@
-import { BookingError, type BookingResult } from "@/server/agenda/service";
+import { BookingError, type BookingResult } from "@/server/scheduling/agenda/service";
 
 /**
  * 015 — La traducción entre el dominio y HTTP, en un solo sitio.

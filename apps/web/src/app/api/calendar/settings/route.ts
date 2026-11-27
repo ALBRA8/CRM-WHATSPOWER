@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/calendar-settings";
+import * as http from "@/server/scheduling/http/calendar-settings";
 
 export const dynamic = "force-dynamic";
 

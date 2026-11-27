@@ -6,7 +6,7 @@ import { serializeFicha } from "@/server/agents/bot/ficha";
 import { findContactByIdentity } from "@/server/conversations/inbox/identity";
 import { isWindowOpen, windowRemainingMs } from "@/server/conversations/inbox/window";
 import { windowMsFor } from "@/server/channels/capabilities";
-import { citasParaContexto } from "@/server/agenda/context";
+import { citasParaContexto } from "@/server/scheduling/agenda/context";
 import { anuncioDelContacto } from "@/server/attribution/store";
 import { siguientesDelLead } from "@/server/agents/bot/stage";
 

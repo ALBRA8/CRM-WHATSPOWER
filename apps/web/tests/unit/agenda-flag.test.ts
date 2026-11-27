@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseAgendaFlag } from "@/server/agenda/flag";
+import { parseAgendaFlag } from "@/server/scheduling/agenda/flag";
 
 /**
  * 015 — La bandera de la agenda. El caso que importa es el DEFAULT: una

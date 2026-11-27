@@ -3,7 +3,7 @@ import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import type { DateRange } from "@/lib/time/calendar";
 import { addDaysISO, partsInTz, zonedWallClockToUtc } from "@/lib/time/slots";
-import { getSettings, type CalendarSettings } from "@/server/agenda/settings";
+import { getSettings, type CalendarSettings } from "@/server/scheduling/agenda/settings";
 
 /** 015 — Listado de citas para la UI, con la hora en la zona del negocio. */
 

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { GOOGLE_SCOPE, googleConnector } from "@/server/agenda/connectors/google";
-import { clearGoogleTokenCache } from "@/server/agenda/connectors/google-credentials";
+import { GOOGLE_SCOPE, googleConnector } from "@/server/scheduling/agenda/connectors/google";
+import { clearGoogleTokenCache } from "@/server/scheduling/agenda/connectors/google-credentials";
 
 /**
  * 015 / issue #50, puntos 2 y 3 — Los dos fallos del conector de Google que

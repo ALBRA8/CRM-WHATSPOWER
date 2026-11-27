@@ -3,7 +3,7 @@ import {
   citasEnContexto,
   citasParaContexto,
   type FilaCita,
-} from "@/server/agenda/context";
+} from "@/server/scheduling/agenda/context";
 
 /**
  * 015 — Las citas del contacto en el contexto de un cerebro externo
@@ -187,8 +187,8 @@ vi.mock("@/lib/db", async (importOriginal) => {
   return { ...original, getDb };
 });
 
-vi.mock("@/server/agenda/settings", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/agenda/settings")>();
+vi.mock("@/server/scheduling/agenda/settings", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/scheduling/agenda/settings")>();
   return {
     ...original,
     getSettings: vi.fn(async () => ({

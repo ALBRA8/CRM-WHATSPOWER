@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { apiError, parseBody, withAuth } from "@/lib/api";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
-import { googleConnector } from "@/server/agenda/connectors/google";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { googleConnector } from "@/server/scheduling/agenda/connectors/google";
 import {
   deleteGoogleCredentials,
   getGoogleCredentials,
   saveGoogleCredentials,
   secretLast4,
-} from "@/server/agenda/connectors/google-credentials";
+} from "@/server/scheduling/agenda/connectors/google-credentials";
 
 export const dynamic = "force-dynamic";
 

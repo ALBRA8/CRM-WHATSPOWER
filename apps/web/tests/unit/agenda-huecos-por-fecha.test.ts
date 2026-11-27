@@ -3,17 +3,17 @@ import {
   buildCandidateSlots,
   filterFreeSlots,
   type AvailableSlot,
-} from "@/server/agenda/availability";
+} from "@/server/scheduling/agenda/availability";
 import {
   DEFAULT_CALENDAR_SETTINGS,
   type CalendarSettings,
-} from "@/server/agenda/settings";
+} from "@/server/scheduling/agenda/settings";
 import {
   aLoLargoDelDia,
   armarHuecos,
   HUECOS_POR_FECHA,
   spreadByDay,
-} from "@/server/agenda/spread";
+} from "@/server/scheduling/agenda/spread";
 import type { SlotUtc } from "@/lib/time/slots";
 
 /**

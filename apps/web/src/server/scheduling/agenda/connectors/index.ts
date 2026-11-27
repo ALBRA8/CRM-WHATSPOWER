@@ -1,23 +1,23 @@
 import { type ConnectorId } from "@/lib/agenda-connectors";
-import type { CalendarSettings } from "@/server/agenda/settings";
+import type { CalendarSettings } from "@/server/scheduling/agenda/settings";
 import {
   ConnectorError,
   type AgendaConnector,
   type MeetingRequest,
   type MeetingResult,
   type TestConnectionResult,
-} from "@/server/agenda/connectors/types";
-import { enlaceFijoConnector } from "@/server/agenda/connectors/enlace-fijo";
-import { zoomConnector } from "@/server/agenda/connectors/zoom";
+} from "@/server/scheduling/agenda/connectors/types";
+import { enlaceFijoConnector } from "@/server/scheduling/agenda/connectors/enlace-fijo";
+import { zoomConnector } from "@/server/scheduling/agenda/connectors/zoom";
 import {
   getZoomCredentials,
   markZoomError,
-} from "@/server/agenda/connectors/zoom-credentials";
-import { googleConnector } from "@/server/agenda/connectors/google";
+} from "@/server/scheduling/agenda/connectors/zoom-credentials";
+import { googleConnector } from "@/server/scheduling/agenda/connectors/google";
 import {
   getGoogleCredentials,
   markGoogleError,
-} from "@/server/agenda/connectors/google-credentials";
+} from "@/server/scheduling/agenda/connectors/google-credentials";
 
 /**
  * 015 — El catálogo de conectores y la ÚNICA puerta por la que el motor habla

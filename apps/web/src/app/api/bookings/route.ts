@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/api";
-import * as http from "@/server/http/bookings";
+import * as http from "@/server/scheduling/http/bookings";
 
 export const dynamic = "force-dynamic";
 

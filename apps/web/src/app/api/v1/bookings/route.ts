@@ -1,5 +1,5 @@
 import { withApiKey } from "@/server/api-v1/handler";
-import * as h from "@/server/http/bookings";
+import * as h from "@/server/scheduling/http/bookings";
 
 export const dynamic = "force-dynamic";
 

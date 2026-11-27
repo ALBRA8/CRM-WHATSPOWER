@@ -1,7 +1,7 @@
 import { getDb, schema } from "@/lib/db";
 import { scoped } from "@/lib/db/tenant";
 import { estadoIaDe, mensajeDeEstado } from "@/lib/ai/provider";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { verifyCalendar } from "./calendar-verifiers";
 import { leerConfigDespacho, urlSaludCerebro } from "@/server/agents/brains/config";
 import { getBrainHealth } from "@/server/agents/bot/status";

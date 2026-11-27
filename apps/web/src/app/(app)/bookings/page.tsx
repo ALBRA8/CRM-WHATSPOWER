@@ -3,8 +3,8 @@ import { BookingsClient } from "@/components/bookings/bookings-client";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { clampListTo, isCalendarView, isIsoDate } from "@/lib/time/calendar";
 import { todayInTz } from "@/lib/time/slots";
-import { agendaEnabled } from "@/server/agenda/flag";
-import { getSettings } from "@/server/agenda/settings";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { getSettings } from "@/server/scheduling/agenda/settings";
 
 export const dynamic = "force-dynamic";
 

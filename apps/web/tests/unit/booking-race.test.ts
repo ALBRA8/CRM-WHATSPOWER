@@ -39,18 +39,18 @@ const createMeeting = vi.fn(async () => ({
   joinUrl: settings.meetingLink,
 }));
 
-vi.mock("@/server/agenda/settings", () => ({
+vi.mock("@/server/scheduling/agenda/settings", () => ({
   getSettings: async () => settings,
 }));
 
-vi.mock("@/server/agenda/availability", () => ({
+vi.mock("@/server/scheduling/agenda/availability", () => ({
   // El hueco se ve libre al re-validar: la otra confirmación aún no escribía.
   findSlot: async () => ({ startUtc: SLOT, endUtc: "…", label: "mié 5 ago, 09:00" }),
   computeAvailability: async () => ALTERNATIVES,
 }));
 
-vi.mock("@/server/agenda/offers", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/agenda/offers")>();
+vi.mock("@/server/scheduling/agenda/offers", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/scheduling/agenda/offers")>();
   return {
     ...original,
     getOffers: async () => [{ startUtc: SLOT, label: "mié 5 ago, 09:00" }],
@@ -59,7 +59,7 @@ vi.mock("@/server/agenda/offers", async (importOriginal) => {
   };
 });
 
-vi.mock("@/server/agenda/connectors", () => ({
+vi.mock("@/server/scheduling/agenda/connectors", () => ({
   bindConnector: async () => ({
     id: "enlace-fijo",
     createMeeting,
@@ -158,7 +158,7 @@ describe("la carrera del hueco", () => {
 
   it("un 23505 se traduce a slot_taken con alternativas frescas, sin crear la cita", async () => {
     const { createSessionBooking, BookingError } = await import(
-      "@/server/agenda/service"
+      "@/server/scheduling/agenda/service"
     );
     primeLookups();
     insertThrows = { code: "23505" };
@@ -187,7 +187,7 @@ describe("la carrera del hueco", () => {
   });
 
   it("el 23505 también se reconoce cuando el driver lo envuelve en `cause`", async () => {
-    const { createSessionBooking } = await import("@/server/agenda/service");
+    const { createSessionBooking } = await import("@/server/scheduling/agenda/service");
     primeLookups();
     insertThrows = Object.assign(new Error("insert falló"), {
       cause: { code: "23505" },
@@ -205,7 +205,7 @@ describe("la carrera del hueco", () => {
   });
 
   it("un error que NO es la carrera se propaga tal cual, sin disfrazarse de slot_taken", async () => {
-    const { createSessionBooking } = await import("@/server/agenda/service");
+    const { createSessionBooking } = await import("@/server/scheduling/agenda/service");
     primeLookups();
     insertThrows = { code: "23503", message: "foreign key" };
 
@@ -221,7 +221,7 @@ describe("la carrera del hueco", () => {
   });
 
   it("un instante que nunca se ofreció se rechaza ANTES de tocar la base", async () => {
-    const { createSessionBooking } = await import("@/server/agenda/service");
+    const { createSessionBooking } = await import("@/server/scheduling/agenda/service");
     primeLookups();
 
     const promise = createSessionBooking({

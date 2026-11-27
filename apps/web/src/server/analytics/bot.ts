@@ -8,7 +8,7 @@ import {
   type LabeledCountDto,
   type SessionsDto,
 } from "@/lib/analytics";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { median, type ResolvedPeriod } from "@/server/analytics/period";
 import { notLabContact } from "@/server/analytics/shared";
 

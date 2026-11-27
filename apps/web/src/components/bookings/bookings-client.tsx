@@ -25,7 +25,7 @@ import {
   type DateRange,
 } from "@/lib/time/calendar";
 import { addDaysISO, dayIsoInTz } from "@/lib/time/slots";
-import type { WeeklyHours } from "@/server/agenda/settings";
+import type { WeeklyHours } from "@/server/scheduling/agenda/settings";
 import { cn } from "@/lib/utils";
 import { AgendaList } from "./agenda-list";
 import { BlockDialog } from "./block-dialog";

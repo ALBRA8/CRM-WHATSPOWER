@@ -6,12 +6,12 @@ import {
   type MeetingRequest,
   type MeetingResult,
   type TestConnectionResult,
-} from "@/server/agenda/connectors/types";
+} from "@/server/scheduling/agenda/connectors/types";
 import {
   getCachedGoogleToken,
   setCachedGoogleToken,
   type GoogleCreds,
-} from "@/server/agenda/connectors/google-credentials";
+} from "@/server/scheduling/agenda/connectors/google-credentials";
 
 /**
  * 015 — Conector Google Calendar + Meet, por REST directo (sin SDK: la

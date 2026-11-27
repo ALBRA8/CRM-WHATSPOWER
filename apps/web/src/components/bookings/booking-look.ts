@@ -1,4 +1,4 @@
-import type { BookingListItem } from "@/server/agenda/queries";
+import type { BookingListItem } from "@/server/scheduling/agenda/queries";
 
 /** 215 — Cómo se ve y cómo se nombra una cita, igual en las cuatro vistas. */
 

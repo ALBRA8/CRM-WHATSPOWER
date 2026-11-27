@@ -1,8 +1,8 @@
 import { conSesion } from "@/server/http/compartido";
 import { dayIsoInTz, timeInTz, dayLabelInTz } from "@/lib/time/slots";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
-import { computeAvailability } from "@/server/agenda/availability";
-import { getSettings } from "@/server/agenda/settings";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { computeAvailability } from "@/server/scheduling/agenda/availability";
+import { getSettings } from "@/server/scheduling/agenda/settings";
 
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;

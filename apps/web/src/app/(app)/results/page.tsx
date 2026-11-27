@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { getSessionOrNull } from "@/lib/auth/session";
 import { todayInTz } from "@/lib/time/slots";
 import { getBranding } from "@/server/branding";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { businessTimezone } from "@/server/analytics/period";
 import { ResultsClient } from "@/components/results/results-client";
 

@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 import { CHANNEL_ORDER, type Channel } from "@/lib/channels";
 import { getDb } from "@/lib/db";
 import { APP_VERSION, resolveCommit } from "@/lib/version";
-import { parseAgendaFlag } from "@/server/agenda/flag";
+import { parseAgendaFlag } from "@/server/scheduling/agenda/flag";
 import { parseAtribucionFlag } from "@/server/attribution/flag";
 import { parseChannels } from "@/server/channels/enabled";
 import { mediaDirStatus } from "@/server/media-dir";

@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import {
   buildCandidateSlots,
   filterFreeSlots,
-} from "@/server/agenda/availability";
+} from "@/server/scheduling/agenda/availability";
 import {
   DEFAULT_CALENDAR_SETTINGS,
   normalizeWeeklyHours,
   type CalendarSettings,
-} from "@/server/agenda/settings";
-import { daysWithAgenda, spreadByDay } from "@/server/agenda/spread";
+} from "@/server/scheduling/agenda/settings";
+import { daysWithAgenda, spreadByDay } from "@/server/scheduling/agenda/spread";
 
 /** 015 — El motor: horario − ocupado, con aviso mínimo. Sin BD ni reloj real. */
 

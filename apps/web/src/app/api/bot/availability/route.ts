@@ -3,15 +3,15 @@ import { getDb, schema } from "@/lib/db";
 import { apiError } from "@/lib/api";
 import { scoped } from "@/lib/db/tenant";
 import { requireBotKey, resolveInstanceOrg } from "@/server/agents/bot/auth";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { addDaysISO, todayInTz } from "@/lib/time/slots";
 import {
   buildCandidateSlots,
   computeAvailability,
-} from "@/server/agenda/availability";
-import { getSettings } from "@/server/agenda/settings";
-import { armarHuecos, daysWithAgenda } from "@/server/agenda/spread";
-import { replaceOffers } from "@/server/agenda/offers";
+} from "@/server/scheduling/agenda/availability";
+import { getSettings } from "@/server/scheduling/agenda/settings";
+import { armarHuecos, daysWithAgenda } from "@/server/scheduling/agenda/spread";
+import { replaceOffers } from "@/server/scheduling/agenda/offers";
 
 export const dynamic = "force-dynamic";
 

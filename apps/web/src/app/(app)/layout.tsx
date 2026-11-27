@@ -7,7 +7,7 @@ import { getBranding } from "@/server/branding";
 import { AppShell } from "@/components/app-shell";
 import { SessionKeepalive } from "@/components/session-keepalive";
 import { resolveCommit } from "@/lib/version";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { enabledChannels } from "@/server/channels/enabled";
 import { navKicker } from "@/lib/channels";
 import { avisoIaDe } from "@/server/agents/ai/aviso";

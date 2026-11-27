@@ -10,7 +10,7 @@ import {
   rolDe,
   type ClaveHerramienta,
 } from "@/lib/agent-roles";
-import { agendaEnabled } from "@/server/agenda/flag";
+import { agendaEnabled } from "@/server/scheduling/agenda/flag";
 import { leerConfigDespacho, urlSaludCerebro } from "@/server/agents/brains/config";
 import { getBrainHealth } from "@/server/agents/bot/status";
 import { HORAS_REACTIVACION_MAX } from "@/server/conversations/inbox/reactivacion";

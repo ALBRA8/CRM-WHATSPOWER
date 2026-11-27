@@ -3,7 +3,7 @@ import {
   CABECERA_HUECOS,
   findOffered,
   mapaDeHuecosParaModelo,
-} from "@/server/agenda/offers";
+} from "@/server/scheduling/agenda/offers";
 
 /**
  * 015 / issue #50 — Los huecos que el modelo puede usar de verdad.

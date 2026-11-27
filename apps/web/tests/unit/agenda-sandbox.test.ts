@@ -45,13 +45,13 @@ const bindConnector = vi.fn(async () => ({
   testConnection: async () => ({ ok: true }),
 }));
 
-vi.mock("@/server/agenda/settings", () => ({ getSettings: async () => settings }));
-vi.mock("@/server/agenda/availability", () => ({
+vi.mock("@/server/scheduling/agenda/settings", () => ({ getSettings: async () => settings }));
+vi.mock("@/server/scheduling/agenda/availability", () => ({
   findSlot: async () => ({ startUtc: SLOT, endUtc: "…", label: "mié 5 ago, 09:00" }),
   computeAvailability: async () => [],
 }));
-vi.mock("@/server/agenda/offers", async (importOriginal) => {
-  const original = await importOriginal<typeof import("@/server/agenda/offers")>();
+vi.mock("@/server/scheduling/agenda/offers", async (importOriginal) => {
+  const original = await importOriginal<typeof import("@/server/scheduling/agenda/offers")>();
   return {
     ...original,
     getOffers: async () => [{ startUtc: SLOT, label: "mié 5 ago, 09:00" }],
@@ -59,7 +59,7 @@ vi.mock("@/server/agenda/offers", async (importOriginal) => {
     clearOffers: async () => {},
   };
 });
-vi.mock("@/server/agenda/connectors", () => ({
+vi.mock("@/server/scheduling/agenda/connectors", () => ({
   bindConnector,
   markConnectorAuthError: async () => {},
 }));
@@ -139,7 +139,7 @@ describe("una cita del Laboratorio jamás llega al proveedor", () => {
   });
 
   it("al CREAR: la cita se registra como de prueba y no se crea reunión", async () => {
-    const { createSessionBooking } = await import("@/server/agenda/service");
+    const { createSessionBooking } = await import("@/server/scheduling/agenda/service");
     selectRows.push([{ contactId: "ct_1", isTest: true }]); // la conversación
     selectRows.push([{ name: "Persona simulada" }]); // el contacto
     selectRows.push([]); // sin lead
@@ -160,7 +160,7 @@ describe("una cita del Laboratorio jamás llega al proveedor", () => {
   });
 
   it("al REPROGRAMAR: no se mueve nada en el proveedor", async () => {
-    const { rescheduleBooking } = await import("@/server/agenda/service");
+    const { rescheduleBooking } = await import("@/server/scheduling/agenda/service");
     selectRows.push([CITA_DE_PRUEBA]);
 
     await rescheduleBooking({
@@ -174,7 +174,7 @@ describe("una cita del Laboratorio jamás llega al proveedor", () => {
   });
 
   it("al CANCELAR: no se borra nada en el proveedor", async () => {
-    const { cancelBooking } = await import("@/server/agenda/service");
+    const { cancelBooking } = await import("@/server/scheduling/agenda/service");
     selectRows.push([CITA_DE_PRUEBA]);
 
     await cancelBooking({ organizationId: "org_1", bookingId: "bk_test" });
@@ -184,7 +184,7 @@ describe("una cita del Laboratorio jamás llega al proveedor", () => {
   });
 
   it("una cita REAL sí llega al proveedor (el guardarraíl no apaga todo)", async () => {
-    const { createSessionBooking } = await import("@/server/agenda/service");
+    const { createSessionBooking } = await import("@/server/scheduling/agenda/service");
     selectRows.push([{ contactId: "ct_1", isTest: false }]);
     selectRows.push([{ name: "Cliente real" }]);
     selectRows.push([]);

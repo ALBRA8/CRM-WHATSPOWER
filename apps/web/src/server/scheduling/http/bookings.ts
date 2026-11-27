@@ -2,11 +2,11 @@ import { conSesion } from "@/server/http/compartido";
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { parseRangeQuery } from "@/lib/time/calendar";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
-import { listBookings, listBookingsInRange } from "@/server/agenda/queries";
-import { getSettings } from "@/server/agenda/settings";
-import { createBlock, createSessionBooking } from "@/server/agenda/service";
-import { bookingErrorResponse, bookingPayload } from "@/server/agenda/http";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
+import { listBookings, listBookingsInRange } from "@/server/scheduling/agenda/queries";
+import { getSettings } from "@/server/scheduling/agenda/settings";
+import { createBlock, createSessionBooking } from "@/server/scheduling/agenda/service";
+import { bookingErrorResponse, bookingPayload } from "@/server/scheduling/agenda/http";
 
 
 /**

@@ -2,12 +2,12 @@ import { conSesion } from "@/server/http/compartido";
 import { z } from "zod";
 import { apiError, parseBody } from "@/lib/api";
 import { CONNECTOR_ORDER } from "@/lib/agenda-connectors";
-import { agendaDisabledResponse, agendaEnabled } from "@/server/agenda/flag";
+import { agendaDisabledResponse, agendaEnabled } from "@/server/scheduling/agenda/flag";
 import {
   CalendarSettingsError,
   getSettings,
   upsertSettings,
-} from "@/server/agenda/settings";
+} from "@/server/scheduling/agenda/settings";
 
 
 /**
