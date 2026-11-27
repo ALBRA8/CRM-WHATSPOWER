@@ -209,6 +209,10 @@ puerto 3261 ocupado por un cerebro falso huérfano.
   checks de la CI del cerebro corren contra este mismo árbol: la suite
   local ya dio **821/821** sin `llm_real` (los flujos de CI que exigen
   credenciales externas son los que decidan en el PR).
+- **CI del PR #77: 5/5 checks verdes** (Python 3.10 / 3.11 / 3.12,
+  Windows compatibility, dashboard build+secret scan) y **merge completado**
+  (squash): `main` del cerebro queda en `7f6e908` — verificado con
+  `git ls-remote`. Ambos repositorios contienen S4.4 en su rama principal.
 - Criterio de finalización: R-AG-1 y T9 **resueltos con pruebas reales**,
   integración satisfactoria (1.819 CRM + 821 cerebro + 26/26 RLS + 269/302
   E2E), documentación entregada. Lo no verificable está enumerado exactamente
