@@ -1,7 +1,7 @@
 # CONTEXTO CRM — INDEX
 
 **Estado:** FASE 4 COMPLETADA (S4.1-S4.4) / F5 ENTREGADA / CIERRE OPERATIVO POST-F5 ENTREGADO (informe para aprobación expresa; sin activación pública)
-**Última actualización:** 2026-11-28 (cierre post-F5: R11 11/11 primera ejecución real, controles del puente frescos, contabilidad honesta de checks — ver SESSION_2026-11-28_CIERRE_POSTF5.md y ENTREGA_CIERRE_POSTF5.md)
+**Última actualización:** 2026-11-28 (rebrand completo a «CRM WhatsPower», decisión D-030 — ver SESSION_2026-11-28-c_REBRAND_CRM_WHATSPOWER.md; cierre post-F5 en SESSION_2026-11-28_CIERRE_POSTF5.md y ENTREGA_CIERRE_POSTF5.md)
 
 | Área | Archivo | Estado | Propósito |
 |---|---|---|---|
@@ -12,7 +12,7 @@
 | Master | `00_MASTER/ROADMAP_CONSTRUCCION.md` | APROBADO (F3) | fases F0-F12 con sprints y criterios de aceptación |
 | Master | `00_MASTER/MATRIZ_PARIDAD_VOCERO.md` | VIVA | 156 capacidades: conservadas / adaptadas / pendientes |
 | Master | `00_MASTER/GLOSSARY.md` | V1 | términos del proyecto |
-| Decisions | `01_DECISIONS/DECISION_LOG.md` | POPULATED (D-001..D-029) | decisiones arquitectónicas, de integración y de proceso |
+| Decisions | `01_DECISIONS/DECISION_LOG.md` | POPULATED (D-001..D-030) | decisiones arquitectónicas, de integración y de proceso |
 | Processes | `02_PROCESSES/PROCESS_INDEX.md` | POPULATED | procesos de trabajo: aceptación, reversión, paridad, licencias |
 | Findings | `03_FINDINGS/FINDINGS_INDEX.md` | POPULATED (F-001..F-010) | hallazgos de auditoría y construcción con evidencia |
 | Audits | `04_AUDITS/AUDIT_INDEX.md` | POPULATED | auditorías de los 6 repos + auditoría del monorepo |
@@ -28,8 +28,9 @@
 
 - **F0-F3 COMPLETADOS (2026-11-26):** 8 documentos rectores producidos y aprobados; auditoría real de los 6 repositorios; matriz de paridad de 156 capacidades; arquitectura maestra; modelo multi-tenant con batería T1-T15; contratos de integración; roadmap F0-F12; registro de 40+ riesgos.
 - **FASE 4 — etapa 1 (2026-11-27):** monorepo pnpm creado en este repositorio; VOCERO 2.12.0 migrado íntegro a `apps/web` (commit `aa90a81`, sin cambios de código); `packages/contracts` (contratos versionados + catálogo de errores con prueba de vigía), `packages/tenant` (contexto fail-closed), `services/agent-gateway` (cliente firmado del despacho HITL), `services/flows` y `services/campaigns` (esqueletos de contrato), `infra/` (PG16 + RLS + audit_log); verificación real de typecheck/lint/test/build — resultados en `05_TESTS/TEST_INDEX.md` y `08_SESSIONS/SESSION_2026-11-27_FASE4_ETAPA1.md`.
-- **F5 (2026-11-28):** preparación y validación de producción entregada sin exposición pública: rol runtime `vestro_runtime` verificado 24/24 (D-025), backplane SSE LISTEN/NOTIFY 6/6 (D-024), backups con restauración verificada 5/5 y persistencia/crash PASS (D-026), checklist del puente (D-028), secretos y observabilidad — `ENTREGA_F5.md`, commits `52372f6`/`ff691d9`.
+- **F5 (2026-11-28):** preparación y validación de producción entregada sin exposición pública: rol runtime `whatspower_runtime` verificado 24/24 (D-025), backplane SSE LISTEN/NOTIFY 6/6 (D-024), backups con restauración verificada 5/5 y persistencia/crash PASS (D-026), checklist del puente (D-028), secretos y observabilidad — `ENTREGA_F5.md`, commits `52372f6`/`ff691d9`.
 - **CIERRE POST-F5 (2026-11-28):** validación ampliada conservando los estados publicados (`ff691d9` CRM / `7f6e908` cerebro): R11 primera ejecución real 11/11 (ráfaga 700 sin OOM), controles del puente frescos (runtime 24/24, SSE 6/6, respaldo→restauración 5/5, persistencia/crash PASS, adaptador↔cerebro real 19/19), contabilidad honesta 281 checks con evidencia individual / 0 FAIL — `ENTREGA_CIERRE_POSTF5.md`, commit `dc7d153`.
+- **REBRAND (2026-11-28):** identidad de marca única **CRM WhatsPower** (D-030): renombrado completo en 383 archivos + 4 rutas (`git mv`; paquetes `@whatspower/*`, env `CRM_WHATSPOWER_VERSION`/`WHATSPOWER_API_KEY`, cabeceras `x-whatspower-*`, MCP `configurar_whatspower`, imagen `ghcr.io/albra8/crm-whatspower`, specs `001-whatspower-core`, plugin `plugin/whatspower`); sin reescritura de historial; cerebro `7f6e908` intacto.
 
 ## Próximo hito
 

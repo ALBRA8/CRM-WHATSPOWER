@@ -36,7 +36,7 @@ propietario** (mandato F5 §7).
 | C2 | `BOT_API_KEY`/secreto del gateway presentes (fail-closed sin ellos: no envía nada) | arranque del gateway con secreto; intento sin secreto no despacha | ☐ |
 | C3 | Interruptor del Agente por organización apagado por defecto hasta autorización | estado del interruptor en BD; el despacho no corre sin encendido explícito | ☐ |
 | C4 | Cola HITL visible: `GET /api/v1/approvals/pending` operativa y con dueño del cierre | prueba real 202 + cola (S4.4); runbook de aprobación/rechazo | ☐ |
-| C5 | `DATABASE_URL_RUNTIME` apuntando a `vestro_runtime` (infra/sql/005) — o decisión documentada de quedarse en owner con la primera valla `scoped()` | `/api/health` → `dbRole:"runtime"`; verificador R1-R7 verde | ☐ |
+| C5 | `DATABASE_URL_RUNTIME` apuntando a `whatspower_runtime` (infra/sql/005) — o decisión documentada de quedarse en owner con la primera valla `scoped()` | `/api/health` → `dbRole:"runtime"`; verificador R1-R7 verde | ☐ |
 | C6 | Backplane SSE según topología: 1 instancia → `SSE_BACKPLANE=off`; N instancias → `postgres` | `/api/health` → `sse.mode` correcto; prueba de evento cruzado | ☐ |
 | C7 | Webhook por URL firmada por organización; firewall de canales oficial activo | S4.3/S4.4 webhook us5; ninguna ruta pública sin firma | ☐ |
 

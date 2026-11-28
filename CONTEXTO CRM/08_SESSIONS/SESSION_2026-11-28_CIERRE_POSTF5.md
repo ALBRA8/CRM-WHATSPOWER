@@ -21,7 +21,7 @@ del puente; entregar informe; **sin despliegue público**; push al terminar.
    sobrevivió al reciclado con **recuperación real por replay de WAL** (log:
    «database system was interrupted… automatic recovery» → «ready to accept
    connections», todas las BD F5 intactas).
-2. **BD E2E limpia** `vestro_036_e2e` (34 migraciones + infra/sql 001-005;
+2. **BD E2E limpia** `whatspower_036_e2e` (34 migraciones + infra/sql 001-005;
    44 tablas; RLS FORCE 39/39) y `.env.e2e-036` estándar 036 con fixtures
    etiquetados (gitignored).
 3. **Hallazgo de entorno (no del producto):** el sandbox inyecta

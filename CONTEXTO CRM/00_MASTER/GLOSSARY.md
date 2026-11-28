@@ -1,14 +1,14 @@
-# GLOSSARY — Vestro / CRM WHATSPOWER
+# GLOSSARY — CRM WhatsPower
 
 | Término | Definición en este proyecto |
 |---|---|
-| **Vestro** | Nombre de trabajo del producto CRM SaaS (D-012, provisional hasta confirmación del propietario). |
+| **CRM WhatsPower** | Nombre oficial del producto CRM SaaS, confirmado por el propietario (D-030). Es la única identidad válida del producto: ningún nombre de trabajo anterior debe usarse en código, docs ni interfaz. |
 | **Tenant / Organización** | El inquilino de la plataforma. Toda entidad de negocio pertenece a una `organization`; no existen datos globales de negocio sin dueño. |
 | **RLS** | Row-Level Security de PostgreSQL: política a nivel de fila que filtra por `organization_id = current_setting('app.current_org', true)`. Fail-closed: sin contexto fijado devuelve cero filas. |
 | **Doble valla** | Aislamiento en dos capas: RLS en la BD + `scoped()` en la aplicación. Si una capa falla, la otra bloquea. |
 | **Fail-closed** | Si no puede determinarse el contexto/credencial/salvaguarda, la operación NO se ejecuta (patrón heredado del ecosistema). |
 | **VOCERO** | CRM open source v2.12.0 (MIT, Kevin Belier): base funcional completa conservada en `apps/web`. 28 páginas, 142 rutas API, 43 tablas, 65 specs. |
-| **AGENTE-GENERAL** | Sistema Python/FastAPI independiente: único cerebro de razonamiento, memoria, herramientas, MCP, workflows, firewall, HITL y observabilidad. No se duplica dentro de Vestro. |
+| **AGENTE-GENERAL** | Sistema Python/FastAPI independiente: único cerebro de razonamiento, memoria, herramientas, MCP, workflows, firewall, HITL y observabilidad. No se duplica dentro de WhatsPower. |
 | **Agente lógico** | Especialización (ventas, atención, prospección…) = configuración por organización del perfil del agente; NO un motor cognitivo separado. Identidad: `org:<organizationId>#<agenteLogico>`. |
 | **Despacho estándar** | Evento `conversation.turn.received` que el CRM envía al agente tras coalescing de la ráfaga del cliente, firmado, con 3 reintentos y red de seguridad hacia humanos. |
 | **Coalescing** | Espera del fin de ráfaga (`AGENT_COALESCE_MS`) antes de despachar al agente. |

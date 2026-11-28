@@ -335,7 +335,7 @@ El inventario completo de VOCERO (156 capacidades inventariadas en 16 dominios) 
 
 ## Nota de verificación S4.2 (2026-11-27)
 
-Tras el rebrand VOCERO→Vestro y la reorganización de `src/server/*` en los 14
+Tras el rebrand VOCERO→WhatsPower y la reorganización de `src/server/*` en los 14
 dominios (sesión `08_SESSIONS/SESSION_2026-11-27_S4.2_DOMINIOS.md`), la matriz
 **no registra ninguna baja ni cambio de estado de capacidad**: 156/156
 capacidades conservadas con su estado anterior (67 conservadas, 69 adaptación

@@ -1,11 +1,11 @@
-# DECISION LOG — CRM WHATSPOWER (Vestro)
+# DECISION LOG — CRM WHATSPOWER (WhatsPower)
 
 Formato: D-XXX · Estado · Decisión · Motivo/Evidencia. Las decisiones aquí no
 se revierten sin nueva entrada que documente motivo e impacto.
 
 ## D-001 — Producto único SaaS sobre la base funcional de VOCERO
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** construir UN producto CRM SaaS (Vestro) tomando VOCERO como base funcional completa; no una suma de seis repositorios ni un launcher de herramientas.
+- **Decisión:** construir UN producto CRM SaaS (WhatsPower) tomando VOCERO como base funcional completa; no una suma de seis repositorios ni un launcher de herramientas.
 - **Motivo:** el mandato exige un SaaS empresarial completo, no una colección de módulos desconectados.
 
 ## D-002 — Conservación total de VOCERO (156 capacidades)
@@ -15,7 +15,7 @@ se revierten sin nueva entrada que documente motivo e impacto.
 
 ## D-003 — AGENTE-GENERAL único cerebro, independiente
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** razonamiento, memoria, herramientas, skills, MCP, workflows, firewall, HITL y observabilidad viven SOLO en AGENTE-GENERAL; Vestro se conecta por contratos y adaptadores versionados. Las especializaciones son configuración por organización, no motores separados.
+- **Decisión:** razonamiento, memoria, herramientas, skills, MCP, workflows, firewall, HITL y observabilidad viven SOLO en AGENTE-GENERAL; WhatsPower se conecta por contratos y adaptadores versionados. Las especializaciones son configuración por organización, no motores separados.
 - **Motivo:** prohibición de crear un segundo agente que compita.
 
 ## D-004 — Stack base: el de VOCERO
@@ -25,7 +25,7 @@ se revierten sin nueva entrada que documente motivo e impacto.
 
 ## D-005 — Monorepo pnpm con límites de módulos
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** workspace pnpm: `apps/web` (núcleo), `packages/contracts` (contratos versionados), `packages/tenant` (contexto), `services/agent-gateway|flows|campaigns` (satélites), `infra/` (BD, RLS). Dependencias entre paquetes solo vía `@vestro/*`.
+- **Decisión:** workspace pnpm: `apps/web` (núcleo), `packages/contracts` (contratos versionados), `packages/tenant` (contexto), `services/agent-gateway|flows|campaigns` (satélites), `infra/` (BD, RLS). Dependencias entre paquetes solo vía `@whatspower/*`.
 - **Motivo:** separación de responsabilidades exigida por la instrucción maestra §3.
 
 ## D-006 — Multi-tenant: PostgreSQL compartido + RLS + doble valla
@@ -58,9 +58,9 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** perfiles sectoriales copiados a `packages/presets` con atribución; instalador/plantillas se reutilizan en F8.
 - **Motivo:** MIT permite reuso con licencia conservada.
 
-## D-012 — Marca provisional «Vestro»
+## D-012 — Marca provisional «WhatsPower»
 - **Estado:** PROVISIONAL.
-- **Decisión:** nombre de trabajo Vestro; paleta base #0B2447 + tipografía Inter/Archivo (OFL) según arquitectura maestra. Confirmación final pendiente del propietario; no bloquea construcción.
+- **Decisión:** nombre de trabajo WhatsPower; paleta base #0B2447 + tipografía Inter/Archivo (OFL) según arquitectura maestra. Confirmación final pendiente del propietario; no bloquea construcción.
 - **Impacto:** cambio de marca afectaría solo tokens de UI y naming comercial, no contratos.
 
 ## D-013 — Contratos versionados y catálogo único de errores
@@ -78,9 +78,9 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** `packages/contracts` implementa con Zod: catálogo de errores, contexto de tenant, despacho, bot API v1, API v1, flujos, campañas, agenda y eventos; incluye prueba de vigía que congela los códigos de error (D-013).
 - **Evidencia:** `packages/contracts`, resultados en `05_TESTS/TEST_INDEX.md`.
 
-## D-016 — Rebrand VOCERO → Vestro
+## D-016 — Rebrand VOCERO → WhatsPower
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** se renombró la marca del producto en toda su superficie (UI, docs, specs, fixtures, infra, env vars `VESTRO_*`, imagen del cerebro en el namespace ALBRA8); paquete `vocero-crm` → `@vestro/web`; README y CHANGELOG reescritos.
+- **Decisión:** se renombró la marca del producto en toda su superficie (UI, docs, specs, fixtures, infra, env vars `WHATSPOWER_*`, imagen del cerebro en el namespace ALBRA8); paquete `vocero-crm` → `@whatspower/web`; README y CHANGELOG reescritos.
 - **Motivo:** identidad propia del producto comercial; la base funcional y el comportamiento quedan intactos (misma suite verde, mismas rutas).
 - **Evidencia:** sesión S4.2 §2.2 (commit `c370cc4`); suite 1.801 verde; 142 rutas intactas (diff vacío vs baseline).
 
@@ -125,13 +125,13 @@ se revierten sin nueva entrada que documente motivo e impacto.
 
 ## D-024 — Backplane SSE vía LISTEN/NOTIFY de la misma PostgreSQL (F5, cierra A1)
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** con `SSE_BACKPLANE=postgres` el bus de eventos de bandeja atraviesa instancias usando LISTEN/NOTIFY de la MISMA base de datos (canal `vestro_sse`, conexión dedicada por proceso, reconexión con reintentos exponenciales). `publish()` en modo backplane NO emite localmente: el propio publicador recibe su evento por LISTEN y cada instancia entrega cada evento exactamente una vez. Payload ≤7900 bytes en claro; mayor → gzip+base64 automático; si aún excede, reparto local de respaldo + contador `droppedOversize` (el cliente hace catch-up con `since=`, contrato sse.md). `off` (default) conserva el EventEmitter in-process de S3/S4 byte-a-byte. Estado visible en `/api/health` (`sse.*`).
+- **Decisión:** con `SSE_BACKPLANE=postgres` el bus de eventos de bandeja atraviesa instancias usando LISTEN/NOTIFY de la MISMA base de datos (canal `whatspower_sse`, conexión dedicada por proceso, reconexión con reintentos exponenciales). `publish()` en modo backplane NO emite localmente: el propio publicador recibe su evento por LISTEN y cada instancia entrega cada evento exactamente una vez. Payload ≤7900 bytes en claro; mayor → gzip+base64 automático; si aún excede, reparto local de respaldo + contador `droppedOversize` (el cliente hace catch-up con `since=`, contrato sse.md). `off` (default) conserva el EventEmitter in-process de S3/S4 byte-a-byte. Estado visible en `/api/health` (`sse.*`).
 - **Motivo:** riesgo A1 heredado (mono-instancia) era bloqueador de producción multi-replica; la Constitución prohíbe servicios nuevos de cola, y la propia BD del CRM ya es el punto de encuentro natural entre instancias.
 - **Evidencia:** `apps/web/tests/unit/sse-backplane.test.ts` 6/6 contra PostgreSQL 16.16 real (pg_notify de OTRA instancia llega al suscriptor local; exactly-once; compresión >7900 bytes íntegra; filtro por org) — F5.
 
-## D-025 — Rol LOGIN de runtime `vestro_runtime` (F5, operativo sobre el riesgo de S4.4 §7.2)
+## D-025 — Rol LOGIN de runtime `whatspower_runtime` (F5, operativo sobre el riesgo de S4.4 §7.2)
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** `infra/sql/005_runtime_login.sql` crea el rol LOGIN `vestro_runtime`, miembro del grupo `app_runtime` (DML de 004), con `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS`. La app conecta con `DATABASE_URL_RUNTIME` si el despliegue la define (`apps/web/src/lib/db/index.ts`); sin ella usa `DATABASE_URL` como siempre. Verificación real: `apps/web/scripts/verificar-rol-runtime.mjs` 24/24 (solo DML+secuencias; DDL prohibido; RLS muerde sin contexto/cruzado; DML en su org; audit append-only; app operativa). El corte completo del HTTP al rol runtime exige propagar `app.current_org` por transacción en el pool (MODELO_MULTI_TENANT §5.3) — trabajo operativo declarado, no hecho en F5.
+- **Decisión:** `infra/sql/005_runtime_login.sql` crea el rol LOGIN `whatspower_runtime`, miembro del grupo `app_runtime` (DML de 004), con `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS`. La app conecta con `DATABASE_URL_RUNTIME` si el despliegue la define (`apps/web/src/lib/db/index.ts`); sin ella usa `DATABASE_URL` como siempre. Verificación real: `apps/web/scripts/verificar-rol-runtime.mjs` 24/24 (solo DML+secuencias; DDL prohibido; RLS muerde sin contexto/cruzado; DML en su org; audit append-only; app operativa). El corte completo del HTTP al rol runtime exige propagar `app.current_org` por transacción en el pool (MODELO_MULTI_TENANT §5.3) — trabajo operativo declarado, no hecho en F5.
 - **Motivo:** el runtime nunca debe ser dueño de los objetos; S4.4 dejó el cambio «como trabajo operativo de F5».
 - **Evidencia:** batería multi-tenant 26/26 + verificador R1-R7 contra PostgreSQL real; `/api/health` reporta `dbRole:"owner"|"runtime"` según el despliegue.
 
@@ -158,3 +158,10 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** los informes de E2E usan el total EN EJECUCIÓN con evidencia individual por check; el guion 036 tiene 301 puntos `ok()` (302 contando la definición), pero el total real es dinámico (bucles que emiten por iteración y ramas por banderas). «302/302» solo se declara con UNA corrida continua completa en host ≥8 GB (checklist D6). Estado publicado: 270 (F5, corrida B) + 11 (R11, primera ejecución real) = **281 checks con evidencia individual, 0 FAIL acumulado**.
 - **Motivo:** no declarar aprobado lo no ejecutado; presentar un total fijo de un total dinámico induce a error de lectura.
 - **Evidencia:** `ENTREGA_CIERRE_POSTF5.md` §contabilidad; `scripts/e2e-r11-postf5.mjs` 11/11; `05_TESTS/TEST_INDEX.md` §CIERRE POST-F5.
+
+## D-030 — Identidad de marca única: CRM WhatsPower
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** renombrado completo de la marca del producto a **CRM WhatsPower** en toda la superficie del repositorio (383 archivos + renombres de ruta vía `git mv`): UI (marca por defecto `WhatsPower`, temas, favicon, `sw.js`), paquetes pnpm (raíz `crm-whatspower`, scope `@whatspower/*` y lockfile), variables de entorno (`WHATSPOWER_API_KEY`, `CRM_WHATSPOWER_VERSION`), cabeceras del contrato CRM del puente (`x-whatspower-signature`, `x-whatspower-dispatch-id`, `x-whatspower-organization`, `x-whatspower-event`, arnés `cerebro-falso` y E2E incluidos), MCP (servidor `crm-whatspower`, herramienta `configurar_whatspower`, realm `whatspower`), infra (imagen `ghcr.io/albra8/crm-whatspower` — se normaliza el typo heredado `crm-whatpower` —, DB/volúmenes `crm-whatspower-db`/`whatspower_*`, bucket `whatspower`), specs (`001-whatspower-core`), plugin Claude (`plugin/whatspower` + skill `configurar-whatspower`) y toda la documentación (README, ENTREGA, specs, CONTEXTO CRM). Correspondencia aplicada en todas las variantes de caja y composición del nombre anterior: identificadores y slugs en minúscula (`whatspower`, `crm-whatspower`, `whatspower.app`, `crm-whatspower-db`, `@whatspower/*`, correo E2E `@whatspower.test`), marca en CamelCase (`WhatsPower`) y constantes/env en MAYÚSCULAS (`WHATSPOWER_API_KEY`, `CRM_WHATSPOWER_VERSION`).
+- **Motivo:** orden del propietario (2026-11-28): el proyecto se llama CRM WhatsPower y el nombre anterior ya no existe; una sola identidad evita enredos y confusiones entre los repositorios del ecosistema.
+- **No cambia:** el protocolo del cerebro real (AGENTE-GENERAL usa `x-albra-metadata`; las cabeceras renombradas son del contrato CRM-side, actualizadas junto con su arnés y sus E2E), los contratos funcionales, las rutas de negocio, los estados publicados (`ff691d9` CRM / `7f6e908` cerebro) ni el historial git (sin rewrite; renombres con `git mv`). El trazo visual de marca se conserva (el nombre es lo que cambia; `isWhatsPowerName` compara «whatspower»).
+- **Evidencia:** verificación del nombre anterior: 0 coincidencias en el árbol rastreado post-renombrado; los `.json` rastreados reparsean (incl. `openapi.json` de docs y api-v1); sesión `08_SESSIONS/SESSION_2026-11-28-c_REBRAND_CRM_WHATSPOWER.md`.

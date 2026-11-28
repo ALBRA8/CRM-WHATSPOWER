@@ -8,7 +8,7 @@
 | A-004 | WHATSPOWER | Motor de flujos: 12 nodos, locks, idempotencia, puentes HMAC, MIT | COMPLETADA (2026-11-26) | ídem |
 | A-005 | WHATSPOWER-ULTRA | Motor de campañas: locks JIT, supresión, pacing, anti-replay; sin LICENSE | COMPLETADA (2026-11-26) | ídem |
 | A-006 | AGENTE-GENERAL (albra-seed) | Cerebro: FastAPI, memoria, skills, MCP, HITL, firewall; sin org_id nativo | COMPLETADA (2026-11-26) | ídem |
-| A-007 | Monorepo Vestro — etapa 1 | Estructura, contratos, tenant, servicios, infra, verificación typecheck/lint/test/build | COMPLETADA (2026-11-27) | `08_SESSIONS/SESSION_2026-11-27_FASE4_ETAPA1.md` + `05_TESTS/TEST_INDEX.md` |
+| A-007 | Monorepo WhatsPower — etapa 1 | Estructura, contratos, tenant, servicios, infra, verificación typecheck/lint/test/build | COMPLETADA (2026-11-27) | `08_SESSIONS/SESSION_2026-11-27_FASE4_ETAPA1.md` + `05_TESTS/TEST_INDEX.md` |
 
 ## Auditorías pendientes
 

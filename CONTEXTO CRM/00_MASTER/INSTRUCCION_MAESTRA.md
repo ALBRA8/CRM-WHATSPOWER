@@ -1,4 +1,4 @@
-# INSTRUCCIÓN DE CONSTRUCCIÓN — CRM WHATSPOWER (Vestro)
+# INSTRUCCIÓN DE CONSTRUCCIÓN — CRM WHATSPOWER (WhatsPower)
 
 **Estado:** VIGENTE — mandato del propietario del proyecto.
 **Registrada:** 2026-11-27.
@@ -8,7 +8,7 @@ código puede contradecirla sin documentar el motivo y presentar el impacto.
 ## Inicio de Fase 4: Monorepo, modularización e integración
 
 A partir de los documentos de auditoría y arquitectura de las fases anteriores,
-se inicia la Fase 4 del proyecto Vestro.
+se inicia la Fase 4 del proyecto WhatsPower.
 
 **Objetivo:** comenzar la construcción de una plataforma CRM SaaS modular,
 comercializable y preparada para trabajar con AGENTE-GENERAL como su único
@@ -44,9 +44,9 @@ La matriz de paridad debe mantenerse actualizada durante toda la construcción.
 
 ### 3. Arquitectura del producto
 
-Construye Vestro como un monorepo modular con responsabilidades claramente separadas.
+Construye WhatsPower como un monorepo modular con responsabilidades claramente separadas.
 
-**VESTRO — CRM y entorno empresarial.** Debe gestionar: contactos y empresas;
+**WHATSPOWER — CRM y entorno empresarial.** Debe gestionar: contactos y empresas;
 conversaciones y bandeja omnicanal; WhatsApp y demás canales; leads, clientes y
 oportunidades; embudos y pipelines comerciales; cotizaciones y seguimiento;
 agenda y calendario; tareas y actividades; automatizaciones y constructor
@@ -59,7 +59,7 @@ Es responsable de: razonamiento y toma de decisiones; memoria; herramientas y
 ejecución; skills y plugins; MCP; workflows y scheduler; firewall y seguridad;
 aprobaciones HITL; observabilidad; políticas de ejecución.
 
-No dupliques estas responsabilidades dentro de Vestro. Conéctalo mediante
+No dupliques estas responsabilidades dentro de WhatsPower. Conéctalo mediante
 contratos y adaptadores versionados.
 
 ### 4. Integración de los demás proyectos
@@ -143,6 +143,6 @@ modificados y creados.
 
 **IMPORTANTE:** en esta primera etapa prioriza establecer una arquitectura
 correcta y preservar el comportamiento existente. No intentes construir todo
-Vestro de una sola vez. Primero deja una base sólida, comprobable y preparada
+WhatsPower de una sola vez. Primero deja una base sólida, comprobable y preparada
 para crecer. El resultado debe ser un SaaS empresarial completo, no un
 prototipo visual ni una colección de módulos desconectados.

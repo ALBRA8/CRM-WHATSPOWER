@@ -23,7 +23,7 @@
 5. **Bitácora del cerebro**: structlog en JSON; alertar `ERROR` repetido en
    `/crm/dispatch` (403/429 sostenidos = reglas de firewall o rate limit mal
    dimensionadas).
-6. **BD**: conexiones de `vestro_runtime` (si se activa) por `pg_stat_activity`
+6. **BD**: conexiones de `whatspower_runtime` (si se activa) por `pg_stat_activity`
    — crecimiento sin techo = fuga de pool; y `% USAGE` del disco de
    `pg_wal` tras un crash (la recuperación lo recorta sola).
 

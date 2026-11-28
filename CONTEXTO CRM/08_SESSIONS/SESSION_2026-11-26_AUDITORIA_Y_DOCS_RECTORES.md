@@ -24,5 +24,5 @@ roadmap de construcción y el registro de riesgos.
 ## Pendientes que hereda la siguiente sesión
 
 - Decisión del propietario sobre licencias de CRM-ALBRA/ULTRA (solicitudes de LICENSE).
-- Confirmación de la marca «Vestro» (D-012).
+- Confirmación de la marca «WhatsPower» (D-012).
 - Inicio de F4 (S4.1): monorepo y portación del núcleo.

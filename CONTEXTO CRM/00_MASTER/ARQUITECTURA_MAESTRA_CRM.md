@@ -36,7 +36,7 @@ Tres reglas que la definen y que no se negocian:
 
 | Elemento | Propuesta |
 |---|---|
-| **Nombre de trabajo** | **Vestro** — de «chaleco» (veste/vestir): el equipo que viste y equipa al agente. Corto, pronunciable en español, neutro para SaaS |
+| **Nombre de trabajo** | **WhatsPower** — de «chaleco» (veste/vestir): el equipo que viste y equipa al agente. Corto, pronunciable en español, neutro para SaaS |
 | Alternativas | **Coraza CRM** (protección), **Vestia** (elegancia), **Nexo CRM** (conexión). El concepto interno «chaleco» queda como nombre de proyecto, no como marca |
 | Tagline | «El chaleco empresarial de tu agente de IA» |
 | Color primario | Azul marino `#0B2447` (continuidad con la barra lateral de VOCERO) |
@@ -55,7 +55,7 @@ graph TB
         ADM["Admin de la organización"]
         SUA["Super-admin de la plataforma"]
     end
-    subgraph Plataforma["Vestro CRM SaaS (multi-tenant)"]
+    subgraph Plataforma["CRM WhatsPower SaaS (multi-tenant)"]
         WEB["Aplicación web (bandeja, pipeline, agenda, resultados, ajustes)"]
         AGT["AGENTE-GENERAL — motor de inteligencia (servicio Python)"]
         FLO["Motor de flujos — WHATSPOWER (servicio Node)"]
@@ -105,7 +105,7 @@ graph TB
     subgraph Edge
         CADDY["Caddy / proxy — HTTPS, SSE, headers"]
     end
-    subgraph Core["Núcleo Vestro (Next.js 15 + React 19 + TS estricto)"]
+    subgraph Core["Núcleo WhatsPower (Next.js 15 + React 19 + TS estricto)"]
         UI["Módulos de UI: bandeja, pipeline, contactos, agenda, resultados, laboratorio, ajustes"]
         DOM["Dominios de servidor: Identity · Organizations · CRM · Conversations · Channels · Agents · Knowledge · Automation · Scheduling · Campaigns · Attribution · Billing · Integrations · Audit"]
         DB["PostgreSQL 16 — esquema único con RLS por organization_id"]

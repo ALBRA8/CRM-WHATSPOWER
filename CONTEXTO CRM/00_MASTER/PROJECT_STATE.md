@@ -1,7 +1,7 @@
-# PROJECT STATE — CRM WHATSPOWER (Vestro)
+# PROJECT STATE — CRM WhatsPower
 
 **Estado unificado:** FASE 4 COMPLETADA (S4.1-S4.4) + F5 ENTREGADA + **CIERRE OPERATIVO POST-F5 ENTREGADO** (validación ampliada y controles del puente re-verificados; sin activación pública: pendiente de aprobación expresa del propietario).
-**Última actualización:** 2026-11-28 (cierre post-F5, commit `dc7d153`).
+**Última actualización:** 2026-11-28 (rebrand completo a «CRM WhatsPower», decisión D-030).
 **Fuente:** ejecución real en sandbox de construcción + documentos rectores de F0-F3.
 
 ## Estado por fase
@@ -15,6 +15,7 @@
 | F4 Base funcional y modularización | **COMPLETADA (S4.1-S4.4)** | sesiones 2026-11-27; `ENTREGA_S4_3.md`, `ENTREGA_S4_4.md` (R-AG-1 + T9 cerrados, PR #77 merged `7f6e908`) |
 | F5 Preparación producción | **ENTREGADA 2026-11-28 — sin exposición pública** | `ENTREGA_F5.md`: rol runtime verificado 24/24 (D-025), backplane SSE 6/6 (D-024, A1 cerrado), backups+restauración 5/5 y persistencia/crash PASS (D-026), checklist del puente (D-028), secretos (infra/SECRETOS.md), observabilidad; suite 1.825/1.825, batería 26/26, cerebro 821 |
 | Cierre operativo post-F5 | **ENTREGADO 2026-11-28 — informe para aprobación expresa** | `ENTREGA_CIERRE_POSTF5.md` + commit `dc7d153`: R11 primera ejecución real 11/11 (ráfaga 700 sin OOM); controles del puente frescos (runtime 24/24, SSE 6/6, respaldo→restauración 5/5, persistencia/crash PASS, adaptador↔cerebro real `7f6e908` 19/19); contabilidad honesta: 270+11 = 281 checks con evidencia individual, 0 FAIL; estados publicados conservados (`ff691d9`/`7f6e908`) |
+| Rebrand CRM WhatsPower | **COMPLETADO 2026-11-28** | D-030: renombrado completo (383 archivos + 4 rutas vía `git mv`); verificación del nombre anterior: 0 coincidencias en el árbol rastreado; sin reescritura de historial; cerebro `7f6e908` intacto; sesión `SESSION_2026-11-28-c_REBRAND_CRM_WHATSPOWER.md` |
 | F6-F12 | PENDIENTES | F6 requiere autorización expresa de activación + host de despliegue (≥8 GB para E2E completo) |
 
 ## Hito Fase 4 — etapa 1 (2026-11-27)

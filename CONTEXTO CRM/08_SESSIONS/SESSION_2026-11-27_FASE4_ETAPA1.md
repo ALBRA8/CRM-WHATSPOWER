@@ -43,7 +43,7 @@ pruebas (listados con detalle en TEST_INDEX «Correcciones durante la verificaci
 5. **Estado de modularización de VOCERO:** migrado íntegro y verificable (142/28/43); reorganización en 14 dominios = S4.2 (próximo sprint); sin cambios de comportamiento.
 6. **Matriz de capacidades:** `00_MASTER/MATRIZ_PARIDAD_VOCERO.md` (156/156 mapeadas); en esta etapa ninguna capacidad se tocó: 67 conservar quedan intactas por migración directa.
 7. **Resultados de build/lint/typecheck/tests:** tabla anterior + TEST_INDEX.
-8. **Riesgos y decisiones pendientes:** L1/L2 (licencias CRM-ALBRA/ULTRA), O1 (backups), A1 (backplane SSE), Docker ausente en sandbox (verificación T1-T15 real), marca «Vestro» provisional (D-012).
+8. **Riesgos y decisiones pendientes:** L1/L2 (licencias CRM-ALBRA/ULTRA), O1 (backups), A1 (backplane SSE), Docker ausente en sandbox (verificación T1-T15 real), marca «WhatsPower» provisional (D-012).
 9. **Archivos creados:** árbol abajo; modificados: ninguno de `apps/web/src`.
 
 ```

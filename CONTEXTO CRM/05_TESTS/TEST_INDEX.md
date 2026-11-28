@@ -75,7 +75,7 @@ Comandos ejecutados en la raíz del monorepo: `pnpm -r typecheck`, `pnpm -r lint
 ## Resultados S4.3 (2026-11-27) — fronteras entre dominios, PostgreSQL real y E2E
 
 Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r build`
-· `pnpm --filter @vestro/web test:multi-tenant` · self-test E2E documentado (036).
+· `pnpm --filter @whatspower/web test:multi-tenant` · self-test E2E documentado (036).
 
 | Verificación | Resultado real |
 |---|---|
@@ -85,7 +85,7 @@ Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r bu
 | Baseline VOCERO 1.801 | **Intacta**: 0 pruebas eliminadas o debilitadas; +15 nuevas (9 fronteras + 1 sobre HITL + 5 integración cerebro) |
 | Build (`next build`) | OK — compilación completa |
 | Rutas API | 142 bajo `src/app/api` (vigía permanente en `fronteras-dominios.test.ts`) |
-| Batería multi-tenant (T1-T15 subset BD + audit + txns) | **26/26 PASS** sobre PostgreSQL 16.16 REAL (`vestro_s43_bateria`, rol `app_runtime` con FORCE RLS) |
+| Batería multi-tenant (T1-T15 subset BD + audit + txns) | **26/26 PASS** sobre PostgreSQL 16.16 REAL (`whatspower_s43_bateria`, rol `app_runtime` con FORCE RLS) |
 | Cobertura RLS | **39/39 tablas org-scoped** con `ENABLE + FORCE RLS` (defecto D-S43-1 corregido: antes 15/39) |
 | Contratos versionados | contracts 49 verdes; vigía de 13 rutas bot del contrato contra los `route.ts` reales; 142 rutas congeladas |
 | Fronteras de dominios | **9/9** (`fronteras-dominios.test.ts`): 14 dominios + Platform, 4 stubs honestos, grafo congelado de 38 aristas, 12 pares bidireccionales documentados, 2 ciclos conocidos congelados |
@@ -105,7 +105,7 @@ Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r bu
 1. **Ciclo de valores heredado** `conversations/inbox` (`ingest→reacciones→send→ingest`) — preexistente en VOCERO (verificado en `c370cc4`); congelado por vigía; refactor futuro fuera de S4.3 (D-020).
 2. **T9 (memoria por tenant del cerebro)**: el `memory_store` de AGENTE-GENERAL está `not_configured` en core_only y su esquema aísla por `(agent_id, domain, user_id, context_id)` SIN dimensión de organización — pendiente lado cerebro (bloquea activación en producción, D-014).
 3. **Endpoint `/crm/dispatch` en el cerebro**: 404 real; el despacho del CRM falla tipado hasta publicar el adaptador en AGENTE-GENERAL (R-AG-1).
-4. **Runtime sobre el rol dueño**: el `DATABASE_URL` documentado conecta como `vestro` (dueño/superusuario, ignora RLS). La valla de BD muerde al operar como `app_runtime` (probado); el cambio de rol de runtime queda como trabajo operativo de F5 (los grants ya están en 004).
+4. **Runtime sobre el rol dueño**: el `DATABASE_URL` documentado conecta como `whatspower` (dueño/superusuario, ignora RLS). La valla de BD muerde al operar como `app_runtime` (probado); el cambio de rol de runtime queda como trabajo operativo de F5 (los grants ya están en 004).
 5. **E2E corrida completa**: R11+ (~33 checks) sin verificar en corrida continua por memoria del sandbox (4 GB); en un host con ≥8 GB el mismo guion corre completo (`node --env-file=.env.e2e-036 scripts/e2e-selftest.mjs`).
 
 ---
@@ -113,7 +113,7 @@ Comandos: `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r test` · `pnpm -r bu
 ## Resultados S4.4 (2026-11-27) — cierre de bloqueos del cerebro (R-AG-1 + T9)
 
 Comandos: `pytest tests` (cerebro) · `pnpm -r test` · `pnpm -r typecheck` ·
-`pnpm -r lint` · `pnpm -r build` · `pnpm --filter @vestro/web test:multi-tenant`
+`pnpm -r lint` · `pnpm -r build` · `pnpm --filter @whatspower/web test:multi-tenant`
 · self-test E2E documentado (036).
 
 | Verificación | Resultado real |
@@ -149,7 +149,7 @@ Comandos: `pytest tests` (cerebro) · `pnpm -r test` · `pnpm -r typecheck` ·
 ## Resultados F5 (2026-11-28) — preparación y validación de producción
 
 Comandos: `pnpm -r test` · `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r build` ·
-`pnpm --filter @vestro/web test:multi-tenant` · `node scripts/verificar-rol-runtime.mjs` ·
+`pnpm --filter @whatspower/web test:multi-tenant` · `node scripts/verificar-rol-runtime.mjs` ·
 `node scripts/verificar-restauracion.mjs` · `infra/backup/prueba-persistencia-recuperacion.sh` ·
 `pytest tests` (cerebro) · self-test E2E (036) · `vitest tests/unit/sse-backplane.test.ts`.
 
@@ -159,7 +159,7 @@ Comandos: `pnpm -r test` · `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r bu
 | Typecheck / lint / build | 0 errores · Done (tras corregir 2 variables muertas) · OK (7 paquetes) |
 | Rutas API / contratos / fronteras | **142** (vigía) · 49/49 · **9/9** (grafo congelado con la arista F5 documentada D-027; ciclos sin nuevos) |
 | Batería multi-tenant (PostgreSQL 16.16 real) | **26/26 PASS** — RLS **39/39 tablas org-scoped** (clon TEMPLATE de base migrada limpia) |
-| **F5.1 rol runtime** (`verificar-rol-runtime.mjs`) | **24/24 PASS** — `vestro_runtime` LOGIN miembro de `app_runtime`: solo DML+secuencias (44/44 tablas), DDL rechazado (CREATE/DROP TABLE, CREATE ROLE → 42501), fail-closed sin contexto, cruzado 0 filas/42501, DML en su org, audit append-only, app operativa (R1-R7) |
+| **F5.1 rol runtime** (`verificar-rol-runtime.mjs`) | **24/24 PASS** — `whatspower_runtime` LOGIN miembro de `app_runtime`: solo DML+secuencias (44/44 tablas), DDL rechazado (CREATE/DROP TABLE, CREATE ROLE → 42501), fail-closed sin contexto, cruzado 0 filas/42501, DML en su org, audit append-only, app operativa (R1-R7) |
 | **F5.2 backplane SSE** (LISTEN/NOTIFY, PostgreSQL real) | **6/6 PASS** — pg_notify de OTRA instancia llega al suscriptor local; exactly-once por instancia; payload >7900 viaja comprimido e íntegro; filtro por org; modo off conserva el contrato previo |
 | **F5.3 ciclo respaldo→restauración→verificación** | **5/5 PASS** — 44/44 tablas con conteos idénticos, RLS 39/39 restaurada con FORCE, cadena de hash de audit_log íntegra, 34 migraciones, base operable (`pg_dump -Fc` + `pg_restore` 16.9 sobre servidor 16.16) |
 | **F5.3 persistencia y recuperación** | **PASS** — marcador con nonce único sobrevive reinicio controlado (P3) y crash real SIGKILL al postmaster con replay de WAL (F3); cadena de hash íntegra tras ambos |
@@ -170,7 +170,7 @@ Comandos: `pnpm -r test` · `pnpm -r typecheck` · `pnpm -r lint` · `pnpm -r bu
 
 ### Corrida E2E F5 (036)
 
-Entorno reconstruido desde cero: BD `vestro_036_e2e` limpia (34 migraciones +
+Entorno reconstruido desde cero: BD `whatspower_036_e2e` limpia (34 migraciones +
 audit_log), `.env.e2e-036` recreado (wa-mock/ai-mock/zoom-mock en la app,
 BOT_API_KEY ≥16, AGENT_COALESCE_MS=1500, AGENT_COALESCE_LARGO_MS=1500,
 AGENDA=on, BRAIN_DISPATCH_URL → cerebro falso 3261, WA_MOCK_ENABLED=true),
