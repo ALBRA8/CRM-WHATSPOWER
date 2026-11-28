@@ -4,15 +4,7 @@ import { contarOrganizacionesReales } from "@/lib/db/instancia";
 import { newId } from "@/lib/db/ids";
 import { HORAS_REACTIVACION_NUEVAS } from "@/server/conversations/inbox/reactivacion";
 
-/**
- * Reexportada: el sembrado del demo (`server/identity/auth/demo.ts`) parte del
- * mismo punto que un negocio nuevo (076) y toma la constante POR AQUÍ para no
- * abrir una segunda arista `identity->conversations` en el grafo congelado de
- * fronteras (tests/unit/fronteras-dominios.test.ts).
- */
-export { HORAS_REACTIVACION_NUEVAS };
-
-/** Etapas sembradas del pipeline (US2). Exportada: el demo siembra lo mismo. */
+/** Etapas sembradas del pipeline (US2). */
 export const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [
   { name: "Nuevo", kind: "open" },
   { name: "En conversación", kind: "open" },
@@ -27,8 +19,8 @@ export const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [
  *
  * Solo actúa si NO existe ninguna organización REAL (las cuentas de equipo las
  * crea el propietario y reciben su membresía explícita). La organización demo
- * (D-032) no cuenta: un visitante que entró al demo en una instalación nueva
- * no le quita al propietario real su primer registro. Un advisory lock evita
+ * (D-032/D-033) no cuenta: si una instalación llegó a crearla al entrar al
+ * demo, no bloquea ni roba el primer registro real. Un advisory lock evita
  * que dos registros simultáneos en instancia vacía creen dos organizaciones.
  */
 export async function onUserCreated(userId: string, userName: string) {

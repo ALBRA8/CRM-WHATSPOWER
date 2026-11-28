@@ -2,21 +2,26 @@
 
 ## No liberado
 
-### Acceso al demo sin registro
+### Acceso de prueba sin registro
 
-- Nuevo interruptor opcional `DEMO_MODE` (mismo patrón que `AGENDA`/`API_V1`).
-  Encendido, el login muestra el botón «Entrar al demo»: un visitante explora
-  el CRM sin crear cuenta, dentro de una organización demo aislada (su propia
-  organización, membresía y semillas de pipeline/agente), vía
-  `POST /api/demo/sesion` con rate limit propio (FR-062). Apagado, la ruta
-  responde 404 mudo y el login no cambia.
-- El demo funciona desde la PRIMERA visita (D-032): el alta demo atraviesa el
-  bypass interno del gate de registro (FR-060) con el hook de primera
-  organización suprimido (`runWithoutOnboarding`), y la organización demo no
-  cuenta para el arranque (`contarOrganizacionesReales` la excluye). El
-  propietario real conserva su primer registro intacto y el registro público
-  sigue abierto hasta que exista su organización; bot, OAuth y la marca/apariencia
-  del login nunca toman la organización demo como la de la instancia.
+- Puerta de PRUEBAS (se quita cuando deje de hacer falta): con
+  `PRUEBA_MODE=on` (legacy: `DEMO_MODE=on`, mismo efecto), el login muestra
+  «Entrar sin registro». En una instancia VIRGEN, un clic crea la cuenta
+  propietaria POR EL MISMO CAMINO que un registro real (`signUpEmail` + hook
+  de primera organización intacto): organización de la instancia
+  (`slug: principal`), semillas del negocio nuevo y guía de inicio. El proceso
+  que sigue es el normal de principio a fin — no hay organización demo ni
+  datos de ejemplo.
+- Límites y seguridad: solo inicializa una instancia sin organización real
+  (después responde 409 `ya_inicializada`, nadie entra a la organización de
+  otro); con la cuenta de prueba ya creada el botón es reentrada (solo
+  sign-in, idempotente); contraseña fija SOLO server-side; rate limit propio
+  con la misma política de login/registro (FR-062). Con la bandera apagada la
+  ruta responde 404 mudo y el botón no se pinta.
+- Sustituye al «Entrar al demo» de D-031/D-032 (organización demo aislada con
+  datos de ejemplo), que no servía para recorrer el proceso real. El filtro
+  que excluye la organización demo (`slug: demo`) del arranque se conserva
+  para las instalaciones que llegaron a crearla.
 
 ## 2.12.0 — 2026-11-27
 

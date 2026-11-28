@@ -12,17 +12,18 @@ import { Label } from "@/components/ui/label";
 
 /**
  * Formulario de acceso. La página (`page.tsx`) es server-side y le pasa si
- * esta instancia tiene el demo encendido (`DEMO_MODE`): sin la bandera, el
- * botón no se pinta y la instancia queda igual que siempre.
+ * esta instancia tiene el acceso de prueba encendido (`PRUEBA_MODE`, legacy
+ * `DEMO_MODE`): sin la bandera, el botón no se pinta y la instancia queda
+ * igual que siempre.
  */
-export function LoginForm({ demoEnabled }: { demoEnabled: boolean }) {
+export function LoginForm({ pruebaEnabled }: { pruebaEnabled: boolean }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [demoError, setDemoError] = useState<string | null>(null);
-  const [demoLoading, setDemoLoading] = useState(false);
+  const [pruebaError, setPruebaError] = useState<string | null>(null);
+  const [pruebaLoading, setPruebaLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -51,20 +52,20 @@ export function LoginForm({ demoEnabled }: { demoEnabled: boolean }) {
     router.refresh();
   }
 
-  async function entrarAlDemo() {
-    setDemoError(null);
-    setDemoLoading(true);
+  async function entrarSinRegistro() {
+    setPruebaError(null);
+    setPruebaLoading(true);
     try {
-      const res = await fetch("/api/demo/sesion", { method: "POST" });
+      const res = await fetch("/api/prueba/sesion", { method: "POST" });
       if (!res.ok) {
-        setDemoError(
+        setPruebaError(
           res.status === 404
-            ? "El demo no está disponible en esta instancia."
+            ? "El acceso de prueba no está disponible en esta instancia."
             : res.status === 409
-              ? "Esta instancia todavía no tiene su organización. Primero crea la cuenta del propietario."
+              ? "Esta instancia ya tiene su organización. Entra con tu cuenta."
               : res.status === 429
                 ? "Demasiados intentos. Espera unos minutos."
-                : "No se pudo entrar al demo."
+                : "No se pudo entrar sin registro."
         );
         return;
       }
@@ -72,9 +73,9 @@ export function LoginForm({ demoEnabled }: { demoEnabled: boolean }) {
       router.push("/");
       router.refresh();
     } catch {
-      setDemoError("No se pudo entrar al demo.");
+      setPruebaError("No se pudo entrar sin registro.");
     } finally {
-      setDemoLoading(false);
+      setPruebaLoading(false);
     }
   }
 
@@ -118,22 +119,23 @@ export function LoginForm({ demoEnabled }: { demoEnabled: boolean }) {
             </Link>
           </p>
         </form>
-        {demoEnabled && (
+        {pruebaEnabled && (
           <div className="mt-6 border-t pt-4">
             <Button
               type="button"
               variant="outline"
               className="w-full"
-              onClick={entrarAlDemo}
-              disabled={demoLoading}
+              onClick={entrarSinRegistro}
+              disabled={pruebaLoading}
             >
-              {demoLoading ? "Preparando el demo…" : "Entrar al demo"}
+              {pruebaLoading ? "Preparando tu acceso…" : "Entrar sin registro"}
             </Button>
             <p className="mt-2 text-center text-xs text-muted-foreground">
-              Explora el CRM sin crear cuenta, con datos de demostración
-              aislados de tu organización.
+              Recorre el proceso completo sin crear cuenta: se inicializa la
+              organización de esta instancia y sigues la guía como cualquier
+              propietario. Pensado para pruebas.
             </p>
-            {demoError && <p className="text-sm text-destructive">{demoError}</p>}
+            {pruebaError && <p className="text-sm text-destructive">{pruebaError}</p>}
           </div>
         )}
       </CardContent>

@@ -312,10 +312,11 @@ describe("fronteras: contratos versionados respetados", () => {
       }
       return n;
     };
-    // 142 → 143: POST /api/demo/sesion (acceso al demo sin registro,
-    // DEMO_MODE=on). Decisión consciente: ruta pública nueva con bandera
-    // opcional y rate limit propio (FR-062); apagada responde 404 mudo, así
-    // que la superficie real de la instancia no cambia.
+    // 142 → 143: POST /api/prueba/sesion (acceso de prueba sin registro,
+    // PRUEBA_MODE=on, legacy DEMO_MODE; D-031→D-033). Decisión consciente:
+    // ruta pública nueva con bandera opcional y rate limit propio (FR-062);
+    // apagada responde 404 mudo, así que la superficie real de la instancia
+    // no cambia.
     expect(contar(join(WEB_ROOT, "src", "app", "api"))).toBe(143);
   });
 });
