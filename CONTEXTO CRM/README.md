@@ -2,8 +2,8 @@
 
 ## Memoria documental de continuidad del proyecto CRM WHATSPOWER (Vestro)
 
-**Estado:** BASELINE INICIALIZADO — FASE 4 EN_CURSO
-**Última actualización:** 2026-11-27
+**Estado:** FASE 4 COMPLETADA (S4.1-S4.4) / F5 ENTREGADA / CIERRE OPERATIVO POST-F5 ENTREGADO
+**Última actualización:** 2026-11-28
 **Propósito:** conservar decisiones, auditorías, hallazgos, pruebas, integraciones, fallos, sesiones y conocimiento necesarios para construir el CRM SaaS multi-tenant Vestro sin repetir investigaciones y sin contradecir lo ya decidido.
 
 ## Naturaleza de esta memoria

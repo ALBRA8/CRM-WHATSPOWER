@@ -1,7 +1,7 @@
 # PROJECT STATE — CRM WHATSPOWER (Vestro)
 
-**Estado unificado:** FASE 4 COMPLETADA (S4.1-S4.4) + **F5 EN CURSO — preparación y validación de producción ENTREGADA** (sin activación pública: mandato F5 §7).
-**Última actualización:** 2026-11-28 (F5).
+**Estado unificado:** FASE 4 COMPLETADA (S4.1-S4.4) + F5 ENTREGADA + **CIERRE OPERATIVO POST-F5 ENTREGADO** (validación ampliada y controles del puente re-verificados; sin activación pública: pendiente de aprobación expresa del propietario).
+**Última actualización:** 2026-11-28 (cierre post-F5, commit `dc7d153`).
 **Fuente:** ejecución real en sandbox de construcción + documentos rectores de F0-F3.
 
 ## Estado por fase
@@ -14,6 +14,7 @@
 | F3 Arquitectura y modelo | COMPLETADA | `00_MASTER/ARQUITECTURA_MAESTRA_CRM.md`, `00_MASTER/MODELO_MULTI_TENANT.md`, `06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` |
 | F4 Base funcional y modularización | **COMPLETADA (S4.1-S4.4)** | sesiones 2026-11-27; `ENTREGA_S4_3.md`, `ENTREGA_S4_4.md` (R-AG-1 + T9 cerrados, PR #77 merged `7f6e908`) |
 | F5 Preparación producción | **ENTREGADA 2026-11-28 — sin exposición pública** | `ENTREGA_F5.md`: rol runtime verificado 24/24 (D-025), backplane SSE 6/6 (D-024, A1 cerrado), backups+restauración 5/5 y persistencia/crash PASS (D-026), checklist del puente (D-028), secretos (infra/SECRETOS.md), observabilidad; suite 1.825/1.825, batería 26/26, cerebro 821 |
+| Cierre operativo post-F5 | **ENTREGADO 2026-11-28 — informe para aprobación expresa** | `ENTREGA_CIERRE_POSTF5.md` + commit `dc7d153`: R11 primera ejecución real 11/11 (ráfaga 700 sin OOM); controles del puente frescos (runtime 24/24, SSE 6/6, respaldo→restauración 5/5, persistencia/crash PASS, adaptador↔cerebro real `7f6e908` 19/19); contabilidad honesta: 270+11 = 281 checks con evidencia individual, 0 FAIL; estados publicados conservados (`ff691d9`/`7f6e908`) |
 | F6-F12 | PENDIENTES | F6 requiere autorización expresa de activación + host de despliegue (≥8 GB para E2E completo) |
 
 ## Hito Fase 4 — etapa 1 (2026-11-27)
@@ -35,4 +36,6 @@
 
 ## Próximo paso
 
-**F5 ENTREGADA** (2026-11-28): preparación y validación de producción sobre los estados publicados `f03048a` (CRM) y `7f6e908` (cerebro) — SIN exposición pública (mandato F5 §7). Entregado con evidencia real: rol runtime `vestro_runtime` con privilegios mínimos verificado 24/24 (D-025; corte completo del HTTP = operativo pendiente declarado), backplane SSE LISTEN/NOTIFY 6/6 (D-024), ciclo respaldo→restauración→verificación 5/5 + persistencia tras reinicio + recuperación tras crash SIGKILL (D-026), checklist de producción del puente (D-028), gestión de secretos (infra/SECRETOS.md), observabilidad (OBSERVABILIDAD.md + /api/health con `dbRole` y `sse`). Verificación: suite **1.825/1.825**, batería **26/26** (RLS 39/39), cerebro **821** (1 skip condicionado a NVIDIA_API_KEY), typecheck/lint/build verdes, 142 rutas y contratos 49/49 intactos, E2E 036 re-corrida (resultado exacto en `ENTREGA_F5.md`). Antes de activar para clientes: E2E completo en host ≥8 GB, checklist del puente ejecutado en el despliegue real, y autorización expresa del propietario.
+**CIERRE POST-F5 ENTREGADO** (2026-11-28, commit `dc7d153`): F5 conservada (`ff691d9` byte-a-byte; cerebro `7f6e908` sin cambios) y validación ampliada con evidencia real: E2E R11 ejecutado por primera vez **11/11 OK, 0 FAIL** (ráfaga de 700 peticiones sin OOM; en S4.3/S4.4/F5 la corrida continua moría por OOM antes de R11); controles del puente re-ejecutados frescos — rol runtime 24/24, backplane SSE 6/6, ciclo respaldo→restauración 5/5, persistencia/crash PASS, adaptador↔cerebro real 19/19; contabilidad honesta del total de checks (total dinámico; **281 checks con evidencia individual, 0 FAIL acumulado**; «302/302» exige corrida continua completa en host ≥8 GB). Dos hallazgos de entorno documentados, sin defectos de producto (`ENTREGA_CIERRE_POSTF5.md`).
+
+**Pendiente antes de activar para clientes** (requiere autorización expresa del propietario): aprobación del informe de cierre; corrida E2E continua completa (302) en el host de despliegue ≥8 GB; checklist del puente (D-028) ejecutado en el despliegue real con secretos gestionados en el entorno; decisión de activación comercial.

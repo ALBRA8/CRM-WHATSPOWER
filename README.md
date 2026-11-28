@@ -31,13 +31,13 @@ versionados e independiente del núcleo.
 
 1. **VESTRO se conserva completo.** Ninguna capacidad se elimina ni se marca
    como implementada sin correspondencia verificable en código y pruebas.
-   Matriz viva: `CONTEXTO CRM/00_MASTER/MATRIZ_PARIDAD_VESTRO.md`.
+   Matriz viva: `CONTEXTO CRM/00_MASTER/MATRIZ_PARIDAD_VOCERO.md`.
 2. **AGENTE-GENERAL es el único cerebro.** Nada de razonamiento, memoria,
    herramientas, firewall ni aprobaciones se duplica en Vestro.
 3. **Aislamiento multi-tenant en la base de datos** (RLS) y doble valla en la
    capa de aplicación. Fail-closed siempre.
 4. **Licencias:** sin código de CRM-ALBRA ni WHATSPOWER-ULTRA; sin
-   Baileys/libsignal. Ver `NOTICE.md` y la matriz de licencias.
+   Baileys/libsignal. Ver `THIRD_PARTY_NOTICES.md` y la matriz de licencias.
 5. **Contratos versionados:** todo cambio de contrato se publica en
    `packages/contracts` con su prueba de vigía.
 

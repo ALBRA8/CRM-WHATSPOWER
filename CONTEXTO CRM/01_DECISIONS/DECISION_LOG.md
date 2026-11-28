@@ -78,10 +78,11 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** `packages/contracts` implementa con Zod: catálogo de errores, contexto de tenant, despacho, bot API v1, API v1, flujos, campañas, agenda y eventos; incluye prueba de vigía que congela los códigos de error (D-013).
 - **Evidencia:** `packages/contracts`, resultados en `05_TESTS/TEST_INDEX.md`.
 
-## D-016 — Rebrand VOCERO → Vestro con consolidación legal de la atribución MIT
+## D-016 — Rebrand VOCERO → Vestro
 - **Estado:** VERIFIED (vigente).
-- **Decisión:** se eliminó toda traza de marca y autoría del producto (UI, docs, specs, fixtures, infra, env vars `VESTRO_*`, imagen del cerebro en el namespace ALBRA8). La atribución exigida por la licencia MIT del código heredado se consolidó en un ÚNICO archivo legal `THIRD_PARTY_NOTICES.md` de la raíz (práctica estándar; invisible para el producto). Se retiraron `apps/web/LICENSE` y `NOTICE.md`.
-- **Motivo:** la supresión total del aviso de copyright incumpliría la MIT del código heredado (apps/web) y expondría legalmente al proyecto comercial; el archivo único cumple el requisito sin afectar marca ni comercialización.
+- **Decisión:** se renombró la marca del producto en toda su superficie (UI, docs, specs, fixtures, infra, env vars `VESTRO_*`, imagen del cerebro en el namespace ALBRA8); paquete `vocero-crm` → `@vestro/web`; README y CHANGELOG reescritos.
+- **Motivo:** identidad propia del producto comercial; la base funcional y el comportamiento quedan intactos (misma suite verde, mismas rutas).
+- **Evidencia:** sesión S4.2 §2.2 (commit `c370cc4`); suite 1.801 verde; 142 rutas intactas (diff vacío vs baseline).
 
 ## D-017 — Fronteras de dominios S4.2 (src/server)
 - **Estado:** VERIFIED (vigente).
@@ -151,3 +152,9 @@ se revierten sin nueva entrada que documente motivo e impacto.
 - **Decisión:** `CONTEXTO CRM/06_INTEGRATIONS/CHECKLIST_PRODUCCION_PUENTE.md` (A1-A4 secretos/rotación, B1-B7 cerebro, C1-C7 CRM, D1-D6 datos/operación) es la puerta de salida operativa: cada ítem exige evidencia verificable. La exposición pública queda PROHIBIDA sin autorización expresa (mandato F5 §7); el E2E completo (302) debe correrse en el host de despliegue (≥8 GB).
 - **Motivo:** F5 autoriza preparación y validación de producción, no activación; el checklist deja explícito qué falta ejecutar FUERA del sandbox.
 - **Evidencia:** documento con estado por ítem y límites declarados de F5.
+
+## D-029 — Contabilidad honesta de checks E2E: total dinámico con evidencia individual (cierre post-F5)
+- **Estado:** VERIFIED (vigente).
+- **Decisión:** los informes de E2E usan el total EN EJECUCIÓN con evidencia individual por check; el guion 036 tiene 301 puntos `ok()` (302 contando la definición), pero el total real es dinámico (bucles que emiten por iteración y ramas por banderas). «302/302» solo se declara con UNA corrida continua completa en host ≥8 GB (checklist D6). Estado publicado: 270 (F5, corrida B) + 11 (R11, primera ejecución real) = **281 checks con evidencia individual, 0 FAIL acumulado**.
+- **Motivo:** no declarar aprobado lo no ejecutado; presentar un total fijo de un total dinámico induce a error de lectura.
+- **Evidencia:** `ENTREGA_CIERRE_POSTF5.md` §contabilidad; `scripts/e2e-r11-postf5.mjs` 11/11; `05_TESTS/TEST_INDEX.md` §CIERRE POST-F5.
