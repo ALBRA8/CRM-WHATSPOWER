@@ -37,3 +37,14 @@ Alcance autorizado y ejecutado: renombrado completo del nombre en el árbol de t
 - Re-correr suite completa + batería multi-tenant + E2E en entorno con dependencias (host ≥8 GB para la corrida continua).
 - La activación pública sigue **prohibida** sin autorización expresa del propietario (mandato F5 §7; checklist D-028 en el despliegue real).
 - No registrar secretos ni credenciales (regla vigente).
+
+## 6. Adenda — validación con dependencias (misma fecha, pasada posterior)
+
+Ejecutada la suite en un entorno con `node_modules` instalados, contabilidad honesta:
+
+- **Regresiones reales del rebrand detectadas: 2**, ambas por renombrar cadenas congeladas en tests sin regenerar su referencia:
+  1. `tests/unit/reset-password.test.ts` (canario de formato): la contraseña del canario se renombró, pero el hash congelado estaba generado para la anterior. Corregido regenerando el hash con `better-auth/crypto` (scrypt actual) para `canario-de-formato-whatspower`; `verifyPassword` verifica `true`.
+  2. `tests/unit/medios-almacenamiento.test.ts` (firma SigV4): el bucket de ejemplo se renombró, pero la firma de referencia estaba calculada con botocore para el nombre anterior. Corregido regenerando la referencia con **botocore 1.42.86** para las entradas nuevas (`1a5d085a…`). **Validez del método demostrada**: botocore con las entradas ANTIGUAS reproduce exactamente la firma congelada anterior (`bd0b2a26…`), y la implementación TS produce la misma firma nueva que botocore (paridad TS↔botocore confirmada).
+- **Resultado de la suite tras corregir:** apps/web **1.725/1.729** unitarias verdes; `services/flows` 8/8; `services/campaigns` 5/5; `packages/contracts` 49/49.
+- **4 fallos NO son regresiones sino ambientales:** los 4 tests de `sse-backplane.test.ts` (transporte real entre instancias) exigen un PostgreSQL real (`pg_notify`/`LISTEN`); en este sandbox no hay docker ni Postgres. No ejecutados aquí.
+- **Sigue pendiente:** batería multi-tenant + E2E (requieren la pila levantada; host ≥8 GB para la corrida continua).

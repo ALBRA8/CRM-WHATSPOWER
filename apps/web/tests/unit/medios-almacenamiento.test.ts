@@ -70,9 +70,10 @@ describe("firma SigV4 del bucket", () => {
     });
 
     // Valor de referencia calculado con botocore (AWS oficial) para estas
-    // mismas entradas. Si esta firma cambia, la culpa es nuestra.
+    // mismas entradas (regenerado tras el rebrand D-030, que cambió el nombre
+    // del bucket de ejemplo). Si esta firma cambia, la culpa es nuestra.
     expect(r.headers.Authorization).toContain(
-      "Signature=bd0b2a26c9fa21c142e6538f2d65c07f70f81742173f227e80cfa458f0b067f8"
+      "Signature=1a5d085ac6eb3b3447a7b4950ff4fe8863bf1452293c92982408869055b82c5c"
     );
     expect(r.headers.Authorization).toContain(
       "SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date"

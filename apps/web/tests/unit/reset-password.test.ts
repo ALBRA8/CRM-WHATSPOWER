@@ -71,9 +71,10 @@ describe("reset-password", () => {
     // Congelado a propósito. Si una versión futura de better-auth cambia el
     // formato o los parámetros de scrypt, esto se pone rojo AQUÍ — antes de
     // que las contraseñas ya guardadas dejen de funcionar en producción y
-    // nadie pueda entrar a arreglarlo.
+    // nadie pueda entrar a arreglarlo. El hash se regeneró tras el rebrand
+    // D-030, que renombró la contraseña del canario.
     const congelado =
-      "53900d281b59e30499f1420fe7875642:74e410275e792076dc6715482cfe8406edd10a00a2e06880a7d300b699825ef99f4aa4a8f198d1820f7f3716094e01c57bdab6a134354b037a7e09609f687747";
+      "a92ddfd30f39e6e1f503126ff5522fba:3b45ad530f9146ec97b7254c553925edd8205eb7f2ff11537dba527233338cf130d50fc951035009944391d4fcdcb82cebf2b16ea90bf29ece2d0192e896a8c8";
     expect(
       await verifyPassword({ hash: congelado, password: "canario-de-formato-whatspower" })
     ).toBe(true);
