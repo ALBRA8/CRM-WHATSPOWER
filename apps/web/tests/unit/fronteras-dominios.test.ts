@@ -15,7 +15,7 @@
  *  5. Las 13 rutas bot congeladas en packages/contracts existen como archivos
  *     de ruta en apps/web (el contrato versionado se respeta).
  *  6. Los servicios satélite consumen @whatspower/contracts (no duplican contratos).
- *  7. El conteo de rutas API del núcleo sigue siendo 142.
+ *  7. El conteo de rutas API del núcleo sigue siendo 143.
  */
 import { describe, expect, it } from "vitest";
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
@@ -302,7 +302,7 @@ describe("fronteras: contratos versionados respetados", () => {
     }
   });
 
-  it("el núcleo conserva exactamente 142 rutas API", () => {
+  it("el núcleo conserva exactamente 143 rutas API", () => {
     const contar = (dir: string): number => {
       let n = 0;
       for (const e of readdirSync(dir, { withFileTypes: true })) {
@@ -312,6 +312,10 @@ describe("fronteras: contratos versionados respetados", () => {
       }
       return n;
     };
-    expect(contar(join(WEB_ROOT, "src", "app", "api"))).toBe(142);
+    // 142 → 143: POST /api/demo/sesion (acceso al demo sin registro,
+    // DEMO_MODE=on). Decisión consciente: ruta pública nueva con bandera
+    // opcional y rate limit propio (FR-062); apagada responde 404 mudo, así
+    // que la superficie real de la instancia no cambia.
+    expect(contar(join(WEB_ROOT, "src", "app", "api"))).toBe(143);
   });
 });

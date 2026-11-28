@@ -3,8 +3,16 @@ import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import { HORAS_REACTIVACION_NUEVAS } from "@/server/conversations/inbox/reactivacion";
 
-/** Etapas sembradas del pipeline (US2). */
-const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [
+/**
+ * Reexportada: el sembrado del demo (`server/identity/auth/demo.ts`) parte del
+ * mismo punto que un negocio nuevo (076) y toma la constante POR AQUÍ para no
+ * abrir una segunda arista `identity->conversations` en el grafo congelado de
+ * fronteras (tests/unit/fronteras-dominios.test.ts).
+ */
+export { HORAS_REACTIVACION_NUEVAS };
+
+/** Etapas sembradas del pipeline (US2). Exportada: el demo siembra lo mismo. */
+export const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [
   { name: "Nuevo", kind: "open" },
   { name: "En conversación", kind: "open" },
   { name: "Interesado", kind: "open" },
