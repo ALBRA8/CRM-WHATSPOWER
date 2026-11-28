@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
+import { SLUG_ORG_DEMO } from "@/lib/db/instancia";
 import { THEME_COOKIE } from "@/lib/theme";
 import {
   APARIENCIA_COOKIE,
@@ -35,8 +36,14 @@ export async function aparienciaDelNegocio(organizationId?: string | null): Prom
         .from(schema.organization)
         .where(eq(schema.organization.id, organizationId))
         .limit(1)
-    : // Sin sesión (login, layout raíz): la única organización de la instancia.
-      await db.select({ metadata: schema.organization.metadata }).from(schema.organization).limit(1);
+    : // Sin sesión (login, layout raíz): la organización de la instancia. La
+      // demo (D-032) no es la de la instancia: si solo existe ella, vale el
+      // tema de fábrica.
+      await db
+        .select({ metadata: schema.organization.metadata })
+        .from(schema.organization)
+        .where(ne(schema.organization.slug, SLUG_ORG_DEMO))
+        .limit(1);
   const r = aparienciaSchema.safeParse(leerMetadata(rows[0]?.metadata ?? null).apariencia);
   return r.success ? r.data : null;
 }

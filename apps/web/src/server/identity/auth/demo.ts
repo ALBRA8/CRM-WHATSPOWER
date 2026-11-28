@@ -1,5 +1,5 @@
-import { count, eq, sql } from "drizzle-orm";
-import { getAuth, runInternalSignup } from "@/lib/auth";
+import { eq, sql } from "drizzle-orm";
+import { getAuth, runInternalSignup, runWithoutOnboarding } from "@/lib/auth";
 import { getDb, schema } from "@/lib/db";
 import { newId } from "@/lib/db/ids";
 import {
@@ -23,10 +23,11 @@ import {
  *
  * Reglas de seguridad:
  * - La creación de la cuenta demo atraviesa `runInternalSignup` (bypass del
- *   gate de registro cerrado, FR-060) pero SOLO si la instancia ya tiene su
- *   organización: en una instancia virgen, el hook `onUserCreated` crearía la
- *   PRIMERA organización con el demo como dueño y cerraría el registro al
- *   propietario real. `ErrorInstanciaSinInicializar` protege ese caso.
+ *   gate de registro cerrado, FR-060) y `runWithoutOnboarding` (D-032): el
+ *   hook de primera organización NO se dispara, así que en una instancia
+ *   virgen el demo no le roba al propietario real su primer registro. La
+ *   organización demo no cierra nada: `contarOrganizacionesReales` no la ve,
+ *   y el propietario puede crear su cuenta cuando quiera.
  * - La contraseña del demo es fija y SOLO server-side (nunca viaja al bundle
  *   del cliente). La puerta real del demo es la bandera + el rate limit de
  *   `POST /api/demo/sesion`; quien conozca esta constante ya tiene acceso al
@@ -56,7 +57,7 @@ export const DEMO_ORG_SLUG = "demo";
 /** Solo server-side: la usa `ensureDemoOrg` al crear la cuenta la primera vez. */
 export const DEMO_PASSWORD = "demo-whatspower-sin-registro";
 
-/** Error del caso instancia virgen: el demo no arranca antes que el negocio real. */
+/** Error defensivo: la cuenta demo desapareció a media vía (no debería pasar). */
 export class ErrorInstanciaSinInicializar extends Error {
   constructor() {
     super("instancia-sin-inicializar");
@@ -81,17 +82,19 @@ export async function ensureDemoOrg(): Promise<void> {
     .limit(1);
 
   if (!demoUser[0]) {
-    // Guarda de la instancia virgen: re-verificada justo antes de crear la
-    // cuenta. La ventana de carrera con el primer registro real es de
-    // milisegundos y el resultado (demo dueño de la primera org) es el caso
-    // que este guardado ya rechaza de antemano.
-    const [orgs] = await db.select({ n: count() }).from(schema.organization);
-    if ((orgs?.n ?? 0) === 0) throw new ErrorInstanciaSinInicializar();
+    // D-032: el demo entra también en una instancia virgen. El alta pasa con
+    // el arranque de primera organización suprimido (el hook no crea la org
+    // del propietario con el demo como dueño) y por el bypass interno del
+    // gate de registro (mismo camino que las cuentas de equipo). La organización
+    // demo la crea la transacción de abajo; contarOrganizacionesReales no la
+    // ve, así que el propietario real conserva su primer registro intacto.
     try {
-      await runInternalSignup(() =>
-        auth.api.signUpEmail({
-          body: { name: DEMO_NAME, email: DEMO_EMAIL, password: DEMO_PASSWORD },
-        })
+      await runWithoutOnboarding(() =>
+        runInternalSignup(() =>
+          auth.api.signUpEmail({
+            body: { name: DEMO_NAME, email: DEMO_EMAIL, password: DEMO_PASSWORD },
+          })
+        )
       );
     } catch (err) {
       // Carrera benigna: otro clic creó la cuenta entre la lectura y el alta.

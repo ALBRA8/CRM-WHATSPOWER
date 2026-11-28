@@ -1,5 +1,6 @@
-import { count, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
+import { contarOrganizacionesReales } from "@/lib/db/instancia";
 import { newId } from "@/lib/db/ids";
 import { HORAS_REACTIVACION_NUEVAS } from "@/server/conversations/inbox/reactivacion";
 
@@ -24,9 +25,11 @@ export const SEED_STAGES: { name: string; kind: "open" | "won" | "lost" }[] = [
  * Primer registro de la instancia: crea la organización, deja al usuario como
  * propietario y siembra pipeline + perfil del agente.
  *
- * Solo actúa si NO existe ninguna organización (las cuentas de equipo las crea
- * el propietario y reciben su membresía explícita). Un advisory lock evita que
- * dos registros simultáneos en instancia vacía creen dos organizaciones.
+ * Solo actúa si NO existe ninguna organización REAL (las cuentas de equipo las
+ * crea el propietario y reciben su membresía explícita). La organización demo
+ * (D-032) no cuenta: un visitante que entró al demo en una instalación nueva
+ * no le quita al propietario real su primer registro. Un advisory lock evita
+ * que dos registros simultáneos en instancia vacía creen dos organizaciones.
  */
 export async function onUserCreated(userId: string, userName: string) {
   const db = getDb();
@@ -34,10 +37,7 @@ export async function onUserCreated(userId: string, userName: string) {
     // Lock transaccional de "primer arranque" (clave arbitraria fija):
     // dos registros simultáneos en instancia vacía → solo uno crea la org.
     await tx.execute(sql`select pg_advisory_xact_lock(874201)`);
-    const [orgs] = await tx
-      .select({ n: count() })
-      .from(schema.organization);
-    if ((orgs?.n ?? 0) > 0) return;
+    if ((await contarOrganizacionesReales(tx)) > 0) return;
 
     const orgId = newId("organization");
     await tx.insert(schema.organization).values({

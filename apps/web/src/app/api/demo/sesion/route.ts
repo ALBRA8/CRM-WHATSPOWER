@@ -38,6 +38,8 @@ export async function POST(req: Request): Promise<Response> {
     await ensureDemoOrg();
   } catch (err) {
     if (err instanceof ErrorInstanciaSinInicializar) {
+      // Defensivo (D-032): el demo entra también en instancia virgen; este
+      // error solo salta si la cuenta demo desaparece a media vía.
       return apiError(
         409,
         "sin_organizacion",

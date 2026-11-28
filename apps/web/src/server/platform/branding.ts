@@ -1,5 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, ne } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
+import { SLUG_ORG_DEMO } from "@/lib/db/instancia";
 import {
   DEFAULT_BRANDING,
   normalizeBranding,
@@ -37,10 +38,13 @@ export async function getBrandingContext(
         .from(schema.organization)
         .where(eq(schema.organization.id, organizationId))
         .limit(1)
-    : // Sin sesión (login, layout raíz): la única organización de la instancia.
+    : // Sin sesión (login, layout raíz): la organización de la instancia. La
+      // demo (D-032) no es la de la instancia: si solo existe ella, no hay
+      // marca propia y vale la de fábrica.
       await db
         .select({ id: schema.organization.id, metadata: schema.organization.metadata })
         .from(schema.organization)
+        .where(ne(schema.organization.slug, SLUG_ORG_DEMO))
         .limit(1);
   if (!rows[0]) return { organizationId: null, branding: DEFAULT_BRANDING };
   const meta = parseMetadata(rows[0].metadata);

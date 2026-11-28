@@ -38,6 +38,44 @@ function isInternalSignup(): boolean {
   return internalSignupContext().getStore() === true;
 }
 
+/**
+ * Contexto de arranque suprimido (D-032): el alta del demo crea su usuario
+ * SIN el hook de primera organización. En una instancia virgen, el demo no
+ * debe poder quedarse con la organización del propietario real. Mismo patrón
+ * que el contexto de alta interna: AsyncLocalStorage en globalThis.
+ */
+const globalForOnboarding = globalThis as unknown as {
+  __whatspowerSkipOnboarding?: AsyncLocalStorage<boolean>;
+};
+
+function skipOnboardingContext(): AsyncLocalStorage<boolean> {
+  if (!globalForOnboarding.__whatspowerSkipOnboarding) {
+    globalForOnboarding.__whatspowerSkipOnboarding = new AsyncLocalStorage<boolean>();
+  }
+  return globalForOnboarding.__whatspowerSkipOnboarding;
+}
+
+export function runWithoutOnboarding<T>(fn: () => Promise<T>): Promise<T> {
+  return skipOnboardingContext().run(true, fn);
+}
+
+function isOnboardingSuppressed(): boolean {
+  return skipOnboardingContext().getStore() === true;
+}
+
+/**
+ * Hook `user.create.after` de better-auth: el primer usuario REAL de una
+ * instancia virgen se convierte en propietario (onUserCreated). El alta del
+ * demo lo atraviesa con el arranque suprimido y sale sin organización: la suya
+ * la crea después `ensureDemoOrg` (una organización `demo` aislada, que
+ * `contarOrganizacionesReales` no ve). Exportado a propósito: el unit test
+ * lo prueba sin levantar better-auth.
+ */
+export async function alCrearUsuario(user: { id: string; name: string }) {
+  if (isOnboardingSuppressed()) return;
+  await onUserCreated(user.id, user.name);
+}
+
 const RATE_LIMITED_PATHS = new Set(["/sign-in/email", "/sign-up/email"]);
 
 function createAuth() {
@@ -89,9 +127,7 @@ function createAuth() {
     databaseHooks: {
       user: {
         create: {
-          after: async (user) => {
-            await onUserCreated(user.id, user.name);
-          },
+          after: alCrearUsuario,
         },
       },
       session: {

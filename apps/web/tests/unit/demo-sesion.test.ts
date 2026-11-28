@@ -5,11 +5,13 @@ import { resetRateLimit } from "@/lib/rate-limit";
  * Acceso al demo sin registro (DEMO_MODE).
  *
  * Lo que importa: con la bandera apagada la ruta NO existe (404 mudo) y no se
- * prepara nada; el demo jamás roba la primera organización de una instancia
- * virgen (409); el alta es idempotente (un clic más no duplica org ni
- * semillas); y la sesión llega al navegador con las cookies de better-auth.
- * La BD va simulada por FORMA de consulta — el camino completo contra la app
- * viva queda para el host con Postgres (misma situación que sse-backplane).
+ * prepara nada; el demo entra TAMBIÉN en una instancia virgen (D-032) sin
+ * robarle la primera organización al propietario real (el alta pasa con el
+ * arranque suprimido y la org demo no cuenta para el arranque); el alta es
+ * idempotente (un clic más no duplica org ni semillas); y la sesión llega al
+ * navegador con las cookies de better-auth. La BD va simulada por FORMA de
+ * consulta — el camino completo contra la app viva queda para el host con
+ * Postgres (misma situación que sse-backplane).
  */
 
 const st = vi.hoisted(() => ({
@@ -29,6 +31,7 @@ vi.mock("@/lib/auth", () => ({
     },
   }),
   runInternalSignup: (fn: () => Promise<unknown>) => fn(),
+  runWithoutOnboarding: (fn: () => Promise<unknown>) => fn(),
 }));
 
 vi.mock("@/lib/db", () => {
@@ -192,15 +195,18 @@ describe("POST /api/demo/sesion", () => {
     ).toBe(true);
   });
 
-  it("en una instancia virgen responde 409 y NO crea la cuenta demo", async () => {
+  it("en una instancia virgen el demo entra y se prepara (D-032)", async () => {
     process.env.DEMO_MODE = "on";
     st.orgCount = 0;
     const res = await POST(PETICION());
-    expect(res.status).toBe(409);
-    const cuerpo = (await res.json()) as { error: { code: string } };
-    expect(cuerpo.error.code).toBe("sin_organizacion");
-    expect(st.signUp).not.toHaveBeenCalled();
-    expect(st.inserts).toEqual([]);
+    expect(res.status).toBe(200);
+    expect(res.headers.get("set-cookie")).toContain("better-auth.session_token=demo");
+    // Se crea la cuenta demo (el arranque suprimido se prueba en
+    // alta-demo-sin-arranque.test.ts) y se siembra su organización.
+    expect(st.signUp).toHaveBeenCalledTimes(1);
+    expect(st.signIn).toHaveBeenCalledTimes(1);
+    const tablas = st.inserts.map((i) => i.tabla).sort();
+    expect(tablas).toEqual(["agentProfile", "member", "organization", "pipelineStage"]);
   });
 
   it("camino feliz: prepara el demo y devuelve la sesión con cookies", async () => {

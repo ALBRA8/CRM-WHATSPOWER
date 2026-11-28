@@ -1,5 +1,7 @@
 import { timingSafeEqual } from "node:crypto";
+import { ne } from "drizzle-orm";
 import { getDb, schema } from "@/lib/db";
+import { SLUG_ORG_DEMO } from "@/lib/db/instancia";
 import { apiError } from "@/lib/api";
 import { checkRateLimit, clientIp } from "@/lib/rate-limit";
 import { markBotSeen } from "@/server/agents/bot/status";
@@ -87,6 +89,11 @@ function validBotKey(provided: string | null): boolean {
 /**
  * Organización única de la instancia (self-hosted, un negocio). Cacheada en
  * memoria: la instancia jamás cambia de organización en runtime.
+ *
+ * La organización demo (D-032) NO es la de la instancia: en una instalación
+ * donde el visitante solo entró al demo, devuelve null (los consumidores ya
+ * tratan el caso) y en cuanto el propietario real cree su cuenta se resuelve
+ * a la buena — null no se cachea.
  */
 let cachedOrgId: string | null = null;
 
@@ -96,6 +103,7 @@ export async function resolveInstanceOrg(): Promise<string | null> {
   const rows = await db
     .select({ id: schema.organization.id })
     .from(schema.organization)
+    .where(ne(schema.organization.slug, SLUG_ORG_DEMO))
     .limit(1);
   cachedOrgId = rows[0]?.id ?? null;
   return cachedOrgId;

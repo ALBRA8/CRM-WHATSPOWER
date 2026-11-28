@@ -9,10 +9,14 @@
   el CRM sin crear cuenta, dentro de una organización demo aislada (su propia
   organización, membresía y semillas de pipeline/agente), vía
   `POST /api/demo/sesion` con rate limit propio (FR-062). Apagado, la ruta
-  responde 404 mudo y el login no cambia. El alta demo atraviesa el bypass
-  interno del gate de registro cerrado (FR-060) pero solo en instancias ya
-  inicializadas: en una virgen responde 409 para no robarle la primera
-  organización al propietario real.
+  responde 404 mudo y el login no cambia.
+- El demo funciona desde la PRIMERA visita (D-032): el alta demo atraviesa el
+  bypass interno del gate de registro (FR-060) con el hook de primera
+  organización suprimido (`runWithoutOnboarding`), y la organización demo no
+  cuenta para el arranque (`contarOrganizacionesReales` la excluye). El
+  propietario real conserva su primer registro intacto y el registro público
+  sigue abierto hasta que exista su organización; bot, OAuth y la marca/apariencia
+  del login nunca toman la organización demo como la de la instancia.
 
 ## 2.12.0 — 2026-11-27
 
