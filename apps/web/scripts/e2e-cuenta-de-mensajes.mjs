@@ -1,6 +1,6 @@
 /**
  * Self-test E2E de comportamiento — 065, la Cuenta de mensajes del split de
- * Meta de 2026 e importar las plantillas creadas fuera de Vestro (guion
+ * Meta de 2026 e importar las plantillas creadas fuera de WhatsPower (guion
  * tests/e2e/us-cuenta-de-mensajes.md).
  *
  * Reproduce las dos fallas vistas en producción el 28-oct-2026: crear una
@@ -87,7 +87,7 @@ function guardar(extra = {}, token = "tok-065") {
 
 async function main() {
   console.log("== Setup: operador y una cuenta de WhatsApp ya partida ==");
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",
@@ -138,7 +138,7 @@ async function main() {
             },
           ],
         },
-        // Lo que Vestro no sabe enviar: NO se importa.
+        // Lo que WhatsPower no sabe enviar: NO se importa.
         {
           name: nombres.conImagen,
           components: [

@@ -3,7 +3,7 @@ packages:
   - "services/*"
   - "packages/*"
 
-# Reconocimiento de scripts de postinstall de dependencias (heredado de VESTRO).
+# Reconocimiento de scripts de postinstall de dependencias (heredado del monorepo CRM WhatsPower).
 allowBuilds:
   esbuild: true
   sharp: true

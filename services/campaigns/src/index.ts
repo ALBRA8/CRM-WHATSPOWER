@@ -11,4 +11,4 @@ export {
   WEBHOOK_LEAD,
   CAMPAIGN_RESULTS,
   CAMPAIGN_ROUTES,
-} from "@vestro/contracts";
+} from "@whatspower/contracts";

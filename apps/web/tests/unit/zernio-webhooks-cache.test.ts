@@ -111,8 +111,8 @@ describe("zernio · caché de los webhooks", () => {
 
   it("la llave no se usa como clave de la caché en claro", async () => {
     await webhookSecretsFromZernio(TOKEN, SEGMENTO);
-    const mapa = (globalThis as unknown as { __vestroZernioWebhooks: Map<string, unknown> })
-      .__vestroZernioWebhooks;
+    const mapa = (globalThis as unknown as { __whatspowerZernioWebhooks: Map<string, unknown> })
+      .__whatspowerZernioWebhooks;
     expect([...mapa.keys()].some((k) => k.includes(TOKEN))).toBe(false);
   });
 });

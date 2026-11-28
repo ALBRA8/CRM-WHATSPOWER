@@ -134,7 +134,7 @@ export function textoAviso(nuevas: readonly Espera[], umbral = UMBRAL_AVISO_MIN)
 
 /* ---- Lo que ya se le avisó a cada persona, en este navegador ---- */
 
-const CLAVE_AVISADAS = "vestro.esperando.avisadas";
+const CLAVE_AVISADAS = "whatspower.esperando.avisadas";
 /** Lo avisado hace más de 8 días ya no puede volver (la ventana más larga es de 7). */
 const VIDA_AVISADA_MS = 8 * 24 * 3_600_000;
 
@@ -196,7 +196,7 @@ export const AVISO_ESPERANDO_POR_DEFECTO: AvisoEsperandoDto = { modo: "todo", so
  * ni migración, y el layout la lee en el servidor para que el primer pintado
  * ya la sepa.
  */
-export const ESPERANDO_COOKIE = "vestro-esperando";
+export const ESPERANDO_COOKIE = "whatspower-esperando";
 /** Un año, como la apariencia. */
 export const ESPERANDO_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;
 
@@ -221,7 +221,7 @@ export function cookieDeAvisoEsperando(a: AvisoEsperandoDto): string {
 /* ---- Puentes entre el cintillo, el aviso y la Bandeja ---- */
 
 /** El cintillo o el aviso piden abrir la pestaña «Esperando». */
-export const EVENTO_VER_ESPERANDO = "vestro:ver-esperando";
+export const EVENTO_VER_ESPERANDO = "whatspower:ver-esperando";
 /** La ruta de la pestaña: la Bandeja la abre al leer `vista=esperando`. */
 export const URL_ESPERANDO = "/inbox?vista=esperando";
 /** Donde cada persona elige qué ve de «Esperando». */

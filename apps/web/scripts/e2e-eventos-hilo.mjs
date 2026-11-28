@@ -12,7 +12,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-eventos@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-eventos@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-eventos";
 const BOT_KEY = process.env.BOT_API_KEY ?? "";
 const TEMA = process.env.TEMA === "dark" ? "dark" : "light";
@@ -43,7 +43,7 @@ async function hasta(fn, ms = 15000) {
 mkdirSync(SALIDA, { recursive: true });
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
-await ctx.addCookies([{ name: "vestro-theme", value: TEMA, url: BASE }]);
+await ctx.addCookies([{ name: "whatspower-theme", value: TEMA, url: BASE }]);
 const req = ctx.request;
 const errores = [];
 

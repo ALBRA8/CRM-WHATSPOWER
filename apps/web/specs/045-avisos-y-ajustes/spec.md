@@ -27,7 +27,7 @@ aviso corto en cualquier pantalla de la app, salvo que ya estés mirando esa
 conversación con la pestaña al frente. Lo que mandas tú (o el agente) no
 suena. Una ráfaga suena una vez.
 
-**H3 — La pestaña cuenta los pendientes.** «(3) Vestro — CRM…»: cuántos chats
+**H3 — La pestaña cuenta los pendientes.** «(3) WhatsPower — CRM…»: cuántos chats
 tienen mensajes sin leer, como WhatsApp Web. Se actualiza en vivo y en todas
 las pantallas.
 

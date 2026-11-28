@@ -1,4 +1,4 @@
-# ENTREGA S4.3 — CRM WHATSPOWER (Vestro)
+# ENTREGA S4.3 — CRM WHATSPOWER (WhatsPower)
 
 **Fase:** Pruebas de fronteras entre los 14 dominios y validación E2E.
 **Repositorio:** `ALBRA8/CRM-WHATSPOWER`, rama `main`.
@@ -22,7 +22,7 @@ al reciclaje); VOCERO permaneció intacto.
 | 4 | Build (`pnpm -r build`) | OK — apps/web compilación completa + 6 paquetes TS |
 | 5 | Rutas API | **142** `route.ts` bajo `src/app/api` (vigía permanente nuevo) |
 | 6 | Contratos versionados (`packages/contracts`) | 49/49 — catálogo de errores congelado intacto |
-| 7 | Batería multi-tenant sobre PostgreSQL REAL (`pnpm --filter @vestro/web test:multi-tenant`) | **26/26 PASS** |
+| 7 | Batería multi-tenant sobre PostgreSQL REAL (`pnpm --filter @whatspower/web test:multi-tenant`) | **26/26 PASS** |
 | 8 | Vigía de fronteras entre dominios (`fronteras-dominios.test.ts`) | **9/9 PASS** |
 | 9 | Adaptador AGENTE-GENERAL (`services/agent-gateway`) | **16/16 PASS** (incluye 5 contra el servidor REAL del cerebro) |
 | 10 | E2E self-test de VOCERO (036) | **269/302 checks verdes, 0 FAIL**; parada por memoria del sandbox en R11 (ver §7) |
@@ -75,7 +75,7 @@ T2, CRED, ISO — arriba) y en las suites existentes de `packages/tenant`
 |---|---|
 | Responsabilidades respetadas | Vigía congelado: 14 dominios maestra + Platform; stubs audit/billing/campaigns/automation con SOLO README (sin declararse implementados) |
 | Sin dependencias circulares | RUNTIME: único ciclo el heredado de VOCERO `conversations/inbox` (ingest→reacciones→send→ingest) — demostrado preexistente en el baseline `c370cc4`, congelado por prueba (D-020); FUENTE además el benigno de solo-tipos en `integrations/mcp`. Cero ciclos nuevos. |
-| Sin acceso a datos internos de otro dominio donde corresponde contratos | 128 imports cross-domain reales congelados (38 aristas); contratos para límites de servicio: los 3 servicios consumen `@vestro/contracts` (vigía) y las 13 rutas bot del contrato existen verbatim en el núcleo |
+| Sin acceso a datos internos de otro dominio donde corresponde contratos | 128 imports cross-domain reales congelados (38 aristas); contratos para límites de servicio: los 3 servicios consumen `@whatspower/contracts` (vigía) y las 13 rutas bot del contrato existen verbatim en el núcleo |
 | Contratos versionados respetados | contracts 49/49; openapi/bot/despacho intactos; vigía de 13 rutas bot ↔ `route.ts` |
 | Sin duplicación de lógica | el catálogo de errores y contratos viven SOLO en `packages/contracts`; los servicios los consumen (`workspace:*`); la ventana HMAC (±300 s) tiene un único punto de verificación por dirección |
 | Stubs identificados correctamente | 4/4 con README honesto y verificado por prueba |
@@ -110,7 +110,7 @@ documentación únicamente.
 ## 7. E2E real (self-test de VOCERO, corrida continua)
 
 - Entorno documentado 036: app real (dev), PostgreSQL real, wa-mock/ai-mock
-  integrados en la app, cerebro falso de prueba en 3261, BD `vestro_036_e2e`.
+  integrados en la app, cerebro falso de prueba en 3261, BD `whatspower_036_e2e`.
 - **269/302 checks verdes (0 FAIL)** en una sola corrida: setup de registro,
   guía de inicio, webhook us5, us-bsuid ×4 (inbound sin wa_id, sin teléfono,
   reconciliación 521/52, destinatario argentino), #51 nombre del contacto,
@@ -145,7 +145,7 @@ funcionalidad para conseguir verdes.
 2. **R-AG-1 — `/crm/dispatch` no implantado en el cerebro** (404 real; el CRM
    falla tipado y con red de seguridad hasta publicar el adaptador).
 3. **Runtime de BD sobre el rol dueño**: la URL documentada conecta como
-   `vestro` (dueño; RLS no muerde para superusuario). La valla de BD opera como
+   `whatspower` (dueño; RLS no muerde para superusuario). La valla de BD opera como
    `app_runtime` — probado; el cambio de rol de runtime es trabajo operativo de
    F5 (grants ya en `004`).
 4. **A1 — SSE mono-instancia** (inherited, F5 backplane).

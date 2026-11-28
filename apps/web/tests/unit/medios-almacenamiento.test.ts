@@ -24,7 +24,7 @@ const BASE = {
 
 const CREDS = {
   MEDIA_BUCKET_ENDPOINT: "https://cuenta123.r2.cloudflarestorage.com",
-  MEDIA_BUCKET_NAME: "vestro-media",
+  MEDIA_BUCKET_NAME: "whatspower-media",
   MEDIA_BUCKET_KEY_ID: "AKIAEJEMPLO",
   MEDIA_BUCKET_SECRET: "secretoDeEjemplo1234567890",
   MEDIA_BUCKET_REGION: "auto",
@@ -44,7 +44,7 @@ async function montar(extra: Record<string, string | undefined>) {
 }
 
 beforeEach(async () => {
-  dirTemporal = await mkdtemp(path.join(tmpdir(), "vestro-medios-"));
+  dirTemporal = await mkdtemp(path.join(tmpdir(), "whatspower-medios-"));
 });
 
 afterEach(() => {
@@ -57,7 +57,7 @@ describe("firma SigV4 del bucket", () => {
     const r = firmarSolicitud({
       cfg: {
         endpoint: "https://cuenta123.r2.cloudflarestorage.com",
-        bucket: "vestro-media",
+        bucket: "whatspower-media",
         accessKeyId: "AKIAEJEMPLO",
         secretAccessKey: "secretoDeEjemplo1234567890",
         region: "auto",
@@ -78,7 +78,7 @@ describe("firma SigV4 del bucket", () => {
       "SignedHeaders=content-type;host;x-amz-content-sha256;x-amz-date"
     );
     expect(r.url).toBe(
-      "https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_abc/asset_def"
+      "https://cuenta123.r2.cloudflarestorage.com/whatspower-media/org_abc/asset_def"
     );
   });
 });
@@ -128,7 +128,7 @@ describe("dónde se escribe", () => {
     expect(fetchFalso).toHaveBeenCalledOnce();
     const [url, init] = fetchFalso.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe(
-      "https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/asset_1"
+      "https://cuenta123.r2.cloudflarestorage.com/whatspower-media/org_1/asset_1"
     );
     expect(init.method).toBe("PUT");
     await expect(
@@ -161,7 +161,7 @@ describe("una llave fija (el icono) no queda tapada al mover la bandera", () => 
     const m = await montar({ MEDIA_STORE: "disco", ...CREDS });
     await m.guardarMedia("org_1", "favicon", Buffer.from("icono nuevo"));
     expect(await readFile(path.join(dirTemporal, "org_1", "favicon"), "utf8")).toBe("icono nuevo");
-    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/favicon"]);
+    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/whatspower-media/org_1/favicon"]);
   });
 });
 
@@ -259,7 +259,7 @@ describe("037 — un bucket caído no pierde el archivo (D4)", () => {
     await writeFile(path.join(dirTemporal, "org_1", "asset_4"), "x");
     await m.borrarMedia("org_1", "asset_4");
     await expect(readFile(path.join(dirTemporal, "org_1", "asset_4"))).rejects.toThrow();
-    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/vestro-media/org_1/asset_4"]);
+    expect(llamadas).toEqual(["DELETE https://cuenta123.r2.cloudflarestorage.com/whatspower-media/org_1/asset_4"]);
   });
 
   it("un endpoint que no es http(s) cuenta como bucket mal configurado", async () => {

@@ -93,7 +93,7 @@
 </div>
 
 <script>
-  // Lo llena Claude al abrir la ventana: el nombre del conector de Vestro del
+  // Lo llena Claude al abrir la ventana: el nombre del conector de WhatsPower del
   // usuario (el mismo que declara la capacidad mcp) y el del negocio.
   const CONECTOR = "__CONECTOR__";
   const NEGOCIO = "__NEGOCIO__";
@@ -164,10 +164,10 @@
       return `No encuentro tu conector «${CONECTOR}». Agrégalo en claude.ai → Ajustes → Conectores y vuelve a abrir esta ventana. Mientras, puedes seguir probando en el chat con Claude.`;
     if (code === "needs_reauth") return `Tu conector «${CONECTOR}» necesita volver a conectarse (claude.ai → Ajustes → Conectores).`;
     if (code === "not_in_manifest" || code === "approval_required" || code === "consent_required")
-      return "Esta ventana necesita tu permiso para usar el conector de Vestro. Vuelve a enviar el mensaje y acepta el permiso.";
+      return "Esta ventana necesita tu permiso para usar el conector de WhatsPower. Vuelve a enviar el mensaje y acepta el permiso.";
     if (code === "cancelled") return "Cancelaste el envío; no se gastó nada.";
     if (code === "tool_error") {
-      // El MCP de Vestro devuelve el error de la API como texto JSON.
+      // El MCP de WhatsPower devuelve el error de la API como texto JSON.
       let r = e.result && e.result.structuredContent;
       if (!r) { try { r = JSON.parse(e.result.content[0].text); } catch { r = null; } }
       const err = r && r.error;
@@ -176,10 +176,10 @@
         const enlaces = (err.enlaces || []).map((x) => `${x.titulo}: ${x.url}`).join("\n");
         return `${err.message}\n${enlaces}`;
       }
-      return `Vestro no pudo correr la simulación: ${(err && err.message) || e.message || "error"}`;
+      return `WhatsPower no pudo correr la simulación: ${(err && err.message) || e.message || "error"}`;
     }
     if (code === "server_unavailable" || code === "upstream_error")
-      return "Vestro no contestó a tiempo. No sabemos si llegó a pensar: vuelve a enviar en un momento.";
+      return "WhatsPower no contestó a tiempo. No sabemos si llegó a pensar: vuelve a enviar en un momento.";
     return `No se pudo simular (${code || "error"}).`;
   }
 
@@ -187,7 +187,7 @@
     const mcp = await obtenerMcp();
     if (!mcp) {
       mcpPromesa = null; // otra oportunidad en el siguiente mensaje
-      agregar("error", "Esta vista no puede usar tu conector de Vestro. Ábrela en claude.ai o en la app de Claude, o sigue probando en el chat con Claude.");
+      agregar("error", "Esta vista no puede usar tu conector de WhatsPower. Ábrela en claude.ai o en la app de Claude, o sigue probando en el chat con Claude.");
       return;
     }
     agregar("burbuja cliente", textoCliente);

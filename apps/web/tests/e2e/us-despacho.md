@@ -7,7 +7,7 @@ Precondición: app corriendo (`next dev`) sobre una base migrada, con mocks
 (`WA_MOCK_ENABLED=true`, `META_GRAPH_BASE_URL` → wa-mock, `OPENROUTER_BASE_URL`
 → ai-mock con `OPENROUTER_API_TOKEN` y `OPENROUTER_MODEL`), `BOT_API_KEY`
 (≥16), `AGENT_COALESCE_MS=1500` y
-`BRAIN_DISPATCH_URL=http://127.0.0.1:<puerto libre>/vestro/dispatch`. Para los
+`BRAIN_DISPATCH_URL=http://127.0.0.1:<puerto libre>/whatspower/dispatch`. Para los
 otros canales, `CHANNELS=whatsapp,instagram,messenger` y `ZERNIO_BASE_URL` →
 zernio-mock.
 
@@ -39,9 +39,9 @@ corridas, cada una con la app arrancada en su modo.
 ## Historia 1 — Un mensaje llega al cerebro
 
 4. **AC1** Un WhatsApp entrante aparece en la bandeja y, pasada la ventana, el
-   cerebro recibe **un** `POST`: firma `x-vestro-signature` válida sobre el
-   cuerpo crudo con `BOT_API_KEY`; cabeceras `x-vestro-dispatch-id` (igual al
-   `dispatchId`, `dsp_…`) y `x-vestro-organization`; sin `x-vestro-event`; las
+   cerebro recibe **un** `POST`: firma `x-whatspower-signature` válida sobre el
+   cuerpo crudo con `BOT_API_KEY`; cabeceras `x-whatspower-dispatch-id` (igual al
+   `dispatchId`, `dsp_…`) y `x-whatspower-organization`; sin `x-whatspower-event`; las
    claves del evento en el orden del contrato; `conversation.id` es la de la
    bandeja, `channel = whatsapp`, ventana abierta; un mensaje de texto sin
    adjunto. El cuerpo no lleva el token de WhatsApp ni la llave.
@@ -174,6 +174,6 @@ configurada: no importa, el CRM no contesta solo).
   el agente responde 409 `sin_cerebro`.
 - **La tarjeta.** En la pantalla Agente, la fila «Despacho al cerebro» dice
   «Activo · host» con la última entrega; tras un turno que no llegó, pasa a
-  ámbar con el motivo. Sin cerebro, la tarjeta dice que Vestro funciona como
+  ámbar con el motivo. Sin cerebro, la tarjeta dice que WhatsPower funciona como
   bandeja manual (informativo, no rojo); con cerebro y el interruptor
   apagado, que nadie está contestando.

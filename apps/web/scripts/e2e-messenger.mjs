@@ -116,7 +116,7 @@ async function main() {
   }
 
   console.log("== Setup: registro/login del propietario ==");
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",
@@ -153,7 +153,7 @@ async function main() {
   });
   ok(
     "PUT con token válido → 200 con el nombre de la página",
-    conn.res.ok && conn.json?.pageName === "Página de prueba Vestro",
+    conn.res.ok && conn.json?.pageName === "Página de prueba WhatsPower",
     JSON.stringify(conn.json)
   );
 

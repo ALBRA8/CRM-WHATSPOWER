@@ -115,7 +115,7 @@ conversación va en Nota interna. No cambia nada de los datos.
 
 - **Editar notas** (D3).
 - **Menciones `@persona` con aviso** (Chatwoot): necesitan notificaciones por
-  persona, que Vestro aún no tiene.
+  persona, que WhatsPower aún no tiene.
 - **Adjuntos en la nota** (DeskcommCRM): primero el texto.
 - **Notas visibles para el cerebro** (D5).
 - **Migrar el campo «Notas» del contacto**: sigue donde está. Sirve para

@@ -7,7 +7,7 @@
 **Status**: Especificada antes de escribir código.
 
 **Input**: primera spec de la 1.6.0 (`PLAN-2.0.md`, aprobado por el dueño el
-2026-10-13). Es el puerto a la raíz de tres arreglos que Vestro Cloud ya tiene
+2026-10-13). Es el puerto a la raíz de tres arreglos que WhatsPower Cloud ya tiene
 en producción: #111 `439386e`, #116 `5325273` + `2fdeff2` y #117 `2624262`
 (migración `0035_dispatch_message_ids`). Su historia, con lo medido en
 producción, está en `docs/bitacora-cloud.md` de ese repo (entradas del 8 y del

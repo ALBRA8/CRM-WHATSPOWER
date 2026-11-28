@@ -36,7 +36,7 @@ Migración aditiva `0025_conversation_note.sql`.
 `NotaDto = { id, conversationId, texto, createdAt, autor: { id, nombre } | null, puedeBorrar }`.
 `puedeBorrar` se calcula para quien pide.
 
-`specs/001-vestro-core/contracts/sse.md` gana los dos eventos.
+`specs/001-whatspower-core/contracts/sse.md` gana los dos eventos.
 
 ## Interfaz
 

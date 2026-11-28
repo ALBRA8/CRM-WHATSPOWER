@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: quinta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#106.
+**Input**: quinta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/crm-whatspower#106.
 el propietario del producto autorizó en el chat del 2026-10-20 mergear la 035 y seguir con la #106.
 Decisiones de producto ya tomadas por el propietario del producto para la 2.0: el cerebro piensa
 por el CRM (`/api/bot/llm`, opción recomendada del issue) y el par usa una
@@ -28,7 +28,7 @@ despacho activo, el incluido ya ni contesta: es código muerto que confunde
 
 ## Historias
 
-**H1 — El CRM no trae agente.** Sin cerebro conectado, Vestro es un CRM de
+**H1 — El CRM no trae agente.** Sin cerebro conectado, WhatsPower es un CRM de
 bandeja manual: recibe, envía a mano, pipeline, agenda. La interfaz lo dice
 sin tratarlo como error.
 
@@ -99,7 +99,7 @@ modelo que dice el perfil (`LLM_MODEL` si el perfil no trae). Con
 **D7 — Guía de inicio.** El paso «IA» se queda (es con lo que piensa el
 agente); se suma **«Conecta tu agente»**: listo cuando el despacho está
 configurado y el `/health` contesta. La tarjeta final: «enciende tu agente»
-solo cuando hay cerebro; sin él, «Vestro funciona como bandeja manual; para
+solo cuando hay cerebro; sin él, «WhatsPower funciona como bandeja manual; para
 que un agente conteste, conéctalo» con enlace a la guía.
 
 **D8 — «Quién responde»** pierde el agente incluido: el DTO deja `embedded`,
@@ -137,7 +137,7 @@ cerebro en la interfaz (D3).
 - **AC5** — AGENTE-GENERAL con `LLM_API_KEY` vacía piensa por el CRM (pytest con respx y
   e2e contra el CRM local).
 - **AC6** — Gates verdes; OpenAPI al día (`openapi.test.ts`).
-- **AC7** — En vivo: `vestro20` con AGENTE-GENERAL **sin** `LLM_API_KEY` contesta un
+- **AC7** — En vivo: `whatspower20` con AGENTE-GENERAL **sin** `LLM_API_KEY` contesta un
   WhatsApp real por el relevo, y una corrida corta del Laboratorio pasa.
 
 ## Constitution Check

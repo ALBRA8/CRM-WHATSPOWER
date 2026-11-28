@@ -1,6 +1,6 @@
 # Plan — 036 Retiro del agente incluido
 
-## CRM (vestro-crm)
+## CRM (crm-whatspower)
 
 1. **Proxy** `src/app/api/bot/llm/[...ruta]/route.ts` + `src/server/bot/llm-proxy.ts`
    (puerto de cloud sin lista de modelos). `requireBotKey` acepta también
@@ -35,6 +35,6 @@
 
 ## Prueba en vivo
 
-`vestro20`: imagen CRM y AGENTE-GENERAL `rc.7`; se borra `LLM_API_KEY` del servicio
+`whatspower20`: imagen CRM y AGENTE-GENERAL `rc.7`; se borra `LLM_API_KEY` del servicio
 (deja de existir la excepción de `coolify-env.mjs` para ella: solo se borra);
 un WhatsApp real por el relevo y una corrida corta del Laboratorio.

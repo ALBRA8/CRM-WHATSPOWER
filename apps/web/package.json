@@ -1,7 +1,7 @@
 {
-  "name": "@vestro/web",
+  "name": "@whatspower/web",
   "version": "2.12.0",
-  "description": "Vestro — CRM SaaS multi-tenant de WhatsApp: bandeja, canales oficiales, CRM, agenda, API v1 y MCP.",
+  "description": "WhatsPower — CRM SaaS multi-tenant de WhatsApp: bandeja, canales oficiales, CRM, agenda, API v1 y MCP.",
   "license": "MIT",
   "type": "module",
   "private": true,

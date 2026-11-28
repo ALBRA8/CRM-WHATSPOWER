@@ -1,6 +1,6 @@
 # 031 — Plan
 
-Spec: [spec.md](spec.md). Dos repos, dos PRs: `vestro-crm` (contrato aditivo)
+Spec: [spec.md](spec.md). Dos repos, dos PRs: `crm-whatspower` (contrato aditivo)
 y `AGENTE-GENERAL` (la entrada única). El del CRM va primero, porque AGENTE-GENERAL lee lo que
 el CRM agrega; AGENTE-GENERAL tolera que falte, así que el orden no rompe nada.
 
@@ -17,7 +17,7 @@ contrato: agregar cabe, quitar o renombrar no).
 |---|---|
 | ¿Qué le daba el webhook a AGENTE-GENERAL que el despacho no trae? | `referral.headline`, `location`, `contacts[].name`, `document.filename` y `audio.voice` (`app/webhook.py`, `_parse_messages`). El resto (texto, botones, adjuntos con `mediaId`, nombre de perfil) ya viaja. |
 | ¿Dónde guarda el CRM cada uno? | Anuncio: tabla `ad_attribution` (una por conversación). Ubicación y tarjetas: `media_asset.payload` con `kind` `location` o `contacts`. Nombre del archivo: `media_asset.file_name`. Voz: no se guarda. |
-| ¿AGENTE-GENERAL ya lee `adOrigen`? | Sí: `app/prompt.py` cae a `context.adOrigen.headline` cuando el mensaje no trae `referral`. Vestro Cloud ya lo manda; la raíz no. |
+| ¿AGENTE-GENERAL ya lee `adOrigen`? | Sí: `app/prompt.py` cae a `context.adOrigen.headline` cuando el mensaje no trae `referral`. WhatsPower Cloud ya lo manda; la raíz no. |
 | ¿Con qué firma la raíz? | `BOT_API_KEY`, la misma llave que AGENTE-GENERAL tiene como `CRM_BOT_API_KEY`. |
 | ¿La raíz exige `dispatchId` al contestar? | No. `/api/bot/messages` pide `conversationId` y `text`, como siempre. |
 | ¿Qué pasa en la raíz si AGENTE-GENERAL no contesta el despacho? | Tres intentos (1 s, 4 s), y la conversación pasa a humano con motivo `error` (021). |
@@ -25,11 +25,11 @@ contrato: agregar cabe, quitar o renombrar no).
 
 ## Fase 1 — Diseño
 
-### CRM (`vestro-crm`)
+### CRM (`crm-whatspower`)
 
 1. **`/api/bot/context` gana `adOrigen`**: `{headline, body, sourceType,
    sourceUrl, hasCtwaClid}` de `ad_attribution` de esa conversación, o `null`.
-   Mismo nombre y misma forma que Vestro Cloud (`hasCtwaClid` en vez del clid:
+   Mismo nombre y misma forma que WhatsPower Cloud (`hasCtwaClid` en vez del clid:
    el identificador no sale del CRM).
 2. **El mensaje del despacho gana tres llaves opcionales**, después de las que
    ya tiene y en este orden:

@@ -15,7 +15,7 @@ import {
  *
  * 036 — El CRM ya no trae agente: quien contesta es el cerebro al que se le
  * despacha (`BRAIN_DISPATCH_URL`), y solo con el interruptor encendido. Sin
- * cerebro, Vestro es una bandeja manual, que es un producto válido: el aviso
+ * cerebro, WhatsPower es una bandeja manual, que es un producto válido: el aviso
  * `sin_cerebro` informa, no alarma. Ya no hay dos que puedan contestar a la
  * vez desde el CRM, así que `doble_respuesta` se fue.
  */
@@ -39,25 +39,25 @@ type HealthCacheEntry = {
 // En globalThis: los módulos pueden evaluarse más de una vez (una por ruta en
 // dev) y la última llamada la anota `requireBotKey`, en otra ruta.
 const globalForBrain = globalThis as unknown as {
-  __vestroBotLastSeen?: number;
-  __vestroBrainHealth?: HealthCacheEntry;
+  __whatspowerBotLastSeen?: number;
+  __whatspowerBrainHealth?: HealthCacheEntry;
 };
 
 /** La anota `requireBotKey` en cada llamada autenticada. Solo memoria: se
  *  pierde al reiniciar, y la UI lo dice («desde el último arranque»). */
 export function markBotSeen(now: number = Date.now()): void {
-  globalForBrain.__vestroBotLastSeen = now;
+  globalForBrain.__whatspowerBotLastSeen = now;
 }
 
 export function botLastSeenAt(): Date | null {
-  const t = globalForBrain.__vestroBotLastSeen;
+  const t = globalForBrain.__whatspowerBotLastSeen;
   return typeof t === "number" ? new Date(t) : null;
 }
 
 /** Solo para tests. */
 export function resetBrainStatusState(): void {
-  delete globalForBrain.__vestroBotLastSeen;
-  delete globalForBrain.__vestroBrainHealth;
+  delete globalForBrain.__whatspowerBotLastSeen;
+  delete globalForBrain.__whatspowerBrainHealth;
 }
 
 // ---------------------------------------------------------------------------
@@ -208,7 +208,7 @@ export async function getBrainHealth(
 ): Promise<BrainHealthDto | null> {
   if (!rawUrl) return null;
   const clock = opts.clock ?? Date.now;
-  const cached = globalForBrain.__vestroBrainHealth;
+  const cached = globalForBrain.__whatspowerBrainHealth;
   if (cached && cached.url === rawUrl && clock() < cached.expiresAt) {
     return cached.pending;
   }
@@ -218,7 +218,7 @@ export async function getBrainHealth(
     expiresAt: Number.POSITIVE_INFINITY,
     pending: fetchBrainHealth(rawUrl, opts),
   };
-  globalForBrain.__vestroBrainHealth = entry;
+  globalForBrain.__whatspowerBrainHealth = entry;
   const result = await entry.pending;
   entry.expiresAt = clock() + (opts.ttlMs ?? BRAIN_HEALTH_TTL_MS);
   return result;

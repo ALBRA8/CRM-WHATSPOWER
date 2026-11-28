@@ -1,6 +1,6 @@
 # 031 — Tareas
 
-## CRM (`vestro-crm`)
+## CRM (`crm-whatspower`)
 
 - [ ] T1 `adOrigen` en `GET /api/bot/context` (`src/app/api/bot/context/route.ts`), con prueba
 - [ ] T2 `fileName`, `location`, `contacts` en el mensaje del despacho (`src/server/brains/contract.ts`, `deliver.ts`)
@@ -26,5 +26,5 @@
 
 - [ ] T17 `scripts/e2e_contra_raiz.py` con la topología nueva: 9/9
 - [ ] T18 En vivo local con túnel: WhatsApp (línea cliente) e Instagram (DM del propietario del producto)
-- [ ] T19 En vivo en Coolify (`vestro-16`)
+- [ ] T19 En vivo en Coolify (`whatspower-16`)
 - [ ] T20 Bitácora, PRs y tres líneas en el chat

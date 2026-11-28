@@ -20,5 +20,5 @@
 
 ## Juntos
 
-- [ ] T13 En vivo: corrida en `vestro20` contra AGENTE-GENERAL
+- [ ] T13 En vivo: corrida en `whatspower20` contra AGENTE-GENERAL
 - [ ] T14 Bitácora, PRs

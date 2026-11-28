@@ -1,6 +1,6 @@
 # 031 — AGENTE-GENERAL entra solo por el despacho
 
-**Feature Branch**: `feat/031-agente-por-despacho` (en `vestro-crm` y en `AGENTE-GENERAL`)
+**Feature Branch**: `feat/031-agente-por-despacho` (en `crm-whatspower` y en `AGENTE-GENERAL`)
 
 **Created**: 2026-10-19
 
@@ -19,7 +19,7 @@ forma aditiva, y cambia la topología con la que se instala el par. Plan en
 
 ## Problema
 
-Hoy, con Vestro raíz, Meta le manda el webhook a AGENTE-GENERAL y AGENTE-GENERAL se lo reenvía al
+Hoy, con WhatsPower raíz, Meta le manda el webhook a AGENTE-GENERAL y AGENTE-GENERAL se lo reenvía al
 CRM (el «relay»). Eso tiene tres costos:
 
 1. **AGENTE-GENERAL solo contesta WhatsApp.** Los DMs de Instagram, Messenger y TikTok
@@ -53,14 +53,14 @@ webhook a AGENTE-GENERAL 2.0, AGENTE-GENERAL no lo descarta en silencio: avisa y
 
 **D1 — El despacho es la única entrada de AGENTE-GENERAL, en los dos modos.**
 
-| | Estándar (contra la raíz) | Cloud (contra Vestro Cloud) |
+| | Estándar (contra la raíz) | Cloud (contra WhatsPower Cloud) |
 |---|---|---|
-| Entrada | `POST /vestro/dispatch` | `POST /vestro/dispatch` (sin cambios) |
+| Entrada | `POST /whatspower/dispatch` | `POST /whatspower/dispatch` (sin cambios) |
 | Firma de lo que entra | `CRM_BOT_API_KEY` | `CRM_BRAIN_SECRET` (sin cambios) |
 | Salida | `/api/bot/*` con `X-API-Key` (sin cambios) | `/api/brains/*` (sin cambios) |
 | Seguimiento a las 4 h | Sí, como siempre | No, como siempre |
 
-El modo lo sigue diciendo `VESTRO_MODE`. Entrada y salida dejan de ir atadas:
+El modo lo sigue diciendo `WHATSPOWER_MODE`. Entrada y salida dejan de ir atadas:
 la entrada es la misma para los dos.
 
 **D2 — Sale lo que existía solo por estar delante del CRM.** `app/webhook.py`,
@@ -97,7 +97,7 @@ CRM.** Cambios aditivos en la raíz:
 
 | Dato | Antes (webhook a AGENTE-GENERAL) | Ahora |
 |---|---|---|
-| Anuncio de origen (titular) | `referral` del mensaje | `adOrigen` en `GET /api/bot/context`, la misma llave que ya manda Vestro Cloud y que AGENTE-GENERAL ya lee |
+| Anuncio de origen (titular) | `referral` del mensaje | `adOrigen` en `GET /api/bot/context`, la misma llave que ya manda WhatsPower Cloud y que AGENTE-GENERAL ya lee |
 | Ubicación | `location` del mensaje | `location` en el mensaje del despacho, solo si `type` es `location` |
 | Tarjeta de contacto | `contacts[].name` | `contacts` (los nombres) en el mensaje del despacho, solo si `type` es `contacts` |
 | Nombre del documento | `document.filename` | `fileName` en el mensaje del despacho, solo si el adjunto tiene nombre |

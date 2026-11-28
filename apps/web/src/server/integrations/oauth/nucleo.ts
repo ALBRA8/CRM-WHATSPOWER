@@ -137,7 +137,7 @@ export function metadatosRecurso(origen: string) {
     authorization_servers: [origen],
     scopes_supported: [...OAUTH_SCOPES],
     bearer_methods_supported: ["header"],
-    resource_name: "Vestro CRM",
+    resource_name: "CRM WhatsPower",
     resource_documentation: `${origen}/settings/api/docs`,
   };
 }

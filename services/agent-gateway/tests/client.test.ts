@@ -2,7 +2,7 @@ import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { createHmac } from "node:crypto";
 import { createServer, type Server } from "node:http";
 import { AgentGateway, AgentGatewayError } from "../src/client.js";
-import type { ConversationTurnReceived } from "@vestro/contracts";
+import type { ConversationTurnReceived } from "@whatspower/contracts";
 
 const SECRET = "secreto-hmac-de-prueba";
 const KEY = "agent-api-key-de-prueba";
@@ -137,7 +137,7 @@ describe("despacho firmado (contrato §4)", () => {
     expect(hits.get("/crm/dispatch-5xx")).toBe(3); // 1 inicial + 2 reintentos
   });
 
-  it("preserva el código tipado ai_paused en 409 (compatibilidad VESTRO)", async () => {
+  it("preserva el código tipado ai_paused en 409 (compatibilidad WHATSPOWER)", async () => {
     const gw = makeGateway("/crm/dispatch-paused", 0);
     const res = await gw.dispatch(VALID_EVENT, "req-uuid-3");
     expect(res.ok).toBe(false);

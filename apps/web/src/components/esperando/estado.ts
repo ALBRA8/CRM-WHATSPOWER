@@ -27,7 +27,7 @@ import type { ConversacionDeLista } from "@/lib/lista-compartida";
  * el cintillo, y el cintillo de arriba ya está pintado: este evento le avisa
  * sin recargar.
  */
-const EVENTO_AJUSTE = "vestro:aviso-esperando";
+const EVENTO_AJUSTE = "whatspower:aviso-esperando";
 
 /** Guarda la elección de esta persona (cookie, como la apariencia) y la avisa. */
 export function guardarAvisoEsperando(a: AvisoEsperandoDto): void {

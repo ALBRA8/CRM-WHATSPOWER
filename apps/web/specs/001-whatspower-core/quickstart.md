@@ -1,4 +1,4 @@
-# Quickstart — desarrollo local y self-test (001-vestro-core)
+# Quickstart — desarrollo local y self-test (001-whatspower-core)
 
 ## Requisitos
 

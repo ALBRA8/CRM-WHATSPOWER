@@ -1,9 +1,9 @@
 ---
 name: probar-agente
-description: Prueba el agente de WhatsApp de un negocio en Vestro CRM sin WhatsApp, con simulaciones que usan su configuración real (escenarios por caso de uso y casos difíciles) y una ventana de chat donde el dueño escribe como cliente. Úsala después de configurar o cambiar el agente, antes de encenderlo, o cuando el dueño quiera ver cómo contesta.
+description: Prueba el agente de WhatsApp de un negocio en CRM WhatsPower sin WhatsApp, con simulaciones que usan su configuración real (escenarios por caso de uso y casos difíciles) y una ventana de chat donde el dueño escribe como cliente. Úsala después de configurar o cambiar el agente, antes de encenderlo, o cuando el dueño quiera ver cómo contesta.
 ---
 
-# Probar el agente de Vestro
+# Probar el agente de WhatsPower
 
 Vas a enseñarle al dueño de un negocio cómo le contesta su agente a los clientes, **sin WhatsApp**: con `simulate_conversation` le escribes al agente como si fueras un cliente y ves qué contestaría y qué haría. La respuesta sale del mismo agente que atiende el WhatsApp del negocio (AGENTE-GENERAL u otro), con su configuración real. No se envía ningún mensaje por WhatsApp, la conversación de prueba se borra al terminar y una cita agendada es **de prueba**: no llega a ningún calendario (los horarios que ofrece sí son los reales).
 
@@ -68,7 +68,7 @@ Aplica si el agente atiende a quien llega por un anuncio, una campaña o una pro
 
 ### Agregar un caso de uso
 
-Cuando Vestro sume funciones (botones, imágenes, catálogos, nichos), agrega aquí su sección con el mismo formato: cuándo aplica, y por escenario qué escribe el cliente y qué debe pasar. Los casos difíciles se corren con todos.
+Cuando WhatsPower sume funciones (botones, imágenes, catálogos, nichos), agrega aquí su sección con el mismo formato: cuándo aplica, y por escenario qué escribe el cliente y qué debe pasar. Los casos difíciles se corren con todos.
 
 ## La tanda
 
@@ -81,7 +81,7 @@ Cuando Vestro sume funciones (botones, imágenes, catálogos, nichos), agrega aq
 
 Para que el dueño escriba él como cliente y vea en vivo qué contesta su agente, abre un artefacto con la plantilla `ventana-chat.html` de esta skill (si no tienes el archivo, arma una página sencilla igual: una caja para escribir, la conversación arriba, y por cada mensaje una llamada a `simulate_conversation` con lo anterior en `history`).
 
-- La página llama a la herramienta por el conector de Vestro del usuario con la capacidad `mcp` del artefacto: declara `capabilities: {mcp: {servers: [{server: "<nombre del conector>", tools: ["simulate_conversation"]}]}}` y reemplaza en la plantilla `__CONECTOR__` por ese mismo nombre y `__NEGOCIO__` por el nombre del negocio.
-- El nombre del conector es el que el usuario le puso en claude.ai (Ajustes → Conectores). Si el MCP de Vestro es local (Claude Code o la app de escritorio), es `host:` seguido del nombre del servidor tal como aparece en tus herramientas (`mcp__<nombre>__…`), y la ventana solo funciona dentro de la app de Claude.
+- La página llama a la herramienta por el conector de WhatsPower del usuario con la capacidad `mcp` del artefacto: declara `capabilities: {mcp: {servers: [{server: "<nombre del conector>", tools: ["simulate_conversation"]}]}}` y reemplaza en la plantilla `__CONECTOR__` por ese mismo nombre y `__NEGOCIO__` por el nombre del negocio.
+- El nombre del conector es el que el usuario le puso en claude.ai (Ajustes → Conectores). Si el MCP de WhatsPower es local (Claude Code o la app de escritorio), es `host:` seguido del nombre del servidor tal como aparece en tus herramientas (`mcp__<nombre>__…`), y la ventana solo funciona dentro de la app de Claude.
 - Antes de abrirla, recuérdale al dueño que cada mensaje que escriba ahí también gasta saldo de su proveedor de IA, y que nada de lo que escriba llega a un cliente.
 - Si la ventana no puede llamar al conector (el usuario no lo tiene en claude.ai o no lo autoriza), sigue en el chat: el dueño te escribe como cliente y tú llamas a `simulate_conversation` con el historial.

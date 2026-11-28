@@ -86,8 +86,8 @@ AGENTS.md, CHANGELOG.md, specs/README.md, docs/bitacora-2.0.md
   entrega firmada con el secreto de antes → 200, segundo arranque sin log.
 - **Prueba en vivo**: el canal tocado son los webhooks de Zernio. En local no
   hay DM real sin mover el webhook de Zernio del propietario del producto, que hoy apunta a
-  `vestro-clase`; en Coolify, la instancia `vestro-clase`. Las dos cosas
+  `whatspower-clase`; en Coolify, la instancia `whatspower-clase`. Las dos cosas
   esperan a que el propietario del producto lo pida (instrucción de esta tarea). Receta cuando lo
-  autorice: desplegar la imagen con esta rama en `vestro-clase`, ver en el log
+  autorice: desplegar la imagen con esta rama en `whatspower-clase`, ver en el log
   del arranque cuántos secretos cifró, y un DM real de `karla.beltran` a
   Instagram que entra con la firma verificada y recibe respuesta.

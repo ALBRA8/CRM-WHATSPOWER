@@ -99,7 +99,7 @@ queda esperando.
 - **Capturas** en claro y oscuro con Playwright: el compositor en WhatsApp y en
   Instagram, la bandeja vacía con varios canales y el filtro de un canal sin
   conversaciones. `tests/unit/contraste-temas.test.ts` en verde.
-- **En vivo**: en `vestro-clase`, abrir la conversación de Instagram y ver el
+- **En vivo**: en `whatspower-clase`, abrir la conversación de Instagram y ver el
   compositor sin clip, ubicación ni contacto (captura).
 
 ## Constitution Check

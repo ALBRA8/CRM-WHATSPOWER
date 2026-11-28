@@ -5,18 +5,18 @@
  * frecuentes, campaña o venta, y los casos difíciles, que van siempre) y la
  * ventana de chat.
  *
- * Una sola fuente, igual que «configurar Vestro»: el servidor MCP la ofrece
+ * Una sola fuente, igual que «configurar WhatsPower»: el servidor MCP la ofrece
  * como prompt (`probar_agente`) y el plugin la trae como skill en
- * `plugin/vestro/skills/probar-agente/SKILL.md`, con la plantilla de la
+ * `plugin/whatspower/skills/probar-agente/SKILL.md`, con la plantilla de la
  * ventana (`ventana-chat.html`) al lado. `tests/unit/mcp.test.ts` exige que
  * los dos textos sean el mismo. Para sumar un caso de uso, agrega su sección
  * aquí y en la skill.
  *
- * Puerto de Vestro Cloud: en la raíz la simulación corre por el camino del
+ * Puerto de WhatsPower Cloud: en la raíz la simulación corre por el camino del
  * Laboratorio con el agente que de verdad contesta (AGENTE-GENERAL u otro), así que las
  * acciones son las que ese agente deja en el CRM (traspaso, etapa, cita).
  */
-export const GUIA_PROBAR = `# Probar el agente de Vestro
+export const GUIA_PROBAR = `# Probar el agente de WhatsPower
 
 Vas a enseñarle al dueño de un negocio cómo le contesta su agente a los clientes, **sin WhatsApp**: con \`simulate_conversation\` le escribes al agente como si fueras un cliente y ves qué contestaría y qué haría. La respuesta sale del mismo agente que atiende el WhatsApp del negocio (AGENTE-GENERAL u otro), con su configuración real. No se envía ningún mensaje por WhatsApp, la conversación de prueba se borra al terminar y una cita agendada es **de prueba**: no llega a ningún calendario (los horarios que ofrece sí son los reales).
 
@@ -81,7 +81,7 @@ Aplica si el agente atiende a quien llega por un anuncio, una campaña o una pro
 
 ### Agregar un caso de uso
 
-Cuando Vestro sume funciones (botones, imágenes, catálogos, nichos), agrega aquí su sección con el mismo formato: cuándo aplica, y por escenario qué escribe el cliente y qué debe pasar. Los casos difíciles se corren con todos.
+Cuando WhatsPower sume funciones (botones, imágenes, catálogos, nichos), agrega aquí su sección con el mismo formato: cuándo aplica, y por escenario qué escribe el cliente y qué debe pasar. Los casos difíciles se corren con todos.
 
 ## La tanda
 
@@ -94,8 +94,8 @@ Cuando Vestro sume funciones (botones, imágenes, catálogos, nichos), agrega aq
 
 Para que el dueño escriba él como cliente y vea en vivo qué contesta su agente, abre un artefacto con la plantilla \`ventana-chat.html\` de esta skill (si no tienes el archivo, arma una página sencilla igual: una caja para escribir, la conversación arriba, y por cada mensaje una llamada a \`simulate_conversation\` con lo anterior en \`history\`).
 
-- La página llama a la herramienta por el conector de Vestro del usuario con la capacidad \`mcp\` del artefacto: declara \`capabilities: {mcp: {servers: [{server: "<nombre del conector>", tools: ["simulate_conversation"]}]}}\` y reemplaza en la plantilla \`__CONECTOR__\` por ese mismo nombre y \`__NEGOCIO__\` por el nombre del negocio.
-- El nombre del conector es el que el usuario le puso en claude.ai (Ajustes → Conectores). Si el MCP de Vestro es local (Claude Code o la app de escritorio), es \`host:\` seguido del nombre del servidor tal como aparece en tus herramientas (\`mcp__<nombre>__…\`), y la ventana solo funciona dentro de la app de Claude.
+- La página llama a la herramienta por el conector de WhatsPower del usuario con la capacidad \`mcp\` del artefacto: declara \`capabilities: {mcp: {servers: [{server: "<nombre del conector>", tools: ["simulate_conversation"]}]}}\` y reemplaza en la plantilla \`__CONECTOR__\` por ese mismo nombre y \`__NEGOCIO__\` por el nombre del negocio.
+- El nombre del conector es el que el usuario le puso en claude.ai (Ajustes → Conectores). Si el MCP de WhatsPower es local (Claude Code o la app de escritorio), es \`host:\` seguido del nombre del servidor tal como aparece en tus herramientas (\`mcp__<nombre>__…\`), y la ventana solo funciona dentro de la app de Claude.
 - Antes de abrirla, recuérdale al dueño que cada mensaje que escriba ahí también gasta saldo de su proveedor de IA, y que nada de lo que escriba llega a un cliente.
 - Si la ventana no puede llamar al conector (el usuario no lo tiene en claude.ai o no lo autoriza), sigue en el chat: el dueño te escribe como cliente y tú llamas a \`simulate_conversation\` con el historial.
 `;

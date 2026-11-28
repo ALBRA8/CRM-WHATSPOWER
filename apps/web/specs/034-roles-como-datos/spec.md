@@ -1,12 +1,12 @@
 # 034 — Roles como datos
 
-**Feature Branch**: `feat/034-roles-como-datos` (en `vestro-crm` y en `AGENTE-GENERAL`)
+**Feature Branch**: `feat/034-roles-como-datos` (en `crm-whatspower` y en `AGENTE-GENERAL`)
 
 **Created**: 2026-10-20
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: tercera pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#90.
+**Input**: tercera pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/crm-whatspower#90.
 el propietario del producto autorizó en el chat del 2026-10-20 mergear la 033 y seguir con la #90.
 
 **Carril**: ciclo completo (Principio VI). Toca el modelo de datos (migración
@@ -93,7 +93,7 @@ respeta el agente conectado.
 - **AC4** — AGENTE-GENERAL: con `tools` sin `agendar`, al modelo no se le enseñan
   `propose_slots` ni `book_session` y el prompt dice que no agenda; sin `tools`
   en el perfil, todas como hoy.
-- **AC5** — En vivo: apagar «agendar» en `vestro20` hace que una corrida del
+- **AC5** — En vivo: apagar «agendar» en `whatspower20` hace que una corrida del
   Laboratorio o una conversación ya no ofrezca horarios, sin redesplegar
   (esperando el TTL del perfil).
 - **AC6** — Gates verdes en los dos repos; migración probada sobre base vacía

@@ -1,5 +1,5 @@
 {
-  "name": "@vestro/campaigns",
+  "name": "@whatspower/campaigns",
   "version": "0.1.0",
   "private": true,
   "description": "Servicio satélite de campañas: reconstrucción clean-room de las capacidades de WHATSPOWER-ULTRA (sin copiar código — D-009). Etapa 1: máquina de estados y contratos; motor completo en Fase 9.",
@@ -13,7 +13,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@vestro/contracts": "workspace:*"
+    "@whatspower/contracts": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

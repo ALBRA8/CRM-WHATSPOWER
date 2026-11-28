@@ -106,7 +106,7 @@ async function main() {
 
 async function preparar() {
   console.log("== Setup ==");
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

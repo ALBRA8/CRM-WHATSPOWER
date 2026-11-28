@@ -32,11 +32,11 @@ type Estado = {
 
 // En globalThis: en dev los módulos se evalúan más de una vez y todas las
 // copias deben compartir un solo barrido.
-const g = globalThis as unknown as { __vestroWebhookBarrido?: Estado };
+const g = globalThis as unknown as { __whatspowerWebhookBarrido?: Estado };
 
 function estado(): Estado {
-  if (!g.__vestroWebhookBarrido) {
-    g.__vestroWebhookBarrido = {
+  if (!g.__whatspowerWebhookBarrido) {
+    g.__whatspowerWebhookBarrido = {
       timer: null,
       corriendo: false,
       cita: null,
@@ -44,7 +44,7 @@ function estado(): Estado {
       ultimaPurga: 0,
     };
   }
-  return g.__vestroWebhookBarrido;
+  return g.__whatspowerWebhookBarrido;
 }
 
 export function iniciarBarrido(): void {

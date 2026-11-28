@@ -8,11 +8,11 @@
 lint, pruebas unitarias, build y el arnés E2E contra el wa-mock en verde. Sin
 verificar todavía contra Meta real (ver «Pendiente»).
 
-**Input**: una instancia de cliente (Vestro 2.6, app de Meta propia del
+**Input**: una instancia de cliente (WhatsPower 2.6, app de Meta propia del
 negocio) va a App Review con `whatsapp_business_messaging`,
 `whatsapp_business_management` y `public_profile`. Para demostrar
 `public_profile` hace falta el diálogo de Facebook Login for Business, y
-Vestro solo sabía conectar un número pegando WABA ID + Phone Number ID +
+WhatsPower solo sabía conectar un número pegando WABA ID + Phone Number ID +
 token. Un fork de cliente ya lo resolvió (su spec 104, probada con otra app);
 aquí se porta la parte de Embedded Signup normal.
 

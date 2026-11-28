@@ -1,4 +1,4 @@
-# Guion E2E — Vestro en el celular (048)
+# Guion E2E — WhatsPower en el celular (048)
 
 > Automatizado en `scripts/e2e-pwa.mjs` (36 checks: API, HTML, CDP y Playwright
 > con un perfil persistente de Chromium). Spec:
@@ -6,7 +6,7 @@
 
 ## Por qué
 
-El dueño atiende desde el celular y Vestro vivía en una pestaña. Sin manifest
+El dueño atiende desde el celular y WhatsPower vivía en una pestaña. Sin manifest
 el navegador no ofrecía instalarlo, y en el iPhone «Agregar a inicio» dejaba
 un recorte de la página como icono.
 
@@ -28,7 +28,7 @@ porque en incógnito Chromium nunca da una app por instalable.
    `GET /manifest.webmanifest` sin sesión → 200 `application/manifest+json` con:
    - `name` igual al de la marca y `short_name` de ≤ 12;
    - `standalone` desde `/`;
-   - ningún «Vestro»;
+   - ningún «WhatsPower»;
    - iconos 192 y 512 (`any`) y 512 (`maskable`).
 2. **Iconos (AC2).** Cada uno es un PNG del tamaño exacto (se lee el IHDR).
    ✅ `size=64` → 400.

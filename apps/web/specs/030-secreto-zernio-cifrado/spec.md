@@ -158,7 +158,7 @@ vive en el entorno de la app, nunca en la base ni en el repo.
 | V · Hecho | Unitarias de guardado, lectura y paso de arranque; los cuatro guiones E2E; la actualización probada sobre una base en `0019` con datos escritos por el código de `main`. |
 | VI · Specs | Ciclo completo: migración y datos movidos. Spec, plan y tareas antes del código. |
 | VIII · Foco | Endurece el núcleo de canales; no añade superficie. |
-| IX · En vivo | Ver «Prueba en vivo» en el plan: la parte en Coolify espera autorización del propietario del producto para tocar `vestro-clase`. |
+| IX · En vivo | Ver «Prueba en vivo» en el plan: la parte en Coolify espera autorización del propietario del producto para tocar `whatspower-clase`. |
 | Contratos públicos | Ninguno cambia (D7). |
 | Sandbox | Sin relación: no hay envíos nuevos. |
 

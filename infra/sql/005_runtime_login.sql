@@ -9,7 +9,7 @@
 -- prohibido.
 --
 -- La CONTRASEÑA del rol la fija el operador en el despliegue (fuera del repo):
---   ALTER ROLE vestro_runtime PASSWORD '<secreto del gestor de secretos>';
+--   ALTER ROLE whatspower_runtime PASSWORD '<secreto del gestor de secretos>';
 -- Ver infra/SECRETOS.md (generación, almacenamiento y rotación) y
 -- infra/README.md §5. El verificador real es apps/web/scripts/verificar-rol-runtime.mjs.
 --
@@ -19,8 +19,8 @@
 
 DO $$
 BEGIN
-  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'vestro_runtime') THEN
-    CREATE ROLE vestro_runtime LOGIN;
+  IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'whatspower_runtime') THEN
+    CREATE ROLE whatspower_runtime LOGIN;
   END IF;
 END
 $$;
@@ -28,10 +28,10 @@ $$;
 -- Pertenece al grupo documentado; hereda SELECT/INSERT/UPDATE/DELETE y USAGE
 -- de secuencias (grants de 004_grants.sql, incluidos los default privileges
 -- para tablas futuras).
-GRANT app_runtime TO vestro_runtime;
+GRANT app_runtime TO whatspower_runtime;
 
 -- Hardening explícito: el rol de runtime jamás administra el clúster.
-ALTER ROLE vestro_runtime
+ALTER ROLE whatspower_runtime
   NOSUPERUSER
   NOCREATEDB
   NOCREATEROLE

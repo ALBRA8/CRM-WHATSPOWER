@@ -1,5 +1,5 @@
 {
-  "name": "@vestro/flows",
+  "name": "@whatspower/flows",
   "version": "0.1.0",
   "private": true,
   "description": "Servicio satélite de flujos (herencia WHATSPOWER, MIT): envelope firmado, ventana de timestamp ±300 s y contratos versionados. Motor completo en Fase 9 (roadmap).",
@@ -13,7 +13,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@vestro/contracts": "workspace:*"
+    "@whatspower/contracts": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

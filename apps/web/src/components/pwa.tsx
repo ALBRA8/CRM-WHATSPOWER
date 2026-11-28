@@ -26,7 +26,7 @@ export function RegistrarServiceWorker() {
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return;
     navigator.serviceWorker.register("/sw.js", { scope: "/" }).catch(() => {
-      // Sin service worker Vestro funciona igual, en la pestaña.
+      // Sin service worker WhatsPower funciona igual, en la pestaña.
     });
   }, []);
   return null;
@@ -35,26 +35,26 @@ export function RegistrarServiceWorker() {
 // El aviso puede llegar antes de que el menú se monte (o mientras se navega
 // entre pantallas): se guarda fuera de React para no perderlo.
 const g = globalThis as unknown as {
-  __vestroInstalacion?: EventoInstalacion | null;
-  __vestroInstalacionOyentes?: Set<() => void>;
+  __whatspowerInstalacion?: EventoInstalacion | null;
+  __whatspowerInstalacionOyentes?: Set<() => void>;
 };
 function oyentes(): Set<() => void> {
-  g.__vestroInstalacionOyentes ??= new Set();
-  return g.__vestroInstalacionOyentes;
+  g.__whatspowerInstalacionOyentes ??= new Set();
+  return g.__whatspowerInstalacionOyentes;
 }
 function avisar() {
   for (const f of oyentes()) f();
 }
-if (typeof window !== "undefined" && !("__vestroInstalacionEscucha" in window)) {
-  Object.defineProperty(window, "__vestroInstalacionEscucha", { value: true });
+if (typeof window !== "undefined" && !("__whatspowerInstalacionEscucha" in window)) {
+  Object.defineProperty(window, "__whatspowerInstalacionEscucha", { value: true });
   window.addEventListener("beforeinstallprompt", (e) => {
     // Sin esto, Chrome enseña su propia barra en el celular en el peor momento.
     e.preventDefault();
-    g.__vestroInstalacion = e as EventoInstalacion;
+    g.__whatspowerInstalacion = e as EventoInstalacion;
     avisar();
   });
   window.addEventListener("appinstalled", () => {
-    g.__vestroInstalacion = null;
+    g.__whatspowerInstalacion = null;
     avisar();
   });
 }
@@ -70,7 +70,7 @@ export function BotonInstalar({ className }: { className?: string }) {
   const [evento, setEvento] = useState<EventoInstalacion | null>(null);
 
   useEffect(() => {
-    const leer = () => setEvento(yaInstalada() ? null : (g.__vestroInstalacion ?? null));
+    const leer = () => setEvento(yaInstalada() ? null : (g.__whatspowerInstalacion ?? null));
     leer();
     oyentes().add(leer);
     return () => {
@@ -84,7 +84,7 @@ export function BotonInstalar({ className }: { className?: string }) {
       type="button"
       onClick={async () => {
         // `prompt()` solo se puede llamar una vez por aviso.
-        g.__vestroInstalacion = null;
+        g.__whatspowerInstalacion = null;
         setEvento(null);
         await evento.prompt().catch(() => {});
       }}

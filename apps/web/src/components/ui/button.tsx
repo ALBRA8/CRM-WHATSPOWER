@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Botones en píldora, como los `.btn` de vestro.app: semibold, apretados y
+ * Botones en píldora, como los `.btn` de whatspower.app: semibold, apretados y
  * con un leve levantamiento al pasar el cursor. El principal lleva el acento
  * white-label; el `outline` es el fantasma de la landing (borde fino que se
  * oscurece al pasar).

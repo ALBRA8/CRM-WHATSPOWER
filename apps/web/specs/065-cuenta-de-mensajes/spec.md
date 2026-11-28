@@ -1,4 +1,4 @@
-# 065 — La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vestro
+# 065 — La Cuenta de mensajes de Meta y las plantillas creadas fuera de WhatsPower
 
 **Feature Branch**: `feat/065-cuenta-de-mensajes`
 
@@ -9,15 +9,15 @@ y pruebas unitarias en verde. Sin verificar todavía contra Meta real (ver
 «Pendiente»).
 
 **Input**: dos fallas vistas en producción el 2026-10-28 en una instancia de
-cliente (Vestro 2.5.0, App Review de un Tech Provider):
+cliente (WhatsPower 2.5.0, App Review de un Tech Provider):
 
-1. Crear una plantilla desde Vestro daba «Invalid parameter». Meta respondía
+1. Crear una plantilla desde WhatsPower daba «Invalid parameter». Meta respondía
    `#100`, subcode `2388339`: *«This API is not supported for this WhatsApp
    Business Account»*. La misma llamada sobre la **Cuenta de mensajes** sí
    funcionó. Y los mensajes entrantes no llegaron hasta suscribir la app,
    con override, **también** a la Cuenta de mensajes.
 2. `hello_world` y las plantillas creadas en el Administrador de WhatsApp
-   nunca aparecían en Vestro: el sync solo actualizaba las que Vestro había
+   nunca aparecían en WhatsPower: el sync solo actualizaba las que WhatsPower había
    creado. El fork de un cliente ya lo resolvió (su spec 101); aquí se porta.
 
 **Carril**: ciclo completo (Principio VI): migración aditiva `0026` y un campo
@@ -29,7 +29,7 @@ el script de instalación agéntica, fuera de este repo).
 Meta partió la antigua WABA en dos activos (doc oficial *«WhatsApp accounts
 and Messaging accounts»*):
 
-| Activo | Qué tiene | En Vestro |
+| Activo | Qué tiene | En WhatsPower |
 |---|---|---|
 | **Cuenta de WhatsApp** (la «WABA» de siempre) | El número y la presencia de la empresa | `meta_credentials.waba_id` |
 | **Cuenta de mensajes** | Las **plantillas** y el **método de pago** | `meta_credentials.messaging_account_id` (nuevo) |
@@ -117,7 +117,7 @@ spec 101 del fork).
   y recorre **toda** la paginación (`limit=100`, sigue `paging.next` hasta el
   final; se corta si Meta repite un cursor, con una red de 100 páginas =
   10.000 plantillas, por encima del máximo de 6.000 que Meta permite).
-- Importa solo lo que Vestro sabe enviar: categoría UTILITY o MARKETING,
+- Importa solo lo que WhatsPower sabe enviar: categoría UTILITY o MARKETING,
   cuerpo con variables válidas, encabezado de texto fijo, pie y botones sin
   variables. Encabezado multimedia o con variable, botón de URL dinámica,
   OTP o AUTHENTICATION **no** se importan: Meta los rechazaría al enviar sin

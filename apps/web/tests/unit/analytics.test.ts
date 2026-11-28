@@ -5,7 +5,7 @@ import { MAX_ANUNCIOS, unirAnuncios, unirFuentes } from "@/server/platform/analy
 import { escalaLimpia, etiqueta } from "@/components/results/time-bars";
 
 /**
- * 019 — La aritmética de la pantalla Resultados (portada de Vestro Cloud, sin
+ * 019 — La aritmética de la pantalla Resultados (portada de WhatsPower Cloud, sin
  * los casos del gasto publicitario ni de la probabilidad de cierre).
  *
  * Toda tasa de la pantalla pasa por `rate`. Estas pruebas son lo que permite

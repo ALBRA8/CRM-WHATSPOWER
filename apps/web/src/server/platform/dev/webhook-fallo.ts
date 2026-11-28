@@ -7,20 +7,20 @@ import { isMockEnabled } from "@/lib/env";
  * barrido reintentar y agotar sin romper nada de verdad. En globalThis porque
  * en dev los módulos se evalúan más de una vez. Fuera de los mocks es un no-op.
  */
-const g = globalThis as unknown as { __vestroWebhookFallos?: number };
+const g = globalThis as unknown as { __whatspowerWebhookFallos?: number };
 
 export function programarFallosDePrueba(veces: number): void {
-  g.__vestroWebhookFallos = Math.max(0, Math.floor(veces));
+  g.__whatspowerWebhookFallos = Math.max(0, Math.floor(veces));
 }
 
 export function fallosDePruebaPendientes(): number {
-  return g.__vestroWebhookFallos ?? 0;
+  return g.__whatspowerWebhookFallos ?? 0;
 }
 
 export function lanzarFalloDePrueba(): void {
   if (!isMockEnabled()) return;
-  const quedan = g.__vestroWebhookFallos ?? 0;
+  const quedan = g.__whatspowerWebhookFallos ?? 0;
   if (quedan <= 0) return;
-  g.__vestroWebhookFallos = quedan - 1;
+  g.__whatspowerWebhookFallos = quedan - 1;
   throw new Error("fallo de prueba inyectado por el arnés (047)");
 }

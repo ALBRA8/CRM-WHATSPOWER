@@ -7,7 +7,7 @@ configurar el agente. Encima de ella vive un servidor **MCP** para que Claude
 (Claude Code, claude.ai, la app de escritorio), ChatGPT o cualquier cliente MCP
 configure el agente, lo pruebe sin WhatsApp y opere el CRM.
 
-Es un puerto de la API y el MCP de Vestro Cloud (spec
+Es un puerto de la API y el MCP de WhatsPower Cloud (spec
 [069](../specs/069-api-mcp/spec.md)). El contrato completo está en
 [openapi.json](../src/server/api-v1/openapi.json) y la instancia lo sirve en
 `/api/v1/openapi.json` y en **Ajustes → API y MCP → Documentación**.
@@ -33,17 +33,17 @@ API_V1=on
 
 ```bash
 curl -s https://tu-crm.example.com/api/v1/me \
-  -H "Authorization: Bearer $VESTRO_API_KEY"
+  -H "Authorization: Bearer $WHATSPOWER_API_KEY"
 ```
 
 ```bash
 curl -s "https://tu-crm.example.com/api/v1/contacts?q=martillo" \
-  -H "Authorization: Bearer $VESTRO_API_KEY"
+  -H "Authorization: Bearer $WHATSPOWER_API_KEY"
 ```
 
 ```bash
 curl -s -X POST https://tu-crm.example.com/api/v1/conversations/cv_xxx/notes \
-  -H "Authorization: Bearer $VESTRO_API_KEY" \
+  -H "Authorization: Bearer $WHATSPOWER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"texto":"Llamó para confirmar el pedido"}'
 ```
@@ -93,7 +93,7 @@ curl -s -X POST https://tu-crm.example.com/api/v1/conversations/cv_xxx/notes \
   (`BRAIN_DISPATCH_URL` + `BOT_API_KEY`), no por la API: `GET /brain` lo lee y
   el pendiente trae el enlace a la receta del par.
 
-Diferencias con Vestro Cloud: la raíz no guarda versiones de la configuración
+Diferencias con WhatsPower Cloud: la raíz no guarda versiones de la configuración
 (no hay `/agent/revisions` ni `expectedConfigVersion`), no tiene recordatorios
 de citas ni el «ejemplo» de Cloud (en su lugar, `POST /agent/preset` carga un
 rol), y no ofrece `/templates/send` ni `/templates/record` (quedan como
@@ -129,7 +129,7 @@ Le escribes al agente como si fueras un cliente y devuelve lo que contestó.
 misma llave o con OAuth.
 
 ```bash
-claude mcp add --transport http vestro https://tu-crm.example.com/api/v1/mcp --header "Authorization: Bearer vk_…"
+claude mcp add --transport http whatspower https://tu-crm.example.com/api/v1/mcp --header "Authorization: Bearer vk_…"
 ```
 
 - **Transporte**: Streamable HTTP sin estado. Cada POST es un mensaje JSON-RPC
@@ -149,11 +149,11 @@ claude mcp add --transport http vestro https://tu-crm.example.com/api/v1/mcp --h
   `read_conversation`, `list_notes`, `add_note`, `list_pipeline_stages`,
   `move_lead`, `list_bookings`, `book_appointment`, `block_time`.
   `tools/list` solo enseña las que la credencial puede usar.
-- **Las guías** «configurar Vestro» y «probar el agente» se sirven como
-  prompts (`configurar_vestro`, `probar_agente`) y las instrucciones del
+- **Las guías** «configurar WhatsPower» y «probar el agente» se sirven como
+  prompts (`configurar_whatspower`, `probar_agente`) y las instrucciones del
   servidor le dicen al modelo que las siga. Una sola fuente
   (`src/server/mcp/guia.ts`, `guia-probar.ts`); el plugin de Claude Code
-  (`plugin/vestro/`) las trae como skills y una prueba exige que digan lo mismo.
+  (`plugin/whatspower/`) las trae como skills y una prueba exige que digan lo mismo.
 - **El MCP no le escribe al cliente**, ni con `send` («agent first»): mandar por
   máquina es `POST /conversations/{id}/messages` de la API.
 - **Cada herramienta es una llamada a la API v1**, no código aparte: aislamiento,

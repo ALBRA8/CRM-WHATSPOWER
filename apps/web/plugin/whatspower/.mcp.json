@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "whatspower": {
+      "type": "http",
+      "url": "${WHATSPOWER_MCP_URL}",
+      "headers": {
+        "Authorization": "Bearer ${WHATSPOWER_API_KEY}"
+      }
+    }
+  }
+}

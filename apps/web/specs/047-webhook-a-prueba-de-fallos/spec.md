@@ -170,6 +170,6 @@ si hay cerebro, se despacha. Reordenar el hilo por la hora del canal cambia
 | IV · Idempotencia | Huella única del cuerpo; reclamo condicionado; la ingesta ya deduplica por `wa_message_id` |
 | V · Hecho | Unitarias del reintento y de la resolución; arnés E2E con fallo inyectado; los cuatro gates |
 | VI · Specs | Ciclo completo: esta spec, `plan.md` y `tasks.md` antes del código |
-| VII · Trazabilidad | D1 a D8; el cambio al contrato del webhook queda anotado en `specs/001-vestro-core/contracts/webhook.md` |
+| VII · Trazabilidad | D1 a D8; el cambio al contrato del webhook queda anotado en `specs/001-whatspower-core/contracts/webhook.md` |
 | VIII · Foco | Atender conversaciones de WhatsApp sin perder ninguna |
 | IX · En vivo | Self-test con mocks: camino feliz, fallo inyectado, agotado y Reintentar en la interfaz |

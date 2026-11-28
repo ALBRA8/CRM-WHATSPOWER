@@ -80,7 +80,7 @@ expone como `composer.quoteReply` y la UI no ofrece «Responder» si es
 |---|---|---|
 | WhatsApp Cloud API | `context.message_id` en `/<PHONE_NUMBER_ID>/messages` (guía «Contextual replies»). Sirve para texto, adjuntos, ubicación y contactos; no para reacciones | **Sí** |
 | Instagram y Messenger por Zernio | `POST /v1/inbox/conversations/{id}/messages` tiene `replyTo`, pero la propia doc dice que Instagram y Messenger **no** lo admiten: se envía sin cita y responde un aviso `ignored_field` | **No** |
-| Instagram directo (`graph.instagram.com`, Instagram Login, que es el transporte de Vestro) | La guía de `reply_to: { mid }` solo documenta `graph.facebook.com` con token de página; nada para Instagram Login | **No** (no confirmado) |
+| Instagram directo (`graph.instagram.com`, Instagram Login, que es el transporte de WhatsPower) | La guía de `reply_to: { mid }` solo documenta `graph.facebook.com` con token de página; nada para Instagram Login | **No** (no confirmado) |
 | Messenger directo (`graph.facebook.com`) | `reply_to: { mid }` documentado en el changelog del Send API (15-jul-2025) | **No por ahora**: la capacidad es por canal, y el mismo canal por Zernio la ignora. Ver «Fuera de alcance» |
 | TikTok (Zernio) | Sin soporte documentado | **No** |
 

@@ -1,6 +1,6 @@
 # 038 — El cerebro mueve la etapa
 
-**Feature Branch**: `feat/038-cerebro-mueve-etapa` (en `vestro-crm`; en
+**Feature Branch**: `feat/038-cerebro-mueve-etapa` (en `crm-whatspower`; en
 `AGENTE-GENERAL`, su propia rama y su propio PR)
 
 **Created**: 2026-10-20
@@ -133,7 +133,7 @@ detalle}`; un fallo del CRM nunca tumba el turno.
 - **AC9** — AGENTE-GENERAL: pytest con respx de la herramienta (encendida, apagada, sin
   `nextStages`, 409 del CRM). Gates verdes en los dos repos.
 - **AC10** — En vivo: pendiente de coordinar (otra sesión usa el número
-  Soporte y `vestro20`). Queda «pendiente de verificación humana» hasta
+  Soporte y `whatspower20`). Queda «pendiente de verificación humana» hasta
   entonces.
 
 ## Constitution Check

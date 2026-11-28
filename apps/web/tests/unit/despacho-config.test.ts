@@ -41,14 +41,14 @@ describe("leerConfigDespacho", () => {
 
   it("https público también", () => {
     const c = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: " https://agente.ejemplo.com/vestro/dispatch ",
+      BRAIN_DISPATCH_URL: " https://agente.ejemplo.com/whatspower/dispatch ",
       BOT_API_KEY: LLAVE,
     });
     expect(c.active).toBe(true);
     expect(c.host).toBe("agente.ejemplo.com");
   });
 
-  it.each(["agente:8000/vestro/dispatch", "no es una url", "ftp://agente/vestro", "file:///etc/passwd"])(
+  it.each(["agente:8000/whatspower/dispatch", "no es una url", "ftp://agente/whatspower", "file:///etc/passwd"])(
     "%s → problema de URL, inactivo",
     (url) => {
       const c = leerConfigDespacho({ BRAIN_DISPATCH_URL: url, BOT_API_KEY: LLAVE });
@@ -58,7 +58,7 @@ describe("leerConfigDespacho", () => {
 
   it("usuario y clave en la URL → problema de URL (el despacho ya va firmado)", () => {
     const c = leerConfigDespacho({
-      BRAIN_DISPATCH_URL: "https://user:secreto@agente.ejemplo.com/vestro/dispatch",
+      BRAIN_DISPATCH_URL: "https://user:secreto@agente.ejemplo.com/whatspower/dispatch",
       BOT_API_KEY: LLAVE,
     });
     expect(c).toEqual({ active: false, host: "agente.ejemplo.com", problem: "url" });
@@ -102,7 +102,7 @@ describe("dispatchDto — lo que ve la tarjeta", () => {
       pending: 2,
     });
     expect(JSON.stringify(dto)).not.toContain(LLAVE);
-    expect(JSON.stringify(dto)).not.toContain("/vestro/dispatch");
+    expect(JSON.stringify(dto)).not.toContain("/whatspower/dispatch");
   });
 
   it("mal configurado: el problema viaja y active es false", () => {

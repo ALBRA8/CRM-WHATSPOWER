@@ -1,6 +1,6 @@
 # Postgres local para desarrollo. Uso: docker compose -f docker-compose.dev.yml up -d
 # `name` propio: evita colisionar con el proyecto del docker-compose.yml (Ruta B).
-name: vestro-dev
+name: whatspower-dev
 
 services:
   postgres:
@@ -9,16 +9,16 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: vestro
+      POSTGRES_DB: whatspower
     ports:
       - "5432:5432"
     volumes:
-      - vestro_dev_pg:/var/lib/postgresql/data
+      - whatspower_dev_pg:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d vestro"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d whatspower"]
       interval: 5s
       timeout: 3s
       retries: 10
 
 volumes:
-  vestro_dev_pg:
+  whatspower_dev_pg:

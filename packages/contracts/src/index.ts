@@ -1,5 +1,5 @@
 /**
- * @vestro/contracts — contratos de integración versionados de Vestro.
+ * @whatspower/contracts — contratos de integración versionados de WhatsPower.
  *
  * Fuente canónica: `CONTEXTO CRM/06_INTEGRATIONS/CONTRATOS_INTEGRACION.md`.
  * Regla de evolución (§12): cambios compatibles → mismo /v1; incompatibles →

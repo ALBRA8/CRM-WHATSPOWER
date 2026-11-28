@@ -82,7 +82,7 @@ describe("renderInitEnv sobre el .env.example real", () => {
     const secrets = { ...generateSecrets(), POSTGRES_PASSWORD: "abc123def456" };
     const vars = parseEnv(renderInitEnv(EJEMPLO, { secrets }).content);
     expect(vars.POSTGRES_PASSWORD).toBe("abc123def456");
-    expect(vars.DATABASE_URL).toBe("postgresql://postgres:abc123def456@postgres:5432/vestro");
+    expect(vars.DATABASE_URL).toBe("postgresql://postgres:abc123def456@postgres:5432/whatspower");
   });
 
   it("--domain fija DOMAIN y APP_BASE_URL con https", () => {
@@ -131,7 +131,7 @@ describe("runInitEnv", () => {
   let dir: string;
 
   beforeEach(async () => {
-    dir = await mkdtemp(path.join(os.tmpdir(), "vestro-init-env-"));
+    dir = await mkdtemp(path.join(os.tmpdir(), "whatspower-init-env-"));
     await writeFile(path.join(dir, ".env.example"), EJEMPLO);
   });
 

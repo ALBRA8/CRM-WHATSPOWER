@@ -1,4 +1,4 @@
-# Plan: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vestro
+# Plan: La Cuenta de mensajes de Meta y las plantillas creadas fuera de WhatsPower
 
 **Spec**: [spec.md](spec.md) · **Tasks**: [tasks.md](tasks.md) · **Migrar**: [migrar.md](migrar.md)
 

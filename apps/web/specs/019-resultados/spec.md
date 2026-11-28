@@ -9,7 +9,7 @@ helpers de anuncio que esta pantalla reutiliza. Se fusiona después de #67.
 **Status**: Especificada antes de escribir código.
 
 **Input**: decisión del dueño el 2026-09-21: traer al raíz la pantalla
-Resultados de Vestro Cloud (101 W6, con la tabla por anuncio de 212) **sin
+Resultados de WhatsPower Cloud (101 W6, con la tabla por anuncio de 212) **sin
 gasto publicitario y sin ninguna dependencia externa**.
 
 **Carril**: ligero (Principio VI). No migra: solo LEE tablas que ya existen
@@ -176,7 +176,7 @@ No es histórico: describe el ahora y no toma rango.
   «sin identificar».
 - **Zona horaria propia de Resultados**: se usa la de la agenda. Una instancia
   sin agenda corta los días en `America/Mexico_City`.
-- **Cotizaciones y acciones vencidas**: tablas que Vestro no tiene (Cloud
+- **Cotizaciones y acciones vencidas**: tablas que WhatsPower no tiene (Cloud
   tampoco las trajo).
 
 ## Constitution Check

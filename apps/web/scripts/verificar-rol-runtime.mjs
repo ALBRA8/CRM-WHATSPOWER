@@ -4,7 +4,7 @@
  *
  * Uso:
  *   DATABASE_URL=postgresql://owner@host/db \
- *   RUNTIME_ROLE_PASSWORD='<contraseña de vestro_runtime>' \
+ *   RUNTIME_ROLE_PASSWORD='<contraseña de whatspower_runtime>' \
  *   node scripts/verificar-rol-runtime.mjs
  *
  * Qué demuestra (contra un clon TEMPLATE de la base migrada, igual que la
@@ -45,15 +45,15 @@ function loadDatabaseUrl() {
     const line = env.split(/\r?\n/).find((l) => l.startsWith("DATABASE_URL="));
     if (line) return line.slice("DATABASE_URL=".length).trim();
   } catch {}
-  return "postgresql://vestro:vestro_dev_only@127.0.0.1:5433/vestro";
+  return "postgresql://whatspower:whatspower_dev_only@127.0.0.1:5433/whatspower";
 }
 
 const BASE_URL = loadDatabaseUrl();
 const u = new URL(BASE_URL);
-const BASE_DB = (u.pathname || "/vestro").replace(/^\//, "") || "vestro";
+const BASE_DB = (u.pathname || "/whatspower").replace(/^\//, "") || "whatspower";
 const CLONE_DB = `${BASE_DB}_f5_runtime`;
 
-const RUNTIME_PASSWORD = process.env.RUNTIME_ROLE_PASSWORD ?? "vestro_runtime_dev";
+const RUNTIME_PASSWORD = process.env.RUNTIME_ROLE_PASSWORD ?? "whatspower_runtime_dev";
 
 const results = [];
 function caso(name, ok, detail = "") {
@@ -94,7 +94,7 @@ async function main() {
   caso("R0b infra SQL aplicado (001/002/003/004/005)", true);
 
   // Contraseña del rol (el operador la fija fuera del repo; aquí es dev).
-  await admin.unsafe(`ALTER ROLE vestro_runtime PASSWORD '${RUNTIME_PASSWORD.replaceAll("'", "''")}'`);
+  await admin.unsafe(`ALTER ROLE whatspower_runtime PASSWORD '${RUNTIME_PASSWORD.replaceAll("'", "''")}'`);
 
   // ---------- 2. siembra de una organización de prueba (dueño) ----------
   const ORG = "org_f5_rt";
@@ -107,10 +107,10 @@ async function main() {
   });
   caso("R0c siembra de 2 organizaciones", true);
 
-  // ---------- 3. conexión REAL como vestro_runtime ----------
+  // ---------- 3. conexión REAL como whatspower_runtime ----------
   const rtUrl = new URL(cloneUrl.toString());
-  if (rtUrl.password !== "" || rtUrl.username !== "vestro_runtime") {
-    rtUrl.username = "vestro_runtime";
+  if (rtUrl.password !== "" || rtUrl.username !== "whatspower_runtime") {
+    rtUrl.username = "whatspower_runtime";
     rtUrl.password = RUNTIME_PASSWORD;
   }
   const rt = postgres(rtUrl.toString(), { max: 1, connect_timeout: 10, onnotice: () => {} });
@@ -119,8 +119,8 @@ async function main() {
   const r1 = await rt`SELECT r.rolname, r.rolsuper, r.rolcreatedb, r.rolcreaterole, r.rolreplication, r.rolbypassrls,
                              EXISTS (SELECT 1 FROM pg_auth_members m JOIN pg_roles g ON g.oid = m.roleid
                                      WHERE m.member = r.oid AND g.rolname = 'app_runtime') AS es_miembro
-                      FROM pg_roles r WHERE r.rolname = 'vestro_runtime'`;
-  caso("R1 rol LOGIN vestro_runtime existe y es miembro de app_runtime",
+                      FROM pg_roles r WHERE r.rolname = 'whatspower_runtime'`;
+  caso("R1 rol LOGIN whatspower_runtime existe y es miembro de app_runtime",
     r1.length === 1 && r1[0].es_miembro === true, `miembro=${r1[0]?.es_miembro}`);
   caso("R1b sin superuser/createrole/createdb/replication/bypassrls",
     r1[0].rolsuper === false && r1[0].rolcreaterole === false && r1[0].rolcreatedb === false &&
@@ -129,21 +129,21 @@ async function main() {
   // R2 — inventario de privilegios (exactamente DML + secuencias)
   const tablas = await rt`SELECT count(*)::int n FROM pg_tables WHERE schemaname = 'public'`;
   const conDml = await rt`SELECT count(*)::int n FROM pg_tables pt WHERE pt.schemaname = 'public'
-                          AND has_table_privilege('vestro_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'SELECT')
-                          AND has_table_privilege('vestro_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'INSERT')
-                          AND has_table_privilege('vestro_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'UPDATE')
-                          AND has_table_privilege('vestro_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'DELETE')`;
+                          AND has_table_privilege('whatspower_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'SELECT')
+                          AND has_table_privilege('whatspower_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'INSERT')
+                          AND has_table_privilege('whatspower_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'UPDATE')
+                          AND has_table_privilege('whatspower_runtime', format('%I.%I', pt.schemaname, pt.tablename), 'DELETE')`;
   caso("R2 DML (SELECT/INSERT/UPDATE/DELETE) sobre TODAS las tablas de public",
     conDml[0].n === tablas[0].n, `${conDml[0].n}/${tablas[0].n} tablas`);
 
   const sinDdl = await rt`SELECT count(*)::int n FROM information_schema.table_privileges
-                          WHERE grantee = 'vestro_runtime'
+                          WHERE grantee = 'whatspower_runtime'
                           AND privilege_type IN ('TRUNCATE', 'REFERENCES', 'TRIGGER')`;
   caso("R2b NINGÚN privilegio de TRUNCATE/REFERENCES/TRIGGER", sinDdl[0].n === 0, `${sinDdl[0].n} hallazgos`);
 
   const seqs = await rt`SELECT count(*)::int n FROM pg_sequences WHERE schemaname = 'public'`;
   const seqsOk = await rt`SELECT count(*)::int n FROM pg_sequences s WHERE s.schemaname = 'public'
-                          AND has_sequence_privilege('vestro_runtime', format('%I.%I', s.schemaname, s.sequencename), 'USAGE')`;
+                          AND has_sequence_privilege('whatspower_runtime', format('%I.%I', s.schemaname, s.sequencename), 'USAGE')`;
   caso("R2c USAGE sobre secuencias", seqs[0].n === seqsOk[0].n, `${seqsOk[0].n}/${seqs[0].n}`);
 
   // R3 — DDL prohibido
@@ -231,7 +231,7 @@ async function main() {
   const fallados = results.filter((r) => !r.ok);
   const resumen = {
     base: `${u.host}/${CLONE_DB}`,
-    rol_runtime: "vestro_runtime (LOGIN, miembro de app_runtime, NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS)",
+    rol_runtime: "whatspower_runtime (LOGIN, miembro de app_runtime, NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS)",
     casos: results.length,
     pasados,
     fallidos: fallados.length,

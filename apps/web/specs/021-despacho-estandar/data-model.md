@@ -3,7 +3,7 @@
 ## `dispatch` (nueva)
 
 El outbox del despachador. Mismos nombres de tabla, columnas, estados e índices
-que la tabla `dispatch` de Vestro Cloud, sin lo que allá es de la plataforma
+que la tabla `dispatch` de WhatsPower Cloud, sin lo que allá es de la plataforma
 (`brain_generation`, `expires_at`, `brain_kind`, `responded_message_id`): los
 dos repos comparten la forma y cloud queda como superconjunto. Un índice
 difiere, y se explica abajo.

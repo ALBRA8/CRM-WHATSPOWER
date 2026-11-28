@@ -16,7 +16,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-diseno@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-diseno@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-diseno";
 const SALIDA = process.env.CAPTURAS_DIR ?? ".tmp";
 const S = Date.now().toString(36);
@@ -86,7 +86,7 @@ try {
   for (const tema of ["light", "dark"]) {
     console.log(`\n== ${tema} · 1440 ==`);
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, storageState: sesion });
-    await ctx.addCookies([{ name: "vestro-theme", value: tema, url: BASE }]);
+    await ctx.addCookies([{ name: "whatspower-theme", value: tema, url: BASE }]);
     const p = await ctx.newPage();
     p.on("pageerror", (e) => errores.push(e.message));
     await p.goto(`${BASE}/inbox?conversation=${conv.id}`);
@@ -169,7 +169,7 @@ try {
 
     console.log(`\n== ${tema} · 390 ==`);
     const tel = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, storageState: sesion });
-    await tel.addCookies([{ name: "vestro-theme", value: tema, url: BASE }]);
+    await tel.addCookies([{ name: "whatspower-theme", value: tema, url: BASE }]);
     const t = await tel.newPage();
     t.on("pageerror", (e) => errores.push(e.message));
     await t.goto(`${BASE}/inbox`);
@@ -201,7 +201,7 @@ try {
   {
     const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, storageState: sesion });
     const apariencia = { tema: "alto-contraste", letra: "urbanist", tamano: "normal", densidad: "normal" };
-    await ctx.addCookies([{ name: "vestro-apariencia", value: encodeURIComponent(JSON.stringify(apariencia)), url: BASE }]);
+    await ctx.addCookies([{ name: "whatspower-apariencia", value: encodeURIComponent(JSON.stringify(apariencia)), url: BASE }]);
     const ac = await ctx.newPage();
     ac.on("pageerror", (e) => errores.push(e.message));
     await ac.goto(`${BASE}/inbox?conversation=${conv.id}`);

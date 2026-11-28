@@ -14,8 +14,8 @@
  *   V5  una consulta de dominio responde (la base restaurada es operable).
  *
  * Uso:
- *   DATABASE_URL=postgresql://...origen/vestro \
- *   RESTORE_DATABASE_URL=postgresql://...restaurada/vestro_restaurado \
+ *   DATABASE_URL=postgresql://...origen/whatspower \
+ *   RESTORE_DATABASE_URL=postgresql://...restaurada/whatspower_restaurado \
  *   node scripts/verificar-restauracion.mjs
  *
  * Salida: detalle por caso + resumen JSON; exit 1 si algún caso falla.

@@ -75,7 +75,7 @@ describe("reset-password", () => {
     const congelado =
       "53900d281b59e30499f1420fe7875642:74e410275e792076dc6715482cfe8406edd10a00a2e06880a7d300b699825ef99f4aa4a8f198d1820f7f3716094e01c57bdab6a134354b037a7e09609f687747";
     expect(
-      await verifyPassword({ hash: congelado, password: "canario-de-formato-vestro" })
+      await verifyPassword({ hash: congelado, password: "canario-de-formato-whatspower" })
     ).toBe(true);
   });
 

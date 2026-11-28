@@ -20,7 +20,7 @@ Better Auth guarda la sesión 7 días (`expiresIn`) y la alarga una vez al día
 (`updateAge`) en la misma lectura que la pide: actualiza `session.expires_at`
 y manda la caducidad nueva en un `Set-Cookie`.
 
-En Vestro casi todas las lecturas las hace el servidor: el layout de la app,
+En WhatsPower casi todas las lecturas las hace el servidor: el layout de la app,
 `requireSession` (todas las rutas `/api/*` con sesión) y la página de
 autorización OAuth llamaban a `getAuth().api.getSession(...)`. Desde un server
 component o un route handler propio ese `Set-Cookie` no llega al navegador.

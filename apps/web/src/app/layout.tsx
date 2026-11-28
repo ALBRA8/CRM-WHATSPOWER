@@ -16,7 +16,7 @@ import "./globals.css";
 // bajaba de Google en cada BUILD y un hipo de esa red tumbaba el build; así
 // el build no sale a internet y el runtime tampoco (soberanía). 061 — La
 // interfaz va en Urbanist (geométrica y ligera, como la referencia del diseño
-// de tarjetas); Archivo, la de vestro.app, queda cargada para elegirla
+// de tarjetas); Archivo, la de whatspower.app, queda cargada para elegirla
 // (062). `--font-sans` se arma en globals.css a partir de estas.
 const urbanist = localFont({
   src: "./fonts/urbanist-latin-variable.woff2",
@@ -111,7 +111,7 @@ export default async function RootLayout({
         />
         {/* 062 — Los temas listos (todos, para cambiar en vivo) y el propio. */}
         <style
-          id="vestro-temas"
+          id="whatspower-temas"
           dangerouslySetInnerHTML={{ __html: cssDeTemas() + cssDePropio(apariencia) }}
         />
       </head>

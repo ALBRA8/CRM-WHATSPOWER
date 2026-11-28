@@ -8,7 +8,7 @@ El `referral` de WhatsApp se normaliza a un «anuncio de origen» y se guarda en
 `ad_attribution` siempre; el `ctwa_clid` solo con `ATRIBUCION`. La imagen del
 creativo se copia en segundo plano a un `media_asset` por anuncio. La bandeja lo
 enseña en la lista, el panel y el cajón del trato. Es un puerto de la spec 212 de
-Vestro Cloud sin edición, cuotas, organizaciones múltiples ni Instagram.
+WhatsPower Cloud sin edición, cuotas, organizaciones múltiples ni Instagram.
 
 ## Technical Context
 

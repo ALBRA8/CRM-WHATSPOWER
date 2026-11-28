@@ -12,7 +12,7 @@ import { AsyncLocalStorage } from "node:async_hooks";
 import {
   TENANT_CONTEXT,
   type TenantContext,
-} from "@vestro/contracts";
+} from "@whatspower/contracts";
 
 const tenantStorage = new AsyncLocalStorage<TenantContext>();
 

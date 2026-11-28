@@ -1,8 +1,8 @@
 /**
- * Contrato de conectores de agenda (conservado de VESTRO) + eventos de dominio.
+ * Contrato de conectores de agenda (conservado de WHATSPOWER) + eventos de dominio.
  *
  * Fuente canónica: `CONTEXTO CRM/06_INTEGRATIONS/CONTRATOS_INTEGRACION.md` §10
- * y `docs/agenda-conectores.md` de VESTRO.
+ * y `docs/agenda-conectores.md` de WHATSPOWER.
  */
 
 import { z } from "zod";

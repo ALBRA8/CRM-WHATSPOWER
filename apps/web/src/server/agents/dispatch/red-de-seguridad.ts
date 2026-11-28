@@ -48,11 +48,11 @@ const POR_BARRIDO = 50;
 
 type Estado = { timer: NodeJS.Timeout | null; corriendo: boolean };
 // En globalThis, como el worker: en dev los módulos se evalúan más de una vez.
-const globalForRed = globalThis as unknown as { __vestroRedDeSeguridad?: Estado };
+const globalForRed = globalThis as unknown as { __whatspowerRedDeSeguridad?: Estado };
 
 function estado(): Estado {
-  globalForRed.__vestroRedDeSeguridad ??= { timer: null, corriendo: false };
-  return globalForRed.__vestroRedDeSeguridad;
+  globalForRed.__whatspowerRedDeSeguridad ??= { timer: null, corriendo: false };
+  return globalForRed.__whatspowerRedDeSeguridad;
 }
 
 /**

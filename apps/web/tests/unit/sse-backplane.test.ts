@@ -25,8 +25,8 @@ const CON_DB = !!process.env.DATABASE_URL;
 
 function limpiarEstadoGlobal() {
   const g = globalThis as unknown as Record<string, unknown>;
-  delete g.__vestroBus;
-  delete g.__vestroSseBackplane;
+  delete g.__whatspowerBus;
+  delete g.__whatspowerSseBackplane;
 }
 
 beforeEach(() => {
@@ -100,7 +100,7 @@ describe.skipIf(!CON_DB)(
         type: "message.new",
         data: { conversationId: "cv_bp", message: { id: "m_bp", texto: "hola" } },
       };
-      await sqlB`SELECT pg_notify('vestro_sse', ${JSON.stringify({
+      await sqlB`SELECT pg_notify('whatspower_sse', ${JSON.stringify({
         orgId: "org_bp_a",
         event: evento,
       })})`;

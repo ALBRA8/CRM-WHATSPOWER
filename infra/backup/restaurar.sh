@@ -6,9 +6,9 @@
 # respaldo. Este script + verificar-restauracion.mjs son la prueba real.
 #
 # Uso:
-#   DATABASE_URL='postgresql://usuario:secreto@host:5432/vestro' \
+#   DATABASE_URL='postgresql://usuario:secreto@host:5432/whatspower' \
 #   RESTORE_BACKUP=/ruta/respaldo.dump \
-#   RESTORE_DB=vestro_restaurado \
+#   RESTORE_DB=whatspower_restaurado \
 #   [PG_RESTORE_BIN=/ruta/pg_restore] \
 #   infra/backup/restaurar.sh
 #
@@ -16,7 +16,7 @@
 #   DATABASE_URL    conexión administrativa al servidor (REQUERIDA). La base a
 #                   restaurar se deriva del .dump; RESTORE_DB nombra el destino.
 #   RESTORE_BACKUP  ruta del .dump a restaurar (REQUERIDA)
-#   RESTORE_DB      nombre de la base destino (default vestro_restaurado)
+#   RESTORE_DB      nombre de la base destino (default whatspower_restaurado)
 #   RESTORE_FRESH   1 (default) borra la base destino antes de restaurar
 #   PG_RESTORE_BIN  ruta de pg_restore (default: pg_restore en el PATH)
 #
@@ -31,7 +31,7 @@ if [ -z "${DATABASE_URL:-}" ] || [ -z "${RESTORE_BACKUP:-}" ]; then
   exit 2
 fi
 
-RESTORE_DB="${RESTORE_DB:-vestro_restaurado}"
+RESTORE_DB="${RESTORE_DB:-whatspower_restaurado}"
 FRESH="${RESTORE_FRESH:-1}"
 PG_RESTORE="${PG_RESTORE_BIN:-pg_restore}"
 

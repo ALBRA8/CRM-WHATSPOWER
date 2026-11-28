@@ -38,7 +38,7 @@ sin migración. Reemplaza a #166 y #167, que se cierran sin fusionar.
 
 ## Decisiones
 
-**D1 — El marco de tarjetas es el diseño base de Vestro.** En escritorio
+**D1 — El marco de tarjetas es el diseño base de WhatsPower.** En escritorio
 (`lg` y más):
 
 - la app vive sobre un fondo de marco (`--marco`), con 12 px de margen y de
@@ -127,7 +127,7 @@ selectores que haga falta.
 
 - **Otras pantallas** (Pipeline, Contactos, Ajustes…): heredan el marco y los
   tokens, pero su rediseño propio va en specs posteriores.
-- **Fotos de los contactos**: la referencia las tiene, pero Vestro no guarda
+- **Fotos de los contactos**: la referencia las tiene, pero WhatsPower no guarda
   fotos; se quedan las iniciales.
 - **Copiar la referencia** (imágenes, logo): solo es inspiración.
 

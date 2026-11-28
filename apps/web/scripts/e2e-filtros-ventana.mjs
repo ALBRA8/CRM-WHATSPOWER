@@ -13,7 +13,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-filtros@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-filtros@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-filtros";
 const S = Date.now().toString(36);
 const PN = `PN-FIL-${S}`;

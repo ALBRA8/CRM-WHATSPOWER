@@ -19,4 +19,4 @@
 - [x] T009 `e2e-canales`: la base no guarda el secreto en claro; guion `us-canales.md`
 - [x] T010 Gates; `e2e-canales`, `e2e-messenger`, `e2e-tiktok`, `e2e-despacho` (dos modos)
 - [x] T011 `AGENTS.md`, `specs/README.md`, CHANGELOG, bitácora
-- [ ] T012 Prueba en vivo en `vestro-clase` — **espera autorización del propietario del producto**
+- [ ] T012 Prueba en vivo en `whatspower-clase` — **espera autorización del propietario del producto**

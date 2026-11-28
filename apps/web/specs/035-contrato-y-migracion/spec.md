@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: cuarta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#92.
+**Input**: cuarta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/crm-whatspower#92.
 el propietario del producto autorizó en el chat del 2026-10-20 mergear la 034 y seguir con la #92.
 
 **Carril**: ciclo completo (Principio VI). Publica el contrato del par y
@@ -15,7 +15,7 @@ cambia cómo se instala (el compose levanta dos servicios). Plan en
 
 ## Problema
 
-Con el agente fuera del CRM, el contrato es lo único que une a Vestro con AGENTE-GENERAL
+Con el agente fuera del CRM, el contrato es lo único que une a WhatsPower con AGENTE-GENERAL
 o con cualquier otro cerebro. Hoy vive en docstrings de rutas, en el README y
 en `specs/021-despacho-estandar/contracts/despacho.md`. Y quien actualiza no
 tiene una guía: depende de dónde viene. Además, quien tenía AGENTE-GENERAL 1.x delante
@@ -88,7 +88,7 @@ el agente incluido, AGENTE-GENERAL 1.x delante, cerebro propio), los pasos con �
 el webhook», y lo que se quitó de AGENTE-GENERAL. El README y `INSTALL-IA.md` dejan de
 decir «mueve el webhook a AGENTE-GENERAL» y enlazan al OpenAPI y a la guía.
 
-**D8 — Fuera**: el starter (`vestro-starter-v2`, otro repo) se actualiza en
+**D8 — Fuera**: el starter (`whatspower-starter-v2`, otro repo) se actualiza en
 el cierre de la 2.0 (starter 3.0.0); el retiro del agente incluido es la #106.
 
 ## Criterios de aceptación
@@ -106,7 +106,7 @@ el cierre de la 2.0 (starter 3.0.0); el retiro del agente incluido es la #106.
   servicios (AGENTE-GENERAL con `DATABASE_SCHEMA=agente` sobre la misma base y
   `CRM_BASE_URL=http://app:3000`), y sin el perfil, el compose de siempre.
 - **AC5** — Gates verdes; `manifests-plataformas` en verde.
-- **AC6** — En vivo: `vestro20` sirve el OpenAPI; y «Recuperar el webhook» en
+- **AC6** — En vivo: `whatspower20` sirve el OpenAPI; y «Recuperar el webhook» en
   una prueba con el número «Soporte», devolviendo el override al terminar.
 
 ## Constitution Check

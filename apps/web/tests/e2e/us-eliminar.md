@@ -8,7 +8,7 @@ Precondición: app corriendo (`next dev`) sobre una base migrada, con
 
 Dos modos, según cómo arrancó la app; el gate completo son las dos corridas:
 
-- **Con cerebro**: `BRAIN_DISPATCH_URL=http://127.0.0.1:<puerto>/vestro/dispatch`
+- **Con cerebro**: `BRAIN_DISPATCH_URL=http://127.0.0.1:<puerto>/whatspower/dispatch`
   y `BOT_API_KEY`. El arnés levanta ese cerebro en su propio proceso, verifica
   la firma sobre el cuerpo crudo y guarda lo que recibe.
 - **Sin despacho**: no hay a quién avisar (`agente: "no_aplica"`).
@@ -42,8 +42,8 @@ node --env-file=.env scripts/e2e-eliminar.mjs
 ## El aviso al cerebro (AC7, con cerebro)
 
 10. Llega **un** `conversation.deleted`, firmado como un turno, con
-    `x-vestro-event: conversation.deleted`, `x-vestro-organization` y sin
-    `x-vestro-dispatch-id`. Las claves van en el orden del contrato; dice la
+    `x-whatspower-event: conversation.deleted`, `x-whatspower-organization` y sin
+    `x-whatspower-dispatch-id`. Las claves van en el orden del contrato; dice la
     conversación, el canal, el contacto y su identidad, con un `eventId`
     propio y la hora. No lleva nada de lo borrado.
 

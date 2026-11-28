@@ -1,4 +1,4 @@
-# ENTREGA S4.4 — CRM WHATSPOWER (Vestro)
+# ENTREGA S4.4 — CRM WHATSPOWER (WhatsPower)
 
 **Fase:** Cierre de bloqueos de AGENTE-GENERAL — R-AG-1 (`/crm/dispatch`) y T9
 (memoria aislada por organización) + pruebas completas.
@@ -25,7 +25,7 @@ cada uno con prueba que impide su repetición).
 | 4 | Build (`pnpm -r build`) | OK — apps/web compilación completa + 6 paquetes TS |
 | 5 | Rutas API | **142** `route.ts` bajo `src/app/api` (vigía permanente, dentro de la suite) |
 | 6 | Contratos versionados (`packages/contracts`) | 49/49 — catálogo de errores congelado intacto (D-013) |
-| 7 | Batería multi-tenant sobre PostgreSQL REAL (`pnpm --filter @vestro/web test:multi-tenant`) | **26/26 PASS** — servidor PostgreSQL **16.16** real en `127.0.0.1:5433`, migraciones desde base limpia (34), rol `app_runtime` con `SET ROLE`, cobertura **RLS 39/39 tablas org-scoped** |
+| 7 | Batería multi-tenant sobre PostgreSQL REAL (`pnpm --filter @whatspower/web test:multi-tenant`) | **26/26 PASS** — servidor PostgreSQL **16.16** real en `127.0.0.1:5433`, migraciones desde base limpia (34), rol `app_runtime` con `SET ROLE`, cobertura **RLS 39/39 tablas org-scoped** |
 | 8 | Vigía de fronteras entre dominios | 9/9 PASS (dentro de apps/web) |
 | 9 | **Suite del cerebro AGENTE-GENERAL** (`pytest tests`, sin `llm_real`) | **821/821 PASS** — baseline 781 intacta + 40 nuevas (15 T9 memoria-org + 25 integración `/crm/dispatch`) |
 | 10 | Integración REAL CRM ↔ cerebro (`cerebro-real.test.ts`, uvicorn real como proceso hijo) | **9/9 PASS** (health+memoria configurada, despacho real ACK, idempotencia real, HMAC manipulado 401, tenant cruzado 403 tipado, HITL 200, identidad org) |
@@ -129,7 +129,7 @@ evidencia.
 - Clúster limpio nuevo (`pgdata-s44`): `initdb` → roles `001_roles.sql`
   (`app_runtime` sin DDL) → **34 migraciones Drizzle desde base limpia** → 44
   tablas → `002_audit_log` → batería.
-- **Batería 26/26 PASS** (`vestro_s43_bateria`, clon TEMPLATE de la migrada):
+- **Batería 26/26 PASS** (`whatspower_s43_bateria`, clon TEMPLATE de la migrada):
   T1a-f (RLS directo: SELECT/UPDATE/DELETE cruzados → 0 filas; INSERT cruzado →
   `42501`), T2/T2b (fail-closed sin contexto y con contexto manipulado),
   T15a/b (unicidad por organización), AUD-1..4 (hash encadenado por org +
@@ -141,7 +141,7 @@ evidencia.
 ## 5. E2E real (self-test de VOCERO, corrida continua)
 
 - Entorno documentado 036 reconstruido íntegro en esta sesión: BD
-  `vestro_036_e2e` limpia (34 migraciones + audit_log), `.env.e2e-036` estándar
+  `whatspower_036_e2e` limpia (34 migraciones + audit_log), `.env.e2e-036` estándar
   (wa-mock/ai-mock/zernio-mock/zoom-mock integrados en la app, `BOT_API_KEY`,
   `AGENT_COALESCE_MS=1500`, `AGENDA=on`, `BRAIN_DISPATCH_URL` → cerebro falso
   3261), servidor dev real en :3260.
@@ -184,7 +184,7 @@ puerto 3261 ocupado por un cerebro falso huérfano.
    mandato exigía ≥8 GB para la corrida completa — el sandbox tiene 3,9 GB).
    Quedan ~33 checks sin verificar en corrida continua.
 2. **Runtime de BD sobre el rol dueño** (heredado de S4.3): la URL documentada
-   conecta como `vestro` (dueño); la valla de BD opera como `app_runtime`
+   conecta como `whatspower` (dueño); la valla de BD opera como `app_runtime`
    (probado 26/26). El cambio de rol de runtime sigue siendo trabajo operativo
    de F5 (grants ya en `004`).
 3. **A1 — SSE mono-instancia** (heredado, F5 backplane).

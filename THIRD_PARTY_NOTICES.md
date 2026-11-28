@@ -1,6 +1,6 @@
 # THIRD_PARTY_NOTICES — Atribuciones de terceros
 
-Este repositorio combina código nuevo (MIT, ALBRA — proyecto Vestro) con código
+Este repositorio combina código nuevo (MIT, ALBRA — proyecto CRM WhatsPower) con código
 heredado que conserva su licencia original. Este archivo es el registro legal
 de esas atribuciones, según exige cada licencia de origen.
 

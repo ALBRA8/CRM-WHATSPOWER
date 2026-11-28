@@ -20,7 +20,7 @@ let tmp: string;
 let error: MockInstance<typeof console.error>;
 
 beforeEach(async () => {
-  tmp = await mkdtemp(path.join(os.tmpdir(), "vestro-media-"));
+  tmp = await mkdtemp(path.join(os.tmpdir(), "whatspower-media-"));
   error = vi.spyOn(console, "error").mockImplementation(() => {});
   // El sondeo se cachea (#82): cada caso arranca sin resultado anterior.
   resetMediaDirCache();

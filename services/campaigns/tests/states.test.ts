@@ -4,7 +4,7 @@ import {
   assertCampaignTransition,
   isTerminalState,
 } from "../src/states.js";
-import { LOCK_TIMEOUT_MS, WEBHOOK_LEAD } from "@vestro/contracts";
+import { LOCK_TIMEOUT_MS, WEBHOOK_LEAD } from "@whatspower/contracts";
 
 describe("máquina de estados de campaña (CONTRATOS §9)", () => {
   it("transiciones legales del ciclo de vida", () => {

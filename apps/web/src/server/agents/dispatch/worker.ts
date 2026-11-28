@@ -29,7 +29,7 @@ import {
  * si el contenedor se reinicia, los pendientes siguen ahí y el arranque los
  * reanuda (`instrumentation-node.ts`).
  *
- * Puerto de `src/server/dispatch/worker.ts` de Vestro Cloud.
+ * Puerto de `src/server/dispatch/worker.ts` de WhatsPower Cloud.
  */
 
 /**
@@ -62,19 +62,19 @@ type Estado = {
 // ruta) y todas las copias deben compartir el mismo worker: dos temporizadores
 // sobre el mismo outbox se pisarían el lease.
 const globalForWorker = globalThis as unknown as {
-  __vestroDispatchWorker?: Estado;
+  __whatspowerDispatchWorker?: Estado;
 };
 
 function estado(): Estado {
-  if (!globalForWorker.__vestroDispatchWorker) {
-    globalForWorker.__vestroDispatchWorker = {
+  if (!globalForWorker.__whatspowerDispatchWorker) {
+    globalForWorker.__whatspowerDispatchWorker = {
       timer: null,
       corriendo: false,
       cita: null,
       citaEn: null,
     };
   }
-  return globalForWorker.__vestroDispatchWorker;
+  return globalForWorker.__whatspowerDispatchWorker;
 }
 
 export function iniciarWorker(): void {

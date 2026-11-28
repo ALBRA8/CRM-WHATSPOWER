@@ -1,4 +1,4 @@
-# Data Model — Vestro CRM v1 (001-vestro-core)
+# Data Model — CRM WhatsPower v1 (001-whatspower-core)
 
 Convenciones globales:
 

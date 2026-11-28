@@ -3,16 +3,16 @@ import {
   BRAND_MARK_BODY,
   BRAND_MARK_STROKE,
   BRAND_MARK_TAIL,
-  isVestroName,
+  isWhatsPowerName,
 } from "./brand";
 import { resolveAccentSet, type Branding } from "./branding";
 
 /**
  * El icono de la pestaña, white-label.
  *
- * Toda instancia tiene uno **sin configurar nada**: si se llama Vestro, es el
+ * Toda instancia tiene uno **sin configurar nada**: si se llama WhatsPower, es el
  * logo de la marca (la "v" con remate cian sobre el mosaico azul, igual que en
- * vestro.app); con otro nombre se dibuja la inicial sobre el acento. Una
+ * whatspower.app); con otro nombre se dibuja la inicial sobre el acento. Una
  * agencia que despliega para su cliente puede subir el logo real y
  * reemplazarlo.
  *
@@ -90,7 +90,7 @@ export function sniffFaviconMime(bytes: Uint8Array): FaviconMime | null {
   return null;
 }
 
-/** Inicial que se dibuja. Vacío o raro cae a la V de Vestro. */
+/** Inicial que se dibuja. Vacío o raro cae a la V de WhatsPower. */
 export function faviconInitial(name: string): string {
   const c = name.trim().charAt(0).toUpperCase();
   return c || "V";
@@ -103,7 +103,7 @@ export function faviconInitial(name: string): string {
  */
 export function generatedFaviconSvg(branding: Branding): string {
   const { accent, hover, fg } = resolveAccentSet(branding.accent);
-  if (isVestroName(branding.name)) return vestroFaviconSvg(accent, hover);
+  if (isWhatsPowerName(branding.name)) return whatspowerFaviconSvg(accent, hover);
   const letra = faviconInitial(branding.name)
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;");
@@ -117,11 +117,11 @@ export function generatedFaviconSvg(branding: Branding): string {
 }
 
 /**
- * El favicon de vestro.app, con el degradado en el acento de la instancia:
- * una instancia llamada Vestro pero con otro color sigue viendo SU color.
+ * El favicon de whatspower.app, con el degradado en el acento de la instancia:
+ * una instancia llamada WhatsPower pero con otro color sigue viendo SU color.
  * El trazo sale de `lib/brand`, el mismo que dibuja la barra lateral.
  */
-function vestroFaviconSvg(from: string, to: string): string {
+function whatspowerFaviconSvg(from: string, to: string): string {
   return [
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">`,
     `<defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">`,

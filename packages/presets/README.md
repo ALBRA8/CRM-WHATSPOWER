@@ -1,4 +1,4 @@
-# @vestro/presets — Perfiles sectoriales
+# @whatspower/presets — Perfiles sectoriales
 
 Procedencia: **CRM-WHATSAPP** (AILINK), licencia **MIT** conservada. Copiados el
 2026-11-27 con atribución; sin modificaciones de contenido.

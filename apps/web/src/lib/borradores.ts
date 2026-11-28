@@ -14,10 +14,10 @@
 export type TipoBorrador = "responder" | "nota";
 export type Almacen = Pick<Storage, "getItem" | "setItem" | "removeItem" | "key" | "length">;
 
-const PREFIJO = "vestro.borrador.";
+const PREFIJO = "whatspower.borrador.";
 export const CADUCIDAD_MS = 7 * 24 * 3_600_000;
 /** Evento de la ventana con el que la lista se entera de un borrador nuevo. */
-export const EVENTO_BORRADOR = "vestro:borrador";
+export const EVENTO_BORRADOR = "whatspower:borrador";
 
 export function claveBorrador(tipo: TipoBorrador, conversationId: string): string {
   return `${PREFIJO}${tipo}.${conversationId}`;

@@ -98,7 +98,7 @@ describe("metadatos", () => {
     expect(recursoValido(ORIGEN, undefined)).toBe(true);
     expect(recursoValido(ORIGEN, `${ORIGEN}/api/v1/mcp`)).toBe(true);
     expect(recursoValido(ORIGEN, `${ORIGEN}/`)).toBe(true);
-    expect(recursoValido(ORIGEN, "https://otra.vestro.app/api/v1/mcp")).toBe(false);
+    expect(recursoValido(ORIGEN, "https://otra.whatspower.app/api/v1/mcp")).toBe(false);
   });
 });
 

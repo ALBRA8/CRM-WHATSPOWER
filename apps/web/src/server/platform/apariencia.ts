@@ -26,7 +26,7 @@ function leerMetadata(metadata: string | null): Record<string, unknown> {
   }
 }
 
-/** La del negocio, o null si nunca se eligió (vale la de Vestro). */
+/** La del negocio, o null si nunca se eligió (vale la de WhatsPower). */
 export async function aparienciaDelNegocio(organizationId?: string | null): Promise<Apariencia | null> {
   const db = getDb();
   const rows = organizationId
@@ -59,7 +59,7 @@ export async function guardarAparienciaDelNegocio(organizationId: string, a: Apa
 /**
  * La que se pinta en esta petición: la cookie de la persona, si no la del
  * negocio. Quien ya tenía elegido el oscuro con el botón de antes (la cookie
- * `vestro-theme`) lo conserva: ve la pareja oscura del tema del negocio.
+ * `whatspower-theme`) lo conserva: ve la pareja oscura del tema del negocio.
  */
 export async function aparienciaActual(organizationId?: string | null): Promise<{
   apariencia: Apariencia;

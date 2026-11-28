@@ -9,7 +9,7 @@
 (`scripts/e2e-despacho.mjs`, `scripts/e2e-responder-citando.mjs`) en verde.
 
 **Input**: el propietario del producto, el 2026-11-22. Tres arreglos que ya corren en instancias
-derivadas de Vestro y que el raíz no tenía. Se reescriben aquí; no se copia
+derivadas de WhatsPower y que el raíz no tenía. Se reescriben aquí; no se copia
 código ni texto de esas instancias.
 
 **Carril**: ligero (Principio VI). Sin tabla, migración, variable ni cambio de

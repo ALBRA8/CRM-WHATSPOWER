@@ -15,7 +15,7 @@
 
 import { z } from "zod";
 
-/** Identificador de organización con prefijo (patrón VESTRO con nanoid). */
+/** Identificador de organización con prefijo (patrón WHATSPOWER con nanoid). */
 export const ORGANIZATION_ID = z
   .string()
   .regex(/^org_[A-Za-z0-9_-]+$/, "organizationId debe tener el formato org_<id>");

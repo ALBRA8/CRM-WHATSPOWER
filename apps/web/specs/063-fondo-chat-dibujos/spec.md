@@ -4,7 +4,7 @@
 
 **Created**: 2026-10-25
 
-**Status**: Implementada; unitarias y arnés E2E (`scripts/e2e-diseno-061.mjs`, sección 063) en verde. Ya corre en Vestro Cloud (ALBRA8/vestrocrm-cloud#140).
+**Status**: Implementada; unitarias y arnés E2E (`scripts/e2e-diseno-061.mjs`, sección 063) en verde. Ya corre en WhatsPower Cloud (ALBRA8/whatspowercrm-cloud#140).
 
 **Input**: el propietario del producto, el 2026-10-25, con una captura del fondo de WhatsApp: «para
 el fondo de la ventana de chat, WhatsApp tiene unos vectores que me gustaría

@@ -13,7 +13,7 @@ import { mkdirSync } from "node:fs";
 import { chromium } from "playwright";
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-rapidas@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-rapidas@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-rapidas";
 const S = Date.now().toString(36);
 const PN = `PN-QR-${S}`;
@@ -173,7 +173,7 @@ try {
   await page.setViewportSize({ width: 1280, height: 860 });
 
   console.log("\n== AC4 · un miembro sin permiso ==");
-  const mEmail = `miembro-qr-${S}@vestro.test`;
+  const mEmail = `miembro-qr-${S}@whatspower.test`;
   r = await api("/api/settings/team", { method: "POST", data: { name: "Vendedor", email: mEmail, password: "password-miembro-qr" } });
   ok("alta del miembro", r.status() === 201);
   const ctxM = await browser.newContext();

@@ -226,7 +226,7 @@ async function main() {
 
 async function preparar() {
   console.log("== Setup ==");
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",
@@ -466,7 +466,7 @@ async function navegador() {
 
     // El sonido es de cada persona: el botón del cintillo lo apaga y queda en su cookie.
     await page.locator("[data-esperando-cintillo] [data-esperando-sonido]").click();
-    const galleta = async () => (await ctx.cookies()).find((c) => c.name === "vestro-esperando")?.value ?? null;
+    const galleta = async () => (await ctx.cookies()).find((c) => c.name === "whatspower-esperando")?.value ?? null;
     ok("apagar el sonido desde el cintillo lo guarda para esta persona", (await hasta(async () => (await galleta()) === "todo.0", 3000)) !== null, String(await galleta()));
     await page.locator("[data-esperando-cintillo] [data-esperando-sonido]").click();
 

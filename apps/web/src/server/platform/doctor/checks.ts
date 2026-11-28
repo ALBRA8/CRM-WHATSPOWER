@@ -62,7 +62,7 @@ const FIX: Record<string, string> = {
   APP_BASE_URL:
     "en .env: APP_BASE_URL=https://crm.tudominio.com (con docker compose en esta máquina: https://localhost)",
   DATABASE_URL:
-    "en .env: DATABASE_URL=postgresql://postgres:<POSTGRES_PASSWORD>@postgres:5432/vestro (docker compose) o ...@localhost:5432/vestro (docker-compose.dev.yml)",
+    "en .env: DATABASE_URL=postgresql://postgres:<POSTGRES_PASSWORD>@postgres:5432/whatspower (docker compose) o ...@localhost:5432/whatspower (docker-compose.dev.yml)",
   DOMAIN:
     "en .env: DOMAIN=crm.tudominio.com (o localhost para probar aquí); solo lo usa docker compose para el HTTPS de Caddy",
 };
@@ -309,7 +309,7 @@ export function describeDbError(err: unknown, url: string): CheckResult {
         status: "fail",
         label,
         detail: `la base de datos no existe (${where})`,
-        fix: "créala (CREATE DATABASE vestro) o deja que docker compose la cree con POSTGRES_DB=vestro",
+        fix: "créala (CREATE DATABASE whatspower) o deja que docker compose la cree con POSTGRES_DB=whatspower",
       };
     default:
       return {
@@ -354,7 +354,7 @@ export type StoredWhatsApp = {
 /**
  * Las conexiones guardadas, organización por organización y por la misma
  * puerta que usa la app (getCredentialsByOrg: query acotada + descifrado).
- * Vestro raíz no tiene credenciales de WhatsApp en el entorno: viven cifradas
+ * WhatsPower raíz no tiene credenciales de WhatsApp en el entorno: viven cifradas
  * en la base.
  */
 export async function loadWhatsAppCredentials(): Promise<StoredWhatsApp[]> {

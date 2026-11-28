@@ -89,14 +89,14 @@ export function InboxClient({
 
   useEffect(() => {
     if (!isWideEnoughForPanel()) return;
-    setPanelOpen(localStorage.getItem("vestro.panelOpen") !== "false");
+    setPanelOpen(localStorage.getItem("whatspower.panelOpen") !== "false");
   }, []);
   const togglePanel = useCallback((open: boolean) => {
     setPanelOpen(open);
     // La preferencia es de escritorio: abrir el cajón en el teléfono no debe
     // reescribir cómo queda la Bandeja en la computadora.
     if (isWideEnoughForPanel()) {
-      localStorage.setItem("vestro.panelOpen", String(open));
+      localStorage.setItem("whatspower.panelOpen", String(open));
     }
   }, []);
   const selectedIdRef = useRef<string | null>(null);

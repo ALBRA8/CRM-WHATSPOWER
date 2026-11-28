@@ -45,10 +45,10 @@ $$;
 -- accesibles al runtime sin paso manual.
 DO $$
 BEGIN
-  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'vestro') THEN
-    EXECUTE 'ALTER DEFAULT PRIVILEGES FOR ROLE vestro IN SCHEMA public
+  IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'whatspower') THEN
+    EXECUTE 'ALTER DEFAULT PRIVILEGES FOR ROLE whatspower IN SCHEMA public
              GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO app_runtime';
-    EXECUTE 'ALTER DEFAULT PRIVILEGES FOR ROLE vestro IN SCHEMA public
+    EXECUTE 'ALTER DEFAULT PRIVILEGES FOR ROLE whatspower IN SCHEMA public
              GRANT USAGE, SELECT ON SEQUENCES TO app_runtime';
   END IF;
 END

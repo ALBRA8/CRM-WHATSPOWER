@@ -17,7 +17,7 @@
 - **wacrm (MIT)**: respuestas compartidas por la cuenta.
 
 No se copia código de ninguno: el menú se escribe sobre el compositor de
-Vestro, con sus tokens.
+WhatsPower, con sus tokens.
 
 **Carril**: ciclo completo (Principio VI): tabla nueva. No toca contratos
 publicados (`/api/bot/*`, despacho, webhook, SSE).

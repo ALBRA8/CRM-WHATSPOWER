@@ -1,8 +1,8 @@
 {
-  "name": "@vestro/agent-gateway",
+  "name": "@whatspower/agent-gateway",
   "version": "0.1.0",
   "private": true,
-  "description": "Adaptador Vestro → AGENTE-GENERAL: despacho firmado (HMAC-SHA256), health check, cola de aprobaciones HITL y resultados de ejecución. Fail-closed sin clave. Contrato: CONTRATOS_INTEGRACION.md §2, §4 y §6.",
+  "description": "Adaptador WhatsPower → AGENTE-GENERAL: despacho firmado (HMAC-SHA256), health check, cola de aprobaciones HITL y resultados de ejecución. Fail-closed sin clave. Contrato: CONTRATOS_INTEGRACION.md §2, §4 y §6.",
   "license": "MIT",
   "type": "module",
   "main": "src/index.ts",
@@ -13,7 +13,7 @@
     "build": "tsc --noEmit"
   },
   "dependencies": {
-    "@vestro/contracts": "workspace:*"
+    "@whatspower/contracts": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

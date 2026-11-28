@@ -1,23 +1,23 @@
-# Vestro CRM
+# CRM WhatsPower
 
 [![CI](https://github.com/ALBRA8/CRM-WHATSPOWER/actions/workflows/ci.yml/badge.svg)](https://github.com/ALBRA8/CRM-WHATSPOWER/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](../LICENSE)
 
 **El CRM de WhatsApp open source para tu agente de IA, con un Laboratorio que lo pone a prueba.**
 
-Vestro es un CRM self-hosted y gratuito para negocios que venden por WhatsApp:
+WhatsPower es un CRM self-hosted y gratuito para negocios que venden por WhatsApp:
 bandeja en tiempo real, pipeline de ventas, el perfil y el conocimiento de tu
 agente, y un **Laboratorio** donde clientes simulados lo evalúan antes de que
 hable con clientes reales. Una instancia = un negocio, en tu propio servidor,
 con tus datos.
 
-Vestro no trae agente: contesta el que conectas al lado.
-[AGENTE-GENERAL](https://github.com/ALBRA8/CRM-WHATSPOWER) (MIT) es el recomendado y se
+WhatsPower no trae agente: contesta el que conectas al lado.
+[AGENTE-GENERAL](https://github.com/ALBRA8/AGENTE-GENERAL) (MIT) es el recomendado y se
 levanta con el mismo `docker compose`; también puedes conectar el tuyo por el
-[contrato público](#-tu-agente-al-lado-del-crm). Sin agente, Vestro es un CRM
+[contrato público](#-tu-agente-al-lado-del-crm). Sin agente, WhatsPower es un CRM
 de bandeja manual y contestas tú. El token de WhatsApp nunca sale del CRM.
 
-![Bandeja de Vestro CRM](docs/screenshots/bandeja.png)
+![Bandeja de CRM WhatsPower](docs/screenshots/bandeja.png)
 
 <p align="center">
   <img src="docs/screenshots/laboratorio.png" width="49%" alt="Laboratorio: reporte con score y hallazgos" />
@@ -26,7 +26,7 @@ de bandeja manual y contestas tú. El token de WhatsApp nunca sale del CRM.
 
 > 🎬 **Video-instalador oficial**: próximamente en el canal del proyecto.
 
-> 💼 **¿Quieres venderlo a otros negocios?** Vestro es gratis para tu negocio.
+> 💼 **¿Quieres venderlo a otros negocios?** WhatsPower es gratis para tu negocio.
 > Cómo venderlo, adaptarlo a cada cliente y entregarlo sin que truene se aprende en
 > la comunidad del proyecto.
 
@@ -121,7 +121,7 @@ queda en la bandeja para tu equipo.
 ### 🔌 Tu agente al lado del CRM
 
 Quien contesta es un servicio aparte, en tu mismo servidor:
-[AGENTE-GENERAL](https://github.com/ALBRA8/CRM-WHATSPOWER) (MIT; entiende audio, imagen y
+[AGENTE-GENERAL](https://github.com/ALBRA8/AGENTE-GENERAL) (MIT; entiende audio, imagen y
 PDF, escala a humano, agenda y da seguimiento) o un cerebro tuyo. Se conecta
 con una `BOT_API_KEY` por la API de servicio: tu agente conversa a través del
 CRM, así que **el token de WhatsApp nunca sale de aquí** y todo queda en la
@@ -186,7 +186,7 @@ y su guion en [`tests/e2e/us-despacho.md`](tests/e2e/us-despacho.md).
 
 Si tu bot recibe los webhooks de Meta por un **override de callback de la
 WABA**, guardar la conexión en Configuración → WhatsApp (o rotar el token) lo
-respeta: Vestro ve el override en `GET /{WABA}/subscribed_apps`, no re-suscribe
+respeta: WhatsPower ve el override en `GET /{WABA}/subscribed_apps`, no re-suscribe
 la app —que es justo lo que lo borraría— y tampoco registra su propio webhook
 en el número, porque ese tendría prioridad y dejaría sordo a tu bot. La
 pantalla te dice a qué host se está respetando y, si quieres que los mensajes
@@ -205,7 +205,7 @@ Arriba de la pantalla **Agente**, la tarjeta **«Quién responde a tus
 clientes»** dice si hay un agente conectado: su última llamada a la API, a
 quién se le despacha, cuándo llegó el último turno y si alguno no llegó, y
 —con `BRAIN_HEALTH_URL`, p. ej. `http://agente:8000/api/v1/health`— si está en línea,
-su versión y su modo. Sin agente, te dice que Vestro funciona como bandeja
+su versión y su modo. Sin agente, te dice que WhatsPower funciona como bandeja
 manual (es un aviso, no un error). Con el agente conectado y el interruptor
 apagado, te avisa que nadie está contestando.
 
@@ -274,7 +274,7 @@ que se lean.
 
 ### 📱 En el celular, como una app
 
-Vestro se instala desde el navegador, sin tiendas y con el nombre y el icono
+WhatsPower se instala desde el navegador, sin tiendas y con el nombre y el icono
 de tu negocio:
 
 - **Android y computadora (Chrome o Edge)**: en el menú aparece **Instalar
@@ -303,13 +303,13 @@ Meta y tu proveedor LLM opcional.
 - Un número de WhatsApp en la Cloud API de Meta (ver [Conexión](#conexión-del-número-de-whatsapp)).
 - Opcional: una API key de [OpenRouter](https://openrouter.ai) (o cualquier
   proveedor compatible) para tu agente y el juez del Laboratorio.
-- Opcional: un agente al lado del CRM ([AGENTE-GENERAL](https://github.com/ALBRA8/CRM-WHATSPOWER)
-  u otro). Sin él, Vestro funciona como bandeja manual.
+- Opcional: un agente al lado del CRM ([AGENTE-GENERAL](https://github.com/ALBRA8/AGENTE-GENERAL)
+  u otro). Sin él, WhatsPower funciona como bandeja manual.
 
 ## Instalación (~15 minutos)
 
 Cada versión se publica como imagen de Docker:
-`ghcr.io/albra8/crm-whatpower:<versión>` (p. ej. `2.12.0`). Instalar desde
+`ghcr.io/albra8/crm-whatspower:<versión>` (p. ej. `2.12.0`). Instalar desde
 la imagen es el camino recomendado: tu servidor la descarga en vez de
 construirla. Construir desde el código sigue funcionando, y es lo que
 necesitas en un VPS ARM o si tu fork cambia el código.
@@ -331,7 +331,7 @@ variante que construye desde el repositorio.
 ### Ruta B — docker compose
 
 ```bash
-git clone https://github.com/ALBRA8/vestro-crm.git vestro && cd vestro
+git clone https://github.com/ALBRA8/crm-whatspower.git whatspower && cd whatspower
 pnpm install && pnpm init-env --domain crm.tudominio.com   # crea .env con los secretos ya generados
 pnpm doctor                                                 # revisa el .env antes de arrancar
 docker compose up -d
@@ -353,7 +353,7 @@ dice qué pasa: intenta primero descargar la imagen y solo la construye desde el
 código si no la encuentra ni en el registro ni en tu máquina. Así que:
 
 - `docker compose up -d` corre la imagen publicada de la versión que fija el
-  compose. Para otra versión publicada, `VESTRO_CRM_VERSION=X.Y.Z` en tu
+  compose. Para otra versión publicada, `CRM_WHATSPOWER_VERSION=X.Y.Z` en tu
   `.env`.
 - `docker compose up -d --build` la construye desde tu copia del código. Es lo
   que necesitas en un VPS ARM y en un fork con cambios propios; en el fork,
@@ -384,7 +384,7 @@ webhook), el token de OpenRouter y, con dominio propio, `APP_BASE_URL`. El
 disco exige plan de pago (`starter` + `basic-256mb`; la base `free` caduca a
 los 30 días).
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ALBRA8/vestro-crm)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/ALBRA8/crm-whatspower)
 
 **Fly.io** — [`fly.toml`](fly.toml) declara imagen, volumen `/data`, puerto
 3000, healthcheck, tamaño de máquina y las variables no secretas; Fly no deja
@@ -403,7 +403,7 @@ el dominio y las variables se crean con la CLI, con los comandos exactos
 escritos en el propio archivo (`railway add --database postgres`,
 `railway volume add --mount-path /data`, `railway domain --port 3000`,
 `railway variable set …`, `railway up`). Para la imagen publicada sin build:
-`railway add --image ghcr.io/albra8/crm-whatpower:2.12.0`, y entonces el
+`railway add --image ghcr.io/albra8/crm-whatspower:2.12.0`, y entonces el
 healthcheck se fija en el panel. Railway declaró obsoleto este formato a
 favor de su Infrastructure as Code (`.railway/railway.ts`); lo sigue leyendo
 hasta el 2026-12-01.
@@ -424,7 +424,7 @@ Lo nuevo va al bucket y lo que ya estaba en el volumen se sigue leyendo de
 ahí: no hay que migrar nada, y quitar la bandera tampoco deja nada ilegible.
 Si el bucket no acepta una escritura, ese archivo se guarda en el volumen
 (no se pierde) y `/api/health` (`mediaWritable: false`) y `pnpm doctor` lo
-dicen. Vestro firma las peticiones él mismo: no trae el SDK de AWS.
+dicen. WhatsPower firma las peticiones él mismo: no trae el SDK de AWS.
 
 Vercel y similares siguen fuera: con el bucket ya no dependen del disco, pero
 quedan el trabajo en segundo plano (el despacho, el Laboratorio), el SSE en
@@ -454,7 +454,7 @@ solas al arrancar.
    avance; cada paso se marca solo cuando la pieza de verdad funciona. Con un
    agente conectado aparece **Encender**: hasta entonces nadie le contesta a
    los clientes y los mensajes que lleguen los atiendes tú desde la Bandeja.
-   Sin agente, la guía te dice que Vestro funciona como bandeja manual.
+   Sin agente, la guía te dice que WhatsPower funciona como bandeja manual.
 3. Mientras falte un paso —o haya un agente conectado y siga apagado—, entrar
    a la app te lleva a la guía (también está en el menú, solo para el
    propietario). Si no conectas agente, con los demás pasos listos entras
@@ -469,7 +469,7 @@ solas al arrancar.
 
 ## Conexión del número de WhatsApp
 
-Vestro **consume** un token de la WhatsApp Cloud API — no implementa el
+WhatsPower **consume** un token de la WhatsApp Cloud API — no implementa el
 Embedded Signup. Hay dos formas de obtenerlo:
 
 ### Modo directo (el negocio tiene su propia app de Meta)
@@ -487,16 +487,16 @@ Embedded Signup. Hay dos formas de obtenerlo:
 2. Crea un **usuario del sistema** (Business Settings → System users) con
    acceso a la WABA y genera un token permanente con permisos
    `whatsapp_business_messaging` y `whatsapp_business_management`.
-3. En Vestro: **Configuración → WhatsApp** → pega WABA ID + Phone Number ID +
-   token → **Probar conexión** → Guardar. Al guardar, Vestro **registra el
+3. En WhatsPower: **Configuración → WhatsApp** → pega WABA ID + Phone Number ID +
+   token → **Probar conexión** → Guardar. Al guardar, WhatsPower **registra el
    webhook en Meta por ti** (override a nivel del número, con el handshake
    incluido) y te lo confirma en pantalla. Si Meta lo rechaza, la conexión
    queda guardada igual, el aviso dice por qué (casi siempre el token no tiene
    `whatsapp_business_management`) y el botón **«Registrar en Meta»** de la
    tarjeta del webhook reintenta sin volver a pegar el token.
-4. Solo si tu app aún no tiene ningún webhook configurado (Vestro te lo
+4. Solo si tu app aún no tiene ningún webhook configurado (WhatsPower te lo
    avisa): en el panel de Meta (WhatsApp → Configuration → Webhook) pega la
-   **URL del webhook** y el **verify token** que Vestro te muestra, y suscribe
+   **URL del webhook** y el **verify token** que WhatsPower te muestra, y suscribe
    el campo `messages` (y `message_template_status_update` si usarás
    plantillas). Es una sola vez por app.
 5. Recomendado: agrega `META_APP_SECRET` (App Secret de tu app) a las
@@ -505,7 +505,7 @@ Embedded Signup. Hay dos formas de obtenerlo:
 ### Modo agencia (Tech Provider) — para agencias
 
 Tu plataforma de agencia ya hace el Embedded Signup y guarda los tokens de tus
-clientes; la instancia de Vestro del cliente solo recibe su token. El webhook
+clientes; la instancia de WhatsPower del cliente solo recibe su token. El webhook
 del cliente se conecta con el **override de callback por WABA**:
 
 ```text
@@ -513,7 +513,7 @@ del cliente se conecta con el **override de callback por WABA**:
         │  webhooks (override_callback_uri)
         ▼
    ┌────────────────────────────┐      ┌─────────────────────────────┐
-   │  Instancia Vestro          │      │  Backend de TU agencia      │
+   │  Instancia WhatsPower          │      │  Backend de TU agencia      │
    │  (VPS del cliente)         │      │  (Embedded Signup + tokens) │
    │  /api/webhooks/wa/<token>  │      └──────────────┬──────────────┘
    └────────────▲───────────────┘                     │
@@ -528,10 +528,10 @@ del cliente se conecta con el **override de callback por WABA**:
 2. **Embedded Signup en TU plataforma**: el cliente conecta su número en tu
    onboarding y tu backend guarda su token (intercambio de código → token).
 3. **Pega las credenciales en el wizard** de la instancia (WABA ID, Phone
-   Number ID, token) → **Probar conexión** → **GUARDAR**. Al guardar, Vestro
+   Number ID, token) → **Probar conexión** → **GUARDAR**. Al guardar, WhatsPower
    **registra el override del callback a nivel del número** hacia la propia
    instancia (y el webhook enruta cada mensaje por el Phone Number ID
-   guardado). Si tu backend ya enruta esa WABA a otro sitio, Vestro lo respeta
+   guardado). Si tu backend ya enruta esa WABA a otro sitio, WhatsPower lo respeta
    y no registra el del número.
 4. **Solo si prefieres enrutar desde tu backend** (o el registro automático
    falló), configura el override del callback a nivel WABA hacia la instancia:
@@ -550,7 +550,7 @@ del cliente se conecta con el **override de callback por WABA**:
    La URL y el verify token exactos están en **Configuración → WhatsApp** de la
    instancia. Meta hace el handshake en ese momento (la URI debe responder, si
    no devuelve 422). Volver a guardar la conexión después (p. ej. al rotar el
-   token) respeta este override: Vestro no re-suscribe una WABA que ya lo tiene.
+   token) respeta este override: WhatsPower no re-suscribe una WABA que ya lo tiene.
 5. **Registra el número** en la Cloud API si aún no lo está
    (`POST /{PHONE_NUMBER_ID}/register`) y manda un mensaje de prueba al número:
    debe aparecer en la bandeja en uno o dos segundos. Los mensajes del cliente
@@ -563,13 +563,13 @@ del cliente se conecta con el **override de callback por WABA**:
 >
 > ℹ️ **Limitación conocida de Meta**: los eventos de estado de PLANTILLAS
 > (`message_template_status_update`) no siguen el override de callback — van a
-> la app dueña. Por eso Vestro también **sincroniza plantillas por la API de
+> la app dueña. Por eso WhatsPower también **sincroniza plantillas por la API de
 > Graph** (botón "Sincronizar" en Configuración → Plantillas), así el modo
 > agencia ve las aprobaciones igual.
 
 ## Canales opcionales: Instagram, Messenger y TikTok
 
-WhatsApp es el canal por el que existe Vestro y siempre está encendido. Los
+WhatsApp es el canal por el que existe WhatsPower y siempre está encendido. Los
 demás viajan en el mismo código, **apagados por defecto** ([ADR-001](docs/adr-001-canales-opcionales.md)):
 una instancia que no los usa no ve pantallas, webhooks ni variables suyas.
 Se encienden con una variable de despliegue:
@@ -582,7 +582,7 @@ Con más de un canal encendido, la Bandeja enseña el distintivo de cada
 conversación y permite filtrar por canal. El contacto, el pipeline, la ficha
 y el agente son los mismos: un lead es un lead, escriba por donde escriba.
 
-Tu agente escribe igual para todos los canales y Vestro lo adapta al salir:
+Tu agente escribe igual para todos los canales y WhatsPower lo adapta al salir:
 en Instagram, Messenger y TikTok, que no dibujan las negritas de WhatsApp, su
 texto llega sin asteriscos, con viñetas y con los enlaces legibles.
 
@@ -594,19 +594,19 @@ mirar cuando «no me llegan los mensajes».
 ### Conectar por Zernio (Instagram, Messenger o TikTok)
 
 [Zernio](https://zernio.com) es una API unificada: vinculas ahí tus redes, con
-tu propia cuenta, y una sola llave las entrega todas. En Vestro es igual para
+tu propia cuenta, y una sola llave las entrega todas. En WhatsPower es igual para
 los tres canales:
 
 1. En Zernio vincula la red (**Accounts → Connect**) y crea una API key
    (**Settings → API Keys**; empieza con `sk_` y se muestra una sola vez).
-2. En Vestro abre la pantalla del canal, elige *Zernio*, pega la llave y
+2. En WhatsPower abre la pantalla del canal, elige *Zernio*, pega la llave y
    pulsa **Probar y conectar**. Solo el propietario puede hacerlo.
 
 No hay que copiar ningún id ni dar de alta nada más en Zernio:
 
-- **La cuenta la encuentra Vestro** con esa llave. Si la llave tiene varias
+- **La cuenta la encuentra WhatsPower** con esa llave. Si la llave tiene varias
   cuentas de esa red (una agencia), te las ofrece para elegir.
-- **El webhook lo da de alta Vestro** en tu Zernio, con el evento
+- **El webhook lo da de alta WhatsPower** en tu Zernio, con el evento
   `message.received`, un secreto de firma que él genera y **limitado a tus
   cuentas conectadas**. Un webhook de Zernio sin ese límite recibe los
   mensajes de todas las cuentas de la llave. Los demás webhooks que tengas en
@@ -630,14 +630,14 @@ desde **Configuración → Messenger**. La página y su nombre salen de Zernio.
 1. En [developers.facebook.com](https://developers.facebook.com) crea (o usa)
    una app con el producto **Messenger** y genera el **token de acceso de la
    página** con el permiso `pages_messaging`. Anota el **ID de la página**.
-2. En Vestro, **Configuración → Messenger**: elige *App propia de Meta*, pega
+2. En WhatsPower, **Configuración → Messenger**: elige *App propia de Meta*, pega
    el ID y el token y pulsa *Probar y guardar*.
 3. En la app de Meta, **Messenger → Webhooks**: objeto `page`, campo
    `messages`, esa URL de callback y el token de verificación que enseña la
    pantalla. Suscribe la página a la app.
 
 Desde ese momento, lo que la gente le escribe a la página entra a la bandeja
-como `Messenger`, con el nombre de su perfil, y lo que respondas desde Vestro
+como `Messenger`, con el nombre de su perfil, y lo que respondas desde WhatsPower
 (tú o el agente) llega a su chat. No hay plantillas: pasadas 24 horas del
 último mensaje del cliente ya solo puede contestar una persona, hasta 7 días
 (sale con la etiqueta `HUMAN_AGENT` de Meta); la bandeja lo avisa y dice
@@ -663,7 +663,7 @@ página de Facebook vinculada: eso solo lo pide Messenger.
    una app con el producto **Instagram** y genera el token de la cuenta con
    los permisos `instagram_business_basic` e
    `instagram_business_manage_messages`. Anota el **ID de la cuenta**.
-2. En Vestro, **Configuración → Instagram**: elige *App propia de Meta*, pega
+2. En WhatsPower, **Configuración → Instagram**: elige *App propia de Meta*, pega
    el ID y el token y pulsa *Probar y guardar*.
 3. En la app de Meta, **Instagram → Webhooks**: objeto `instagram`, campo
    `messages`, con la URL de callback y el token de verificación que enseña
@@ -682,11 +682,11 @@ TikTok no entrega mensajes a una app propia: llegan por
 [Zernio](https://zernio.com), con tu cuenta de Zernio.
 
 Sigue [Conectar por Zernio](#conectar-por-zernio-instagram-messenger-o-tiktok)
-desde **Configuración → TikTok**. Si la cuenta es personal, Vestro la conecta
+desde **Configuración → TikTok**. Si la cuenta es personal, WhatsPower la conecta
 pero te avisa ahí mismo y en **Estado**: TikTok no le entrega mensajes hasta
 que sea Business.
 
-Lo que TikTok impone, y Vestro te dice antes de que lo descubras con un
+Lo que TikTok impone, y WhatsPower te dice antes de que lo descubras con un
 mensaje rechazado:
 
 - La cuenta tiene que ser **TikTok Business**, registrada fuera de la Unión
@@ -696,7 +696,7 @@ mensaje rechazado:
   horas**. No hay plantilla que reabra: el undécimo se rechaza (409
   `message_limit`) hasta que el cliente vuelva a escribir.
 - Cada mensaje es texto, de hasta 6,000 caracteres. Las imágenes entran (como
-  aviso de que llegó una), pero todavía no se envían desde Vestro.
+  aviso de que llegó una), pero todavía no se envían desde WhatsPower.
 
 El detalle está en [`specs/022-canal-tiktok`](specs/022-canal-tiktok/spec.md).
 
@@ -737,13 +737,13 @@ encenderlo con clientes reales.
 ## Cumplimiento con las políticas de Meta
 
 1. **Opt-in**: escribe solo a personas que iniciaron la conversación o
-   aceptaron recibir mensajes; Vestro respeta la ventana de 24 h y bloquea el
+   aceptaron recibir mensajes; WhatsPower respeta la ventana de 24 h y bloquea el
    texto libre fuera de ella.
 2. **Plantillas aprobadas** para reabrir conversaciones: nada de trucos para
    saltarse la aprobación de Meta.
 3. **El Laboratorio es 100 % interno**: los clientes simulados jamás tocan la
    API de WhatsApp (bloqueado por diseño y verificado con tests).
-4. **Sin spam ni broadcast**: Vestro no incluye envíos masivos; úsalo para
+4. **Sin spam ni broadcast**: WhatsPower no incluye envíos masivos; úsalo para
    conversaciones reales de venta y soporte.
 5. **Datos del cliente en su servidor**: cada negocio aloja su instancia; el
    token va cifrado en reposo y los webhooks se validan por URL secreta y
@@ -768,10 +768,10 @@ Configuración → WhatsApp. Si dice "reconectar", el token expiró: pega uno
 nuevo. En modo directo usa un token de usuario del sistema (no expira).
 
 **Error 131030 al enviar** — El número destino no está en la lista de
-permitidos (números de prueba de Meta) o el formato es inválido. Vestro ya
+permitidos (números de prueba de Meta) o el formato es inválido. WhatsPower ya
 normaliza los números de México (521 → 52).
 
-**El agente no responde** — Vestro no trae agente: ¿hay uno conectado? La
+**El agente no responde** — WhatsPower no trae agente: ¿hay uno conectado? La
 tarjeta «Quién responde» de la pantalla Agente lo dice (y si su `/health`
 contesta). ¿El interruptor está encendido? ¿Llave de IA vigente en Ajustes →
 IA? ¿La conversación tiene la IA activa y sin handoff? ¿Ventana de 24 h
@@ -794,7 +794,7 @@ arranque lo dice (`[boot] MEDIA_DIR … no es escribible`). Monta un volumen en
 `MEDIA_DIR` en la plataforma: el contenedor le da el volumen al usuario de la
 app al arrancar.
 
-**Olvidé mi contraseña y no puedo entrar** — Vestro no manda correos (sería una
+**Olvidé mi contraseña y no puedo entrar** — WhatsPower no manda correos (sería una
 dependencia externa) y el registro público se cierra con la primera
 organización, así que no hay flujo de "olvidé mi contraseña". La salida es
 reescribir el hash en la base:
@@ -864,11 +864,11 @@ SemVer sobre lo que le importa a quien opera una instancia:
 | **Parche** (`1.1.1`) | Arreglos y ajustes. Actualizar es redesplegar. |
 
 La versión vive en `package.json` y se sube en el PR que publica el cambio,
-junto con el default de `VESTRO_CRM_VERSION` en `docker-compose.yml` y la
+junto con el default de `CRM_WHATSPOWER_VERSION` en `docker-compose.yml` y la
 etiqueta de la imagen en `render.yaml`, `fly.toml` y `railway.toml` (dos
 pruebas exigen que coincidan) y su entrada en [`CHANGELOG.md`](CHANGELOG.md),
 que dice qué trae cada versión y qué hacer para actualizar. Al crear el tag
-`vX.Y.Z`, el CI publica la imagen `ghcr.io/albra8/crm-whatpower:X.Y.Z`.
+`vX.Y.Z`, el CI publica la imagen `ghcr.io/albra8/crm-whatspower:X.Y.Z`.
 
 ## Roadmap
 
@@ -926,7 +926,7 @@ licencia vive en [`../THIRD_PARTY_NOTICES.md`](../THIRD_PARTY_NOTICES.md).
 
 ## Créditos
 
-Desarrollado por el equipo Vestro. Los patrones
+Desarrollado por el equipo WhatsPower. Los patrones
 de producción (webhook firmado, ingesta idempotente, cifrado de tokens) vienen
 de un proyecto de referencia privado en producción, portados y simplificados
 para este repo.

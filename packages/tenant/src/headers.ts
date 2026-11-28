@@ -15,7 +15,7 @@ import {
   tenantContext,
   type Scope,
   type TenantContext,
-} from "@vestro/contracts";
+} from "@whatspower/contracts";
 
 export type HeaderSource =
   | Headers

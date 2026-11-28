@@ -11,7 +11,7 @@ mitad nueva del contrato; la otra mitad, por donde el cerebro contesta, es
 
 El cerebro **nunca** recibe credenciales de canal ni habla con Meta o Zernio.
 
-La forma del evento y la firma son las del despacho de Vestro Cloud
+La forma del evento y la firma son las del despacho de WhatsPower Cloud
 (`specs/101-edicion-cloud-comunidad/contracts/cerebro.md` en ese repo), para
 que un mismo cerebro sirva a las dos ediciones. Las diferencias están marcadas.
 
@@ -41,7 +41,7 @@ que un mismo cerebro sirva a las dos ediciones. Las diferencias están marcadas.
   atendido y no se te despacha nada.
 - **No todo lo que llega a esta URL es un turno** (026). Un cuerpo con `type`
   es un evento, no un despacho: hoy, `conversation.deleted`. Mira `type` (o
-  la cabecera `x-vestro-event`) antes de buscar `messages`. Ver «Eventos que
+  la cabecera `x-whatspower-event`) antes de buscar `messages`. Ver «Eventos que
   no son un turno».
 - **Un `conversation.id` nuevo para una identidad que ya conocías es una
   conversación nueva** (026). El negocio pudo haber eliminado la anterior:
@@ -63,15 +63,15 @@ Mientras el despacho está activo, el agente incluido no contesta.
 ```
 POST {BRAIN_DISPATCH_URL}
 Content-Type: application/json
-X-Vestro-Signature: sha256=<hex>
-X-Vestro-Dispatch-Id: dsp_…
-X-Vestro-Organization: <slug, o el id si no hay slug>
+X-WhatsPower-Signature: sha256=<hex>
+X-WhatsPower-Dispatch-Id: dsp_…
+X-WhatsPower-Organization: <slug, o el id si no hay slug>
 ```
 
-`X-Vestro-Signature` = `HMAC-SHA256(cuerpo_crudo, BOT_API_KEY)` en hex, con el
+`X-WhatsPower-Signature` = `HMAC-SHA256(cuerpo_crudo, BOT_API_KEY)` en hex, con el
 prefijo `sha256=`. Compárala en tiempo constante.
 
-`X-Vestro-Event` queda reservada para eventos que no son un turno. La raíz no
+`X-WhatsPower-Event` queda reservada para eventos que no son un turno. La raíz no
 manda ninguno todavía; un cuerpo con `type` no es un despacho.
 
 ### Cuerpo
@@ -198,11 +198,11 @@ Llega por `POST` a la **misma URL** y con la **misma firma** que un despacho.
 
 | Cabecera | Valor |
 |---|---|
-| `x-vestro-signature` | `sha256=<hmac del cuerpo crudo>`, con `BOT_API_KEY`, igual que un turno |
-| `x-vestro-event` | `conversation.deleted` |
-| `x-vestro-organization` | El `slug` de la organización, o su `id` si no tiene |
+| `x-whatspower-signature` | `sha256=<hmac del cuerpo crudo>`, con `BOT_API_KEY`, igual que un turno |
+| `x-whatspower-event` | `conversation.deleted` |
+| `x-whatspower-organization` | El `slug` de la organización, o su `id` si no tiene |
 
-No lleva `x-vestro-dispatch-id`: no es un despacho.
+No lleva `x-whatspower-dispatch-id`: no es un despacho.
 
 ```json
 {
@@ -229,7 +229,7 @@ No lleva `x-vestro-dispatch-id`: no es un despacho.
   veces.
 - Contestar 4xx a un evento que no conoces es inofensivo: no pausa la
   conversación ni cuenta como fallo del despacho.
-- Es el mismo evento que manda Vestro Cloud. El orden de las claves es
+- Es el mismo evento que manda WhatsPower Cloud. El orden de las claves es
   contrato: una prueba gemela lo fija byte a byte en este repositorio
   (`tests/unit/olvido-contrato.test.ts`) y en el del cerebro.
 

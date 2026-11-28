@@ -9,7 +9,7 @@ import { olvidar, turnoPorDespacho } from "./runner";
  * 069 — Probar el agente sin WhatsApp (`POST /api/v1/agent/simulate` y la
  * herramienta `simulate_conversation` del MCP).
  *
- * En Vestro Cloud esto es un «ensayo» que AGENTE-GENERAL corre aparte. En la raíz el
+ * En WhatsPower Cloud esto es un «ensayo» que AGENTE-GENERAL corre aparte. En la raíz el
  * cerebro puede ser cualquiera (AGENTE-GENERAL u otro), así que se usa el mismo camino
  * que ya prueba el Laboratorio: cada línea entra como un mensaje del cliente
  * en una conversación `is_test`, se le despacha al cerebro que de verdad

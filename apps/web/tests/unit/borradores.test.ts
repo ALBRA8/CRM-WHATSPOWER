@@ -71,8 +71,8 @@ describe("cerrar sesión", () => {
     const a = memoria();
     guardarEn(a, "responder", "cv_a", "uno");
     guardarEn(a, "nota", "cv_b", "dos");
-    a.setItem("vestro.sonido", "on");
+    a.setItem("whatspower.sonido", "on");
     expect(limpiarEn(a)).toBe(2);
-    expect([...a.datos.keys()]).toEqual(["vestro.sonido"]);
+    expect([...a.datos.keys()]).toEqual(["whatspower.sonido"]);
   });
 });

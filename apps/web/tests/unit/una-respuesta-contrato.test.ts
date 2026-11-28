@@ -17,7 +17,7 @@ import { HANDOFF_LABEL } from "@/lib/analytics";
 /**
  * 075 — Una sola respuesta por ráfaga, tal como la ve un cerebro.
  *
- * Las cadenas son contrato compartido con Vestro Cloud y con AGENTE-GENERAL
+ * Las cadenas son contrato compartido con WhatsPower Cloud y con AGENTE-GENERAL
  * (`tests/test_despacho_superado.py` en AGENTE-GENERAL fija este mismo cuerpo):
  * un cerebro que sirve a las dos ediciones manda exactamente esto.
  */
@@ -56,7 +56,7 @@ const BASE = [
 ];
 
 describe("el CRM anuncia el turno superado", () => {
-  it("con la misma cadena que Vestro Cloud", () => {
+  it("con la misma cadena que WhatsPower Cloud", () => {
     expect(CAPACIDAD_SUPERADO).toBe("dispatch_superado");
     // 076: después anuncia también la nota de atención humana.
     expect(capacidadesDelCrm()).toEqual([CAPACIDAD_SUPERADO, "atencion_humana"]);

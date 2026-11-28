@@ -15,7 +15,7 @@ const { bucketsDelPeriodo } = await import("@/lib/analytics");
 const { shortcuts } = await import("@/components/results/range-picker");
 
 /**
- * 019 — Los periodos de la pantalla Resultados (portado de Vestro Cloud).
+ * 019 — Los periodos de la pantalla Resultados (portado de WhatsPower Cloud).
  *
  * Lo que se fija aquí es que los cortes caen en la zona del NEGOCIO: con
  * cortes en UTC, todo lo que pasa después de las 18:00 en México cae en el día

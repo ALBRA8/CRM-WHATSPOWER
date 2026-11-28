@@ -14,7 +14,7 @@ import { avisarOlvido } from "@/server/agents/brains/deliver";
  *
  * `CUERPO_GEMELO` y `FIRMA_GEMELA` están copiados de
  * `AGENTE-GENERAL/tests/test_olvido.py` (y de `tests/unit/olvido-contrato.test.ts`
- * de vestrocrm-cloud): es el contrato entre los repositorios. Cambiar uno
+ * de whatspowercrm-cloud): es el contrato entre los repositorios. Cambiar uno
  * obliga a cambiar los otros. Si esta prueba falla, el cerebro deja de
  * entender el aviso o de aceptar su firma.
  */
@@ -70,7 +70,7 @@ describe("026 · el evento conversation.deleted", () => {
 });
 
 describe("026 · avisarOlvido", () => {
-  const destino = { url: "http://cerebro.test/vestro/dispatch", secret: SECRETO_GEMELO };
+  const destino = { url: "http://cerebro.test/whatspower/dispatch", secret: SECRETO_GEMELO };
 
   it("manda UN POST con el cuerpo gemelo, su firma y las cabeceras del evento", async () => {
     const fetchImpl = vi.fn(async () => new Response(null, { status: 204 }));

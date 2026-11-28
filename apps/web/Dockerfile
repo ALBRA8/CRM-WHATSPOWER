@@ -1,5 +1,5 @@
 # ============================================================
-# Vestro CRM — imagen multi-etapa (Next.js standalone + Node 22)
+# CRM WhatsPower — imagen multi-etapa (Next.js standalone + Node 22)
 # Los secretos NO se necesitan en build: llegan en runtime.
 # ============================================================
 
@@ -40,29 +40,29 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # desarrollo local. No se define en la plataforma: basta montar /data.
 ENV MEDIA_DIR=/data/media
 # su-exec: el entrypoint arranca como root SOLO para dejar /data escribible y
-# baja a `vestro` antes de correr la app (idea de #40).
+# baja a `whatspower` antes de correr la app (idea de #40).
 RUN apk add --no-cache su-exec
-RUN addgroup -S vestro && adduser -S vestro -G vestro
-# El punto de montaje nace de `vestro`: un volumen nombrado nuevo hereda ese
+RUN addgroup -S whatspower && adduser -S whatspower -G whatspower
+# El punto de montaje nace de `whatspower`: un volumen nombrado nuevo hereda ese
 # dueño al montarse vacío. Los que llegan como root (Coolify, Railway, un bind
-# mount) los arregla vestro-entrypoint.sh en cada arranque.
-RUN mkdir -p /data/media && chown -R vestro:vestro /data
+# mount) los arregla whatspower-entrypoint.sh en cada arranque.
+RUN mkdir -p /data/media && chown -R whatspower:whatspower /data
 
-COPY --from=builder --chown=vestro:vestro /app/.next/standalone ./
-COPY --from=builder --chown=vestro:vestro /app/.next/static ./.next/static
-COPY --from=builder --chown=vestro:vestro /app/public ./public
-COPY --from=builder --chown=vestro:vestro /app/migrate.bundle.mjs ./migrate.mjs
-COPY --from=builder --chown=vestro:vestro /app/seed-demo.bundle.mjs ./seed-demo.mjs
-COPY --from=builder --chown=vestro:vestro /app/drizzle ./drizzle
+COPY --from=builder --chown=whatspower:whatspower /app/.next/standalone ./
+COPY --from=builder --chown=whatspower:whatspower /app/.next/static ./.next/static
+COPY --from=builder --chown=whatspower:whatspower /app/public ./public
+COPY --from=builder --chown=whatspower:whatspower /app/migrate.bundle.mjs ./migrate.mjs
+COPY --from=builder --chown=whatspower:whatspower /app/seed-demo.bundle.mjs ./seed-demo.mjs
+COPY --from=builder --chown=whatspower:whatspower /app/drizzle ./drizzle
 # Nombre propio a propósito: la imagen de node ya trae su docker-entrypoint.sh
 # (antepone `node` si el primer argumento no es un comando) y el nuestro le
 # pasa la posta en vez de pisarlo.
-COPY vestro-entrypoint.sh /usr/local/bin/vestro-entrypoint.sh
+COPY whatspower-entrypoint.sh /usr/local/bin/whatspower-entrypoint.sh
 # sed: un checkout de Windows con autocrlf lo deja en CRLF y `sh` no lo corre.
-RUN sed -i 's/\r$//' /usr/local/bin/vestro-entrypoint.sh \
-    && chmod 755 /usr/local/bin/vestro-entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/whatspower-entrypoint.sh \
+    && chmod 755 /usr/local/bin/whatspower-entrypoint.sh
 
-# Sin `USER vestro`: el entrypoint baja a `vestro` con su-exec. Arrancado con
+# Sin `USER whatspower`: el entrypoint baja a `whatspower` con su-exec. Arrancado con
 # `--user`, también funciona (y avisa si /data no es escribible).
 EXPOSE 3000
 ENV PORT=3000
@@ -72,6 +72,6 @@ ENV HOSTNAME=0.0.0.0
 HEALTHCHECK --interval=15s --timeout=5s --start-period=40s --retries=5 \
   CMD wget -q -O /dev/null http://127.0.0.1:3000/api/health || exit 1
 
-ENTRYPOINT ["vestro-entrypoint.sh"]
+ENTRYPOINT ["whatspower-entrypoint.sh"]
 # Migrar al BOOT del contenedor nuevo y arrancar el server standalone
 CMD ["sh", "-c", "node migrate.mjs && node server.js"]

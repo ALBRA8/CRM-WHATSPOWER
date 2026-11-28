@@ -5,7 +5,7 @@ import {
   signBridgePayload,
   verifyBridgeSignature,
 } from "../src/hmac.js";
-import { FLOW_INBOUND, CRM_ACTIONS } from "@vestro/contracts";
+import { FLOW_INBOUND, CRM_ACTIONS } from "@whatspower/contracts";
 
 const SECRET = "secreto-puente";
 const NOW = new Date("2026-11-27T12:00:00Z").getTime();

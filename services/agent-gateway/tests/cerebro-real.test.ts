@@ -26,7 +26,7 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { AgentGateway } from "../src/client.js";
-import type { ConversationTurnReceived } from "@vestro/contracts";
+import type { ConversationTurnReceived } from "@whatspower/contracts";
 
 const BRAIN_DIR =
   process.env.AGENTE_GENERAL_DIR ?? "/home/z/my-project/work/repos/AGENTE-GENERAL";

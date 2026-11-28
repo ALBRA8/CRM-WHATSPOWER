@@ -1,7 +1,7 @@
 # 032 — El seguimiento y el reintento respetan `ALLOWED_WA_IDS`
 
 **Feature Branch**: `fix/032-seguimiento-permitidos` (solo `AGENTE-GENERAL`; esta
-spec va en `docs/032-seguimiento-permitidos` de `vestro-crm`)
+spec va en `docs/032-seguimiento-permitidos` de `crm-whatspower`)
 
 **Created**: 2026-10-20
 

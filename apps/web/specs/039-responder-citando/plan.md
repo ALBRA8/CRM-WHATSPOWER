@@ -13,7 +13,7 @@ Sin violaciones: migración aditiva, DTO aditivo, sin terceros.
 | ¿El webhook ya trae la cita? | Sí: `WebhookMessage.context?: { from, id }` ya estaba tipado (`src/server/inbox/webhook.ts`) pero nadie lo leía |
 | ¿Cómo se cita al enviar en WhatsApp? | `context: { message_id: <wamid> }` en el mismo cuerpo de `/<PHONE_NUMBER_ID>/messages`. Vale para cualquier tipo salvo reacciones; con plantillas la burbuja no se dibuja |
 | ¿Zernio cita en Instagram/Messenger? | `replyTo` existe en su envío, pero su doc dice que en Instagram y Messenger se ignora (aviso `ignored_field`) |
-| ¿Y Meta directo? | Instagram: `reply_to: { mid }` solo documentado con token de página (`graph.facebook.com`); Vestro usa Instagram Login. Messenger: documentado desde el 15-jul-2025 |
+| ¿Y Meta directo? | Instagram: `reply_to: { mid }` solo documentado con token de página (`graph.facebook.com`); WhatsPower usa Instagram Login. Messenger: documentado desde el 15-jul-2025 |
 | ¿Dónde se serializa el mensaje? | `serializeMessage` (`src/server/inbox/ingest.ts`): lo usan el GET del hilo, `persistOutbound`, la ingesta, los ecos y `sendTemplate` |
 | ¿Cómo sabe la UI qué ofrece el compositor? | `conversation.composer` (`queries.ts`), derivado de las capacidades del canal (028) |
 

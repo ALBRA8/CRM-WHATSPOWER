@@ -1,4 +1,4 @@
-# 048 — Vestro en el celular (PWA)
+# 048 — WhatsPower en el celular (PWA)
 
 **Feature Branch**: `feat/048-pwa` (sobre `feat/047-webhook-a-prueba-de-fallos`, #147)
 
@@ -18,7 +18,7 @@ icono) y un archivo estático.
 
 ## Problema
 
-1. **El dueño atiende desde el celular, pero Vestro vive en una pestaña.**
+1. **El dueño atiende desde el celular, pero WhatsPower vive en una pestaña.**
    Para contestar tiene que abrir el navegador, buscar la pestaña entre
    otras veinte y volver a entrar. WhatsApp está a un toque en la pantalla de
    inicio; el CRM que lo atiende, no.
@@ -26,13 +26,13 @@ icono) y un archivo estático.
    muestran «Instalar», y en el iPhone «Agregar a inicio» deja un recorte de
    la página como icono.
 3. **Cinco instancias instaladas se verían iguales** si el icono fuera el de
-   Vestro: una agencia instala la de cada cliente en su propio celular.
+   WhatsPower: una agencia instala la de cada cliente en su propio celular.
 
 ## Decisiones
 
 **D1 — Manifest con la marca de la organización.** `src/app/manifest.ts` lo
 arma en cada petición con la marca guardada (nombre y logo o inicial): nada de
-«Vestro» cableado. Lleva:
+«WhatsPower» cableado. Lleva:
 
 - `display: "standalone"` y `start_url: "/inbox"`: la app instalada abre en la
   Bandeja. Primero fue `/`, que según el estado manda a la guía de inicio;
@@ -59,8 +59,8 @@ Lo que se dibuja:
 - **Con logo subido** (PNG, JPEG o SVG), el logo centrado sobre el color de
   marca. Un ICO o un WEBP no se pueden dibujar en `ImageResponse`: con esos
   formatos cae a la inicial.
-- **Sin logo**, el mismo icono generado que la pestaña: la V de Vestro si la
-  instancia se llama Vestro, y la inicial sobre el acento si se llama de otra
+- **Sin logo**, el mismo icono generado que la pestaña: la V de WhatsPower si la
+  instancia se llama WhatsPower, y la inicial sobre el acento si se llama de otra
   forma.
 
 Las mismas cabeceras de seguridad que el favicon.
@@ -80,7 +80,7 @@ muestra conversaciones viejas como si fueran actuales es peor que uno que dice
 
 **D4 — Se registra en el layout raíz.** Un componente cliente registra
 `/sw.js` al cargar. Si el navegador no tiene service worker (o falla el
-registro), no pasa nada: Vestro funciona igual en la pestaña.
+registro), no pasa nada: WhatsPower funciona igual en la pestaña.
 
 **D5 — «Instalar app» en el menú.** Encima de Ajustes aparece una fila
 **Instalar app** (al implementar se descartó el icono junto a la campana: con

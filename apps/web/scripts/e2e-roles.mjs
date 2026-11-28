@@ -54,7 +54,7 @@ async function main() {
     process.exit(2);
   }
   console.log("== Setup ==");
-  const email = "e2e-roles@vestro.test";
+  const email = "e2e-roles@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

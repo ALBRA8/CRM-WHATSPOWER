@@ -34,14 +34,14 @@ export const PG_CONNECTION_OPTIONS = {
  * globalThis para no agotar conexiones.
  */
 const globalForDb = globalThis as unknown as {
-  __vestroSql?: ReturnType<typeof postgres>;
+  __whatspowerSql?: ReturnType<typeof postgres>;
 };
 
 function createClient() {
   const env = getEnv();
   // F5 — rol de runtime con privilegios mínimos (infra/sql/005_runtime_login.sql).
   // Si el despliegue define DATABASE_URL_RUNTIME, la app conecta con ese rol
-  // (vestro_runtime: miembro de app_runtime — DML sin DDL, dueño de nada, y
+  // (whatspower_runtime: miembro de app_runtime — DML sin DDL, dueño de nada, y
   // FORCE RLS le aplica). Sin ella se usa DATABASE_URL como siempre: los
   // despliegues existentes no cambian de comportamiento.
   const url = env.DATABASE_URL_RUNTIME?.trim() || env.DATABASE_URL;
@@ -58,8 +58,8 @@ export function dbRoleInUse(): "runtime" | "owner" {
 }
 
 export function getSql() {
-  if (!globalForDb.__vestroSql) globalForDb.__vestroSql = createClient();
-  return globalForDb.__vestroSql;
+  if (!globalForDb.__whatspowerSql) globalForDb.__whatspowerSql = createClient();
+  return globalForDb.__whatspowerSql;
 }
 
 let cachedDb: ReturnType<typeof drizzle<typeof schema>> | null = null;

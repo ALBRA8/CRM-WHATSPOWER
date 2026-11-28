@@ -16,6 +16,6 @@ Entra una conversación y sale una respuesta. Luego:
    oscuro, `fondo-chat/oscuro.svg`.
 2. **FC-2.** El compositor es transparente: no tapa los dibujos.
 3. **FC-1.** Los dos SVG se sirven como `image/svg+xml`.
-4. **FC-3.** Con Alto contraste (cookie `vestro-apariencia`), la tarjeta del
+4. **FC-3.** Con Alto contraste (cookie `whatspower-apariencia`), la tarjeta del
    chat no lleva dibujos.
 5. Sin errores de la página.

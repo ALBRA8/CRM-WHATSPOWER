@@ -125,7 +125,7 @@ importers:
 
   packages/tenant:
     dependencies:
-      '@vestro/contracts':
+      '@whatspower/contracts':
         specifier: workspace:*
         version: link:../contracts
     devDependencies:
@@ -141,7 +141,7 @@ importers:
 
   services/agent-gateway:
     dependencies:
-      '@vestro/contracts':
+      '@whatspower/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
     devDependencies:
@@ -157,7 +157,7 @@ importers:
 
   services/campaigns:
     dependencies:
-      '@vestro/contracts':
+      '@whatspower/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
     devDependencies:
@@ -173,7 +173,7 @@ importers:
 
   services/flows:
     dependencies:
-      '@vestro/contracts':
+      '@whatspower/contracts':
         specifier: workspace:*
         version: link:../../packages/contracts
     devDependencies:

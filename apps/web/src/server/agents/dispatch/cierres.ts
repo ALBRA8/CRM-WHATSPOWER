@@ -7,7 +7,7 @@
  * persona, pondría al equipo a atender un «gracias».
  *
  * Las listas son las mismas que usa AGENTE-GENERAL para decidir cuándo puede callar
- * (`app/cierres.py` en AGENTE-GENERAL) y que usa Vestro Cloud. Si una crece, que
+ * (`app/cierres.py` en AGENTE-GENERAL) y que usa WhatsPower Cloud. Si una crece, que
  * crezca la otra: si divergen, el CRM relanza lo que el cerebro calló a
  * propósito, o al revés.
  *

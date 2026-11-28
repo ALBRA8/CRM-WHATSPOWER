@@ -9,7 +9,7 @@
  *
  *   - `GET /health` → 200 `{status:"ok", mode, version, llm:"crm"}` (o 503, o
  *     nunca contesta: `estado.salud`).
- *   - `POST <ruta del despacho>` → verifica la firma `X-Vestro-Signature`
+ *   - `POST <ruta del despacho>` → verifica la firma `X-WhatsPower-Signature`
  *     sobre el cuerpo CRUDO con `BOT_API_KEY`, acusa 200 (o 500, 422, tarde o
  *     nunca: `estado.modo`) y DESPUÉS contesta por `/api/bot/*`:
  *       · texto con «humano» o «asesor» → avisa al cliente por
@@ -46,7 +46,7 @@
  * La app (`pnpm dev`) y el guion leen el MISMO archivo de entorno:
  *
  *   APP_BASE_URL=http://localhost:3260        PORT=3260
- *   DATABASE_URL=postgresql://postgres:postgres@localhost:5433/vestro_036_e2e
+ *   DATABASE_URL=postgresql://postgres:postgres@localhost:5433/whatspower_036_e2e
  *   WA_MOCK_ENABLED=true
  *   META_GRAPH_BASE_URL=http://localhost:3260/api/dev/wa-mock/graph
  *   OPENROUTER_BASE_URL=http://localhost:3260/api/dev/ai-mock
@@ -60,7 +60,7 @@
  *                                   espera lo mismo que lo demás)
  *   MEDIA_DIR=./.dev-media
  *   BOT_API_KEY=<16+ caracteres>
- *   BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch
+ *   BRAIN_DISPATCH_URL=http://127.0.0.1:3261/whatspower/dispatch
  *   (sin BRAIN_HEALTH_URL: el CRM pregunta al /health del mismo origen)
  *   + BETTER_AUTH_SECRET, ENCRYPTION_KEY, META_WEBHOOK_VERIFY_TOKEN
  *
@@ -100,7 +100,7 @@ export function urlDelDespacho(env = process.env) {
   } catch {
     console.error(
       "Falta BRAIN_DISPATCH_URL. Arranca la app (y corre el guion) con algo como\n" +
-        "  BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch\n" +
+        "  BRAIN_DISPATCH_URL=http://127.0.0.1:3261/whatspower/dispatch\n" +
         "Ver la configuración estándar en scripts/lib/cerebro-falso.mjs."
     );
     process.exit(1);
@@ -316,11 +316,11 @@ export async function levantarCerebroFalso({
         modo,
         crudo: crudo.toString("utf8"),
         evento,
-        firmaOk: firmaValida(botKey, crudo, req.headers["x-vestro-signature"]),
+        firmaOk: firmaValida(botKey, crudo, req.headers["x-whatspower-signature"]),
         cabeceras: {
-          dispatch: req.headers["x-vestro-dispatch-id"] ?? null,
-          org: req.headers["x-vestro-organization"] ?? null,
-          evento: req.headers["x-vestro-event"] ?? null,
+          dispatch: req.headers["x-whatspower-dispatch-id"] ?? null,
+          org: req.headers["x-whatspower-organization"] ?? null,
+          evento: req.headers["x-whatspower-event"] ?? null,
           tipo: req.headers["content-type"] ?? null,
         },
       });

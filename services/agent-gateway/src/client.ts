@@ -26,7 +26,7 @@ import {
   type ErrorCode,
   type EventEnvelope,
   type ExecutionResult,
-} from "@vestro/contracts";
+} from "@whatspower/contracts";
 
 export interface AgentGatewayConfig {
   /** URL COMPLETA del endpoint de despacho ({AGENT_DISPATCH_URL}/crm/dispatch, §4). */

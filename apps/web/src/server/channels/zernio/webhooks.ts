@@ -19,7 +19,7 @@ export const ZERNIO_MESSAGE_EVENT = "message.received";
 /** 072 — Las reacciones del cliente llegan en su propio evento. */
 export const ZERNIO_REACTION_EVENT = "reaction.received";
 
-/** Un webhook de `GET /webhooks/settings`, en lo que a Vestro le importa. */
+/** Un webhook de `GET /webhooks/settings`, en lo que a WhatsPower le importa. */
 export type ZernioWebhook = {
   _id: string;
   name?: string | null;
@@ -48,10 +48,10 @@ type Entry = { at: number; ok: boolean; webhooks: ZernioWebhook[] };
 
 // En globalThis porque Next recarga módulos en desarrollo; una instancia es un
 // proceso, así que la memoria alcanza. La llave nunca es la del mapa: su hash.
-const g = globalThis as unknown as { __vestroZernioWebhooks?: Map<string, Entry> };
+const g = globalThis as unknown as { __whatspowerZernioWebhooks?: Map<string, Entry> };
 function cache(): Map<string, Entry> {
-  if (!g.__vestroZernioWebhooks) g.__vestroZernioWebhooks = new Map();
-  return g.__vestroZernioWebhooks;
+  if (!g.__whatspowerZernioWebhooks) g.__whatspowerZernioWebhooks = new Map();
+  return g.__whatspowerZernioWebhooks;
 }
 const keyOf = (token: string) => createHash("sha256").update(token).digest("hex");
 

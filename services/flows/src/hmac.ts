@@ -7,7 +7,7 @@
  */
 
 import { createHmac, timingSafeEqual } from "node:crypto";
-import { HMAC_TIMESTAMP_TOLERANCE_SECONDS } from "@vestro/contracts";
+import { HMAC_TIMESTAMP_TOLERANCE_SECONDS } from "@whatspower/contracts";
 
 export class SignatureError extends Error {
   readonly code: "missing_secret" | "timestamp_out_of_window" | "bad_signature";

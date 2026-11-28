@@ -9,7 +9,7 @@
 **Input**: quinta spec de la 2.2, elegida por el propietario del producto el 2026-10-23
 ([046 research.md](../046-referencias-2.2/research.md)). Salió de lo que REA
 encontró en Chatwoot (MIT): guarda el borrador de cada conversación en
-`localStorage` (`draftMessages`). Vestro lo tiraba al cambiar de chat, porque
+`localStorage` (`draftMessages`). WhatsPower lo tiraba al cambiar de chat, porque
 la 028 (D5) remonta el compositor para que un adjunto no viaje a otra
 conversación.
 
@@ -27,8 +27,8 @@ para contestar algo rápido y, al volver, lo que escribió ya no está. Con la
 **D1 — El texto se guarda por conversación, en el navegador.**
 
 - Al escribir, el texto de la caja se guarda con la clave
-  `vestro.borrador.responder.<id>`. La nota interna (050) se guarda igual con
-  `vestro.borrador.nota.<id>`.
+  `whatspower.borrador.responder.<id>`. La nota interna (050) se guarda igual con
+  `whatspower.borrador.nota.<id>`.
 - Al volver a la conversación, la caja lo trae de vuelta y el cursor queda al
   final.
 - El **adjunto no** se guarda: la decisión D5 de la 028 sigue en pie.

@@ -18,7 +18,7 @@
  *      WA_MOCK_ENABLED=true, META_GRAPH_BASE_URL → wa-mock,
  *      OPENROUTER_BASE_URL → ai-mock + OPENROUTER_API_TOKEN + OPENROUTER_MODEL,
  *      BOT_API_KEY, AGENT_COALESCE_MS=1500,
- *      BRAIN_DISPATCH_URL=http://127.0.0.1:3261/vestro/dispatch (sin
+ *      BRAIN_DISPATCH_URL=http://127.0.0.1:3261/whatspower/dispatch (sin
  *      BRAIN_HEALTH_URL) y CHANNELS=whatsapp,instagram,messenger,tiktok
  *      (Instagram y TikTok entran por Zernio: ZERNIO_BASE_URL → zernio-mock).
  *   2) node --env-file=.env.e2e-036 scripts/e2e-despacho.mjs
@@ -201,7 +201,7 @@ async function main() {
 
 /** Operador y WhatsApp por el wa-mock. */
 async function preparar() {
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

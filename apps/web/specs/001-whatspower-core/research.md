@@ -1,4 +1,4 @@
-# Research — 001-vestro-core
+# Research — 001-whatspower-core
 
 > Decisiones de diseño verificadas (DV-VC-n). Los patrones marcados como "proyecto de
 > referencia privado en producción" provienen de un sistema real en producción cuyo

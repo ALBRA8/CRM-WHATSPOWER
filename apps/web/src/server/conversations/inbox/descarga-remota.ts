@@ -79,7 +79,7 @@ function pedir(url: URL, maxBytes: number, esMock: boolean, fin: number): Promis
       {
         // El simulador vive en esta misma máquina; lo demás, solo a internet.
         ...(esMock ? {} : { lookup: lookupPublico }),
-        headers: { accept: "*/*", "user-agent": "Vestro-CRM" },
+        headers: { accept: "*/*", "user-agent": "WhatsPower-CRM" },
       },
       (res) => {
         const status = res.statusCode ?? 0;

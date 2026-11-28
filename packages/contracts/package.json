@@ -1,8 +1,8 @@
 {
-  "name": "@vestro/contracts",
+  "name": "@whatspower/contracts",
   "version": "0.1.0",
   "private": true,
-  "description": "Contratos de integración versionados de Vestro: catálogo de errores tipados, contexto de tenant, despacho estándar, bot API v1, API v1 comercial, flujos, campañas y agenda. Fuente: CONTRATOS_INTEGRACION.md.",
+  "description": "Contratos de integración versionados de WhatsPower: catálogo de errores tipados, contexto de tenant, despacho estándar, bot API v1, API v1 comercial, flujos, campañas y agenda. Fuente: CONTRATOS_INTEGRACION.md.",
   "license": "MIT",
   "type": "module",
   "main": "src/index.ts",

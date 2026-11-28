@@ -13,7 +13,7 @@ export const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
   // F5 — rol de runtime con privilegios mínimos (MODELO_MULTI_TENANT.md §4.1,
   // infra/sql/005_runtime_login.sql). Si está presente, la app CONECTA con este
-  // rol de BD (vestro_runtime, miembro del grupo app_runtime: DML sin DDL, sin
+  // rol de BD (whatspower_runtime, miembro del grupo app_runtime: DML sin DDL, sin
   // dueño de objetos) en vez de con el dueño de DATABASE_URL. Es opcional para
   // no romper los despliegues existentes: sin ella, el comportamiento es el de
   // siempre (heredado de S4.3/S4.4). El verificador real del rol es

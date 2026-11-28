@@ -8,7 +8,7 @@ import {
   CAMPAIGN_STATES,
   canTransitionCampaign,
   type CampaignState,
-} from "@vestro/contracts";
+} from "@whatspower/contracts";
 
 export class IllegalCampaignTransitionError extends Error {
   readonly from: CampaignState;

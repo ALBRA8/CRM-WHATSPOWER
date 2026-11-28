@@ -82,7 +82,7 @@ describe("contrato de despacho estándar", () => {
   });
 });
 
-describe("bot API v1 — vigía de las 13 rutas heredadas de VESTRO", () => {
+describe("bot API v1 — vigía de las 13 rutas heredadas de WHATSPOWER", () => {
   const FROZEN_PATHS = [
     "/api/bot/profile",
     "/api/bot/context",

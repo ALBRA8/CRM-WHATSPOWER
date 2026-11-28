@@ -28,7 +28,7 @@ Referencias:
 
 ## Problema
 
-Hoy solo hay claro u oscuro. El aspecto lo decide Vestro, no quien pasa ocho
+Hoy solo hay claro u oscuro. El aspecto lo decide WhatsPower, no quien pasa ocho
 horas frente a la bandeja, y no hay forma de agrandar la letra para ver mejor
 ni de compactar la lista para ver más.
 
@@ -42,8 +42,8 @@ otro modo):
 |---|---|---|
 | Menta | claro | El de la 061: marco menta, burbujas del cliente oscuras. **Por defecto** |
 | Noche | oscuro | Pareja de Menta |
-| Vestro | claro | El azul papel frío de la 2.x |
-| Vestro oscuro | oscuro | Su pareja |
+| WhatsPower | claro | El azul papel frío de la 2.x |
+| WhatsPower oscuro | oscuro | Su pareja |
 | Papel | claro | Cálido, crema y tinta café |
 | Carbón | oscuro | Pareja de Papel: negro cálido |
 | Medianoche | oscuro | Casi negro y nítido, al estilo Linear |
@@ -53,14 +53,14 @@ Ninguno cambia el acento, que es de la marca (white-label), salvo el de alto
 contraste, que lo oscurece si hace falta para AAA. Todos pasan los pisos de
 `contraste-temas.test.ts`, que se extiende a cada tema.
 
-**D2 — Tema propio.** Se eligen tres colores: fondo, texto y marco. Vestro
+**D2 — Tema propio.** Se eligen tres colores: fondo, texto y marco. WhatsPower
 genera los demás tonos (superficies, bordes, hovers, burbujas) mezclando esos
 tres, como Linear.
 
 - Si un par no pasa AA, se avisa en la pantalla y no se guarda.
 - Vive en la cookie de esa persona, como un tema más.
 
-**D3 — Letra.** Cuatro familias, todas servidas por Vestro con `next/font`
+**D3 — Letra.** Cuatro familias, todas servidas por WhatsPower con `next/font`
 (se descargan al construir la imagen, no en el navegador):
 
 - Archivo (la actual);
@@ -84,7 +84,7 @@ Instrument Serif y Plex Mono se quedan para sus acentos.
   defecto del negocio (tema, letra, tamaño y densidad). Se guarda en
   `metadata.apariencia`, junto a la marca.
 - **Cada persona** puede cambiarlo solo en su equipo, con «Usar el del
-  negocio» para volver. Se guarda en la cookie `vestro-apariencia` (JSON
+  negocio» para volver. Se guarda en la cookie `whatspower-apariencia` (JSON
   corto, validado con Zod al leerlo).
 - El botón de sol y luna salta a la pareja del tema actual.
 

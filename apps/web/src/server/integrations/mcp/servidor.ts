@@ -1,5 +1,5 @@
 /**
- * 069 — Servidor MCP de Vestro sobre Streamable HTTP, sin estado (puerto de Vestro Cloud).
+ * 069 — Servidor MCP de WhatsPower sobre Streamable HTTP, sin estado (puerto de WhatsPower Cloud).
  *
  * Solo hace falta la parte de herramientas del protocolo, así que se atiende
  * a mano en vez de cargar el SDK: cada POST trae un mensaje JSON-RPC y se
@@ -22,13 +22,13 @@ import { HERRAMIENTAS, herramientaPorNombre, permitidaPara, type Herramienta, ty
 
 /** De la más nueva a la más vieja; si el cliente pide otra, se le ofrece la primera. */
 export const VERSIONES = ["2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05"] as const;
-export const SERVIDOR = { name: "vestro-crm", title: "Vestro CRM", version: "1.0.0" };
+export const SERVIDOR = { name: "crm-whatspower", title: "CRM WhatsPower", version: "1.0.0" };
 
 const INSTRUCCIONES =
-  "Estás conectado al CRM Vestro de UN negocio (llama a whoami para saber cuál). " +
+  "Estás conectado al CRM WhatsPower de UN negocio (llama a whoami para saber cuál). " +
   "Sirve sobre todo para CONFIGURAR su agente de WhatsApp: empieza con get_setup_status, que dice qué falta y trae los " +
   "enlaces exactos donde se resuelve cada cosa; dáselos al usuario tal cual, sin inventar otros. La guía completa de cómo " +
-  "configurar bien un agente está en el prompt configurar_vestro: síguela. Los datos del negocio van en el conocimiento, " +
+  "configurar bien un agente está en el prompt configurar_whatspower: síguela. Los datos del negocio van en el conocimiento, " +
   "nunca inventados, y no enciendas el agente sin el visto bueno del dueño. " +
   "Antes de encenderlo y después de cada cambio, pruébalo con simulate_conversation (sin WhatsApp, con su configuración " +
   "real y el agente que de verdad contesta; gasta saldo del proveedor de IA del negocio): la guía de cómo probar y qué escenarios " +
@@ -40,8 +40,8 @@ const INSTRUCCIONES =
 /** Prompts del servidor: la guía de configuración, para cualquier cliente MCP. */
 const PROMPTS = [
   {
-    name: "configurar_vestro",
-    title: "Configurar el agente de Vestro",
+    name: "configurar_whatspower",
+    title: "Configurar el agente de WhatsPower",
     description:
       "Guía paso a paso para configurar bien el agente de agendamiento del negocio: diagnóstico, enlaces, entrevista al dueño, conocimiento, instrucciones, agenda y encendido.",
     texto: GUIA_CONFIGURAR,
@@ -188,7 +188,7 @@ export async function responderMcp(req: Request): Promise<Response> {
     if (auth.status === 401) {
       const meta = `, resource_metadata="${urlMetadatosRecurso(origenInstancia())}"`;
       const caducado = req.headers.get("authorization") ? ', error="invalid_token"' : "";
-      auth.headers.set("WWW-Authenticate", `Bearer realm="vestro"${meta}${caducado}`);
+      auth.headers.set("WWW-Authenticate", `Bearer realm="whatspower"${meta}${caducado}`);
       auth.headers.set("Access-Control-Expose-Headers", "WWW-Authenticate");
       auth.headers.set("Access-Control-Allow-Origin", CORS["Access-Control-Allow-Origin"]);
     }

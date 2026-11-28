@@ -4,7 +4,7 @@
  *
  * Los avisos se simulan en la página (la API `Notification` y el
  * `showNotification` del service worker quedan anotados en `window.__avisos`)
- * y «Vestro oculto» se controla con `window.__oculta`. La red se corta de
+ * y «WhatsPower oculto» se controla con `window.__oculta`. La red se corta de
  * verdad con `setOffline`, y el servidor «caído» es `/api/events` con 503.
  *
  * Requiere la app viva con WA_MOCK_ENABLED=true. `E2E_EMAIL` / `E2E_PASSWORD`
@@ -23,7 +23,7 @@ async function abrirCuenta(p) {
 }
 
 const BASE = process.env.APP_BASE_URL ?? "http://localhost:3000";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e-avisos-sistema@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e-avisos-sistema@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-avisos";
 const TEMA = process.env.TEMA === "dark" ? "dark" : "light";
 const SALIDA = process.env.CAPTURAS_DIR ?? ".tmp";
@@ -98,7 +98,7 @@ function simularNavegador() {
 mkdirSync(SALIDA, { recursive: true });
 const browser = await chromium.launch();
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 860 } });
-await ctx.addCookies([{ name: "vestro-theme", value: TEMA, url: BASE }]);
+await ctx.addCookies([{ name: "whatspower-theme", value: TEMA, url: BASE }]);
 await ctx.addInitScript(simularNavegador);
 const errores = [];
 
@@ -147,7 +147,7 @@ try {
   await activar.click();
   ok("al concederlo, la fila desaparece", Boolean(await hasta(async () => (await activar.count()) === 0, 5000)));
 
-  console.log("\n== AC2 · con Vestro oculto ==");
+  console.log("\n== AC2 · con WhatsPower oculto ==");
   await oculta(true);
   await entra("a", { text: `¿Siguen abiertos? ${S}` });
   const primero = await hasta(async () => (await avisos()).find((a) => a.body === `¿Siguen abiertos? ${S}`));
@@ -167,7 +167,7 @@ try {
   await entra("a", { text: `Te estoy viendo ${S}` });
   await page.getByText(`Te estoy viendo ${S}`).first().waitFor({ timeout: 15000 });
   await espera(1500);
-  ok("con Vestro al frente y con el foco, no avisa", (await avisos()).length === n);
+  ok("con WhatsPower al frente y con el foco, no avisa", (await avisos()).length === n);
   await page.getByRole("button", { name: /^Sonido de mensajes/ }).click();
   await oculta(true);
   await entra("a", { text: `Con la campana apagada ${S}` });
@@ -186,7 +186,7 @@ try {
   );
   await page.evaluate(
     ([evento, id]) => window.dispatchEvent(new CustomEvent(evento, { detail: id })),
-    ["vestro:abrir-conversacion", convs.a.id]
+    ["whatspower:abrir-conversacion", convs.a.id]
   );
   ok(
     "y otro aviso, ya en la Bandeja, cambia a su conversación",

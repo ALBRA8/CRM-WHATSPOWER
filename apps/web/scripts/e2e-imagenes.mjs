@@ -46,7 +46,7 @@ const ctx = await browser.newContext({
 const req = ctx.request;
 
 console.log("== Setup: operador, conexión y conversaciones ==");
-const email = process.env.E2E_EMAIL ?? "e2e@vestro.test";
+const email = process.env.E2E_EMAIL ?? "e2e@whatspower.test";
 const password = process.env.E2E_PASSWORD ?? "password-e2e-123";
 let su = await req.post(`${BASE}/api/auth/sign-up/email`, {
   data: { email, password, name: "Operador E2E" },

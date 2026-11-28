@@ -190,7 +190,7 @@ export function BookingDrawer({
               )}
               {b.connector === "google" && (
                 <p className="text-xs text-text-3">
-                  Mueve y cancela desde Vestro: los cambios hechos en Google Calendar no se importan.
+                  Mueve y cancela desde WhatsPower: los cambios hechos en Google Calendar no se importan.
                 </p>
               )}
               {b.notes && isSession && (

@@ -18,16 +18,16 @@ import { isPublicSignupAllowed } from "@/server/identity/auth/registration";
  * desde fuera: solo envuelve llamadas server-side.
  */
 const globalForSignup = globalThis as unknown as {
-  __vestroInternalSignup?: AsyncLocalStorage<boolean>;
+  __whatspowerInternalSignup?: AsyncLocalStorage<boolean>;
 };
 
 // En globalThis: los módulos pueden evaluarse más de una vez (una por ruta en
 // dev) y todas las copias deben compartir el mismo contexto.
 function internalSignupContext(): AsyncLocalStorage<boolean> {
-  if (!globalForSignup.__vestroInternalSignup) {
-    globalForSignup.__vestroInternalSignup = new AsyncLocalStorage<boolean>();
+  if (!globalForSignup.__whatspowerInternalSignup) {
+    globalForSignup.__whatspowerInternalSignup = new AsyncLocalStorage<boolean>();
   }
-  return globalForSignup.__vestroInternalSignup;
+  return globalForSignup.__whatspowerInternalSignup;
 }
 
 export function runInternalSignup<T>(fn: () => Promise<T>): Promise<T> {
@@ -112,9 +112,9 @@ function createAuth() {
 
 type Auth = ReturnType<typeof createAuth>;
 
-const globalForAuth = globalThis as unknown as { __vestroAuth?: Auth };
+const globalForAuth = globalThis as unknown as { __whatspowerAuth?: Auth };
 
 export function getAuth(): Auth {
-  if (!globalForAuth.__vestroAuth) globalForAuth.__vestroAuth = createAuth();
-  return globalForAuth.__vestroAuth;
+  if (!globalForAuth.__whatspowerAuth) globalForAuth.__whatspowerAuth = createAuth();
+  return globalForAuth.__whatspowerAuth;
 }

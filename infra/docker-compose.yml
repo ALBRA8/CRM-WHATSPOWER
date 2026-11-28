@@ -1,23 +1,23 @@
-# Infraestructura local de Vestro (PostgreSQL 16)
+# Infraestructura local de WhatsPower (PostgreSQL 16)
 # Uso: docker compose -f infra/docker-compose.yml up -d
 # La batería T1-T15 (MODELO_MULTI_TENANT.md §9) se ejecuta contra este PostgreSQL real en Fase 5.
 
 services:
   db:
     image: postgres:16-alpine
-    container_name: vestro-db
+    container_name: crm-whatspower-db
     environment:
-      POSTGRES_DB: vestro
-      POSTGRES_USER: vestro
+      POSTGRES_DB: whatspower
+      POSTGRES_USER: whatspower
       # Credencial SOLO de desarrollo local; producción usa secretos del despliegue.
-      POSTGRES_PASSWORD: vestro_dev_only
+      POSTGRES_PASSWORD: whatspower_dev_only
     ports:
       - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./sql:/docker-entrypoint-initdb.d:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U vestro -d vestro"]
+      test: ["CMD-SHELL", "pg_isready -U whatspower -d whatspower"]
       interval: 5s
       timeout: 3s
       retries: 10

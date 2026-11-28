@@ -14,7 +14,7 @@ import {
   parseTenantContext,
   readTenantHeaders,
 } from "../src/headers.js";
-import { tenantContext } from "@vestro/contracts";
+import { tenantContext } from "@whatspower/contracts";
 
 const CTX_A = tenantContext({
   organizationId: "org_aaa111",

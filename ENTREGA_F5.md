@@ -1,4 +1,4 @@
-# ENTREGA F5 — CRM WHATSPOWER (Vestro)
+# ENTREGA F5 — CRM WhatsPower
 
 **Fase:** F5 — preparación y validación de producción (SIN exposición pública).
 **Repositorios:** `ALBRA8/CRM-WHATSPOWER` (rama `main`) y `ALBRA8/AGENTE-GENERAL` (rama `main`).
@@ -20,7 +20,7 @@ se publicó ni activó el SaaS para clientes; no se expuso nada públicamente.
 
 | Componente | Cómo se despliega | Notas operativas |
 |---|---|---|
-| **apps/web** (CRM, Next.js 15) | proceso Node (`pnpm --filter @vestro/web start`) detrás de proxy TLS (Caddy/Traefik/coolify) | escala a N instancias: con `SSE_BACKPLANE=postgres` los eventos de bandeja cruzan instancias (D-024); con 1 instancia, `off` (default) |
+| **apps/web** (CRM, Next.js 15) | proceso Node (`pnpm --filter @whatspower/web start`) detrás de proxy TLS (Caddy/Traefik/coolify) | escala a N instancias: con `SSE_BACKPLANE=postgres` los eventos de bandeja cruzan instancias (D-024); con 1 instancia, `off` (default) |
 | **PostgreSQL 16** | `infra/docker-compose.yml` (dev) o servidor gestionado; migraciones Drizzle al boot (34) + `infra/sql/002..005` idempotentes | RLS FORCE en 39/39 tablas org-scoped; `audit_log` append-only con hash encadenado |
 | **AGENTE-GENERAL** (cerebro, FastAPI) | `render_app.py` + uvicorn; SOLO red interna del CRM | `/crm/dispatch` + `/api/v1/health`; memoria T9 por organización en `ALBRA_MEMORY_DB` PERSISTENTE |
 | **services/agent-gateway** | se ejecuta DENTRO de apps/web (cliente del despacho); `BRAIN_DISPATCH_URL` al cerebro por red interna | fail-closed sin secreto |
@@ -38,7 +38,7 @@ lados), `ALBRA_MEMORY_DB` persistente; banderas `AGENDA`, `ATRIBUCION`,
 ## 2. Configuración operativa F5 (lo nuevo de esta fase)
 
 1. **Rol de BD runtime con privilegios mínimos (D-025).** `infra/sql/
-   005_runtime_login.sql` crea `vestro_runtime` (LOGIN, miembro de
+   005_runtime_login.sql` crea `whatspower_runtime` (LOGIN, miembro de
    `app_runtime`, `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/
    NOBYPASSRLS`). La app conecta con `DATABASE_URL_RUNTIME` si el despliegue
    la define; sin ella, comportamiento de siempre. Verificación real 24/24:
@@ -54,7 +54,7 @@ lados), `ALBRA_MEMORY_DB` persistente; banderas `AGENDA`, `ATRIBUCION`,
    AsyncLocalStorage (primera) y la valla BD probada como segunda (batería 26/26
    + R1-R7).
 2. **Backplane SSE multi-instancia (D-024, cierra A1).** `SSE_BACKPLANE=postgres`
-   publica por `pg_notify` (canal `vestro_sse`) y cada instancia re-emite lo
+   publica por `pg_notify` (canal `whatspower_sse`) y cada instancia re-emite lo
    que su LISTEN recibe: cada evento llega EXACTAMENTE una vez por instancia
    (el publicador también recibe el suyo por LISTEN). Payloads >7900 bytes
    viajan gzip+base64; si aún exceden, reparto local de respaldo + contador
@@ -144,12 +144,12 @@ documentada — mecanismo previsto por el propio vigía).
   restauración real no se da por bueno; el ciclo completo se corre en el
   entorno de despliegue tras cada cambio de versión de PG o de estrategia.
 - El `.dump` debe ir a almacenamiento EXTERNO al host (regla 3-2-1); en este
-  sandbox quedó en `/tmp/vestro-backups-f5` (área de trabajo local, no es la
+  sandbox quedó en `/tmp/whatspower-backups-f5` (área de trabajo local, no es la
   política de destino).
 
 ## 6. E2E 302 checks — resultado real y condición física del sandbox
 
-- Entorno 036 reconstruido íntegro en esta sesión: BD `vestro_036_e2e` limpia
+- Entorno 036 reconstruido íntegro en esta sesión: BD `whatspower_036_e2e` limpia
   (34 migraciones + audit_log), `.env.e2e-036` recreado (wa-mock/ai-mock/
   zoom-mock en la app, `BOT_API_KEY` ≥16, `AGENT_COALESCE_MS=1500`,
   `AGENT_COALESCE_LARGO_MS=1500`, `AGENDA=on`, `BRAIN_DISPATCH_URL` → cerebro
@@ -201,7 +201,7 @@ documentada — mecanismo previsto por el propio vigía).
 
 **Despliegue (checklist):**
 1. Aprovisionar PostgreSQL 16 (o servicio gestionado); crear roles con
-   `infra/sql/001` + `005`; contraseña de `vestro_runtime` desde el gestor de
+   `infra/sql/001` + `005`; contraseña de `whatspower_runtime` desde el gestor de
    secretos.
 2. Base vacía + `DATABASE_URL` del dueño → migraciones al boot (34) +
    `infra/sql/002_audit_log.sql`, `003_rls_policies.sql`, `004_grants.sql`.

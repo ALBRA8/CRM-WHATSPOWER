@@ -1,20 +1,20 @@
-# Vestro CRM — Guía para Claude
+# CRM WhatsPower — Guía para Claude
 
 Lee primero [AGENTS.md](AGENTS.md): el mapa del código y las reglas de
 modificación viven ahí; este archivo solo añade lo específico de Claude Code.
 
-Vestro es un CRM de WhatsApp open source (MIT), self-hosted, con el perfil y el
+WhatsPower es un CRM de WhatsApp open source (MIT), self-hosted, con el perfil y el
 conocimiento del agente y un Laboratorio de auto-evaluación. Desde la 2.0 no
 trae agente: contesta un cerebro conectado al lado (AGENTE-GENERAL u otro). Una
 instancia = un negocio. Este archivo guía a Claude Code (u otro asistente)
 para operar y **modificar** este repositorio —
-el caso típico: una agencia adaptando Vestro para un cliente.
+el caso típico: una agencia adaptando WhatsPower para un cliente.
 
 ## Stack
 
 **Next.js 15 (App Router) + React 19** en monolito · TypeScript estricto
 (`strict` + `noUncheckedIndexedAccess`) · Tailwind CSS (sistema de diseño de la
-marca Vestro, el mismo de vestro.app: tokens en `src/app/globals.css`, tema
+marca WhatsPower, el mismo de whatspower.app: tokens en `src/app/globals.css`, tema
 claro/oscuro, acento white-label por defecto `#0d5bff`, fuentes Archivo +
 Instrument Serif + IBM Plex Mono self-hosted vía `next/font`; el logo vive en
 `src/lib/brand.ts` y se dibuja con `src/components/brand-mark.tsx`) ·
@@ -118,7 +118,7 @@ OPENROUTER_JUDGE_MODEL=anthropic/claude-haiku-4.5   # opcional: juez más barato
 ```
 
 Para el self-test local existe además el modo de pruebas interno (mocks) —
-ver `specs/001-vestro-core/quickstart.md`. Nunca actives mocks en producción.
+ver `specs/001-whatspower-core/quickstart.md`. Nunca actives mocks en producción.
 
 ## Manejo de credenciales (obligatorio)
 

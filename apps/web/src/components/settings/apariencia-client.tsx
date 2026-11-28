@@ -65,7 +65,7 @@ export function AparienciaClient({
       guardarAparienciaPropia(efectiva);
       setPropia(true);
     }
-    const estilo = document.getElementById("vestro-temas-vivo") ?? document.head.appendChild(Object.assign(document.createElement("style"), { id: "vestro-temas-vivo" }));
+    const estilo = document.getElementById("whatspower-temas-vivo") ?? document.head.appendChild(Object.assign(document.createElement("style"), { id: "whatspower-temas-vivo" }));
     estilo.textContent = cssDePropio(efectiva);
   }, [a, colores, propio.ok]);
 
@@ -172,7 +172,7 @@ export function AparienciaClient({
               </div>
               {propio.ok ? (
                 <p className="text-xs text-text-3">
-                  Vestro arma los demás tonos con estos tres ({propio.modo === "dark" ? "tema oscuro" : "tema claro"}).
+                  WhatsPower arma los demás tonos con estos tres ({propio.modo === "dark" ? "tema oscuro" : "tema claro"}).
                 </p>
               ) : (
                 <p role="alert" className="text-xs text-destructive">
@@ -234,7 +234,7 @@ export function AparienciaClient({
             ? "Tus cambios se guardan solos, solo para ti y en este equipo."
             : delNegocio
               ? "Estás viendo la apariencia del equipo. Lo que cambies se guarda solo para ti."
-              : "Estás viendo la apariencia de siempre de Vestro. Lo que cambies se guarda solo para ti."}
+              : "Estás viendo la apariencia de siempre de WhatsPower. Lo que cambies se guarda solo para ti."}
         </p>
         <div className="flex flex-wrap gap-2">
           {/* Solo dueño y administradores: lo ven todos los que no eligieron la suya. */}

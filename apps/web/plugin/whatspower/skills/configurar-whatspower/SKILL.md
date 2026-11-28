@@ -1,11 +1,11 @@
 ---
-name: configurar-vestro
-description: Configura y opera el agente de WhatsApp de un negocio en Vestro CRM con el MCP de Vestro (instrucciones, conocimiento, agenda y lo que falta, con sus enlaces; y revisar conversaciones para mejorarlo). Úsala cuando el usuario quiera configurar, ajustar, encender o revisar su agente de Vestro, pregunte qué le falta para que conteste, o quiera saber cómo le está yendo a su agente.
+name: configurar-whatspower
+description: Configura y opera el agente de WhatsApp de un negocio en CRM WhatsPower con el MCP de WhatsPower (instrucciones, conocimiento, agenda y lo que falta, con sus enlaces; y revisar conversaciones para mejorarlo). Úsala cuando el usuario quiera configurar, ajustar, encender o revisar su agente de WhatsPower, pregunte qué le falta para que conteste, o quiera saber cómo le está yendo a su agente.
 ---
 
-# Configurar y operar el agente de Vestro
+# Configurar y operar el agente de WhatsPower
 
-Vas a configurar y cuidar el agente que contesta el WhatsApp (y Messenger/Instagram) de UN negocio en Vestro CRM, usando las herramientas del MCP de Vestro. El objetivo es que el agente conteste bien y cumpla el objetivo del negocio (casi siempre agendar; a veces vender o atender una campaña): datos reales, pasos claros y nada inventado.
+Vas a configurar y cuidar el agente que contesta el WhatsApp (y Messenger/Instagram) de UN negocio en CRM WhatsPower, usando las herramientas del MCP de WhatsPower. El objetivo es que el agente conteste bien y cumpla el objetivo del negocio (casi siempre agendar; a veces vender o atender una campaña): datos reales, pasos claros y nada inventado.
 
 ## Reglas que no se rompen
 
@@ -26,8 +26,8 @@ Llama a `whoami`: dice de qué negocio son los datos y qué permisos tienes. Si 
 
 Llama a `get_setup_status`. Resume en pocas líneas qué está listo y qué falta. Separa:
 
-- **Lo que solo puede hacer el dueño en el CRM** (conectar WhatsApp, Google Calendar o Zoom, pegar la llave de la IA): explica para qué sirve cada cosa y da sus enlaces. Para OpenRouter son tres: crear la llave (https://openrouter.ai/settings/keys), cargar saldo (el consumo se cobra ahí, aparte de Vestro) y la pantalla Ajustes → IA donde se pega.
-- **Lo que se hace en el despliegue** (lo hace quien instaló Vestro, no tú ni la pantalla): conectar el agente que contesta (AGENTE-GENERAL u otro, con `BRAIN_DISPATCH_URL` y `BOT_API_KEY`) y encender la agenda (`AGENDA=on`). Da el enlace de la receta que trae `get_setup_status`.
+- **Lo que solo puede hacer el dueño en el CRM** (conectar WhatsApp, Google Calendar o Zoom, pegar la llave de la IA): explica para qué sirve cada cosa y da sus enlaces. Para OpenRouter son tres: crear la llave (https://openrouter.ai/settings/keys), cargar saldo (el consumo se cobra ahí, aparte de WhatsPower) y la pantalla Ajustes → IA donde se pega.
+- **Lo que se hace en el despliegue** (lo hace quien instaló WhatsPower, no tú ni la pantalla): conectar el agente que contesta (AGENTE-GENERAL u otro, con `BRAIN_DISPATCH_URL` y `BOT_API_KEY`) y encender la agenda (`AGENDA=on`). Da el enlace de la receta que trae `get_setup_status`.
 - **Lo que haces tú con las herramientas**: instrucciones, conocimiento, agenda, embudo y respuestas rápidas.
 
 Si el negocio no agenda citas (por ejemplo, un agente que solo atiende una campaña o vende un producto), dile al dueño que el pendiente de la agenda no le impide contestar al agente: lo puede dejar así.
@@ -36,7 +36,7 @@ No esperes a que el dueño termine lo suyo: puedes avanzar con lo tuyo en parale
 
 ## 2. El agente que contesta
 
-Vestro no trae agente: contesta el que se conecta al lado (AGENTE-GENERAL u otro). `get_brain` dice si hay uno conectado y si responde. Si no lo hay, Vestro funciona como bandeja manual: puedes configurar todo igual, pero no se puede encender ni probar con `simulate_conversation` hasta que quien instaló Vestro lo conecte (el enlace a la receta viene en `get_setup_status`).
+WhatsPower no trae agente: contesta el que se conecta al lado (AGENTE-GENERAL u otro). `get_brain` dice si hay uno conectado y si responde. Si no lo hay, WhatsPower funciona como bandeja manual: puedes configurar todo igual, pero no se puede encender ni probar con `simulate_conversation` hasta que quien instaló WhatsPower lo conecte (el enlace a la receta viene en `get_setup_status`).
 
 ## 3. Entrevista al dueño
 

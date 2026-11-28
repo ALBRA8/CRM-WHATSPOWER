@@ -7,7 +7,7 @@
 **Status**: Implementada; unitarias (`tests/unit/lista-compartida-064.test.ts`) y
 arnés E2E (`scripts/e2e-lista-compartida.mjs`) en verde.
 
-**Input**: el propietario del producto, el 2026-10-27. Una instancia derivada de Vestro, con unas
+**Input**: el propietario del producto, el 2026-10-27. Una instancia derivada de WhatsPower, con unas
 decenas de miles de mensajes, tardaba de 6 a 13 s en pintar la Bandeja y su
 Postgres estaba al 190 % de CPU. El arreglo ya corre en esa instancia; aquí se
 porta al raíz, que tiene los mismos dos defectos.

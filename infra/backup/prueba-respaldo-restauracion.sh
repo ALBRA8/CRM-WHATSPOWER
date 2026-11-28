@@ -11,7 +11,7 @@
 #      por tabla, RLS, cadena de hash y migraciones.
 #
 # Uso (todas las variables con defaults de desarrollo local):
-#   DATABASE_URL='postgresql://vestro:...@127.0.0.1:5433/vestro' \
+#   DATABASE_URL='postgresql://whatspower:...@127.0.0.1:5433/whatspower' \
 #   [PG_DUMP_BIN] [PG_RESTORE_BIN] [BACKUP_DIR] [RESTORE_DB] \
 #   infra/backup/prueba-respaldo-restauracion.sh
 #
@@ -24,8 +24,8 @@ REPO_ROOT="$(cd "$HERE/../.." && pwd)"
 WEB="$REPO_ROOT/apps/web"
 
 : "${DATABASE_URL:?DATABASE_URL es requerida}"
-BACKUP_DIR="${BACKUP_DIR:-/tmp/vestro-backups-f5}"
-RESTORE_DB="${RESTORE_DB:-vestro_f5_restaurada}"
+BACKUP_DIR="${BACKUP_DIR:-/tmp/whatspower-backups-f5}"
+RESTORE_DB="${RESTORE_DB:-whatspower_f5_restaurada}"
 PG_DUMP_BIN="${PG_DUMP_BIN:-pg_dump}"
 PG_RESTORE_BIN="${PG_RESTORE_BIN:-pg_restore}"
 

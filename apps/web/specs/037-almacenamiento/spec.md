@@ -6,7 +6,7 @@
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: sexta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#93.
+**Input**: sexta pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/crm-whatspower#93.
 el propietario del producto autorizó en el chat del 2026-10-20 mergear la 036 y seguir con la #93.
 
 **Carril**: ciclo completo (Principio VI). Entra un conector opcional
@@ -18,7 +18,7 @@ Plan en [plan.md](plan.md), tareas en [tasks.md](tasks.md).
 Los adjuntos (entrantes, salientes y la copia del creativo de un anuncio), el
 logo y el icono se guardan en el disco del contenedor (`MEDIA_DIR`). En una
 plataforma sin disco persistente, o con varias réplicas, cada redeploy los
-pierde. Es lo primero que impide correr Vestro fuera de un VPS con volumen.
+pierde. Es lo primero que impide correr WhatsPower fuera de un VPS con volumen.
 
 ## Historias
 
@@ -104,7 +104,7 @@ fuera, como dice el issue.
   `mediaWritable` es `false` y el log lo dice.
 - **AC5** — La firma SigV4 coincide con un vector conocido; la llave secreta
   no aparece en ninguna respuesta ni log.
-- **AC6** — En vivo en `vestro20`: un MinIO dentro del servicio con
+- **AC6** — En vivo en `whatspower20`: un MinIO dentro del servicio con
   credenciales generadas por Coolify; una imagen real por WhatsApp (de la
   línea cliente, por el relevo) queda en el bucket y se ve en la bandeja.
   Después se devuelve el override.

@@ -3,7 +3,7 @@ import { join } from "node:path";
 import { describe, expect, it, vi } from "vitest";
 
 /**
- * 048 — Vestro instalable en el celular: el manifest sale de la marca, los
+ * 048 — WhatsPower instalable en el celular: el manifest sale de la marca, los
  * iconos tienen los tamaños que piden Chrome y el iPhone, y el service worker
  * no guarda nada en el dispositivo.
  */
@@ -28,11 +28,11 @@ import { GET as icono } from "@/app/api/branding/app-icon/route";
 const marca = { name: "Ferretería El Martillo", accent: "#0d5bff", favicon: null };
 
 describe("el manifest", () => {
-  it("sale de la marca, sin «Vestro» cableado", () => {
+  it("sale de la marca, sin «WhatsPower» cableado", () => {
     const m = buildManifest(marca, "CRM de WhatsApp de Ferretería El Martillo");
     expect(m.name).toBe("Ferretería El Martillo");
     expect(m.short_name).toBe("Ferretería");
-    expect(JSON.stringify(m)).not.toMatch(/vestro/i);
+    expect(JSON.stringify(m)).not.toMatch(/whatspower/i);
     expect(m).toMatchObject({
       display: "standalone",
       start_url: "/inbox",
@@ -67,7 +67,7 @@ describe("el manifest", () => {
 
 describe("el nombre corto bajo el icono", () => {
   it("cabe en 12 caracteres y prefiere la primera palabra entera", () => {
-    expect(shortAppName("Vestro")).toBe("Vestro");
+    expect(shortAppName("WhatsPower")).toBe("WhatsPower");
     expect(shortAppName("Taller Ruiz")).toBe("Taller Ruiz");
     expect(shortAppName("Ferretería El Martillo")).toBe("Ferretería");
     expect(shortAppName("Supercalifragilístico SA")).toBe("Supercalifra");
@@ -101,7 +101,7 @@ describe("la ruta del icono dibuja un PNG del tamaño pedido", () => {
   };
 
   it.each([
-    ["Vestro", 192, "any"],
+    ["WhatsPower", 192, "any"],
     ["Ferretería El Martillo", 512, "maskable"],
     ["Taller Ruiz", 180, "any"],
   ] as const)("%s · %i · %s", async (name, size, purpose) => {
@@ -135,6 +135,6 @@ describe("el service worker no guarda nada", () => {
 
   it("la página sin conexión no lleva el nombre de nadie (white-label)", () => {
     expect(codigo).toMatch(/Sin conexión/);
-    expect(codigo).not.toMatch(/vestro/i);
+    expect(codigo).not.toMatch(/whatspower/i);
   });
 });

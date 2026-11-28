@@ -8,16 +8,16 @@ import {
 
 /**
  * La guía de inicio: cuatro pasos (cinco con la agenda) y nada más (issue #86).
- * 036 — «Conecta tu agente» es opcional: sin él, Vestro es una bandeja manual.
+ * 036 — «Conecta tu agente» es opcional: sin él, WhatsPower es una bandeja manual.
  *
- * Es lo primero que ve quien instala Vestro: configurar el agente, vincular
+ * Es lo primero que ve quien instala WhatsPower: configurar el agente, vincular
  * el proveedor de IA, conectar el número y, si la agenda existe en esta
  * instancia, dejarla lista. Al terminar, un botón enciende el agente. Lo
  * demás —la Bandeja, el Pipeline— ya está en el menú; la guía no lo repite.
  *
  * El estado de cada paso sale de `onboardingStatus`, la misma fuente que ya
  * verifica cada conexión: la guía no inventa su propia noción de «listo».
- * Puerto de `onboarding/guide.ts` de Vestro Cloud sin lo que allá es de la
+ * Puerto de `onboarding/guide.ts` de WhatsPower Cloud sin lo que allá es de la
  * plataforma (modelo fijado por soporte, agencias, planes).
  */
 export type GuideStep = {
@@ -31,7 +31,7 @@ export type GuideStep = {
   cta: string;
   /** Lo que falta, cuando no es lo obvio del paso. */
   hint: string | null;
-  /** 036 — No cuenta para `complete`: sin cerebro, Vestro es una bandeja
+  /** 036 — No cuenta para `complete`: sin cerebro, WhatsPower es una bandeja
    *  manual, y eso es un producto válido. */
   optional?: boolean;
 };
@@ -96,7 +96,7 @@ export function guideFrom(status: OnboardingStatus): Guide {
       key: "brain",
       title: "Conecta tu agente",
       description:
-        "Vestro no trae agente: contesta el que conectas al lado (AGENTE-GENERAL, o el tuyo). Sin agente, Vestro funciona como bandeja manual y contestas tú.",
+        "WhatsPower no trae agente: contesta el que conectas al lado (AGENTE-GENERAL, o el tuyo). Sin agente, WhatsPower funciona como bandeja manual y contestas tú.",
       done: ready(brain),
       href: GUIA_DEL_PAR,
       cta: "Cómo conectarlo",

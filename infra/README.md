@@ -9,7 +9,7 @@
 | `sql/002_audit_log.sql` | Tabla `audit_log` org-scoped, append-only con hash encadenado (pgcrypto) y triggers que rechazan UPDATE/DELETE; RLS con `FORCE` |
 | `sql/003_rls_policies.sql` | Plantilla idempotente de política `tenant_isolation` para las tablas de dominio existentes (fail-closed con `current_setting('app.current_org', true)`) |
 | `sql/004_grants.sql` | Grants DML de `app_runtime` sobre todas las tablas/secuencias + default privileges para tablas futuras |
-| `sql/005_runtime_login.sql` | **F5** — rol LOGIN `vestro_runtime` (miembro de `app_runtime`, `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS`) con el que la app puede conectarse sin ser dueña de objetos |
+| `sql/005_runtime_login.sql` | **F5** — rol LOGIN `whatspower_runtime` (miembro de `app_runtime`, `NOSUPERUSER/NOCREATEDB/NOCREATEROLE/NOREPLICATION/NOBYPASSRLS`) con el que la app puede conectarse sin ser dueña de objetos |
 | `backup/backup.sh` | **F5** — respaldo `pg_dump -Fc` con retención por días, bitácora y verificación de integridad (`pg_restore --list`) |
 | `backup/restaurar.sh` | **F5** — restauración real del `.dump` a una base aparte |
 | `backup/prueba-respaldo-restauracion.sh` | **F5** — ciclo completo: siembra → respaldo → restauración → verificación comparativa |
@@ -19,7 +19,7 @@
 
 ```bash
 pnpm infra:up          # levanta PostgreSQL 16 con los SQL aplicados
-# Conexión: postgresql://vestro:vestro_dev_only@localhost:5433/vestro
+# Conexión: postgresql://whatspower:whatspower_dev_only@localhost:5433/whatspower
 ```
 
 ## 5. Rol de runtime con privilegios mínimos (F5)
@@ -30,13 +30,13 @@ los objetos. La cadena completa:
 1. `001` crea el grupo `app_runtime` (NOLOGIN, sin DDL).
 2. `004` le concede SELECT/INSERT/UPDATE/DELETE sobre tablas y USAGE sobre
    secuencias (incluidas las futuras, por default privileges).
-3. `005` crea el rol LOGIN `vestro_runtime`, miembro del grupo, sin privilegios
+3. `005` crea el rol LOGIN `whatspower_runtime`, miembro del grupo, sin privilegios
    de administración y sin `BYPASSRLS`.
 4. La app conecta con `DATABASE_URL_RUNTIME` si el despliegue la define
    (`apps/web/src/lib/db/index.ts`); sin ella sigue usando `DATABASE_URL` como
    siempre (comportamiento de S4.3/S4.4 intacto).
 5. Verificación real: `apps/web/scripts/verificar-rol-runtime.mjs`
-   (`pnpm --filter @vestro/web test:rol-runtime`) prueba contra PostgreSQL real
+   (`pnpm --filter @whatspower/web test:rol-runtime`) prueba contra PostgreSQL real
    que el rol: solo tiene DML+secuencias (R2), el DDL le queda prohibido (R3),
    la valla RLS le muerde — sin contexto 0 filas, cruzado 0 filas/42501 (R4),
    el DML dentro de su org y las secuencias funcionan (R5), audit_log sigue
@@ -63,9 +63,9 @@ DATABASE_URL='postgresql://...' PG_BIN=<binarios servidor> PGDATA=<cluster> \
 
 Programación del respaldo automático (producción):
 
-- **cron**: `0 2 * * * DATABASE_URL='postgresql://...' BACKUP_DIR=/var/backups/vestro BACKUP_RETENTION_DAYS=14 PG_DUMP_BIN=/usr/bin/pg_dump /opt/vestro/infra/backup/backup.sh >> /var/log/vestro-backup.log 2>&1`
-- **systemd timer**: unidad `vestro-backup.service` (`Type=oneshot`, mismo
-  Environment que arriba, ExecStart=backup.sh) + `vestro-backup.timer`
+- **cron**: `0 2 * * * DATABASE_URL='postgresql://...' BACKUP_DIR=/var/backups/whatspower BACKUP_RETENTION_DAYS=14 PG_DUMP_BIN=/usr/bin/pg_dump /opt/whatspower/infra/backup/backup.sh >> /var/log/whatspower-backup.log 2>&1`
+- **systemd timer**: unidad `whatspower-backup.service` (`Type=oneshot`, mismo
+  Environment que arriba, ExecStart=backup.sh) + `whatspower-backup.timer`
   (`OnCalendar=*-*-* 02:00:00`, `Persistent=true`).
 - **Docker**: sidecar `pg_dump` programado o respaldo gestionado por la
   plataforma; el `.dump` resultante debe ir a almacenamiento externo (regla
@@ -92,7 +92,7 @@ instancias y cada instancia entrega cada evento exactamente una vez. `off`
 ## Reglas de operación
 
 1. La aplicación NUNCA se conecta con el rol dueño de los objetos: en
-   producción, `DATABASE_URL_RUNTIME` apunta a `vestro_runtime` (005).
+   producción, `DATABASE_URL_RUNTIME` apunta a `whatspower_runtime` (005).
 2. `SET LOCAL app.current_org = '<orgId>'` al inicio de cada transacción (sin fugas de pool).
 3. Ninguna migración destructiva sin backup + revisión + staging (P-009).
 4. El super-admin opera con su propio rol y con auditoría obligatoria de cada acceso.

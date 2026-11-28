@@ -134,7 +134,7 @@ function ejemplo(s: Schema | undefined): unknown {
 function curl(base: string, verbo: string, path: string, op: Operation): string {
   const conLlave = op.security === undefined || op.security.length > 0;
   const linea = [`curl -X ${verbo.toUpperCase()} "${base}${path}"`];
-  if (conLlave) linea.push(`  -H "Authorization: Bearer $VESTRO_API_KEY"`);
+  if (conLlave) linea.push(`  -H "Authorization: Bearer $WHATSPOWER_API_KEY"`);
   const schema = op.requestBody?.content?.["application/json"]?.schema;
   if (schema) {
     linea.push(`  -H "Content-Type: application/json"`);

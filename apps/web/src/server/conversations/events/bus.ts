@@ -21,15 +21,15 @@ export type { SseEvent };
  * exactamente una vez por instancia (ver backplane.ts).
  */
 
-const globalForBus = globalThis as unknown as { __vestroBus?: EventEmitter };
+const globalForBus = globalThis as unknown as { __whatspowerBus?: EventEmitter };
 
 function getBus(): EventEmitter {
-  if (!globalForBus.__vestroBus) {
+  if (!globalForBus.__whatspowerBus) {
     const bus = new EventEmitter();
     bus.setMaxListeners(200);
-    globalForBus.__vestroBus = bus;
+    globalForBus.__whatspowerBus = bus;
   }
-  return globalForBus.__vestroBus;
+  return globalForBus.__whatspowerBus;
 }
 
 export function publish(organizationId: string, event: SseEvent): void {

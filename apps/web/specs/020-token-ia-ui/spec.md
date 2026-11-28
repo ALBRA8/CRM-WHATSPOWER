@@ -6,7 +6,7 @@
 
 **Status**: Implementada en la rama; pendiente de revisión del dueño.
 
-`ai_credentials` de Vestro Cloud al raíz. Sin `isCloud()`, sin agencias ni
+`ai_credentials` de WhatsPower Cloud al raíz. Sin `isCloud()`, sin agencias ni
 planes, sin el modelo fijo por plataforma (PR #102 de cloud).
 
 **Carril**: ligero, con el modelo de datos dentro de esta spec. Toca el modelo

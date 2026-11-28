@@ -43,7 +43,7 @@ function section(title: string, results: CheckResult[]): void {
 
 const skip = (label: string, detail: string): CheckResult => ({ status: "skip", label, detail });
 
-console.log("Vestro CRM — doctor");
+console.log("CRM WhatsPower — doctor");
 
 section("Archivo .env", [
   hasEnvFile

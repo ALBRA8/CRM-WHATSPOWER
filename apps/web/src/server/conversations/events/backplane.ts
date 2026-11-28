@@ -12,7 +12,7 @@ import type { SseEvent } from "./types";
  *
  * Diseño (Constitución II — sin servicios nuevos): LISTEN/NOTIFY de la MISMA
  * PostgreSQL. Publicar por `pg_notify` y recibir con una conexión dedicada
- * `LISTEN vestro_sse` por instancia; lo recibido se re-emite en el bus local.
+ * `LISTEN whatspower_sse` por instancia; lo recibido se re-emite en el bus local.
  * Con el backplane encendido, `publish()` NO emite localmente: la propia
  * instancia publicadora recibe su evento por LISTEN como cualquier otra, así
  * cada evento llega EXACTAMENTE una vez por instancia.
@@ -30,7 +30,7 @@ import type { SseEvent } from "./types";
  * validación del entorno completo (mal escrito, el CRM sigue levantando).
  */
 
-const CHANNEL = "vestro_sse";
+const CHANNEL = "whatspower_sse";
 /** Límite de seguridad bajo el máximo de 8000 bytes de pg_notify. */
 const NOTIFY_LIMIT = 7_900;
 
@@ -63,12 +63,12 @@ type BackplaneState = {
 };
 
 const globalForBackplane = globalThis as unknown as {
-  __vestroSseBackplane?: BackplaneState;
+  __whatspowerSseBackplane?: BackplaneState;
 };
 
 function state(): BackplaneState {
-  if (!globalForBackplane.__vestroSseBackplane) {
-    globalForBackplane.__vestroSseBackplane = {
+  if (!globalForBackplane.__whatspowerSseBackplane) {
+    globalForBackplane.__whatspowerSseBackplane = {
       sql: null,
       listening: false,
       starting: null,
@@ -85,7 +85,7 @@ function state(): BackplaneState {
       },
     };
   }
-  return globalForBackplane.__vestroSseBackplane;
+  return globalForBackplane.__whatspowerSseBackplane;
 }
 
 export function backplaneStatus(): BackplaneStatus {
@@ -168,7 +168,7 @@ export async function stopBackplane(): Promise<void> {
       // la conexión ya estaba muerta: eso es lo que se cerraba
     }
   }
-  delete (globalThis as unknown as Record<string, unknown>).__vestroSseBackplane;
+  delete (globalThis as unknown as Record<string, unknown>).__whatspowerSseBackplane;
 }
 
 function programarReintento(onEvent: (organizationId: string, event: SseEvent) => void) {

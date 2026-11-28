@@ -1,5 +1,5 @@
 {
-  "name": "@vestro/presets",
+  "name": "@whatspower/presets",
   "version": "0.1.0",
   "private": true,
   "description": "Perfiles sectoriales heredados de CRM-WHATSAPP (MIT, AILINK): reglas comerciales, guiones y configuración por industria. Solo datos; sin código ejecutable.",

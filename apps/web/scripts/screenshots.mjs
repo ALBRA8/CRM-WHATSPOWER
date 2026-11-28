@@ -39,8 +39,8 @@ const ONLY = (process.env.SCREENSHOTS_ONLY ?? "")
   .map((par) => par.trim().split("="))
   .filter(([ruta, archivo]) => ruta && archivo);
 const VIEWPORT = { width: 1440, height: 900 };
-const EMAIL = process.env.SCREENSHOTS_EMAIL ?? "capturas@vestro.test";
-const PASSWORD = process.env.SCREENSHOTS_PASSWORD ?? "capturas-vestro-123";
+const EMAIL = process.env.SCREENSHOTS_EMAIL ?? "capturas@whatspower.test";
+const PASSWORD = process.env.SCREENSHOTS_PASSWORD ?? "capturas-whatspower-123";
 
 await mkdir(OUT, { recursive: true });
 
@@ -57,7 +57,7 @@ const context = await browser.newContext({
 // La Bandeja abre el panel de detalles según esta preferencia de escritorio.
 await context.addInitScript(() => {
   try {
-    localStorage.setItem("vestro.panelOpen", "true");
+    localStorage.setItem("whatspower.panelOpen", "true");
   } catch {
     // sin almacenamiento no hay preferencia que recordar
   }
@@ -97,10 +97,10 @@ await call("/api/settings/whatsapp", {
 });
 await call("/api/settings/branding", {
   method: "PUT",
-  data: { name: "Vestro", accent: "#0d5bff", currency: "MXN" },
+  data: { name: "WhatsPower", accent: "#0d5bff", currency: "MXN" },
 });
 
-await context.addCookies([{ name: "vestro-theme", value: THEME, url: BASE }]);
+await context.addCookies([{ name: "whatspower-theme", value: THEME, url: BASE }]);
 
 const page = await context.newPage();
 

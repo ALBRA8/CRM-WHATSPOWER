@@ -1,0 +1,9 @@
+{
+  "name": "whatspower",
+  "version": "0.1.0",
+  "description": "Configura y opera tu CRM WhatsPower desde Claude: el MCP de WhatsPower y la guía para configurar el agente de WhatsApp.",
+  "author": {
+    "name": "WhatsPower"
+  },
+  "homepage": "https://whatspower.app"
+}

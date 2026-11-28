@@ -5,7 +5,7 @@ import { armarAtencion, MAX_TEXTO_ATENCION, recortarParaNota } from "@/server/ag
 /**
  * 076 — «Hubo una persona», tal como lo ve un cerebro.
  *
- * `EVENTO_GEMELO` es el mismo cuerpo que fija Vestro Cloud, y el que prueba
+ * `EVENTO_GEMELO` es el mismo cuerpo que fija WhatsPower Cloud, y el que prueba
  * `tests/test_atencion_humana.py` de AGENTE-GENERAL del otro lado: que
  * AGENTE-GENERAL lee este campo, lo pone en el prompt y, sin él, el prompt no cambia. Si
  * aquí cambia un nombre o el orden de una clave, esta prueba falla antes de

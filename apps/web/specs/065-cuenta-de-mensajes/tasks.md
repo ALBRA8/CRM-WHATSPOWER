@@ -1,4 +1,4 @@
-# Tasks: La Cuenta de mensajes de Meta y las plantillas creadas fuera de Vestro
+# Tasks: La Cuenta de mensajes de Meta y las plantillas creadas fuera de WhatsPower
 
 **Spec**: [spec.md](spec.md) · **Plan**: [plan.md](plan.md)
 

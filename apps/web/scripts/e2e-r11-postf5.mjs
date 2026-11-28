@@ -83,7 +83,7 @@ const PN = "PN-E2E-1";
  * ------------------------------------------------------------------ */
 async function prep() {
   console.log("== PREP (sin checks): registro + conexión + 1 inbound ==");
-  const email = "e2e@vestro.test";
+  const email = "e2e@whatspower.test";
   const password = "password-e2e-123";
   let su = await api("/api/auth/sign-up/email", {
     method: "POST",

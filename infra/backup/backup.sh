@@ -7,15 +7,15 @@
 # formato que la prueba real de restauración (verificar-restauracion.mjs) valida.
 #
 # Uso:
-#   DATABASE_URL='postgresql://usuario:secreto@host:5432/vestro' \
-#   BACKUP_DIR=/var/backups/vestro \
+#   DATABASE_URL='postgresql://usuario:secreto@host:5432/whatspower' \
+#   BACKUP_DIR=/var/backups/whatspower \
 #   BACKUP_RETENTION_DAYS=14 \
 #   [PG_DUMP_BIN=/ruta/pg_dump] \
 #   infra/backup/backup.sh
 #
 # Variables (todas con default operativo):
 #   DATABASE_URL           conexión a la base a respaldar (REQUERIDA)
-#   BACKUP_DIR             destino (default /var/backups/vestro)
+#   BACKUP_DIR             destino (default /var/backups/whatspower)
 #   BACKUP_RETENTION_DAYS  días a conservar (default 14)
 #   PG_DUMP_BIN            ruta de pg_dump (default: pg_dump en el PATH)
 #   PG_RESTORE_BIN         ruta de pg_restore (default: pg_restore en el PATH)
@@ -30,7 +30,7 @@ if [ -z "${DATABASE_URL:-}" ]; then
   exit 2
 fi
 
-BACKUP_DIR="${BACKUP_DIR:-/var/backups/vestro}"
+BACKUP_DIR="${BACKUP_DIR:-/var/backups/whatspower}"
 RETENTION="${BACKUP_RETENTION_DAYS:-14}"
 PG_DUMP="${PG_DUMP_BIN:-pg_dump}"
 PG_RESTORE="${PG_RESTORE_BIN:-pg_restore}"
@@ -39,7 +39,7 @@ mkdir -p "$BACKUP_DIR"
 log() { echo "[$(date -u '+%Y-%m-%dT%H:%M:%SZ')] $*" | tee -a "$BACKUP_DIR/backup.log"; }
 
 STAMP=$(date -u '+%Y%m%dT%H%M%SZ')
-DBNAME=$(DATABASE_URL="$DATABASE_URL" node -e "console.log(new URL(process.env.DATABASE_URL).pathname.replace(/^\//,'')||'vestro')" 2>/dev/null || echo "vestro")
+DBNAME=$(DATABASE_URL="$DATABASE_URL" node -e "console.log(new URL(process.env.DATABASE_URL).pathname.replace(/^\//,'')||'whatspower')" 2>/dev/null || echo "whatspower")
 FILE="$BACKUP_DIR/${DBNAME}_${STAMP}.dump"
 
 log "inicio respaldo base=$DBNAME destino=$FILE"

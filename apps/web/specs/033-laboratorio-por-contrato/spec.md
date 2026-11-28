@@ -1,12 +1,12 @@
 # 033 — Laboratorio por contrato
 
-**Feature Branch**: `feat/033-laboratorio-por-contrato` (en `vestro-crm` y en `AGENTE-GENERAL`)
+**Feature Branch**: `feat/033-laboratorio-por-contrato` (en `crm-whatspower` y en `AGENTE-GENERAL`)
 
 **Created**: 2026-10-20
 
 **Status**: Especificada antes de escribir código.
 
-**Input**: segunda pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/vestro-crm#91.
+**Input**: segunda pieza de la 2.0.0 (`PLAN-2.0.md`): ALBRA8/crm-whatspower#91.
 el propietario del producto autorizó en el chat del 2026-10-20 mergear la 031 y seguir. Es la
 condición previa para retirar el agente incluido (#106).
 
@@ -89,7 +89,7 @@ contesta las pruebas si hay IA, y eso ya lo valida `ai_not_configured`.
 
 **D7b — Un silencio con el despacho entregado es una respuesta** (decidido
 tras la prueba en vivo del 2026-10-20). AGENTE-GENERAL calla a propósito ante el relleno
-después de despedirse (candado de cierre): la primera corrida en `vestro20`
+después de despedirse (candado de cierre): la primera corrida en `whatspower20`
 marcó «Sin rumbo» como `agent_failed` por eso. Entregado el despacho, el runner
 espera la respuesta hasta 45 s; si no llega, el silencio queda en la
 transcripción y el juez lo evalúa. Falla es solo un despacho que no se
@@ -125,7 +125,7 @@ del agente incluido (#106).
 - **AC8** — Sin despacho, el Laboratorio sigue corriendo contra el agente
   incluido (`e2e-selftest.mjs` en verde).
 - **AC9** — Gates verdes en los dos repos.
-- **AC10** — En vivo: una corrida en `vestro20` contra AGENTE-GENERAL, en verde, con el
+- **AC10** — En vivo: una corrida en `whatspower20` contra AGENTE-GENERAL, en verde, con el
   número sin tocar.
 
 ## Constitution Check

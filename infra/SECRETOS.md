@@ -10,8 +10,8 @@ generarlos, inyectarlos, rotarlos y auditarlos.
 
 | Secreto | Dónde se usa | Generación | Rotación |
 |---|---|---|---|
-| `DATABASE_URL` | apps/web (dueño de BD) | contraseña con `openssl rand -hex 24`; usuario dueño `vestro`/`postgres` | baja frecuencia; con ventana de doble usuario |
-| `DATABASE_URL_RUNTIME` (opcional, F5) | apps/web (rol runtime) | contraseña de `vestro_runtime` (infra/sql/005) — `openssl rand -hex 24` | baja; solo app |
+| `DATABASE_URL` | apps/web (dueño de BD) | contraseña con `openssl rand -hex 24`; usuario dueño `whatspower`/`postgres` | baja frecuencia; con ventana de doble usuario |
+| `DATABASE_URL_RUNTIME` (opcional, F5) | apps/web (rol runtime) | contraseña de `whatspower_runtime` (infra/sql/005) — `openssl rand -hex 24` | baja; solo app |
 | `BETTER_AUTH_SECRET` | apps/web (sesiones) | `openssl rand -hex 32` | con logout masivo aceptado |
 | `ENCRYPTION_KEY` | apps/web (credenciales por org, AES-256-GCM) | `openssl rand -base64 32` (32 bytes exactos) | **solo con re-cifrado planificado** (0020 secreto zernio cifrado) |
 | `META_WEBHOOK_VERIFY_TOKEN` | webhook Meta | `openssl rand -hex 16`; el MISMO se registra en Meta | baja |

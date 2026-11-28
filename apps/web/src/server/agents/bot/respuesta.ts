@@ -26,7 +26,7 @@ export const cuerpoRespuesta = z.object({
    * escribió otra vez y hay un despacho posterior: el CRM contesta
    * `409 dispatch_superado` y el cerebro contesta ese otro, que trae toda la
    * ráfaga. Es opt-in porque un cerebro que no conozca ese 409 lo leería como
-   * un fallo. Mismo nombre que en Vestro Cloud.
+   * un fallo. Mismo nombre que en WhatsPower Cloud.
    */
   dropIfSuperseded: z.boolean().optional(),
 });

@@ -14,7 +14,7 @@
  *     integrations/mcp) son los únicos permitidos y están documentados.
  *  5. Las 13 rutas bot congeladas en packages/contracts existen como archivos
  *     de ruta en apps/web (el contrato versionado se respeta).
- *  6. Los servicios satélite consumen @vestro/contracts (no duplican contratos).
+ *  6. Los servicios satélite consumen @whatspower/contracts (no duplican contratos).
  *  7. El conteo de rutas API del núcleo sigue siendo 142.
  */
 import { describe, expect, it } from "vitest";
@@ -295,10 +295,10 @@ describe("fronteras: contratos versionados respetados", () => {
     }
   });
 
-  it("los servicios satélite consumen @vestro/contracts (no duplican contratos)", () => {
+  it("los servicios satélite consumen @whatspower/contracts (no duplican contratos)", () => {
     for (const svc of ["agent-gateway", "flows", "campaigns"]) {
       const pkg = JSON.parse(readFileSync(join(REPO_ROOT, "services", svc, "package.json"), "utf8"));
-      expect(pkg.dependencies?.["@vestro/contracts"], `${svc} depende de contracts`).toBe("workspace:*");
+      expect(pkg.dependencies?.["@whatspower/contracts"], `${svc} depende de contracts`).toBe("workspace:*");
     }
   });
 

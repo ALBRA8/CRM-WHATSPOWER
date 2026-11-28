@@ -115,7 +115,7 @@ confunden.
 - Los guiones existentes siguen en verde.
 - **Interfaz**: el aviso de atención humana y el de ventana cerrada, en claro
   y oscuro.
-- **En vivo** (Principio IX): en `vestro-clase`, un turno real del agente por
+- **En vivo** (Principio IX): en `whatspower-clase`, un turno real del agente por
   WhatsApp sigue saliendo con su formato. Lo de Instagram y Messenger necesita
   que una persona escriba desde su cuenta: queda pendiente de verificación
   humana.

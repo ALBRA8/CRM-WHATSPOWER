@@ -4,7 +4,7 @@
  * todo pasa por TCP contra el servidor documentado (DATABASE_URL, PG 16).
  *
  * Uso:  DATABASE_URL=postgresql://... node scripts/bateria-multi-tenant.mjs
- *       pnpm --filter @vestro/web test:multi-tenant
+ *       pnpm --filter @whatspower/web test:multi-tenant
  *
  * Qué hace:
  *  1. Clona la base migrada a una base de batería efímera (TEMPLATE), aplica
@@ -37,12 +37,12 @@ function loadDatabaseUrl() {
     const line = env.split(/\r?\n/).find((l) => l.startsWith("DATABASE_URL="));
     if (line) return line.slice("DATABASE_URL=".length).trim();
   } catch {}
-  return "postgresql://vestro:vestro_dev_only@127.0.0.1:5433/vestro";
+  return "postgresql://whatspower:whatspower_dev_only@127.0.0.1:5433/whatspower";
 }
 
 const BASE_URL = loadDatabaseUrl();
 const u = new URL(BASE_URL);
-const BASE_DB = (u.pathname || "/vestro").replace(/^\//, "") || "vestro";
+const BASE_DB = (u.pathname || "/whatspower").replace(/^\//, "") || "whatspower";
 const BATERIA_DB = `${BASE_DB}_s43_bateria`;
 
 const results = [];

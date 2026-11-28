@@ -12,14 +12,14 @@ type Bucket = {
 };
 
 const globalForRl = globalThis as unknown as {
-  __vestroRateLimit?: Map<string, Bucket>;
+  __whatspowerRateLimit?: Map<string, Bucket>;
 };
 
 function store(): Map<string, Bucket> {
-  if (!globalForRl.__vestroRateLimit) {
-    globalForRl.__vestroRateLimit = new Map();
+  if (!globalForRl.__whatspowerRateLimit) {
+    globalForRl.__whatspowerRateLimit = new Map();
   }
-  return globalForRl.__vestroRateLimit;
+  return globalForRl.__whatspowerRateLimit;
 }
 
 /**

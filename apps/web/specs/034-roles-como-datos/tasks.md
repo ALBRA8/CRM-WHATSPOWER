@@ -18,5 +18,5 @@
 
 ## Juntos
 
-- [ ] T11 En vivo en `vestro20`: apagar «agendar» sin redesplegar
+- [ ] T11 En vivo en `whatspower20`: apagar «agendar» sin redesplegar
 - [ ] T12 Bitácora, PRs

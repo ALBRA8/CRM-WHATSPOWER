@@ -28,7 +28,7 @@ const CAPTURAS = process.env.CAPTURAS_DIR || "";
 const S = Math.random().toString(36).slice(2, 6).toUpperCase();
 const PN = "PN-PIN-1";
 const LIMITE = "Solo puedes fijar 3 chats. Desfija uno para fijar este.";
-const EMAIL = process.env.E2E_EMAIL ?? "e2e@vestro.test";
+const EMAIL = process.env.E2E_EMAIL ?? "e2e@whatspower.test";
 const PASSWORD = process.env.E2E_PASSWORD ?? "password-e2e-123";
 
 let failures = 0;
@@ -84,7 +84,7 @@ r = await req.put(`${BASE}/api/settings/whatsapp`, {
   data: { wabaId: "WABA-PIN", phoneNumberId: PN, token: "tok-pin" },
 });
 ok("WhatsApp conectado (wa-mock)", r.ok(), String(r.status()));
-const mEmail = `equipo-pin-${S.toLowerCase()}@vestro.test`;
+const mEmail = `equipo-pin-${S.toLowerCase()}@whatspower.test`;
 const mPass = "password-equipo-pin";
 r = await req.post(`${BASE}/api/settings/team`, {
   headers: { origin: BASE },

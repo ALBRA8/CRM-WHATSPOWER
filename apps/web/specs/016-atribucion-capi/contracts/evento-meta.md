@@ -21,7 +21,7 @@ cliente con el que el CRM manda mensajes. No hay un segundo camino a internet.
       "custom_data": { "lead_stage": "qualified" }
     }
   ],
-  "partner_agent": "vestro-crm"
+  "partner_agent": "crm-whatspower"
 }
 ```
 
@@ -36,7 +36,7 @@ Para `Purchase` con monto capturado, `custom_data` lleva además
 `RatingProvided` · `ReviewProvided`
 
 Cualquier otro nombre es un `400` opaco de Meta. Se valida **antes** de salir y
-se falla con el motivo escrito. Vestro solo emite dos de ellos; la constante
+se falla con el motivo escrito. WhatsPower solo emite dos de ellos; la constante
 existe para que un fork que agregue el suyo no descubra el catálogo a golpes.
 
 ## La respuesta, y la trampa
